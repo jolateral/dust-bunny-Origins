@@ -1,23 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1233149941 &-5729157861725880230
+--- !u!1233149941 &-4083681949827611475
 AudioContainerElement:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: sfx_bunnymove_002_{-5729157861725880230}
-  m_AudioClip: {fileID: 8300000, guid: 610467e34cfdd00479483da08ca0453b, type: 3}
+  m_Name: sfx_bunnymove_nl_002_{-4083681949827611475}
+  m_AudioClip: {fileID: 8300000, guid: 36f2fceb5ff639349b1dff04b821365b, type: 3}
   m_Volume: 0
   m_Enabled: 1
---- !u!1233149941 &4201752651659134124
+--- !u!1233149941 &2738222222643841886
 AudioContainerElement:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: sfx_bunnymove_001_{4201752651659134124}
-  m_AudioClip: {fileID: 8300000, guid: 00223075c58743346bfd1e43cd824a12, type: 3}
+  m_Name: sfx_bunnymove_nl_001_{2738222222643841886}
+  m_AudioClip: {fileID: 8300000, guid: 8f28d961951b59d4baf536b7654c4afe, type: 3}
   m_Volume: 0
   m_Enabled: 1
 --- !u!1307931743 &6418180475301049370
@@ -27,22 +27,22 @@ AudioRandomContainer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: bunnyMove
-  m_Volume: -6
+  m_Volume: 0
   m_Pitch: 0
-  m_AutomaticTriggerTime: 0.5
+  m_AutomaticTriggerTime: 0
   m_LoopCount: 1
-  m_VolumeRandomizationRange: {x: -12, y: 0}
+  m_VolumeRandomizationRange: {x: -3, y: 0}
   m_PitchRandomizationRange: {x: -250, y: 250}
   m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
   m_LoopCountRandomizationRange: {x: 0, y: 0}
   m_Elements:
-  - {fileID: 4201752651659134124}
-  - {fileID: -5729157861725880230}
+  - {fileID: 2738222222643841886}
+  - {fileID: -4083681949827611475}
   m_AvoidRepeatingLast: 1
-  m_PlaybackMode: 2
-  m_TriggerMode: 0
-  m_AutomaticTriggerMode: 0
-  m_LoopMode: 2
+  m_PlaybackMode: 0
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 0
   m_VolumeRandomizationEnabled: 1
   m_PitchRandomizationEnabled: 1
   m_AutomaticTriggerTimeRandomizationEnabled: 0

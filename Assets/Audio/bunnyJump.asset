@@ -1,13 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1233149941 &-6638805401172391542
+--- !u!1233149941 &-8891170282509482084
 AudioContainerElement:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: sfx_bunnyjump_{-6638805401172391542}
-  m_AudioClip: {fileID: 8300000, guid: 74dea26683c2e024893b639fb08da0bf, type: 3}
+  m_Name: sfx_bunnyjump_nl_{-8891170282509482084}
+  m_AudioClip: {fileID: 8300000, guid: 2a548d70a2745d642adc9e784326ea36, type: 3}
   m_Volume: 0
   m_Enabled: 1
 --- !u!1307931743 &6418180475301049370
@@ -17,18 +17,18 @@ AudioRandomContainer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: bunnyJump
-  m_Volume: 0
-  m_Pitch: 0
+  m_Volume: -6
+  m_Pitch: 200
   m_AutomaticTriggerTime: 0
   m_LoopCount: 1
-  m_VolumeRandomizationRange: {x: 0, y: 6}
-  m_PitchRandomizationRange: {x: -300, y: 300}
+  m_VolumeRandomizationRange: {x: -9, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 400}
   m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
   m_LoopCountRandomizationRange: {x: 0, y: 0}
   m_Elements:
-  - {fileID: -6638805401172391542}
+  - {fileID: -8891170282509482084}
   m_AvoidRepeatingLast: 0
-  m_PlaybackMode: 2
+  m_PlaybackMode: 0
   m_TriggerMode: 0
   m_AutomaticTriggerMode: 1
   m_LoopMode: 2

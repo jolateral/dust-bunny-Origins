@@ -48,6 +48,7 @@ public class DustBunnyController : MonoBehaviour
 
     [Header("Audio Sources")]
     public AudioSource movementSource;
+    public AudioSource actionSource;
 
     [Header("Audio Resources")]
     public AudioResource bunnyMove;
@@ -69,6 +70,9 @@ public class DustBunnyController : MonoBehaviour
 
         // Lock rotation so the bunny stands upright (until we roll)
         rb.freezeRotation = true;
+
+        movementSource.resource = bunnyMove;
+        movementSource.Play();
     }
 
     void Update()
@@ -89,8 +93,6 @@ public class DustBunnyController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isRolling)
         {
             PerformJump();
-            movementSource.resource = bunnyJump;
-            movementSource.Play();
         }
 
         // DASH: Check input and cooldown
@@ -99,8 +101,8 @@ public class DustBunnyController : MonoBehaviour
             if (Time.time >= lastDashTime + dashCooldown)
             {
                 StartCoroutine(PerformDash());
-                movementSource.resource = bunnyRoll;
-                movementSource.Play();
+                actionSource.resource = bunnyRoll;
+                actionSource.Play();
             }
         }
     }
@@ -143,9 +145,6 @@ public class DustBunnyController : MonoBehaviour
             
             rb.linearVelocity = targetVelocity;
         }
-
-        movementSource.resource = bunnyMove;
-        movementSource.Play();
     }
 
     void PerformJump()
@@ -156,6 +155,9 @@ public class DustBunnyController : MonoBehaviour
         
         // Apply immediate upward force
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        actionSource.resource = bunnyJump;
+        actionSource.Play();
     }
 
     // Coroutine to handle the dash sequence over time

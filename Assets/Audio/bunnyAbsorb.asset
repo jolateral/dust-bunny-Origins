@@ -1,23 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1233149941 &-1623313105591584809
+--- !u!1233149941 &-3661959708758180411
 AudioContainerElement:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: sfx_bunnyabsorb_001_{-1623313105591584809}
-  m_AudioClip: {fileID: 8300000, guid: d9038afaed028ae4d905a1ac07c9bf85, type: 3}
+  m_Name: sfx_bunnyabsorb_nl_001_{-3661959708758180411}
+  m_AudioClip: {fileID: 8300000, guid: e099d6fc10e3a7b4393a0db082245d8f, type: 3}
   m_Volume: 0
   m_Enabled: 1
---- !u!1233149941 &2888066308177947753
+--- !u!1233149941 &-3365478840384343385
 AudioContainerElement:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: sfx_bunnyabsorb_002_{2888066308177947753}
-  m_AudioClip: {fileID: 8300000, guid: 417a7ab36f47e394fbfd80fb0f237e29, type: 3}
+  m_Name: sfx_bunnyabsorb_nl_002_{-3365478840384343385}
+  m_AudioClip: {fileID: 8300000, guid: 1a61c94c1ead7ec44840b2ce64d7851e, type: 3}
   m_Volume: 0
   m_Enabled: 1
 --- !u!1307931743 &6418180475301049370
@@ -28,16 +28,16 @@ AudioRandomContainer:
   m_PrefabAsset: {fileID: 0}
   m_Name: bunnyAbsorb
   m_Volume: 0
-  m_Pitch: 300
+  m_Pitch: 0
   m_AutomaticTriggerTime: 0
   m_LoopCount: 1
-  m_VolumeRandomizationRange: {x: 0, y: 6}
-  m_PitchRandomizationRange: {x: 0, y: 500}
+  m_VolumeRandomizationRange: {x: -1.5, y: 3}
+  m_PitchRandomizationRange: {x: -200, y: 200}
   m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
   m_LoopCountRandomizationRange: {x: 0, y: 0}
   m_Elements:
-  - {fileID: 2888066308177947753}
-  - {fileID: -1623313105591584809}
+  - {fileID: -3661959708758180411}
+  - {fileID: -3365478840384343385}
   m_AvoidRepeatingLast: 0
   m_PlaybackMode: 2
   m_TriggerMode: 0
