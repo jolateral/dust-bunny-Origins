@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using System.Collections;
 
 // Ensures the object has the necessary components
@@ -45,6 +46,14 @@ public class DustBunnyController : MonoBehaviour
     private float defaultDrag;
     private float distToGround;
 
+    [Header("Audio Sources")]
+    public AudioSource movementSource;
+
+    [Header("Audio Resources")]
+    public AudioResource bunnyMove;
+    public AudioResource bunnyJump;
+    public AudioResource bunnyRoll;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -80,6 +89,8 @@ public class DustBunnyController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isRolling)
         {
             PerformJump();
+            movementSource.resource = bunnyJump;
+            movementSource.Play();
         }
 
         // DASH: Check input and cooldown
@@ -88,6 +99,8 @@ public class DustBunnyController : MonoBehaviour
             if (Time.time >= lastDashTime + dashCooldown)
             {
                 StartCoroutine(PerformDash());
+                movementSource.resource = bunnyRoll;
+                movementSource.Play();
             }
         }
     }
@@ -130,6 +143,9 @@ public class DustBunnyController : MonoBehaviour
             
             rb.linearVelocity = targetVelocity;
         }
+
+        movementSource.resource = bunnyMove;
+        movementSource.Play();
     }
 
     void PerformJump()
