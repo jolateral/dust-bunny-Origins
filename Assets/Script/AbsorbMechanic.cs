@@ -30,6 +30,13 @@ public class AbsorbMechanic : MonoBehaviour
 
         if (mySize >= itemSize * sizeTolerance)
         {
+            // Check for memory item
+            MemoryItem memory = item.GetComponent<MemoryItem>();
+            if (memory != null)
+            {
+                MemoryUIManager.Instance.ShowMemory(memory.memoryText, memory.textColor);
+            }
+
             // 1. Disable physics on the item
             Destroy(item.GetComponent<Rigidbody>());
             Destroy(item.GetComponent<Collider>());
