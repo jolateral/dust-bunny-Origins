@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public float height = 5.0f;
     
     [Header("Controls")]
-    public float rotationSpeed = 5.0f;
+    public float rotationSpeed = 2.0f;
 
     private float currentX = 0.0f;
     private float currentY = 0.0f;
@@ -22,10 +23,22 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void Update()
     {
-        // Mouse Input
-        currentX += Input.GetAxis("Mouse X") * rotationSpeed;
-        currentY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-        currentY = Mathf.Clamp(currentY, -20, 60); // Limit vertical angle
+        // Right stick input via New Input System
+        Vector2 rightStick = Vector2.zero;
+        if (Gamepad.current != null)
+        {
+            rightStick = Gamepad.current.rightStick.ReadValue(); // X = horizontal, Y = vertical
+        }
+
+        // Mouse Input via Legacy Input System
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        // Combine both mouse and right stick
+        currentX += (rightStick.x + mouseX) * rotationSpeed;
+        currentY -= (rightStick.y + mouseY) * rotationSpeed;
+        currentY = Mathf.Clamp(currentY, -20f, 60f); // Limit vertical rotation
+
     }
 
     void LateUpdate()

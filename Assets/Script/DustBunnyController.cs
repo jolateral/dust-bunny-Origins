@@ -77,13 +77,13 @@ public class DustBunnyController : MonoBehaviour
         // --- 2. Handle Inputs ---
         
         // JUMP: Only if grounded and NOT rolling
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isRolling)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)) && isGrounded && !isRolling) // Jump on Gamepad "A" button
         {
             PerformJump();
         }
 
         // DASH: Check input and cooldown
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isRolling)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !isRolling) // Dash on Gamepad "X" button
         {
             if (Time.time >= lastDashTime + dashCooldown)
             {
