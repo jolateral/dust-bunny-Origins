@@ -11,10 +11,17 @@ public class DustBunnyController : MonoBehaviour
     public float walkSpeed = 8f;
     
     [Tooltip("The immediate upward force applied when jumping.")]
-    public float jumpForce = 15f;
+    public float jumpForce = 15f; // Might need to increase to 20-25 due to gravity multiplier
     
     [Tooltip("How quickly the character turns to face movement direction.")]
     public float turnSmoothTime = 0.1f;
+
+    [Header("--- Jump Feel (Gravity) ---")]
+    [Tooltip("Multiplier for gravity when falling. Higher = faster fall (snappier).")]
+    public float fallMultiplier = 2.5f; 
+
+    [Tooltip("Multiplier for gravity when going up but Space is released (Variable Jump Height).")]
+    public float lowJumpMultiplier = 2f; 
 
     [Header("--- Dash / Roll Settings ---")]
     [Tooltip("The explosive force applied when pressing Shift.")]
@@ -31,17 +38,17 @@ public class DustBunnyController : MonoBehaviour
 
     [Header("--- Debug & Status ---")]
     [Tooltip("Adjust this if the ground check is too sensitive or not sensitive enough.")]
-    public float groundCheckOffset = 0.2f; 
+    public float groundCheckOffset = 0.2f;
     
-    public bool isRolling = false; // Accessible by other scripts (like Absorption)
-    public bool isGrounded;        // Read-only status for debugging
+    public bool isRolling = false; // Accessible by other scripts
+    public bool isGrounded;
 
     // Private variables
     private Rigidbody rb;
     private Collider playerCollider;
     private Transform camTransform;
     private float turnSmoothVelocity;
-    private float lastDashTime = -10f; // Initialize to allow immediate dash
+    private float lastDashTime = -10f;
     private float defaultDrag;
     private float distToGround;
 
@@ -51,39 +58,33 @@ public class DustBunnyController : MonoBehaviour
         playerCollider = GetComponent<Collider>();
         camTransform = Camera.main.transform;
 
-        // Calculate distance from center to the bottom of the collider
         distToGround = playerCollider.bounds.extents.y;
 
-        // Set default drag for stable walking
+        // Unity 6: use linearDamping instead of drag
         rb.linearDamping = 5f;
         defaultDrag = rb.linearDamping;
 
-        // Lock rotation so the bunny stands upright (until we roll)
         rb.freezeRotation = true;
     }
 
     void Update()
     {
         // --- 1. Ground Check Logic ---
-        // We recalculate bounds in case the player grew in size
         distToGround = playerCollider.bounds.extents.y;
-        
-        // Raycast from center downwards. Length = half height + small offset
         isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + groundCheckOffset);
-
-        // DEBUG: Draw a red line in the Scene view to show the ground check
         Debug.DrawRay(transform.position, Vector3.down * (distToGround + groundCheckOffset), isGrounded ? Color.green : Color.red);
 
         // --- 2. Handle Inputs ---
         
-        // JUMP: Only if grounded and NOT rolling
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)) && isGrounded && !isRolling) // Jump on Gamepad "A" button
+        // JUMP: Input.GetKeyDown(KeyCode.Space) OR Joystick Button 1 (Usually 'A' or 'X' on controller)
+        // Only if grounded and NOT rolling
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)) && isGrounded && !isRolling)
         {
             PerformJump();
         }
 
-        // DASH: Check input and cooldown
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !isRolling) // Dash on Gamepad "X" button
+        // DASH: Left Shift OR Joystick Button 2 (Usually 'X' or 'Square')
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton2)) && !isRolling)
         {
             if (Time.time >= lastDashTime + dashCooldown)
             {
@@ -94,70 +95,73 @@ public class DustBunnyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // We only control movement manually if we are NOT rolling.
-        // During the dash, physics takes over completely.
         if (!isRolling)
         {
             MoveCharacter();
+            ApplyBetterGravity(); // Re-added the better jump feel logic
         }
     }
 
     void MoveCharacter()
     {
-        // Get Input (WASD or Arrow Keys)
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         
         Vector3 direction = new Vector3(h, 0f, v).normalized;
 
-        // If player is pressing keys
         if (direction.magnitude >= 0.1f)
         {
-            // Calculate the angle the player should face based on Camera direction
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
-            
-            // Smoothly rotate the character to that angle
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            // Convert rotation into a forward direction vector
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             
-            // Apply velocity for movement
-            // We preserve rb.velocity.y so gravity/jumping isn't cancelled out
+            // Unity 6: use linearVelocity instead of velocity
             Vector3 targetVelocity = moveDir * walkSpeed;
-            targetVelocity.y = rb.linearVelocity.y; 
+            targetVelocity.y = rb.linearVelocity.y; // Preserve vertical gravity
             
             rb.linearVelocity = targetVelocity;
         }
     }
 
+    // --- Added back the logic for Snappy Jumping ---
+    void ApplyBetterGravity()
+    {
+        // If falling
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        // If jumping up but button released (Variable Jump Height)
+        else if (rb.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.JoystickButton0))
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+    }
+
     void PerformJump()
     {
-        // Reset vertical velocity to 0 before jumping to ensure consistent height
-        // (This prevents "super jumps" if you hit space while bouncing up)
+        // Unity 6: Reset vertical linearVelocity
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        
-        // Apply immediate upward force
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
-    // Coroutine to handle the dash sequence over time
     IEnumerator PerformDash()
     {
         isRolling = true;
-        lastDashTime = Time.time; // Reset cooldown
+        lastDashTime = Time.time;
 
         // --- STEP 1: Unlock Physics ---
-        rb.freezeRotation = false; // Allow the ball to tumble
-        rb.linearDamping = rollDrag;        // Reduce friction to slide
+        rb.freezeRotation = false;
+        // Unity 6: linearDamping
+        rb.linearDamping = rollDrag;
         
         // --- STEP 2: Calculate Dash Direction ---
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 dashDir = Vector3.zero;
 
-        // If giving input, dash in that direction
         if (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f)
         {
             Vector3 camForward = camTransform.forward;
@@ -168,7 +172,6 @@ public class DustBunnyController : MonoBehaviour
         }
         else
         {
-            // If standing still, dash forward relative to camera
             dashDir = camTransform.forward;
             dashDir.y = 0; 
             dashDir.Normalize();
@@ -176,8 +179,6 @@ public class DustBunnyController : MonoBehaviour
 
         // --- STEP 3: Apply Explosion Force ---
         rb.AddForce(dashDir * dashForce, ForceMode.Impulse);
-        
-        // Add rotational spin for visual flair
         rb.AddTorque(transform.right * dashForce, ForceMode.Impulse);
 
         // --- STEP 4: Wait ---
@@ -185,10 +186,10 @@ public class DustBunnyController : MonoBehaviour
 
         // --- STEP 5: Reset State ---
         isRolling = false;
-        rb.freezeRotation = true;   // Lock upright again
-        rb.linearDamping = defaultDrag;      // Restore walking friction
+        rb.freezeRotation = true;
+        // Unity 6: linearDamping
+        rb.linearDamping = defaultDrag;
         
-        // Reset rotation to be perfectly upright so we don't walk sideways
         transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
     }
 }
