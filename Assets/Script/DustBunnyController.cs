@@ -32,6 +32,10 @@ public class DustBunnyController : MonoBehaviour
     [Header("--- Debug & Status ---")]
     [Tooltip("Adjust this if the ground check is too sensitive or not sensitive enough.")]
     public float groundCheckOffset = 0.2f; 
+
+    [Header("--- Advanced Gravity ---")]
+    public float fallMultiplier = 2.5f; // Multiplier for when falling
+    public float lowJumpMultiplier = 2f; // Multiplier for short hops
     
     public bool isRolling = false; // Accessible by other scripts (like Absorption)
     public bool isGrounded;        // Read-only status for debugging
@@ -94,11 +98,21 @@ public class DustBunnyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // We only control movement manually if we are NOT rolling.
-        // During the dash, physics takes over completely.
         if (!isRolling)
         {
             MoveCharacter();
+        }
+
+        // --- NEW: Gravity Multiplier Logic ---
+        if (rb.linearVelocity.y < 0) 
+        {
+            // Falling: Apply extra gravity
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+        else if (rb.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            // Rising but NOT holding space: Fall faster (Variable Jump Height)
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
     }
 
