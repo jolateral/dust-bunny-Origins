@@ -11,7 +11,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public float height = 5.0f;
     
     [Header("Controls")]
-    public float rotationSpeed = 2.0f; // Adjusted sensitivity
+    public float rotationSpeed = 1.0f; // Adjusted sensitivity
 
     private float currentX = 0.0f;
     private float currentY = 0.0f;

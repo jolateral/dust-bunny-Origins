@@ -76,15 +76,15 @@ public class DustBunnyController : MonoBehaviour
 
         // --- 2. Handle Inputs ---
         
-        // JUMP: Input.GetKeyDown(KeyCode.Space) OR Joystick Button 1 (Usually 'A' or 'X' on controller)
+        // JUMP: Input.GetKeyDown(KeyCode.Space) OR Joystick Button 1 (Usually 'A' (xbox) or 'X' (ps) on controller)
         // Only if grounded and NOT rolling
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0)) && isGrounded && !isRolling)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)) && isGrounded && !isRolling)
         {
             PerformJump();
         }
 
-        // DASH: Left Shift OR Joystick Button 2 (Usually 'X' or 'Square')
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton2)) && !isRolling)
+        // DASH: Left Shift OR Joystick Button 2 (Usually 'X' (xbox) or 'Square' (ps))
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !isRolling)
         {
             if (Time.time >= lastDashTime + dashCooldown)
             {
