@@ -1,4 +1,6 @@
 using UnityEngine;
+// Important: This namespace is required for Gamepad support
+using UnityEngine.InputSystem; 
 
 public class ThirdPersonCamera : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public float height = 5.0f;
     
     [Header("Controls")]
-    public float rotationSpeed = 5.0f;
+    public float rotationSpeed = 1.0f; // Adjusted sensitivity
 
     private float currentX = 0.0f;
     private float currentY = 0.0f;
@@ -22,10 +24,27 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void Update()
     {
-        // Mouse Input
-        currentX += Input.GetAxis("Mouse X") * rotationSpeed;
-        currentY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-        currentY = Mathf.Clamp(currentY, -20, 60); // Limit vertical angle
+        // 1. Get Gamepad Input (New Input System)
+        Vector2 rightStick = Vector2.zero;
+        if (Gamepad.current != null)
+        {
+            rightStick = Gamepad.current.rightStick.ReadValue();
+        }
+
+        // 2. Get Mouse Input (Legacy Input System)
+        // We combine both so you can use either device at any time
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        // 3. Apply Rotation
+        // Add Stick X + Mouse X
+        currentX += (rightStick.x + mouseX) * rotationSpeed;
+        
+        // Subtract Stick Y + Mouse Y (Invert Y axis logic)
+        currentY -= (rightStick.y + mouseY) * rotationSpeed;
+        
+        // Limit vertical rotation so camera doesn't flip
+        currentY = Mathf.Clamp(currentY, -20f, 60f);
     }
 
     void LateUpdate()
