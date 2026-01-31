@@ -17,7 +17,7 @@ public class DustBunnyController : MonoBehaviour
     public float lowJumpMultiplier = 2f;
 
     [Header("--- Dash / Roll Settings ---")]
-    public float dashForce = 3f;
+    public float dashForce = 30f; // Adjusted default, 3f might be too weak for an impulse
     public float dashDuration = 0.8f;
     public float dashCooldown = 1.0f;
     public float rollDrag = 0.5f;
@@ -49,6 +49,7 @@ public class DustBunnyController : MonoBehaviour
         rb.linearDamping = 5f;
         defaultDrag = rb.linearDamping;
 
+        // Ensure rotation is locked so the bunny stays upright
         rb.freezeRotation = true;
     }
 
@@ -57,7 +58,7 @@ public class DustBunnyController : MonoBehaviour
         // 1. Ground Check
         distToGround = playerCollider.bounds.extents.y;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + groundCheckOffset);
-        Debug.DrawRay(transform.position, Vector3.down * (distToGround + groundCheckOffset), isGrounded ? Color.green : Color.red);
+        // Debug.DrawRay(transform.position, Vector3.down * (distToGround + groundCheckOffset), isGrounded ? Color.green : Color.red);
 
         // 2. Handle Inputs
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)) && isGrounded && !isRolling)
@@ -76,6 +77,8 @@ public class DustBunnyController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // If we are rolling (dashing), we let physics handle the slide.
+        // If we are NOT rolling, we control movement manually.
         if (!isRolling)
         {
             MoveCharacter();
@@ -104,13 +107,14 @@ public class DustBunnyController : MonoBehaviour
             rb.linearVelocity = targetVelocity;
         }
 
+        // Animation handling
         if (h != 0 || v != 0)
         { 
-            _animator.SetBool("isRunning", true);
+            if(_animator) _animator.SetBool("isRunning", true);
         }
         else
         {
-            _animator.SetBool("isRunning", false);
+            if(_animator) _animator.SetBool("isRunning", false);
         }
     }
 
@@ -137,12 +141,14 @@ public class DustBunnyController : MonoBehaviour
     IEnumerator PerformDash()
     {
         isRolling = true;
-        _animator.SetBool("isRolling", true);
+        if(_animator) _animator.SetBool("isRolling", true);
         lastDashTime = Time.time;
 
-        rb.freezeRotation = false;
+        // --- Change: No longer unlocking rotation ---
+        // rb.freezeRotation = false; // REMOVED: We want the bunny upright
         rb.linearDamping = rollDrag;
 
+        // Calculate Direction
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 dashDir = Vector3.zero;
@@ -162,17 +168,28 @@ public class DustBunnyController : MonoBehaviour
             dashDir.Normalize();
         }
 
+        // --- New: Immediately face the dash direction ---
+        // This prevents sliding sideways while looking forward
+        if (dashDir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(dashDir);
+        }
+
+        // Apply Force
         rb.AddForce(dashDir * dashForce, ForceMode.Impulse);
-        rb.AddTorque(transform.right * dashForce, ForceMode.Impulse);
+        
+        // --- Change: No longer adding Torque (spinning) ---
+        // rb.AddTorque(...); // REMOVED
 
         yield return new WaitForSeconds(dashDuration);
 
+        // Reset
         isRolling = false;
-        _animator.SetBool("isRolling", false);
+        if(_animator) _animator.SetBool("isRolling", false);
 
-        rb.freezeRotation = true;
+        // Restore drag
         rb.linearDamping = defaultDrag;
-
-        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+        
+        // Rotation is already locked, so we don't need to manually reset logic here
     }
 }
