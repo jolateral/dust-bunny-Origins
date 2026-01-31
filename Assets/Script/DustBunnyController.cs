@@ -17,7 +17,7 @@ public class DustBunnyController : MonoBehaviour
     public float lowJumpMultiplier = 2f;
 
     [Header("--- Dash / Roll Settings ---")]
-    public float dashForce = 30f;
+    public float dashForce = 3f;
     public float dashDuration = 0.8f;
     public float dashCooldown = 1.0f;
     public float rollDrag = 0.5f;
@@ -34,6 +34,8 @@ public class DustBunnyController : MonoBehaviour
     private float lastDashTime = -10f;
     private float defaultDrag;
     private float distToGround;
+
+    [SerializeField] private Animator _animator;
 
     void Start()
     {
@@ -101,6 +103,15 @@ public class DustBunnyController : MonoBehaviour
 
             rb.linearVelocity = targetVelocity;
         }
+
+        if (h != 0 || v != 0)
+        { 
+            _animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            _animator.SetBool("isRunning", false);
+        }
     }
 
     void ApplyBetterGravity()
@@ -126,6 +137,7 @@ public class DustBunnyController : MonoBehaviour
     IEnumerator PerformDash()
     {
         isRolling = true;
+        _animator.SetBool("isRolling", true);
         lastDashTime = Time.time;
 
         rb.freezeRotation = false;
@@ -156,6 +168,8 @@ public class DustBunnyController : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
 
         isRolling = false;
+        _animator.SetBool("isRolling", false);
+
         rb.freezeRotation = true;
         rb.linearDamping = defaultDrag;
 
