@@ -1,59 +1,41 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using System.Collections;
 
-// Ensures the object has the necessary components
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 public class DustBunnyController : MonoBehaviour
 {
     [Header("--- Movement Settings ---")]
-    [Tooltip("How fast the bunny moves when walking.")]
     public float walkSpeed = 8f;
-    
-    [Tooltip("The immediate upward force applied when jumping.")]
-    public float jumpForce = 15f;
-    
-    [Tooltip("How quickly the character turns to face movement direction.")]
+    public float jumpForce = 15f; 
     public float turnSmoothTime = 0.1f;
 
+    [Header("--- Jump Feel (Gravity) ---")]
+    [Tooltip("Multiplier for gravity when falling. Higher = faster fall.")]
+    public float fallMultiplier = 2.5f;
+    [Tooltip("Multiplier for gravity when space is released early.")]
+    public float lowJumpMultiplier = 2f;
+
     [Header("--- Dash / Roll Settings ---")]
-    [Tooltip("The explosive force applied when pressing Shift.")]
-    public float dashForce = 30f;
-    
-    [Tooltip("How long the rolling state lasts (in seconds).")]
+    public float dashForce = 30f; // Adjusted default, 3f might be too weak for an impulse
     public float dashDuration = 0.8f;
-    
-    [Tooltip("Time to wait before dashing again.")]
     public float dashCooldown = 1.0f;
-    
-    [Tooltip("Friction when rolling (lower = slide further).")]
     public float rollDrag = 0.5f;
 
     [Header("--- Debug & Status ---")]
-    [Tooltip("Adjust this if the ground check is too sensitive or not sensitive enough.")]
-    public float groundCheckOffset = 0.2f; 
-    
-    public bool isRolling = false; // Accessible by other scripts (like Absorption)
-    public bool isGrounded;        // Read-only status for debugging
+    public float groundCheckOffset = 0.2f;
+    public bool isRolling = false; 
+    public bool isGrounded;
 
-    // Private variables
     private Rigidbody rb;
     private Collider playerCollider;
     private Transform camTransform;
     private float turnSmoothVelocity;
-    private float lastDashTime = -10f; // Initialize to allow immediate dash
+    private float lastDashTime = -10f;
     private float defaultDrag;
     private float distToGround;
 
-    [Header("Audio Sources")]
-    public AudioSource movementSource;
-    public AudioSource actionSource;
-
-    [Header("Audio Resources")]
-    public AudioResource bunnyMove;
-    public AudioResource bunnyJump;
-    public AudioResource bunnyRoll;
+    [SerializeField] private Animator _animator;
 
     void Start()
     {
@@ -61,121 +43,116 @@ public class DustBunnyController : MonoBehaviour
         playerCollider = GetComponent<Collider>();
         camTransform = Camera.main.transform;
 
-        // Calculate distance from center to the bottom of the collider
         distToGround = playerCollider.bounds.extents.y;
 
-        // Set default drag for stable walking
+        // Unity 6: use linearDamping
         rb.linearDamping = 5f;
         defaultDrag = rb.linearDamping;
 
-        // Lock rotation so the bunny stands upright (until we roll)
+        // Ensure rotation is locked so the bunny stays upright
         rb.freezeRotation = true;
-
-        movementSource.resource = bunnyMove;
-        movementSource.Play();
     }
 
     void Update()
     {
-        // --- 1. Ground Check Logic ---
-        // We recalculate bounds in case the player grew in size
+        // 1. Ground Check
         distToGround = playerCollider.bounds.extents.y;
-        
-        // Raycast from center downwards. Length = half height + small offset
         isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + groundCheckOffset);
+        // Debug.DrawRay(transform.position, Vector3.down * (distToGround + groundCheckOffset), isGrounded ? Color.green : Color.red);
 
-        // DEBUG: Draw a red line in the Scene view to show the ground check
-        Debug.DrawRay(transform.position, Vector3.down * (distToGround + groundCheckOffset), isGrounded ? Color.green : Color.red);
-
-        // --- 2. Handle Inputs ---
-        
-        // JUMP: Only if grounded and NOT rolling
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isRolling)
+        // 2. Handle Inputs
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)) && isGrounded && !isRolling)
         {
             PerformJump();
         }
 
-        // DASH: Check input and cooldown
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isRolling)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !isRolling)
         {
             if (Time.time >= lastDashTime + dashCooldown)
             {
                 StartCoroutine(PerformDash());
-                actionSource.resource = bunnyRoll;
-                actionSource.Play();
             }
         }
     }
 
     void FixedUpdate()
     {
-        // We only control movement manually if we are NOT rolling.
-        // During the dash, physics takes over completely.
+        // If we are rolling (dashing), we let physics handle the slide.
+        // If we are NOT rolling, we control movement manually.
         if (!isRolling)
         {
             MoveCharacter();
+            ApplyBetterGravity(); 
         }
     }
 
     void MoveCharacter()
     {
-        // Get Input (WASD or Arrow Keys)
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        
+
         Vector3 direction = new Vector3(h, 0f, v).normalized;
 
-        // If player is pressing keys
         if (direction.magnitude >= 0.1f)
         {
-            // Calculate the angle the player should face based on Camera direction
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
-            
-            // Smoothly rotate the character to that angle
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            // Convert rotation into a forward direction vector
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            
-            // Apply velocity for movement
-            // We preserve rb.velocity.y so gravity/jumping isn't cancelled out
+
             Vector3 targetVelocity = moveDir * walkSpeed;
             targetVelocity.y = rb.linearVelocity.y; 
-            
+
             rb.linearVelocity = targetVelocity;
+        }
+
+        // Animation handling
+        if (h != 0 || v != 0)
+        { 
+            if(_animator) _animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            if(_animator) _animator.SetBool("isRunning", false);
+        }
+    }
+
+    void ApplyBetterGravity()
+    {
+        // Falling
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+        // Rising but jump button released early
+        else if (rb.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.JoystickButton1))
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
     }
 
     void PerformJump()
     {
-        // Reset vertical velocity to 0 before jumping to ensure consistent height
-        // (This prevents "super jumps" if you hit space while bouncing up)
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        
-        // Apply immediate upward force
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-        actionSource.resource = bunnyJump;
-        actionSource.Play();
     }
 
-    // Coroutine to handle the dash sequence over time
     IEnumerator PerformDash()
     {
         isRolling = true;
-        lastDashTime = Time.time; // Reset cooldown
+        if(_animator) _animator.SetBool("isRolling", true);
+        lastDashTime = Time.time;
 
-        // --- STEP 1: Unlock Physics ---
-        rb.freezeRotation = false; // Allow the ball to tumble
-        rb.linearDamping = rollDrag;        // Reduce friction to slide
-        
-        // --- STEP 2: Calculate Dash Direction ---
+        // --- Change: No longer unlocking rotation ---
+        // rb.freezeRotation = false; // REMOVED: We want the bunny upright
+        rb.linearDamping = rollDrag;
+
+        // Calculate Direction
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 dashDir = Vector3.zero;
 
-        // If giving input, dash in that direction
         if (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f)
         {
             Vector3 camForward = camTransform.forward;
@@ -186,27 +163,33 @@ public class DustBunnyController : MonoBehaviour
         }
         else
         {
-            // If standing still, dash forward relative to camera
             dashDir = camTransform.forward;
-            dashDir.y = 0; 
+            dashDir.y = 0;
             dashDir.Normalize();
         }
 
-        // --- STEP 3: Apply Explosion Force ---
+        // --- New: Immediately face the dash direction ---
+        // This prevents sliding sideways while looking forward
+        if (dashDir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(dashDir);
+        }
+
+        // Apply Force
         rb.AddForce(dashDir * dashForce, ForceMode.Impulse);
         
-        // Add rotational spin for visual flair
-        rb.AddTorque(transform.right * dashForce, ForceMode.Impulse);
+        // --- Change: No longer adding Torque (spinning) ---
+        // rb.AddTorque(...); // REMOVED
 
-        // --- STEP 4: Wait ---
         yield return new WaitForSeconds(dashDuration);
 
-        // --- STEP 5: Reset State ---
+        // Reset
         isRolling = false;
-        rb.freezeRotation = true;   // Lock upright again
-        rb.linearDamping = defaultDrag;      // Restore walking friction
+        if(_animator) _animator.SetBool("isRolling", false);
+
+        // Restore drag
+        rb.linearDamping = defaultDrag;
         
-        // Reset rotation to be perfectly upright so we don't walk sideways
-        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+        // Rotation is already locked, so we don't need to manually reset logic here
     }
 }
