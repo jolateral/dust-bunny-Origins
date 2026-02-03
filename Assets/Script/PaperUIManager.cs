@@ -1,13 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI; // Added for Image component
 using TMPro;
 using System.Collections;
 
 /// <summary>
-/// PaperUIManager.cs
+/// PaperUIManager.cs - IMAGE VERSION
 /// 
 /// Manages the full-screen paper overlay UI that appears when the player
 /// reads a paper item. This script:
-/// - Shows a large white rectangle (paper) with text
+/// - Shows a PNG image instead of a white rectangle
+/// - Optionally shows text overlaid on the image
 /// - Freezes player movement while paper is showing
 /// - Waits for player to press a button (Space/Jump) to dismiss
 /// - Handles fade in/out animations
@@ -17,9 +19,10 @@ using System.Collections;
 /// 2. Add this script to a GameObject
 /// 3. Create UI elements and assign them in the inspector:
 ///    - Background Panel (semi-transparent black)
-///    - Paper Panel (white rectangle)
-///    - Text element (TextMeshProUGUI for the content)
+///    - Paper Image (Image component instead of Panel)
+///    - (Optional) Text element (TextMeshProUGUI for content)
 ///    - Instruction text ("Press SPACE to continue")
+/// 4. Assign your PNG image to the paperImage component
 /// </summary>
 public class PaperUIManager : MonoBehaviour
 {
@@ -30,14 +33,27 @@ public class PaperUIManager : MonoBehaviour
     [Tooltip("The dark background that dims the screen")]
     public CanvasGroup backgroundGroup;
     
-    [Tooltip("The white paper rectangle")]
+    [Tooltip("The CanvasGroup that contains the paper image (for fading)")]
     public CanvasGroup paperGroup;
     
-    [Tooltip("The text component that displays the paper content")]
+    [Tooltip("The Image component that displays the PNG paper")]
+    public Image paperImage;
+    
+    [Tooltip("(Optional) The text component that displays content on top of the image")]
     public TextMeshProUGUI paperText;
     
     [Tooltip("The instruction text (e.g., 'Press SPACE to continue')")]
     public TextMeshProUGUI instructionText;
+    
+    [Header("Image Settings")]
+    [Tooltip("The sprite/texture to display as the paper (assign your PNG here)")]
+    public Sprite paperSprite;
+    
+    [Tooltip("Should the image maintain its aspect ratio?")]
+    public bool preserveAspect = true;
+    
+    [Tooltip("How should the image fill its container?")]
+    public Image.Type imageType = Image.Type.Simple;
     
     [Header("Animation Settings")]
     [Tooltip("How fast the paper fades in/out")]
@@ -73,6 +89,19 @@ public class PaperUIManager : MonoBehaviour
             playerController = FindObjectOfType<DustBunnyController>();
         }
         
+        // Configure the paper image component
+        if (paperImage != null)
+        {
+            paperImage.preserveAspect = preserveAspect;
+            paperImage.type = imageType;
+            
+            // Set the sprite if one was assigned in the inspector
+            if (paperSprite != null)
+            {
+                paperImage.sprite = paperSprite;
+            }
+        }
+        
         // Hide UI at start
         if (backgroundGroup != null) backgroundGroup.alpha = 0;
         if (paperGroup != null) paperGroup.alpha = 0;
@@ -100,10 +129,10 @@ public class PaperUIManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Show the paper overlay with the given text
+    /// Show the paper overlay with the given text (optional)
     /// Called by PaperItem when player absorbs it
     /// </summary>
-    /// <param name="text">The text to display on the paper</param>
+    /// <param name="text">The text to display on the paper (can be empty)</param>
     public void ShowPaper(string text)
     {
         // Don't show if already showing
@@ -111,6 +140,31 @@ public class PaperUIManager : MonoBehaviour
         {
             Debug.LogWarning("Paper is already showing!");
             return;
+        }
+        
+        StopAllCoroutines();
+        StartCoroutine(DisplayPaper(text));
+    }
+    
+    /// <summary>
+    /// Show the paper overlay with a custom image
+    /// Use this if different papers should show different images
+    /// </summary>
+    /// <param name="text">The text to display (can be empty)</param>
+    /// <param name="customSprite">A custom sprite to display instead of the default</param>
+    public void ShowPaper(string text, Sprite customSprite)
+    {
+        // Don't show if already showing
+        if (isPaperShowing)
+        {
+            Debug.LogWarning("Paper is already showing!");
+            return;
+        }
+        
+        // Set the custom sprite if provided
+        if (customSprite != null && paperImage != null)
+        {
+            paperImage.sprite = customSprite;
         }
         
         StopAllCoroutines();
@@ -131,10 +185,16 @@ public class PaperUIManager : MonoBehaviour
             playerController.enabled = false;
         }
         
-        // Set the text content
-        if (paperText != null)
+        // Set the text content (if text component exists and text is provided)
+        if (paperText != null && !string.IsNullOrEmpty(text))
         {
             paperText.text = text;
+            paperText.gameObject.SetActive(true);
+        }
+        else if (paperText != null)
+        {
+            // Hide text if none provided
+            paperText.gameObject.SetActive(false);
         }
         
         // Enable raycasting to block clicks
@@ -148,7 +208,7 @@ public class PaperUIManager : MonoBehaviour
             yield return null;
         }
         
-        // Fade in the paper
+        // Fade in the paper image
         while (paperGroup != null && paperGroup.alpha < 1f)
         {
             paperGroup.alpha += Time.deltaTime * fadeSpeed;
