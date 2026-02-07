@@ -9696,7 +9696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5cb90f8657b674bb47128ecff2c1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DustBunnyController
-  walkSpeed: 8
+  walkSpeed: 3
   jumpForce: 15
   turnSmoothTime: 0.1
   fallMultiplier: 2.5
@@ -9708,6 +9708,10 @@ MonoBehaviour:
   groundCheckOffset: 0.2
   isRolling: 0
   isGrounded: 0
+  bunnySfxSource: {fileID: 0}
+  bunnyHop: {fileID: 0}
+  bunnyJump: {fileID: 0}
+  bunnyRoll: {fileID: 0}
   _animator: {fileID: 1833854774}
 --- !u!114 &1833854776
 MonoBehaviour:
@@ -9723,6 +9727,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AbsorbMechanic
   growthFactor: 0.05
   sizeTolerance: 1.2
+  absorbSource: {fileID: 0}
+  bunnyAbsorb: {fileID: 0}
 --- !u!54 &1833854777
 Rigidbody:
   m_ObjectHideFlags: 0
