@@ -1,31 +1,34 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 public class DustBunnyController : MonoBehaviour
 {
     [Header("--- Movement Settings ---")]
-    public float walkSpeed = 8f;
-    public float jumpForce = 15f; 
+    public float walkSpeed = 3f;
+    public float jumpForce = 15f;
     public float turnSmoothTime = 0.1f;
 
     [Header("--- Jump Feel (Gravity) ---")]
     [Tooltip("Multiplier for gravity when falling. Higher = faster fall.")]
     public float fallMultiplier = 2.5f;
-    [Tooltip("Multiplier for gravity when space is released early.")]
-    public float lowJumpMultiplier = 2f;
+    [Tooltip("Gravity multiplier while holding jump (lower = higher jump)")]
+    public float heldJumpGravityMultiplier = 0.6f;
+    [Tooltip("Multiplier for gravity when jump is released early.")]
+    public float lowJumpMultiplier = 1f;
 
     [Header("--- Dash / Roll Settings ---")]
-    public float dashForce = 30f; // Adjusted default, 3f might be too weak for an impulse
+    public float dashForce = 30f;
     public float dashDuration = 0.8f;
     public float dashCooldown = 1.0f;
     public float rollDrag = 0.5f;
 
     [Header("--- Debug & Status ---")]
     public float groundCheckOffset = 0.2f;
-    public bool isRolling = false; 
+    public bool isRolling = false;
     public bool isGrounded;
 
     private Rigidbody rb;
@@ -37,22 +40,23 @@ public class DustBunnyController : MonoBehaviour
     private float distToGround;
 
     public AudioSource bunnySfxSource;
-
-    public AudioResource bunnyHop;
+    public AudioResource bunnyMove;
     public AudioResource bunnyJump;
     public AudioResource bunnyRoll;
 
     [SerializeField] private Animator _animator;
 
+    private Vector2 moveInput;         
+    private bool jumpHeld;              
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<Collider>();
-        camTransform = Camera.main.transform;
+        camTransform = Camera.main ? Camera.main.transform : null;
 
         distToGround = playerCollider.bounds.extents.y;
 
-        // Unity 6: use linearDamping
         rb.linearDamping = 5f;
         defaultDrag = rb.linearDamping;
 
@@ -62,45 +66,70 @@ public class DustBunnyController : MonoBehaviour
 
     void Update()
     {
-        // 1. Ground Check
+        // Ground Check
         distToGround = playerCollider.bounds.extents.y;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + groundCheckOffset);
-        // Debug.DrawRay(transform.position, Vector3.down * (distToGround + groundCheckOffset), isGrounded ? Color.green : Color.red);
-
-        // 2. Handle Inputs
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)) && isGrounded && !isRolling)
-        {
-            PerformJump();
-            bunnySfxSource.resource = bunnyJump;
-            bunnySfxSource.Play();
-        }
-
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !isRolling)
-        {
-            if (Time.time >= lastDashTime + dashCooldown)
-            {
-                StartCoroutine(PerformDash());
-                bunnySfxSource.resource = bunnyRoll;
-                bunnySfxSource.Play();
-            }
-        }
     }
 
     void FixedUpdate()
     {
-        // If we are rolling (dashing), we let physics handle the slide.
-        // If we are NOT rolling, we control movement manually.
         if (!isRolling)
         {
             MoveCharacter();
-            ApplyBetterGravity(); 
+            ApplyBetterGravity();
         }
     }
 
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        // Track held state for low-jump logic
+        if (context.started)
+        {
+            jumpHeld = true;
+        }
+        if (context.canceled)
+        {
+            jumpHeld = false;
+        }
+
+        // Jump on press (started)
+        if (context.performed && isGrounded && !isRolling)
+        {
+            PerformJump();
+            PlaySfx(bunnyJump);
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+        {
+            return;
+        }
+
+        if (!isRolling && Time.time >= lastDashTime + dashCooldown)
+        {
+            StartCoroutine(PerformDash());
+            PlaySfx(bunnyRoll);
+        }
+    }
+
+    // Movement
+
     void MoveCharacter()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        if (camTransform == null)
+        {
+            return;
+        }
+
+        float h = moveInput.x;
+        float v = moveInput.y;
 
         Vector3 direction = new Vector3(h, 0f, v).normalized;
 
@@ -113,19 +142,16 @@ public class DustBunnyController : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
             Vector3 targetVelocity = moveDir * walkSpeed;
-            targetVelocity.y = rb.linearVelocity.y; 
+            targetVelocity.y = rb.linearVelocity.y;
 
             rb.linearVelocity = targetVelocity;
         }
 
         // Animation handling
-        if (h != 0 || v != 0)
-        { 
-            if(_animator) _animator.SetBool("isRunning", true);
-        }
-        else
+        if (_animator)
         {
-            if(_animator) _animator.SetBool("isRunning", false);
+            bool running = (Mathf.Abs(h) > 0.01f || Mathf.Abs(v) > 0.01f);
+            _animator.SetBool("isRunning", running);
         }
     }
 
@@ -134,12 +160,20 @@ public class DustBunnyController : MonoBehaviour
         // Falling
         if (rb.linearVelocity.y < 0)
         {
-            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1f) * Time.fixedDeltaTime;
         }
-        // Rising but jump button released early
-        else if (rb.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.JoystickButton1))
+        // Rising and NOT holding jump short hop
+        else if (rb.linearVelocity.y > 0 && !jumpHeld)
         {
-            rb.linearVelocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+            rb.linearVelocity += Vector3.up * Physics.gravity.y *
+                (lowJumpMultiplier - 1f) * Time.fixedDeltaTime;
+        }
+
+        // Rising and holding jump lighter gravity higher jump
+        else if (rb.linearVelocity.y > 0 && jumpHeld)
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y *
+                (heldJumpGravityMultiplier - 1f) * Time.fixedDeltaTime;
         }
     }
 
@@ -151,18 +185,21 @@ public class DustBunnyController : MonoBehaviour
 
     IEnumerator PerformDash()
     {
+        if (camTransform == null)
+        {
+            yield break;
+        }
+
         isRolling = true;
-        if(_animator) _animator.SetBool("isRolling", true);
+        if (_animator) _animator.SetBool("isRolling", true);
         lastDashTime = Time.time;
 
-        // --- Change: No longer unlocking rotation ---
-        // rb.freezeRotation = false; // REMOVED: We want the bunny upright
         rb.linearDamping = rollDrag;
 
-        // Calculate Direction
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector3 dashDir = Vector3.zero;
+        float h = moveInput.x;
+        float v = moveInput.y;
+
+        Vector3 dashDir;
 
         if (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f)
         {
@@ -170,6 +207,7 @@ public class DustBunnyController : MonoBehaviour
             Vector3 camRight = camTransform.right;
             camForward.y = 0;
             camRight.y = 0;
+
             dashDir = (camForward.normalized * v + camRight.normalized * h).normalized;
         }
         else
@@ -179,28 +217,30 @@ public class DustBunnyController : MonoBehaviour
             dashDir.Normalize();
         }
 
-        // --- New: Immediately face the dash direction ---
-        // This prevents sliding sideways while looking forward
         if (dashDir != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(dashDir);
         }
 
-        // Apply Force
         rb.AddForce(dashDir * dashForce, ForceMode.Impulse);
-        
-        // --- Change: No longer adding Torque (spinning) ---
-        // rb.AddTorque(...); // REMOVED
 
         yield return new WaitForSeconds(dashDuration);
 
-        // Reset
         isRolling = false;
-        if(_animator) _animator.SetBool("isRolling", false);
-
-        // Restore drag
+        if (_animator)
+        {
+            _animator.SetBool("isRolling", false);
+        }
         rb.linearDamping = defaultDrag;
-        
-        // Rotation is already locked, so we don't need to manually reset logic here
+    }
+    private void PlaySfx(AudioResource clip)
+    {
+        if (!bunnySfxSource || !clip)
+        {
+            return;
+        }
+
+        bunnySfxSource.resource = clip;
+        bunnySfxSource.Play();
     }
 }
