@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 /// <summary>
 /// AbsorbMechanic.cs (UPDATED VERSION)
@@ -17,12 +16,6 @@ public class AbsorbMechanic : MonoBehaviour
     [Header("Growth Settings")]
     public float growthFactor = 0.05f; // How much to grow per item
     public float sizeTolerance = 1.2f; // Player must be this much bigger than target
-
-    [Header("Audio Sources")]
-    public AudioSource absorbSource;
-
-    [Header("Audio Resources")]
-    public AudioResource bunnyAbsorb;
 
     private DustBunnyController controller;
 
@@ -79,9 +72,6 @@ public class AbsorbMechanic : MonoBehaviour
 
             // 3. Grow player
             transform.localScale += Vector3.one * growthFactor;
-
-            absorbSource.resource = bunnyAbsorb;
-            absorbSource.Play();
             
             // Optional: If you want papers to be destroyed instead of absorbed
             // Uncomment the following block:

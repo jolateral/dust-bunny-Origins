@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -36,12 +35,6 @@ public class DustBunnyController : MonoBehaviour
     private float defaultDrag;
     private float distToGround;
 
-    public AudioSource bunnySfxSource;
-
-    public AudioResource bunnyHop;
-    public AudioResource bunnyJump;
-    public AudioResource bunnyRoll;
-
     [SerializeField] private Animator _animator;
 
     void Start()
@@ -71,8 +64,6 @@ public class DustBunnyController : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1)) && isGrounded && !isRolling)
         {
             PerformJump();
-            bunnySfxSource.resource = bunnyJump;
-            bunnySfxSource.Play();
         }
 
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton0)) && !isRolling)
@@ -80,8 +71,6 @@ public class DustBunnyController : MonoBehaviour
             if (Time.time >= lastDashTime + dashCooldown)
             {
                 StartCoroutine(PerformDash());
-                bunnySfxSource.resource = bunnyRoll;
-                bunnySfxSource.Play();
             }
         }
     }
