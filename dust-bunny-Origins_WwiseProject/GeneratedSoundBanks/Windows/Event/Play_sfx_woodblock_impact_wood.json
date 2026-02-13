@@ -1,0 +1,172 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "841695155",
+    "Type": "Event",
+    "GUID": "{4EF5F896-7125-4BD7-AF0A-7C5231C6459C}",
+    "Language": "SFX",
+    "Hash": "{3A7B27F7-C59B-1DB5-A132-4D04DD750461}",
+    "ObjectPath": "Play_sfx_woodblock_impact_wood",
+    "ShortName": "Play_sfx_woodblock_impact_wood",
+    "Path": "Event/Play_sfx_woodblock_impact_wood.bnk",
+    "Media": [
+     {
+      "Id": "116306658",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_impact_nl_002.wav",
+      "Path": "Media/116306658.wem",
+      "CachePath": "4B/{4B8DF1FE-2AE1-D03F-F8EC-649F50278183}.wem"
+     },
+     {
+      "Id": "255263469",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_impact_nl_006.wav",
+      "Path": "Media/255263469.wem",
+      "CachePath": "10/{105C28DB-5BC3-FD88-4AFD-26E6C3A8CDA2}.wem"
+     },
+     {
+      "Id": "497527183",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "Weapons, Blunt, Block Stick With Shield Front, Wood SND70773 S03.wav",
+      "Path": "Media/497527183.wem",
+      "CachePath": "D0/{D07CC389-5D44-45A9-6215-00F990A6B959}.wem"
+     },
+     {
+      "Id": "497917481",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "Weapons, Blunt, Block Stick With Shield Front, Wood SND70773 S04.wav",
+      "Path": "Media/497917481.wem",
+      "CachePath": "2D/{2D74BEF5-E333-B978-A03D-A5856D7D5A36}.wem"
+     },
+     {
+      "Id": "591245122",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_impact_nl_004.wav",
+      "Path": "Media/591245122.wem",
+      "CachePath": "72/{72BEFB1D-3982-2D7C-8B17-D83FE941EBF8}.wem"
+     },
+     {
+      "Id": "776614564",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_impact_nl_003.wav",
+      "Path": "Media/776614564.wem",
+      "CachePath": "A5/{A551C097-0319-F29E-C4DB-1EEA7E407BBE}.wem"
+     },
+     {
+      "Id": "787643204",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_impact_nl_005.wav",
+      "Path": "Media/787643204.wem",
+      "CachePath": "67/{67F34CAB-F2A1-BF6D-751C-B4BC9388281A}.wem"
+     },
+     {
+      "Id": "971705040",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "Weapons, Blunt, Block Stick With Shield Front, Wood SND70773 S02.wav",
+      "Path": "Media/971705040.wem",
+      "CachePath": "91/{911AFCCB-66BF-4583-65E5-0C582F6F49EC}.wem"
+     },
+     {
+      "Id": "995469233",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_impact_nl_001.wav",
+      "Path": "Media/995469233.wem",
+      "CachePath": "CF/{CFF806E3-6345-1EB5-F9FB-C0B4764A1DC8}.wem"
+     }
+    ],
+    "Plugins": {
+     "Custom": [
+      {
+       "Id": "151352060",
+       "Name": "Parametric EQ (Custom)",
+       "ObjectPath": "\\Containers\\Default Work Unit\\SFX_Object\\sfx_woodblock_impact_wood\\sfx_woodblock_impact_heavy_nl\\[Effect Slot [0]: (Parametric EQ)]\\Parametric EQ (Custom)",
+       "GUID": "{E1F5F36E-9F46-46D6-9210-A198795E4BA6}",
+       "LibName": "Wwise Parametric EQ",
+       "LibId": "6881283"
+      }
+     ]
+    },
+    "Events": [
+     {
+      "Id": "841695155",
+      "Name": "Play_sfx_woodblock_impact_wood",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_sfx_woodblock_impact_wood",
+      "GUID": "{4EF5F896-7125-4BD7-AF0A-7C5231C6459C}",
+      "MaxAttenuation": "20",
+      "DurationType": "OneShot",
+      "DurationMin": "0.106729165",
+      "DurationMax": "1.2965723",
+      "MediaRefs": [
+       {
+        "Id": "116306658"
+       },
+       {
+        "Id": "255263469"
+       },
+       {
+        "Id": "497527183"
+       },
+       {
+        "Id": "497917481"
+       },
+       {
+        "Id": "591245122"
+       },
+       {
+        "Id": "776614564"
+       },
+       {
+        "Id": "787643204"
+       },
+       {
+        "Id": "971705040"
+       },
+       {
+        "Id": "995469233"
+       }
+      ],
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "151352060"
+        }
+       ]
+      }
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "3519441192",
+      "Name": "velocity",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\velocity",
+      "GUID": "{00E52E05-195E-4593-9251-C1504F30131D}"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{935BE3DA-5B87-DBC1-0B34-C25BCECECDE5}"
+ }
+}
