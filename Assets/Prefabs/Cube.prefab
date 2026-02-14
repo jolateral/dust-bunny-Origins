@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 4029555349068930619}
   - component: {fileID: 6965215722410022445}
   - component: {fileID: 4570042999428377269}
+  - component: {fileID: 2376486762352743602}
   m_Layer: 0
   m_Name: Cube
   m_TagString: StickyObject
@@ -240,3 +241,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2376486762352743602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8140027133961064499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 416288a2d2ae74e4ea84cf9cb2292814, type: 2}

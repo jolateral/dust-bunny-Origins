@@ -1124,7 +1124,8 @@ GameObject:
   - component: {fileID: 4214717061640914858}
   - component: {fileID: 8131565752979367215}
   - component: {fileID: 8776729684701422177}
-  - component: {fileID: 1360032175054956839}
+  - component: {fileID: -8958621775533741721}
+  - component: {fileID: 2747690076878765375}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -1211,8 +1212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AbsorbMechanic
   growthFactor: 0.05
   sizeTolerance: 1.2
-  absorbSource: {fileID: 1360032175054956839}
-  bunnyAbsorb: {fileID: 6418180475301049370, guid: e67c1061fc18b9240b1183b3241b0110, type: 2}
 --- !u!114 &4214717061640914858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1229,18 +1228,17 @@ MonoBehaviour:
   jumpForce: 15
   turnSmoothTime: 0.1
   fallMultiplier: 2.5
+  heldJumpGravityMultiplier: 0.6
   lowJumpMultiplier: 2
   dashForce: 3
   dashDuration: 0.8
   dashCooldown: 1
   rollDrag: 0.5
+  dashFovKick: 5
+  fovSmoothTime: 0.2
   groundCheckOffset: 0.2
   isRolling: 0
   isGrounded: 0
-  bunnySfxSource: {fileID: 1360032175054956839}
-  bunnyMove: {fileID: 6418180475301049370, guid: 376f26e330ef2ef41a3787a10d358bfd, type: 2}
-  bunnyJump: {fileID: 6418180475301049370, guid: 73cb0e0a8fb72214aae97e7a5983aa4b, type: 2}
-  bunnyRoll: {fileID: 6418180475301049370, guid: 7a1c9c1095b3b2b41ab451ddec15660d, type: 2}
   _animator: {fileID: 8131565752979367215}
 --- !u!95 &8131565752979367215
 Animator:
@@ -1342,103 +1340,50 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!82 &1360032175054956839
-AudioSource:
+--- !u!114 &-8958621775533741721
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4412984083948095987}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e021e4d64cccd3478083e0e42485605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &2747690076878765375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4412984083948095987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49713fda790696340a4dc716d9f42967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BunnyAudioEvent
+  bunnyMoveSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c9fad3603e4fe0f4290865aa02583231, type: 2}
+  bunnyRollSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 368890179cf3ef14a955e643aee7fcc0, type: 2}
 --- !u!1 &4670955279592314525
 GameObject:
   m_ObjectHideFlags: 0

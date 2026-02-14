@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6729024117024119415}
   - component: {fileID: 6521775190650085934}
   - component: {fileID: 2942074422334533526}
+  - component: {fileID: 6404816490881324295}
   m_Layer: 0
   m_Name: Cube (12)
   m_TagString: Untagged
@@ -140,6 +141,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6404816490881324295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625205620254591639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: aa459d046844f8a4c9116a257d2b2a06, type: 2}
+  debug: 0
 --- !u!1 &4298821680840755395
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +171,7 @@ GameObject:
   - component: {fileID: 6661802573746416015}
   - component: {fileID: 5080766968300606072}
   - component: {fileID: 4322731667990218541}
+  - component: {fileID: 1399577315790260650}
   m_Layer: 0
   m_Name: Cube (13)
   m_TagString: Untagged
@@ -280,6 +299,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1399577315790260650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298821680840755395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: aa459d046844f8a4c9116a257d2b2a06, type: 2}
+  debug: 0
 --- !u!1 &5415184000968120678
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +329,7 @@ GameObject:
   - component: {fileID: 365248230003459929}
   - component: {fileID: 8930255373461417282}
   - component: {fileID: 1284135298106961875}
+  - component: {fileID: 874715106965066735}
   m_Layer: 0
   m_Name: Cube (14)
   m_TagString: Untagged
@@ -420,6 +457,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &874715106965066735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415184000968120678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: aa459d046844f8a4c9116a257d2b2a06, type: 2}
+  debug: 0
 --- !u!1 &6096837127856377189
 GameObject:
   m_ObjectHideFlags: 0
