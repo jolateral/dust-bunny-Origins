@@ -297,8 +297,16 @@ public class PaperUIManager : MonoBehaviour
         
         waitingForInput = true;
         
-        if (instructionText != null)
-            StartCoroutine(BlinkInstruction());
+waitingForInput = true;
+
+// Show and blink the instruction text
+
+// Show and blink the instruction text
+if (instructionText != null)
+{
+    instructionText.gameObject.SetActive(true);
+    StartCoroutine(BlinkInstruction());
+}
     }
     
     /// <summary>
@@ -379,11 +387,17 @@ public class PaperUIManager : MonoBehaviour
         if (singlePieceGroup != null) singlePieceGroup.blocksRaycasts = false;
         if (multiPieceGroup != null) multiPieceGroup.blocksRaycasts = false;
         
-        isPaperShowing = false;
-        
-        // Unfreeze player
-        if (playerController != null)
-            playerController.enabled = true;
+isPaperShowing = false;
+
+// Hide the instruction text
+if (instructionText != null)
+{
+    instructionText.gameObject.SetActive(false);
+}
+
+// Unfreeze player
+if (playerController != null)
+    playerController.enabled = true;
     }
     
     /// <summary>
