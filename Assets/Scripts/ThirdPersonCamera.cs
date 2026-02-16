@@ -10,16 +10,27 @@ public class ThirdPersonCamera : MonoBehaviour
     public float baseDistance = 10.0f;
     public float height = 5.0f;
     
+    [Header("Katamari-Style POV")]
+    [Tooltip("Wider FOV to see more of the environment (Katamari-style)")]
+    public float fieldOfView = 75f;
+    [Tooltip("Look-at point above player center - puts player in bottom third of screen")]
+    public float lookAtHeightOffset = 3f;
+    
     [Header("Controls")]
     public float rotationSpeed = 1.0f; // Adjusted sensitivity
 
     private float currentX = 0.0f;
     private float currentY = 0.0f;
+    private Camera cam;
 
     void Start()
     {
         // Hide mouse cursor
         Cursor.lockState = CursorLockMode.Locked;
+        
+        cam = GetComponent<Camera>();
+        if (cam != null)
+            cam.fieldOfView = fieldOfView;
     }
 
     void Update()
@@ -64,6 +75,9 @@ public class ThirdPersonCamera : MonoBehaviour
         transform.position = target.position + rotation * dir;
         transform.position += Vector3.up * actualHeight; // Add height offset
         
-        transform.LookAt(target.position);
+        // Look at point above player = player appears in bottom third (Katamari-style)
+        float scaledLookOffset = lookAtHeightOffset * currentScale;
+        Vector3 lookAtPoint = target.position + Vector3.up * scaledLookOffset;
+        transform.LookAt(lookAtPoint);
     }
 }
