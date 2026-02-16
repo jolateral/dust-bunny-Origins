@@ -8,16 +8,18 @@ public class MovingCar : MonoBehaviour
     public float distance = 10.0f;   // Movement distance
 
     private Vector3 startPos;
+    private float phaseOffset; // Random offset so cars aren't in sync
 
     void Start()
     {
         startPos = transform.position;
+        phaseOffset = Random.Range(0f, 1f); // Random phase so each car is at a different point in the cycle
     }
 
     void Update()
     {
-        // Use PingPong function to generate oscillating values between 0 and 1
-        float cycle = Mathf.PingPong(Time.time * speed, 1f);
+        // Use PingPong with phase offset so cars move out of sync
+        float cycle = Mathf.PingPong(Time.time * speed + phaseOffset, 1f);
         
         // Interpolate between start and end positions
         // EndPos = StartPos + Direction * Distance
