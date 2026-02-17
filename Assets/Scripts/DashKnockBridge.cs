@@ -11,7 +11,7 @@ public class DashKnockBridge : MonoBehaviour
 
     [Header("Behavior")]
     [SerializeField] private bool oneTime = true;
-    [SerializeField] private float ignorePlayerCollisionTime = 5f; // prevents roll impact from pushing it
+    [SerializeField] private float ignorePlayerCollisionTime = 0.5f; // prevents roll impact from pushing it
     [SerializeField] private float unlockDelay = 0f;                  // small delay can help stability (0–0.05)
 
     private bool triggered;
@@ -67,8 +67,6 @@ public class DashKnockBridge : MonoBehaviour
         // Re-enable collision after a moment
         yield return new WaitForSeconds(ignorePlayerCollisionTime);
 
-        rb.isKinematic = true;
-        rb.useGravity = false;
 
         if (playerCollider != null)
             Physics.IgnoreCollision(bridgeCollider, playerCollider, false);

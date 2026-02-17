@@ -7,30 +7,30 @@ using UnityEngine.InputSystem;
 public class DustBunnyController : MonoBehaviour
 {
     [Header("--- Movement Settings ---")]
-    public float walkSpeed = 8f; // Increased slightly for better feel
-    public float jumpForce = 15f;
+    public float walkSpeed = 6f; // Increased slightly for better feel
+    public float jumpForce = 25f;
     public float turnSmoothTime = 0.1f;
 
     [Header("--- Jump Feel (Gravity) ---")]
     [Tooltip("Multiplier for gravity when falling. Higher = faster fall.")]
     public float fallMultiplier = 2.5f;
     [Tooltip("Gravity multiplier while holding jump (lower = higher jump)")]
-    public float heldJumpGravityMultiplier = 0.6f;
+    public float heldJumpGravityMultiplier = 0.25f;
     [Tooltip("Multiplier for gravity when jump is released early.")]
-    public float lowJumpMultiplier = 1f;
+    public float lowJumpMultiplier = 2.5f;
 
     [Header("--- Dash / Roll Settings ---")]
-    public float dashForce = 40f; // Increased force for more impact
-    public float dashDuration = 0.5f; // Shortened duration for a "burst" feel
+    public float dashForce = 5f; 
+    public float dashDuration = 0.5f; 
     public float dashCooldown = 1.0f;
-    public float rollDrag = 2f; // Increased drag so you stop firmly after the burst (less slippery)
+    public float rollDrag = 0.5f; 
 
     [Header("--- Impact Feel ---")]
-    public float dashFovKick = 5f; // How much the camera zooms out on dash
-    public float fovSmoothTime = 0.2f; // How fast camera returns to normal
+    public float dashFovKick = 10f; // How much the camera zooms out on dash
+    public float fovSmoothTime = 0.8f; // How fast camera returns to normal
 
     [Header("--- Debug & Status ---")]
-    public float groundCheckOffset = 0.2f;
+    public float groundCheckOffset = 0.1f;
     public bool isRolling = false;
     public bool isGrounded;
 
