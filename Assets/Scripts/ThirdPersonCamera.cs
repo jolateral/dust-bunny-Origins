@@ -18,6 +18,10 @@ public class ThirdPersonCamera : MonoBehaviour
     
     [Header("Controls")]
     public float rotationSpeed = 1.0f; // Adjusted sensitivity
+    
+    [Header("Initial Look Target")]
+    [Tooltip("Optional: Camera will face this object at start. Leave empty to use default rotation.")]
+    public Transform initialLookTarget;
 
     private float currentX = 0.0f;
     private float currentY = 0.0f;
@@ -31,6 +35,52 @@ public class ThirdPersonCamera : MonoBehaviour
         cam = GetComponent<Camera>();
         if (cam != null)
             cam.fieldOfView = fieldOfView;
+        
+        // Initialize camera to face dust particle if target exists
+        InitializeCameraRotation();
+    }
+    
+    void InitializeCameraRotation()
+    {
+        if (!target) return;
+        
+        Transform lookTarget = initialLookTarget;
+        
+        // If no initialLookTarget is assigned, try to find "Dust Particle" by name
+        if (lookTarget == null)
+        {
+            GameObject dustParticle = GameObject.Find("Dust Particle");
+            if (dustParticle != null)
+            {
+                lookTarget = dustParticle.transform;
+            }
+        }
+        
+        if (lookTarget != null)
+        {
+            // Direction from player to dust particle
+            Vector3 directionToTarget = lookTarget.position - target.position;
+
+            // Horizontal (XZ) direction from player to dust particle
+            Vector3 flatDir = new Vector3(directionToTarget.x, 0f, directionToTarget.z);
+            if (flatDir.sqrMagnitude < 0.0001f)
+            {
+                return; // Avoid degenerate case if they are on top of each other
+            }
+
+            flatDir.Normalize();
+
+            // Yaw: we want the direction from camera -> player to line up
+            // with player -> dust, so dust is in front of the bunny
+            currentX = Mathf.Atan2(flatDir.x, flatDir.z) * Mathf.Rad2Deg;
+
+            // Pitch: angle based on vertical offset to dust
+            float horizontalDistance = new Vector2(directionToTarget.x, directionToTarget.z).magnitude;
+            currentY = Mathf.Atan2(directionToTarget.y, horizontalDistance) * Mathf.Rad2Deg;
+
+            // Clamp vertical rotation to valid range
+            currentY = Mathf.Clamp(currentY, -20f, 60f);
+        }
     }
 
     void Update()
