@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
 
@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 public class DustBunnyController : MonoBehaviour
 {
     [Header("--- Movement Settings ---")]
-    public float walkSpeed = 6f; // Increased slightly for better feel
-    public float jumpForce = 25f;
+    public float walkSpeed = 3.5f;
+    public float jumpForce = 16f;
     public float turnSmoothTime = 0.1f;
 
     [Header("--- Jump Feel (Gravity) ---")]
@@ -20,7 +20,7 @@ public class DustBunnyController : MonoBehaviour
     public float lowJumpMultiplier = 2.5f;
 
     [Header("--- Dash / Roll Settings ---")]
-    public float dashForce = 5f; 
+    public float dashForce = 2.5f; 
     public float dashDuration = 0.5f; 
     public float dashCooldown = 1.0f;
     public float rollDrag = 0.5f; 
@@ -43,16 +43,29 @@ public class DustBunnyController : MonoBehaviour
     private float lastDashTime = -10f;
     private float defaultDrag;
     private float distToGround;
+    private float baseScale; // Scale at Start — speed scales with size relative to this
 
     [SerializeField] private Animator _animator;
 
     private Vector2 moveInput;         
     private bool jumpHeld;              
 
+    /// <summary> Speed scales sub-linearly with size (sqrt) so getting bigger doesn't make you feel much faster — 2x size ≈ 1.4x speed. </summary>
+    private float ScaleFactor
+    {
+        get
+        {
+            float scaleRatio = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / (3f * baseScale);
+            scaleRatio = Mathf.Max(0.5f, scaleRatio);
+            return Mathf.Pow(scaleRatio, 0.5f); // sqrt: speed grows slower than size
+        }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<Collider>();
+        baseScale = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
         
         if (Camera.main != null)
         {
@@ -136,8 +149,8 @@ public class DustBunnyController : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            // Apply movement velocity
-            Vector3 targetVelocity = moveDir * walkSpeed;
+            // Apply movement velocity (scale with size so bigger bunny isn't slower)
+            Vector3 targetVelocity = moveDir * (walkSpeed * ScaleFactor);
             targetVelocity.y = rb.linearVelocity.y; // Preserve gravity
 
             rb.linearVelocity = targetVelocity;
@@ -174,9 +187,9 @@ public class DustBunnyController : MonoBehaviour
 
     void PerformJump()
     {
-        // Reset vertical velocity for consistent jump height
+        // Reset vertical velocity for consistent jump height (scale with size so jump height feels consistent)
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * (jumpForce * ScaleFactor), ForceMode.Impulse);
     }
 
     // --- The Improved Dash Coroutine ---
@@ -222,8 +235,8 @@ public class DustBunnyController : MonoBehaviour
         // Reset velocity first so we don't fight existing momentum
         rb.linearVelocity = Vector3.zero; 
         
-        // Use VelocityChange instead of Impulse for instant, mass-independent speed
-        rb.AddForce(dashDir * dashForce, ForceMode.VelocityChange);
+        // Use VelocityChange instead of Impulse for instant, mass-independent speed (scale with size)
+        rb.AddForce(dashDir * (dashForce * ScaleFactor), ForceMode.VelocityChange);
 
         // 4. Camera Juice (FOV Kick)
         if (mainCam != null)
