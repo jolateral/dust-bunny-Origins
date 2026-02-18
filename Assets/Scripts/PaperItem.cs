@@ -145,7 +145,7 @@ public class PaperItem : MonoBehaviour
     private Sprite[] GetCollectedPieceSprites()
     {
         // Find all PaperItem objects that belong to this multi-piece paper
-        PaperItem[] allPaperItems = FindObjectsOfType<PaperItem>();
+        PaperItem[] allPaperItems = FindObjectsByType<PaperItem>(FindObjectsSortMode.None);
         
         // Create array to hold sprites (indexed by piece number)
         Sprite[] sprites = new Sprite[multiPieceData.totalPieces];

@@ -6,8 +6,8 @@ using UnityEngine;
 /// A moving absorbable item that runs away from the player when they get close.
 /// - Detects player proximity
 /// - Moves away from player at a speed slower than the player
+/// - Keeps minimum distance from walls/obstacles so the player can still absorb it
 /// - Grants bonus size growth when absorbed
-/// - Uses physics-based rolling movement for sphere-shaped objects
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
@@ -20,6 +20,17 @@ public class FleeingAbsorbable : MonoBehaviour
     [Tooltip("Speed multiplier relative to player's walk speed (0.5 = half player speed)")]
     [Range(0.1f, 0.9f)]
     public float speedMultiplier = 0.8f;
+    
+    [Header("Obstacle Avoidance")]
+    [Tooltip("Minimum distance to keep from walls and other obstacles (prevents getting stuck)")]
+    public float minDistanceFromObstacles = 1.5f;
+    
+    [Tooltip("How far ahead to check for obstacles")]
+    public float obstacleCheckRadius = 2f;
+    
+    [Tooltip("How strongly to steer away from obstacles (higher = more avoidance)")]
+    [Range(0.5f, 3f)]
+    public float avoidanceStrength = 1.5f;
     
     [Header("Bonus Growth")]
     [Tooltip("Multiplier for size growth when this item is absorbed (2.0 = double growth)")]
@@ -34,6 +45,7 @@ public class FleeingAbsorbable : MonoBehaviour
     
     private Transform playerTransform;
     private Rigidbody rb;
+    private Collider myCollider;
     private DustBunnyController playerController;
     private float playerWalkSpeed;
     private bool isFleeing = false;
@@ -41,6 +53,7 @@ public class FleeingAbsorbable : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        myCollider = GetComponent<Collider>();
         
         // Find the player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -133,6 +146,15 @@ public class FleeingAbsorbable : MonoBehaviour
         directionAway.y = 0f;
         directionAway.Normalize();
         
+        // Steer away from nearby obstacles (walls, etc.) so we don't get stuck
+        Vector3 avoidanceDir = GetObstacleAvoidanceDirection();
+        if (avoidanceDir.sqrMagnitude > 0.01f)
+        {
+            directionAway = (directionAway + avoidanceDir * avoidanceStrength).normalized;
+            directionAway.y = 0f;
+            directionAway.Normalize();
+        }
+        
         // Calculate target velocity (slower than player)
         float fleeSpeed = playerWalkSpeed * speedMultiplier;
         Vector3 targetVelocity = directionAway * fleeSpeed;
@@ -156,6 +178,41 @@ public class FleeingAbsorbable : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Returns a direction that steers away from nearby obstacles (walls, static colliders).
+    /// Keeps fleeing objects from getting stuck against walls so the player can absorb them.
+    /// </summary>
+    private Vector3 GetObstacleAvoidanceDirection()
+    {
+        Vector3 myPos = transform.position;
+        Vector3 sumAvoidance = Vector3.zero;
+        int count = 0;
+        
+        Collider[] hits = Physics.OverlapSphere(myPos, obstacleCheckRadius);
+        foreach (Collider other in hits)
+        {
+            if (other == myCollider || other.attachedRigidbody == rb) continue;
+            if (other.CompareTag("Player")) continue;
+            
+            Vector3 closestOnOther = other.ClosestPoint(myPos);
+            float dist = Vector3.Distance(myPos, closestOnOther);
+            
+            if (dist < minDistanceFromObstacles && dist > 0.001f)
+            {
+                // Too close to this obstacle — push away from it (horizontal only)
+                Vector3 away = (myPos - closestOnOther).normalized;
+                away.y = 0f;
+                away.Normalize();
+                float strength = 1f - (dist / minDistanceFromObstacles); // stronger when closer
+                sumAvoidance += away * strength;
+                count++;
+            }
+        }
+        
+        if (count == 0) return Vector3.zero;
+        return sumAvoidance.normalized;
+    }
+    
     void OnDrawGizmosSelected()
     {
         if (showGizmos)
@@ -163,6 +220,12 @@ public class FleeingAbsorbable : MonoBehaviour
             // Draw flee distance sphere
             Gizmos.color = isFleeing ? Color.red : Color.yellow;
             Gizmos.DrawWireSphere(transform.position, fleeDistance);
+            
+            // Draw obstacle avoidance radius (keep-out zone)
+            Gizmos.color = new Color(1f, 0.5f, 0f, 0.4f);
+            Gizmos.DrawWireSphere(transform.position, minDistanceFromObstacles);
+            Gizmos.color = new Color(1f, 0.5f, 0f, 0.15f);
+            Gizmos.DrawWireSphere(transform.position, obstacleCheckRadius);
             
             // Draw direction to player
             if (Application.isPlaying && playerTransform != null)

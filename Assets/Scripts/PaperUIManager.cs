@@ -98,7 +98,7 @@ public class PaperUIManager : MonoBehaviour
         // Find player if not assigned
         if (playerController == null)
         {
-            playerController = FindObjectOfType<DustBunnyController>();
+            playerController = FindAnyObjectByType<DustBunnyController>();
         }
         
         // Setup black background color
