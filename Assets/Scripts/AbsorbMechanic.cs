@@ -13,7 +13,7 @@ using UnityEngine;
 public class AbsorbMechanic : MonoBehaviour
 {
     [Header("Growth Settings")]
-    public float growthFactor = 0.05f; // How much to grow per item
+    public float growthFactor = 0.01f; // How much to grow per item (scale increase per absorb)
     public float sizeTolerance = 1.2f; // Player must be this much bigger than target
 
     [Header("Visual Settings")]
