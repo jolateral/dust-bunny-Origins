@@ -33,8 +33,8 @@ public class FleeingAbsorbable : MonoBehaviour
     public float avoidanceStrength = 1.5f;
     
     [Header("Bonus Growth")]
-    [Tooltip("Multiplier for size growth when this item is absorbed (2.0 = double growth)")]
-    public float growthMultiplier = 2.0f;
+    [Tooltip("Multiplier for size growth when this item is absorbed (1.5 = 1.5x base growth)")]
+    public float growthMultiplier = 1.2f;
     
     [Header("Movement Smoothing")]
     [Tooltip("How quickly the item changes direction when fleeing")]
