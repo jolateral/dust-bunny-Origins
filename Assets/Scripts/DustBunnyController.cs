@@ -26,8 +26,8 @@ public class DustBunnyController : MonoBehaviour
     public float rollDrag = 0.5f; 
 
     [Header("--- Impact Feel ---")]
-    public float dashFovKick = 10f; // How much the camera zooms out on dash
-    public float fovSmoothTime = 0.8f; // How fast camera returns to normal
+    public float dashFovKick = 10f; 
+    public float fovSmoothTime = 0.8f; 
 
     [Header("--- Debug & Status ---")]
     public float groundCheckOffset = 0.1f;
@@ -37,27 +37,42 @@ public class DustBunnyController : MonoBehaviour
     private Rigidbody rb;
     private Collider playerCollider;
     private Transform camTransform;
-    private Camera mainCam; // Reference to Camera component for FOV effects
-    private float defaultFov; // Store original FOV
+    private Camera mainCam; 
+    private float defaultFov; 
     private float turnSmoothVelocity;
     private float lastDashTime = -10f;
     private float defaultDrag;
     private float distToGround;
-    private float baseScale; // Scale at Start — speed scales with size relative to this
+    private float baseScale; 
 
     [SerializeField] private Animator _animator;
 
     private Vector2 moveInput;         
     private bool jumpHeld;              
 
-    /// <summary> Speed scales sub-linearly with size (sqrt) so getting bigger doesn't make you feel much faster — 2x size ≈ 1.4x speed. </summary>
+    // --- Scaling Logic ---
+
+    /// <summary> Speed scales sub-linearly with size (sqrt) so getting bigger doesn't make you feel much faster. </summary>
     private float ScaleFactor
     {
         get
         {
             float scaleRatio = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / (3f * baseScale);
             scaleRatio = Mathf.Max(0.5f, scaleRatio);
-            return Mathf.Pow(scaleRatio, 0.5f); // sqrt: speed grows slower than size
+            return Mathf.Pow(scaleRatio, 0.5f);
+        }
+    }
+
+    /// <summary> 
+    /// NEW: Gravity must scale linearly with size to maintain visual "snappiness".
+    /// If you are 10x bigger, you need much more gravity to not look like you're floating.
+    /// </summary>
+    private float GravityFactor
+    {
+        get
+        {
+            float scaleRatio = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / (3f * baseScale);
+            return Mathf.Max(1f, scaleRatio); 
         }
     }
 
@@ -76,24 +91,19 @@ public class DustBunnyController : MonoBehaviour
 
         distToGround = playerCollider.bounds.extents.y;
 
-        // Unity 6: linearDamping replaces drag
         rb.linearDamping = 5f;
         defaultDrag = rb.linearDamping;
-
-        // Ensure rotation is locked so the bunny stays upright
         rb.freezeRotation = true;
     }
 
     void Update()
     {
-        // Ground Check
         distToGround = playerCollider.bounds.extents.y;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + groundCheckOffset);
     }
 
     void FixedUpdate()
     {
-        // Only allow movement control if NOT rolling
         if (!isRolling)
         {
             MoveCharacter();
@@ -101,35 +111,18 @@ public class DustBunnyController : MonoBehaviour
         }
     }
 
-    // Input System Callbacks
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-    }
-
+    // Input Callbacks
+    public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started) jumpHeld = true;
         if (context.canceled) jumpHeld = false;
-
-        if (context.performed && isGrounded && !isRolling)
-        {
-            PerformJump();
-        }
+        if (context.performed && isGrounded && !isRolling) PerformJump();
     }
-
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
-
-        if (!isRolling && Time.time >= lastDashTime + dashCooldown)
-        {
-            StartCoroutine(PerformDash());
-        }
+        if (context.performed && !isRolling && Time.time >= lastDashTime + dashCooldown) StartCoroutine(PerformDash());
     }
-
-    // --- Core Movement Logic ---
 
     void MoveCharacter()
     {
@@ -137,130 +130,87 @@ public class DustBunnyController : MonoBehaviour
 
         float h = moveInput.x;
         float v = moveInput.y;
-
         Vector3 direction = new Vector3(h, 0f, v).normalized;
 
         if (direction.magnitude >= 0.1f)
         {
-            // Calculate target angle based on camera
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-            // Apply movement velocity (scale with size so bigger bunny isn't slower)
             Vector3 targetVelocity = moveDir * (walkSpeed * ScaleFactor);
-            targetVelocity.y = rb.linearVelocity.y; // Preserve gravity
+            targetVelocity.y = rb.linearVelocity.y; 
 
             rb.linearVelocity = targetVelocity;
         }
 
-        // Animation
-        if (_animator)
-        {
-            bool running = (Mathf.Abs(h) > 0.01f || Mathf.Abs(v) > 0.01f);
-            _animator.SetBool("isRunning", running);
-        }
+        if (_animator) _animator.SetBool("isRunning", (Mathf.Abs(h) > 0.01f || Mathf.Abs(v) > 0.01f));
     }
 
     void ApplyBetterGravity()
     {
-        // Use Unity Physics.gravity.y (-9.81) for cleaner calculations
-        
-        // Falling (Heavy fall)
+        // Multiply gravity by GravityFactor to maintain visual speed as you grow
+        float customGravity = Physics.gravity.y * GravityFactor;
+
+        // Falling
         if (rb.linearVelocity.y < 0)
         {
-            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1f) * Time.fixedDeltaTime;
+            rb.linearVelocity += Vector3.up * customGravity * (fallMultiplier - 1f) * Time.fixedDeltaTime;
         }
-        // Rising and NOT holding jump (Short hop)
+        // Rising and NOT holding jump
         else if (rb.linearVelocity.y > 0 && !jumpHeld)
         {
-            rb.linearVelocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1f) * Time.fixedDeltaTime;
+            rb.linearVelocity += Vector3.up * customGravity * (lowJumpMultiplier - 1f) * Time.fixedDeltaTime;
         }
-        // Rising and holding jump (High jump)
+        // Rising and holding jump
         else if (rb.linearVelocity.y > 0 && jumpHeld)
         {
-            rb.linearVelocity += Vector3.up * Physics.gravity.y * (heldJumpGravityMultiplier - 1f) * Time.fixedDeltaTime;
+            rb.linearVelocity += Vector3.up * customGravity * (heldJumpGravityMultiplier - 1f) * Time.fixedDeltaTime;
         }
     }
 
     void PerformJump()
     {
-        // Reset vertical velocity for consistent jump height (scale with size so jump height feels consistent)
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        // Jump force also scales with ScaleFactor to maintain feel
         rb.AddForce(Vector3.up * (jumpForce * ScaleFactor), ForceMode.Impulse);
     }
 
-    // --- The Improved Dash Coroutine ---
     IEnumerator PerformDash()
     {
         if (camTransform == null) yield break;
-
         isRolling = true;
         if (_animator) _animator.SetBool("isRolling", true);
         lastDashTime = Time.time;
 
-        // 1. Physics Setup for Impact
         rb.linearDamping = rollDrag; 
-        rb.useGravity = false; // Disable gravity to dash straight (like a bullet)
+        rb.useGravity = false; 
 
-        // Calculate Dash Direction
         float h = moveInput.x;
         float v = moveInput.y;
-        Vector3 dashDir;
+        Vector3 dashDir = (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f) ? 
+            (Quaternion.Euler(0, camTransform.eulerAngles.y, 0) * new Vector3(h, 0, v)).normalized : 
+            Vector3.ProjectOnPlane(camTransform.forward, Vector3.up).normalized;
 
-        if (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f)
-        {
-            Vector3 camForward = camTransform.forward;
-            Vector3 camRight = camTransform.right;
-            camForward.y = 0;
-            camRight.y = 0;
-            dashDir = (camForward.normalized * v + camRight.normalized * h).normalized;
-        }
-        else
-        {
-            dashDir = camTransform.forward;
-            dashDir.y = 0;
-            dashDir.Normalize();
-        }
+        if (dashDir != Vector3.zero) transform.rotation = Quaternion.LookRotation(dashDir);
 
-        // 2. Face Direction Instantly
-        if (dashDir != Vector3.zero)
-        {
-            transform.rotation = Quaternion.LookRotation(dashDir);
-        }
-
-        // 3. APPLY IMPACT
-        // Reset velocity first so we don't fight existing momentum
         rb.linearVelocity = Vector3.zero; 
-        
-        // Use VelocityChange instead of Impulse for instant, mass-independent speed (scale with size)
         rb.AddForce(dashDir * (dashForce * ScaleFactor), ForceMode.VelocityChange);
 
-        // 4. Camera Juice (FOV Kick)
-        if (mainCam != null)
-        {
-            StartCoroutine(FovKick());
-        }
-
+        if (mainCam != null) StartCoroutine(FovKick());
         yield return new WaitForSeconds(dashDuration);
 
-        // 5. Reset State
         isRolling = false;
         if (_animator) _animator.SetBool("isRolling", false);
-        
         rb.linearDamping = defaultDrag;
-        rb.useGravity = true; // Re-enable gravity
+        rb.useGravity = true; 
     }
 
-    // Helper coroutine to create a visual "Zoom" effect during dash
     IEnumerator FovKick()
     {
         float targetFov = defaultFov + dashFovKick;
         float elapsed = 0f;
-
-        // Zoom Out
         while(elapsed < 0.1f)
         {
             if(!mainCam) yield break;
@@ -268,8 +218,6 @@ public class DustBunnyController : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-
-        // Return to Normal
         elapsed = 0f;
         while (elapsed < fovSmoothTime)
         {
