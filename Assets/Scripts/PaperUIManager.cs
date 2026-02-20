@@ -4,26 +4,24 @@ using TMPro;
 using System.Collections;
 
 /// <summary>
-/// PaperUIManager.cs - UPDATED WITH MULTI-PIECE SUPPORT (NO BACKGROUND PREVIEW)
+/// PaperUIManager.cs - COMPLETE VERSION WITH ALL FIXES
 /// 
-/// Now handles two types of paper display:
+/// Manages full-screen paper overlay UI for both single-piece and multi-piece papers.
 /// 
-/// SINGLE-PIECE MODE (original):
-/// - Shows one complete image
-/// - Optional text overlay
+/// SINGLE-PIECE MODE:
+/// - Shows one complete image with optional text overlay
 /// 
-/// MULTI-PIECE MODE (new):
-/// - Shows only the collected piece sprites on a black background
-/// - Uncollected areas remain as translucent black rectangles
+/// MULTI-PIECE MODE:
+/// - Shows only collected piece sprites on a translucent black background
+/// - Uncollected areas remain dark
 /// - Progress indicator shows X/Y pieces collected
-/// - No preview of the complete image until all pieces are collected
+/// - Player can see bunny faintly in background
 /// 
-/// Setup:
-/// 1. Keep existing single-piece UI elements
-/// 2. Add new multi-piece container with:
-///    - Black background panel
-///    - Piece container (holds individual piece images)
-///    - Progress text
+/// FEATURES:
+/// - Freezes player movement while viewing
+/// - Fade in/out animations
+/// - Instruction text only shows when paper is active
+/// - Press Space to dismiss
 /// </summary>
 public class PaperUIManager : MonoBehaviour
 {
@@ -98,7 +96,7 @@ public class PaperUIManager : MonoBehaviour
         // Find player if not assigned
         if (playerController == null)
         {
-            playerController = FindAnyObjectByType<DustBunnyController>();
+            playerController = FindObjectOfType<DustBunnyController>();
         }
         
         // Setup black background color
@@ -116,6 +114,12 @@ public class PaperUIManager : MonoBehaviour
         if (backgroundGroup != null) backgroundGroup.blocksRaycasts = false;
         if (singlePieceGroup != null) singlePieceGroup.blocksRaycasts = false;
         if (multiPieceGroup != null) multiPieceGroup.blocksRaycasts = false;
+        
+        // Hide instruction text at start
+        if (instructionText != null)
+        {
+            instructionText.gameObject.SetActive(false);
+        }
     }
     
     /// <summary>
@@ -209,8 +213,12 @@ public class PaperUIManager : MonoBehaviour
         
         waitingForInput = true;
         
+        // Show and blink the instruction text
         if (instructionText != null)
+        {
+            instructionText.gameObject.SetActive(true);
             StartCoroutine(BlinkInstruction());
+        }
     }
     
     // ========== MULTI-PIECE METHODS (NEW) ==========
@@ -297,16 +305,12 @@ public class PaperUIManager : MonoBehaviour
         
         waitingForInput = true;
         
-waitingForInput = true;
-
-// Show and blink the instruction text
-
-// Show and blink the instruction text
-if (instructionText != null)
-{
-    instructionText.gameObject.SetActive(true);
-    StartCoroutine(BlinkInstruction());
-}
+        // Show and blink the instruction text
+        if (instructionText != null)
+        {
+            instructionText.gameObject.SetActive(true);
+            StartCoroutine(BlinkInstruction());
+        }
     }
     
     /// <summary>
@@ -387,17 +391,17 @@ if (instructionText != null)
         if (singlePieceGroup != null) singlePieceGroup.blocksRaycasts = false;
         if (multiPieceGroup != null) multiPieceGroup.blocksRaycasts = false;
         
-isPaperShowing = false;
-
-// Hide the instruction text
-if (instructionText != null)
-{
-    instructionText.gameObject.SetActive(false);
-}
-
-// Unfreeze player
-if (playerController != null)
-    playerController.enabled = true;
+        isPaperShowing = false;
+        
+        // Hide the instruction text
+        if (instructionText != null)
+        {
+            instructionText.gameObject.SetActive(false);
+        }
+        
+        // Unfreeze player
+        if (playerController != null)
+            playerController.enabled = true;
     }
     
     /// <summary>
@@ -430,6 +434,7 @@ if (playerController != null)
             }
         }
         
+        // Reset alpha when done
         Color final = instructionText.color;
         final.a = 1f;
         instructionText.color = final;
@@ -444,7 +449,7 @@ if (playerController != null)
     }
     
     /// <summary>
-    /// Manually dismiss paper
+    /// Manually dismiss paper (useful for debugging or scripted events)
     /// </summary>
     public void DismissPaper()
     {
