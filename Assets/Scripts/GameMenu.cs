@@ -1,26 +1,26 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject firstSelected;
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        if (EventSystem.current != null && firstSelected != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstSelected);
+        }
     }
 
     public void StartGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Level");
     }
 
     public void QuitGame(){
-        Debug.Log("Quit DustBunny Game"); // To check proper quit in Unity Editor!
+        Debug.Log("Quit DustBunny Game"); 
         Application.Quit();
     }
 }
