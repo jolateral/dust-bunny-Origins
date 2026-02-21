@@ -20,7 +20,6 @@ public class TutorialTrigger : MonoBehaviour
     [TextArea(2, 5)]
     [Tooltip("The tutorial text to display")]
     public string tutorialText = "Press SHIFT to roll and absorb an object";
-    
     [Tooltip("Color of the tutorial text")]
     public Color textColor = Color.white;
     
@@ -98,7 +97,6 @@ public class TutorialTrigger : MonoBehaviour
     
     void ShowTutorialText()
     {
-        // Show tutorial text using MemoryUIManager
         if (MemoryUIManager.Instance != null)
         {
             MemoryUIManager.Instance.ShowMemory(tutorialText, textColor);
@@ -107,6 +105,19 @@ public class TutorialTrigger : MonoBehaviour
         {
             Debug.LogWarning($"TutorialTrigger '{name}': MemoryUIManager.Instance not found!");
         }
+    }
+
+    /// <summary> Show this tutorial's text now (e.g. called by GlideLaunchSpot when player enters zone). </summary>
+    public void ShowTutorial()
+    {
+        ShowTutorialText();
+    }
+
+    /// <summary> Hide the tutorial display (e.g. when player leaves the zone). </summary>
+    public void HideTutorial()
+    {
+        if (MemoryUIManager.Instance != null)
+            MemoryUIManager.Instance.Hide();
     }
     
     void ResetShowing()

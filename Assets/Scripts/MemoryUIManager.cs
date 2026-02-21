@@ -21,6 +21,16 @@ public class MemoryUIManager : MonoBehaviour
         StartCoroutine(DisplayRoutine(text, color));
     }
 
+    /// <summary> Hide the tutorial/memory UI immediately (e.g. when leaving a prompt zone). </summary>
+    public void Hide()
+    {
+        StopAllCoroutines();
+        if (uiGroup != null)
+            uiGroup.alpha = 0;
+        if (displayUI != null)
+            displayUI.text = "";
+    }
+
     IEnumerator DisplayRoutine(string text, Color color)
     {
         displayUI.text = text;
