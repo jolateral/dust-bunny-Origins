@@ -2354,7 +2354,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Find the memory fragments of the childhood drawing. 0/5 absorbed.
+  m_text: 'Find the memory fragments of the childhood drawing. 0/5 absorbed.
+
+    Press 
+    <sprite=3>to toggle.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f31fd85221f49442bb8b7d7dc19efe44, type: 2}
   m_sharedMaterial: {fileID: -6744081881191185459, guid: f31fd85221f49442bb8b7d7dc19efe44, type: 2}
@@ -2373,7 +2376,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 6ccaa4c1edef9c04c84d38819bb939ec, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -15228,7 +15231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a02787457c21450eafec17af3e5993d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialTrigger
-  tutorialText: Press X to jump
+  tutorialText: Press  <sprite=2>to jump
   textColor: {r: 1, g: 1, b: 1, a: 1}
   triggerDistance: 5
   oneTimeOnly: 1
@@ -16013,7 +16016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a02787457c21450eafec17af3e5993d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialTrigger
-  tutorialText: "Press \u25A2 to roll and absorb an object"
+  tutorialText: Press  <sprite=0>to roll and absorb an object
   textColor: {r: 1, g: 1, b: 1, a: 1}
   triggerDistance: 5
   oneTimeOnly: 1
@@ -20210,7 +20213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press X to continue
+  m_text: Press  <sprite=2>to continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f31fd85221f49442bb8b7d7dc19efe44, type: 2}
   m_sharedMaterial: {fileID: -6744081881191185459, guid: f31fd85221f49442bb8b7d7dc19efe44, type: 2}
@@ -20229,7 +20232,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 6ccaa4c1edef9c04c84d38819bb939ec, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -21818,6 +21821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MemoryUIManager
   displayUI: {fileID: 1863075445}
   uiGroup: {fileID: 1906898938}
+  spriteAsset: {fileID: 11400000, guid: 6ccaa4c1edef9c04c84d38819bb939ec, type: 2}
 --- !u!225 &1906898938
 CanvasGroup:
   m_ObjectHideFlags: 0
