@@ -8300,6 +8300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MemoryUIManager
   displayUI: {fileID: 461422705}
   uiGroup: {fileID: 1602688468}
+  spriteAsset: {fileID: 0}
 --- !u!225 &1602688468
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -9470,7 +9471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a02787457c21450eafec17af3e5993d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialTrigger
-  tutorialText: All these memories have to make it to the moving box. Press F to
+  tutorialText: All these memories have to make it to the moving box. Press  <sprite=1>to
     glide
   textColor: {r: 1, g: 1, b: 1, a: 1}
   triggerDistance: 5

@@ -64,7 +64,7 @@ public class GlideLaunchSpot : MonoBehaviour
     public Transform GetLaunchPoint() => launchPoint;
     /// <summary> Optional: use a custom launch direction from this spot (e.g. off the edge of the shelf). </summary>
     public Vector3 GetLaunchDirection() => launchDirection;
-    public string GetPromptText() => tutorialTrigger != null ? tutorialTrigger.tutorialText : "Press F to glide";
+    public string GetPromptText() => tutorialTrigger != null ? tutorialTrigger.tutorialText : "Press  <sprite=1>to glide";
 
     /// <summary> Minimum scale required to take the leap (design doc: "accumulate a certain amount of mass"). 0 = no requirement. </summary>
     public float GetMinScaleToGlide() => minScaleToGlide;
