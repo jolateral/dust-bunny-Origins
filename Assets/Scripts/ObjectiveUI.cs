@@ -1,10 +1,9 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-
-#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
-#endif
+
+using UnityEngine.InputSystem;
 
 public class ObjectiveUI : MonoBehaviour
 {
@@ -22,6 +21,7 @@ public class ObjectiveUI : MonoBehaviour
 
     [Header("Toggle")]
     public bool startVisible = true;
+    public InputActionReference toggleObjectiveAction;
 
     private Vector2 shownPos;
     private Vector2 hiddenPos;
@@ -51,12 +51,24 @@ public class ObjectiveUI : MonoBehaviour
         //    infoIcon.SetActive(!isVisible);
     }
 
-    void Update()
+    private void OnEnable()
     {
-        if (CirclePressed())
+        if (toggleObjectiveAction != null)
         {
-            Toggle();
+            toggleObjectiveAction.action.Enable();
+            toggleObjectiveAction.action.performed += OnToggleObjective;
         }
+    }
+
+    private void OnDisable()
+    {
+        if (toggleObjectiveAction != null)
+            toggleObjectiveAction.action.performed -= OnToggleObjective;
+    }
+
+    private void OnToggleObjective(InputAction.CallbackContext ctx)
+    {
+        Toggle();
     }
 
     public void Toggle()
@@ -132,18 +144,5 @@ public class ObjectiveUI : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         SlideOut();
-    }
-
-    // --- Input (Circle) ---
-    private bool CirclePressed()
-    {
-#if ENABLE_INPUT_SYSTEM
-        // PS circle is "buttonEast" (same as Xbox B, Switch A)
-        var gp = Gamepad.current;
-        if (gp != null && gp.buttonEast.wasPressedThisFrame)
-            return true;
-#endif
-        // Old Input Manager fallback (some setups map circle to joystick button 1)
-        return Input.GetKeyDown(KeyCode.JoystickButton1);
     }
 }

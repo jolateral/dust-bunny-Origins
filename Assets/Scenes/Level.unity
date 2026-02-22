@@ -2264,6 +2264,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185202379}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &196529159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Gameplay/ToggleObjective
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 7126092c69082d94ebd3bd0a54fae33e, type: 3}
+  m_ActionId: 2ce5ab3c-20b4-4694-8da9-38c62099c21b
 --- !u!1 &217034832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,6 +2333,7 @@ MonoBehaviour:
   slideTime: 0.35
   offscreenPadding: 40
   startVisible: 1
+  toggleObjectiveAction: {fileID: 196529159}
 --- !u!114 &217034835
 MonoBehaviour:
   m_ObjectHideFlags: 0
