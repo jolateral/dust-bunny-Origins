@@ -58,7 +58,7 @@ public class PaperUIManager : MonoBehaviour
     public TextMeshProUGUI progressText;
     
     [Header("Shared UI References")]
-    [Tooltip("The instruction text ('Press SPACE to continue')")]
+    [Tooltip("The instruction text ('Press X to continue')")]
     public TextMeshProUGUI instructionText;
     
     [Header("Settings")]
@@ -76,7 +76,9 @@ public class PaperUIManager : MonoBehaviour
     private bool isPaperShowing = false;
     private bool waitingForInput = false;
     private bool isMultiPieceMode = false;
-    
+    private MultiPiecePaperData currentPaperData;
+    public MultiPiecePaperData CurrentPaperData => currentPaperData;
+
     /// <summary>
     /// Initialize singleton and setup
     /// </summary>
@@ -231,7 +233,11 @@ public class PaperUIManager : MonoBehaviour
     public void ShowMultiPiecePaper(MultiPiecePaperData paperData, Sprite[] collectedSprites)
     {
         if (isPaperShowing) return;
-        
+
+        currentPaperData = paperData;
+        if (ObjectiveUI.Instance != null)
+            ObjectiveUI.Instance.SetObjective();
+
         isMultiPieceMode = true;
         StopAllCoroutines();
         StartCoroutine(DisplayMultiPiece(paperData, collectedSprites));

@@ -40,6 +40,15 @@ public class AbsorbMechanic : MonoBehaviour
         }
     }
 
+    void OnCollisionStay(Collision collision)
+    {
+        // Only absorb if we are in Rolling Mode (Shift held down)
+        if (controller.isRolling && collision.gameObject.CompareTag("StickyObject"))
+        {
+            AttemptAbsorb(collision.gameObject);
+        }
+    }
+
     void AttemptAbsorb(GameObject item)
     {
         // Safety check: Don't process if item is already being destroyed or inactive
@@ -135,6 +144,7 @@ public class AbsorbMechanic : MonoBehaviour
             if (bunnyAbsorbSfx != null) bunnyAbsorbSfx.Post(gameObject);
 
             Debug.Log("Absorbed: " + item.name);
+            ObjectiveUI.Instance.SetObjective();
         }
         else
         {

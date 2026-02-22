@@ -19,7 +19,7 @@ public class TutorialTrigger : MonoBehaviour
     [Header("Tutorial Settings")]
     [TextArea(2, 5)]
     [Tooltip("The tutorial text to display")]
-    public string tutorialText = "Press SHIFT to roll and absorb an object";
+    public string tutorialText = "Press X to roll and absorb an object";
     [Tooltip("Color of the tutorial text")]
     public Color textColor = Color.white;
     
