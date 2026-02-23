@@ -62,7 +62,8 @@ public class GlideLaunchSpot : MonoBehaviour
 
     /// <summary> If set, player is moved here when they press F before gliding. </summary>
     public Transform GetLaunchPoint() => launchPoint;
-    /// <summary> Optional: use a custom launch direction from this spot (e.g. off the edge of the shelf). </summary>
+
+    /// <summary> Launch direction for this spot (world space). If zero, controller uses camera forward. </summary>
     public Vector3 GetLaunchDirection() => launchDirection;
     public string GetPromptText() => tutorialTrigger != null ? tutorialTrigger.tutorialText : "Press  <sprite=1>to glide";
 

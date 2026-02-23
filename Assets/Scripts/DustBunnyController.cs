@@ -345,12 +345,12 @@ public class DustBunnyController : MonoBehaviour
         else
             launchDir = transform.forward;
 
-        // Face the launch direction (so bunny points where you set Launch Direction, not just the Launch Point rotation)
+        // Face the launch direction — use horizontal (XZ) only so bunny stays upright and faces target
         if (launchDir.sqrMagnitude > 0.01f)
         {
             Vector3 flat = new Vector3(launchDir.x, 0f, launchDir.z);
             if (flat.sqrMagnitude > 0.001f)
-                transform.rotation = Quaternion.LookRotation(launchDir, Vector3.up);
+                transform.rotation = Quaternion.LookRotation(flat.normalized);
             else
                 transform.rotation = Quaternion.LookRotation(launchDir, Vector3.back);
         }
@@ -401,7 +401,7 @@ public class DustBunnyController : MonoBehaviour
         launchDir = launchDir.normalized;
         Vector3 flat = new Vector3(launchDir.x, 0f, launchDir.z);
         Quaternion endRot = flat.sqrMagnitude > 0.001f
-            ? Quaternion.LookRotation(launchDir, Vector3.up)
+            ? Quaternion.LookRotation(flat.normalized)
             : Quaternion.LookRotation(launchDir, Vector3.back);
         float elapsed = 0f;
         float dur = Mathf.Max(0.01f, glideMoveToLaunchDuration);
