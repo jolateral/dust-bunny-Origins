@@ -18156,6 +18156,52 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1574632816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
+  m_PrefabInstance: {fileID: 2035049435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1574632818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574632816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34ca784a97bd66459083972e7f18377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GiantHumanWalker
+  waypoints: []
+  walkSpeed: 5
+  turnSpeed: 5
+  pauseAtWaypoint: 1.5
+  stepHeight: 0.5
+  stepSpeed: 10
+  swayAngle: 5
+--- !u!95 &1574632819
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574632816}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1589358618
 GameObject:
   m_ObjectHideFlags: 0
@@ -24855,7 +24901,13 @@ PrefabInstance:
     - {fileID: 65702495048144492, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
     - {fileID: 8934777400606672865, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1574632819}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1574632818}
   m_SourcePrefab: {fileID: 100100000, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
 --- !u!1001 &2042003665
 PrefabInstance:
