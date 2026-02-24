@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 /// <summary>
 /// AbsorbMechanic.cs (UPDATED VERSION)
@@ -21,6 +23,14 @@ public class AbsorbMechanic : MonoBehaviour
     public float absorbedItemScaleMultiplier = 0.3f;
     [Tooltip("How far from the center the item sits. Adjust this based on your bunny's base radius.")]
     public float surfaceStickRadius = 0.5f;
+
+    [Header("Absorb Constraint")]
+    public string tooBigMessage = "Too big to absorb yet!";
+    public Color tooBigColor = Color.red;
+    public float tooBigMessageCooldown = 1.0f;
+
+    private float nextTooBigMessageTime = 0f;
+
 
     private DustBunnyController controller;
 
@@ -93,6 +103,7 @@ public class AbsorbMechanic : MonoBehaviour
                 if (itemCollider != null)
                     itemCollider.enabled = true;
                 Debug.Log("Too small to absorb fleeing item yet!");
+                ShowTooBigUI();
                 return;
             }
         }
@@ -148,7 +159,16 @@ public class AbsorbMechanic : MonoBehaviour
         }
         else
         {
-            Debug.Log("Too big to eat yet!");
+            Debug.Log("Too big to absorb!");
+            ShowTooBigUI();
         }
+    }
+    void ShowTooBigUI()
+    {
+        if (Time.time < nextTooBigMessageTime) return;
+        nextTooBigMessageTime = Time.time + tooBigMessageCooldown;
+
+        if (MemoryUIManager.Instance != null)
+            MemoryUIManager.Instance.ShowMemory(tooBigMessage, tooBigColor);
     }
 }
