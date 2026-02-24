@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2989254757442279833}
   - component: {fileID: 7320628114351178287}
+  - component: {fileID: -4664057757945470588}
   m_Layer: 0
   m_Name: BatteryAA
   m_TagString: StickyObject
@@ -51,6 +52,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &-4664057757945470588
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067531517296353471}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.018142786, y: 0.07271669, z: 0.018114844}
+  m_Center: {x: 0.001070616, y: 0.008152461, z: 0.0007956941}
 --- !u!1001 &1479519598059626474
 PrefabInstance:
   m_ObjectHideFlags: 0

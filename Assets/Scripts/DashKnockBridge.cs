@@ -41,6 +41,15 @@ public class DashKnockBridge : MonoBehaviour
 
         StartCoroutine(UnlockWithoutImpact(col.collider));
     }
+    private void OnCollisionStay(Collision col)
+    {
+        if (triggered && oneTime) return;
+
+        var player = col.collider.GetComponentInParent<DustBunnyController>();
+        if (player == null || !player.isRolling) return;
+
+        StartCoroutine(UnlockWithoutImpact(col.collider));
+    }
 
     private IEnumerator UnlockWithoutImpact(Collider playerCollider)
     {
