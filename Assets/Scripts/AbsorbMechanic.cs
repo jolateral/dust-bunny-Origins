@@ -11,7 +11,7 @@ using System.Collections;
 /// 1. FleeingAbsorbable  — moving items with bonus growth on catch
 /// 2. PaperItem          — shows full-screen paper/fragment overlay
 /// 3. MemoryItem         — shows a text popup via MemoryUIManager
-/// 4. KeyItem  (NEW)     — marks the key as collected so DiaryItem can unlock
+/// 4. KeyItem            — marks the key as collected so DiaryItem can unlock
 /// 5. Generic StickyObject — just gets absorbed and grows the bunny
 /// </summary>
 public class AbsorbMechanic : MonoBehaviour
@@ -35,12 +35,21 @@ public class AbsorbMechanic : MonoBehaviour
     public float surfaceStickRadius = 0.5f;
 
     [Header("Absorb Constraint")]
+    [Tooltip("Message shown when the player is too small to absorb something.")]
     public string tooBigMessage = "You're not quite big enough yet...";
+
+    [Tooltip("Color of the too-small hint message.")]
     public Color tooBigColor = Color.red;
+
+    [Tooltip("How many seconds before the too-small hint can show again.")]
     public float tooBigMessageCooldown = 1.0f;
 
-    private float nextTooBigMessageTime = 0f;
+    // -----------------------------------------------------------------------
+    // Private Fields
+    // -----------------------------------------------------------------------
 
+    /// <summary>Timestamp of the last time the too-small message was shown.</summary>
+    private float nextTooBigMessageTime = 0f;
 
     private DustBunnyController controller;
 
@@ -107,6 +116,7 @@ public class AbsorbMechanic : MonoBehaviour
             }
             else
             {
+                // Re-enable collider so the item keeps working
                 if (itemCollider != null) itemCollider.enabled = true;
                 Debug.Log("Too small to absorb fleeing item yet!");
                 ShowTooBigUI();
@@ -122,7 +132,8 @@ public class AbsorbMechanic : MonoBehaviour
 
         if (mySize < itemSize * sizeTolerance)
         {
-            Debug.Log("Too big to eat yet!");
+            Debug.Log("Too small to absorb yet!");
+            ShowTooBigUI();
             return;
         }
 
@@ -137,7 +148,7 @@ public class AbsorbMechanic : MonoBehaviour
         }
 
         // ===================================================================
-        // 4. MEMORY ITEM — show text popup
+        // 4. MEMORY ITEM — show text popup via MemoryUIManager
         // ===================================================================
         MemoryItem memory = item.GetComponent<MemoryItem>();
         if (memory != null)
@@ -146,9 +157,9 @@ public class AbsorbMechanic : MonoBehaviour
         }
 
         // ===================================================================
-        // 5. KEY ITEM (NEW) — mark the key as collected
+        // 5. KEY ITEM — mark the key as collected
         //    The key sticks to the bunny visually (same as any other item),
-        //    but OnAbsorbed() also sets the static flag DiaryItem checks.
+        //    but OnAbsorbed() also sets the flag that DiaryItem checks.
         // ===================================================================
         KeyItem key = item.GetComponent<KeyItem>();
         if (key != null)
@@ -158,31 +169,45 @@ public class AbsorbMechanic : MonoBehaviour
 
         // ===================================================================
         // 6. VISUAL ABSORPTION — attach item to bunny, shrink, randomize position
-        //    This runs for ALL absorbed items (paper, memory, key, generic).
+        //    This runs for ALL successfully absorbed items.
         // ===================================================================
 
-        // Remove physics so the item doesn't fight the bunny
+        // Remove physics so the item doesn't fight the bunny's movement
         Destroy(item.GetComponent<Rigidbody>());
         Destroy(item.GetComponent<Collider>());
 
-        // Parent the item to the player
+        // Parent the item to the player so it travels with the bunny
         item.transform.SetParent(this.transform);
 
-        // Shrink the item so it looks proportional on the bunny surface
+        // Shrink the item so it looks proportional stuck on the bunny surface
         item.transform.localScale *= absorbedItemScaleMultiplier;
 
-        // Place it on a random spot on the bunny's surface (Katamari effect)
+        // Place it on a random spot on the bunny's surface (Katamari clump effect)
         item.transform.localPosition = Random.onUnitSphere * surfaceStickRadius;
 
-            Debug.Log("Absorbed: " + item.name);
-            ObjectiveUI.Instance.SetObjective();
-        }
-        else
-        {
-            Debug.Log("Too big to absorb!");
-            ShowTooBigUI();
-        }
+        // Random rotation so items look messily stuck together
+        item.transform.localRotation = Random.rotation;
+
+        // Grow the bunny
+        transform.localScale += Vector3.one * growthFactor;
+
+        // Play absorb sound
+        if (bunnyAbsorbSfx != null) bunnyAbsorbSfx.Post(gameObject);
+
+        Debug.Log("Absorbed: " + item.name);
+
+        // Notify the objective UI that something was collected
+        ObjectiveUI.Instance.SetObjective();
     }
+
+    // -----------------------------------------------------------------------
+    // UI Helpers
+    // -----------------------------------------------------------------------
+
+    /// <summary>
+    /// Shows the "too small" hint message via MemoryUIManager.
+    /// Respects a cooldown so the message doesn't spam every frame.
+    /// </summary>
     void ShowTooBigUI()
     {
         if (Time.time < nextTooBigMessageTime) return;
