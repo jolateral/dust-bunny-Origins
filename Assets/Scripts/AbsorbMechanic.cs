@@ -25,7 +25,7 @@ public class AbsorbMechanic : MonoBehaviour
     public float surfaceStickRadius = 0.5f;
 
     [Header("Absorb Constraint")]
-    public string tooBigMessage = "Too big to absorb yet!";
+    public string tooBigMessage = "You're not quite big enough yet...";
     public Color tooBigColor = Color.red;
     public float tooBigMessageCooldown = 1.0f;
 
