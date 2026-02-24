@@ -72,6 +72,14 @@ public class AbsorbMechanic : MonoBehaviour
             AttemptAbsorb(collision.gameObject);
         }
     }
+    void OnCollisionStay(Collision collision)
+    {
+        // Only absorb when the player is in Rolling Mode (dash/Shift held)
+        if (controller.isRolling && collision.gameObject.CompareTag("StickyObject"))
+        {
+            AttemptAbsorb(collision.gameObject);
+        }
+    }
 
     // -----------------------------------------------------------------------
     // Core Absorption Logic
