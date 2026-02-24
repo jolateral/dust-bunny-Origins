@@ -42,7 +42,7 @@ public class AbsorbMechanic : MonoBehaviour
     public Color tooBigColor = Color.red;
 
     [Tooltip("How many seconds before the too-small hint can show again.")]
-    public float tooBigMessageCooldown = 1.0f;
+    public float tooBigMessageCooldown = .075f;
 
     // -----------------------------------------------------------------------
     // Private Fields
