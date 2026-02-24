@@ -206,6 +206,8 @@ public class AbsorbMechanic : MonoBehaviour
 
         // Notify the objective UI that something was collected
         ObjectiveUI.Instance.SetObjective();
+
+        AkUnitySoundEngine.SetRTPCValue("bunny-size", mySize, gameObject);
     }
 
     // -----------------------------------------------------------------------
