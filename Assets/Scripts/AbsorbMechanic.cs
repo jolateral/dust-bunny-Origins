@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 /// <summary>
 /// AbsorbMechanic.cs (UPDATED — now supports KeyItem)
@@ -32,9 +34,13 @@ public class AbsorbMechanic : MonoBehaviour
     [Tooltip("How far from the center the item sits on the bunny surface.")]
     public float surfaceStickRadius = 0.5f;
 
-    // -----------------------------------------------------------------------
-    // References
-    // -----------------------------------------------------------------------
+    [Header("Absorb Constraint")]
+    public string tooBigMessage = "You're not quite big enough yet...";
+    public Color tooBigColor = Color.red;
+    public float tooBigMessageCooldown = 1.0f;
+
+    private float nextTooBigMessageTime = 0f;
+
 
     private DustBunnyController controller;
 
@@ -103,6 +109,7 @@ public class AbsorbMechanic : MonoBehaviour
             {
                 if (itemCollider != null) itemCollider.enabled = true;
                 Debug.Log("Too small to absorb fleeing item yet!");
+                ShowTooBigUI();
                 return;
             }
         }
@@ -167,15 +174,21 @@ public class AbsorbMechanic : MonoBehaviour
         // Place it on a random spot on the bunny's surface (Katamari effect)
         item.transform.localPosition = Random.onUnitSphere * surfaceStickRadius;
 
-        // Random rotation for a messy, organic clump look
-        item.transform.localRotation = Random.rotation;
+            Debug.Log("Absorbed: " + item.name);
+            ObjectiveUI.Instance.SetObjective();
+        }
+        else
+        {
+            Debug.Log("Too big to absorb!");
+            ShowTooBigUI();
+        }
+    }
+    void ShowTooBigUI()
+    {
+        if (Time.time < nextTooBigMessageTime) return;
+        nextTooBigMessageTime = Time.time + tooBigMessageCooldown;
 
-        // Grow the bunny
-        transform.localScale += Vector3.one * growthFactor;
-
-        // Play absorb sound
-        if (bunnyAbsorbSfx != null) bunnyAbsorbSfx.Post(gameObject);
-
-        Debug.Log($"[AbsorbMechanic] Absorbed: {item.name}");
+        if (MemoryUIManager.Instance != null)
+            MemoryUIManager.Instance.ShowMemory(tooBigMessage, tooBigColor);
     }
 }
