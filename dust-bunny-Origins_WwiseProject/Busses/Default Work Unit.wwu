@@ -10,7 +10,39 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<AuxBus Name="Room" ID="{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}"/>
+						<AuxBus Name="Room" ID="{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}">
+							<PropertyList>
+								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+							</PropertyList>
+							<ObjectLists>
+								<ObjectList Name="Effects">
+									<EffectSlot Name="" ID="{3DF6FEC7-197B-4110-9A32-7343F3D82CD4}" ShortID="376163736">
+										<ReferenceList>
+											<Reference Name="Effect">
+												<Custom>
+													<Effect Name="Parametric EQ (Custom)" ID="{FE1D00E9-C7B6-46EC-8526-9387802B973E}" ShortID="97464601" PluginName="Wwise Parametric EQ" CompanyID="0" PluginID="105" PluginType="3">
+														<PropertyList>
+															<Property Name="FilterTypeBand1" Type="int32" Value="1"/>
+															<Property Name="FilterTypeBand3" Type="int32" Value="0"/>
+															<Property Name="FrequencyBand1" Type="Real32" Value="300"/>
+															<Property Name="FrequencyBand3" Type="Real32" Value="10000"/>
+															<Property Name="OnOffBand3" Type="bool" Value="True"/>
+														</PropertyList>
+													</Effect>
+												</Custom>
+											</Reference>
+										</ReferenceList>
+									</EffectSlot>
+									<EffectSlot Name="" ID="{CB121043-EE94-420F-8343-841710CF65F8}" ShortID="929069260">
+										<ReferenceList>
+											<Reference Name="Effect" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+												<ObjectRef Name="Room_Large" ID="{AD8EFAFC-7121-4D5F-BE4D-B13FBD6CEBAE}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+											</Reference>
+										</ReferenceList>
+									</EffectSlot>
+								</ObjectList>
+							</ObjectLists>
+						</AuxBus>
 					</ChildrenList>
 				</Bus>
 			</ChildrenList>

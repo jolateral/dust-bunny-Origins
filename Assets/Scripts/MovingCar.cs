@@ -20,11 +20,11 @@ public class MovingCar : MonoBehaviour
     {
         // Use PingPong with phase offset so cars move out of sync
         float cycle = Mathf.PingPong(Time.time * speed + phaseOffset, 1f);
-        
+
         // Interpolate between start and end positions
         // EndPos = StartPos + Direction * Distance
         Vector3 endPos = startPos + movementDirection.normalized * distance;
-        
+
         transform.position = Vector3.Lerp(startPos, endPos, cycle);
     }
 }

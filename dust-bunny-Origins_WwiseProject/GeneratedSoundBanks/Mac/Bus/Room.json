@@ -10,20 +10,54 @@
     "Type": "Bus",
     "GUID": "{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}",
     "Language": "SFX",
-    "Hash": "{EA58C503-2A61-DEA1-9C92-18DA7E1D8328}",
+    "Hash": "{2D7ABC1F-DAD4-0ACD-7588-9E4E5C7CDAD2}",
     "ObjectPath": "Room",
     "ShortName": "Room",
     "Path": "Bus/Room.bnk",
+    "Plugins": {
+     "Custom": [
+      {
+       "Id": "97464601",
+       "Name": "Parametric EQ (Custom)",
+       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Room\\[Effect Slot [0]: (Parametric EQ)]\\Parametric EQ (Custom)",
+       "GUID": "{FE1D00E9-C7B6-46EC-8526-9387802B973E}",
+       "LibName": "Wwise Parametric EQ",
+       "LibId": "6881283"
+      }
+     ],
+     "ShareSets": [
+      {
+       "Id": "602546716",
+       "Name": "Room_Large",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Rooms\\Room_Large",
+       "GUID": "{AD8EFAFC-7121-4D5F-BE4D-B13FBD6CEBAE}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ]
+    },
     "AuxBusses": [
      {
       "Id": "2077253480",
       "Name": "Room",
       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Room",
-      "GUID": "{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}"
+      "GUID": "{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}",
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "97464601"
+        }
+       ],
+       "ShareSets": [
+        {
+         "Id": "602546716"
+        }
+       ]
+      }
      }
     ]
    }
   ],
-  "FileHash": "{9ECD9D54-01F4-4910-37F6-68746DCCF825}"
+  "FileHash": "{C950F7A6-AB4C-A7F9-3235-A5BBBAB2AEB8}"
  }
 }

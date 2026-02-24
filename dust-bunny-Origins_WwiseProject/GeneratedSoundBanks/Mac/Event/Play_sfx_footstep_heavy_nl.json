@@ -1,0 +1,135 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "1631605133",
+    "Type": "Event",
+    "GUID": "{15395BE9-D52A-49A8-AD99-9222FDFB453C}",
+    "Language": "SFX",
+    "Hash": "{642B281C-C2BE-E503-9340-538BEE656255}",
+    "ObjectPath": "Play_sfx_footstep_heavy_nl",
+    "ShortName": "Play_sfx_footstep_heavy_nl",
+    "Path": "Event/Play_sfx_footstep_heavy_nl.bnk",
+    "Media": [
+     {
+      "Id": "262480793",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bunnyfootstep_heavy_nl_006.wav",
+      "Path": "Media/262480793.wem",
+      "CachePath": "15/{15093EC7-0175-5F2A-99CA-E43077BFC11E}.wem"
+     },
+     {
+      "Id": "376348342",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bunnyfootstep_heavy_nl_002.wav",
+      "Path": "Media/376348342.wem",
+      "CachePath": "C2/{C27655C2-10E1-4C40-017E-AB0D3D99B711}.wem"
+     },
+     {
+      "Id": "677978845",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bunnyfootstep_heavy_nl_003.wav",
+      "Path": "Media/677978845.wem",
+      "CachePath": "4D/{4D527ABB-01F3-AEB2-4847-A074039806F9}.wem"
+     },
+     {
+      "Id": "703300426",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bunnyfootstep_heavy_nl_001.wav",
+      "Path": "Media/703300426.wem",
+      "CachePath": "66/{66D84F38-79E0-6A29-B4EF-6EC793B7F18D}.wem"
+     },
+     {
+      "Id": "1004194193",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bunnyfootstep_heavy_nl_004.wav",
+      "Path": "Media/1004194193.wem",
+      "CachePath": "E1/{E179F737-F906-DB46-07FF-40ACBB75A6A0}.wem"
+     },
+     {
+      "Id": "1015678230",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bunnyfootstep_heavy_nl_005.wav",
+      "Path": "Media/1015678230.wem",
+      "CachePath": "29/{2929D1BC-9637-3B2E-BC61-80DCF272A4FD}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "1631605133",
+      "Name": "Play_sfx_footstep_heavy_nl",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_sfx_footstep_heavy_nl",
+      "GUID": "{15395BE9-D52A-49A8-AD99-9222FDFB453C}",
+      "MaxAttenuation": "20",
+      "DurationType": "OneShot",
+      "DurationMin": "0.201625",
+      "DurationMax": "0.34702083",
+      "MediaRefs": [
+       {
+        "Id": "262480793"
+       },
+       {
+        "Id": "376348342"
+       },
+       {
+        "Id": "677978845"
+       },
+       {
+        "Id": "703300426"
+       },
+       {
+        "Id": "1004194193"
+       },
+       {
+        "Id": "1015678230"
+       }
+      ]
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "404510017",
+      "Name": "bunny_size",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\bunny_size",
+      "GUID": "{6749505B-A3CA-4BC2-B69F-EE8891A95801}"
+     },
+     {
+      "Id": "2907122923",
+      "Name": "grounded",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\grounded",
+      "GUID": "{9A83BFC7-4F47-4C56-B662-00C885D7086D}"
+     }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "2907122923",
+      "Name": "grounded",
+      "ObjectPath": "\\Switches\\Default Work Unit\\grounded",
+      "GUID": "{1B78D9AD-0460-435A-B6EC-E913EE9ADA24}",
+      "GameParameterRef": {
+       "Id": "2907122923"
+      },
+      "Switches": []
+     }
+    ]
+   }
+  ],
+  "FileHash": "{E6DACC15-6280-C52A-B07B-2833D53A4FA3}"
+ }
+}

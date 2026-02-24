@@ -1212,6 +1212,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AbsorbMechanic
   growthFactor: 0.05
   sizeTolerance: 1.2
+  absorbedItemScaleMultiplier: 0.3
+  surfaceStickRadius: 0.5
+  tooBigMessage: You're not quite big enough yet...
+  tooBigColor: {r: 1, g: 0, b: 0, a: 1}
+  tooBigMessageCooldown: 1
+  bunnyAbsorbSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: b34ae8a7c296d3d4d95d2c4c8bcf9822, type: 2}
 --- !u!114 &4214717061640914858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1236,9 +1245,18 @@ MonoBehaviour:
   rollDrag: 0.5
   dashFovKick: 5
   fovSmoothTime: 0.2
+  glideHorizontalSpeed: 2
+  glideSinkSpeed: 2
+  glideJumpForce: 6
+  glideLaunchSpeed: 5
+  glideMassDrainPerSecond: 0.02
+  minGlideScaleRatio: 0.1
+  glideMoveToLaunchDuration: 0.35
   groundCheckOffset: 0.2
+  glideLandTolerance: 0.02
   isRolling: 0
   isGrounded: 0
+  isGliding: 0
   _animator: {fileID: 8131565752979367215}
 --- !u!95 &8131565752979367215
 Animator:
@@ -1351,6 +1369,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e7f8a9b0-c1d2-4e3f-8a5b-6c7d8e9f0a1b
     m_ActionName: 'Gameplay/Glide[/Keyboard/f,/DualSenseGamepadHID/rightShoulder]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ce5ab3c-20b4-4694-8da9-38c62099c21b
+    m_ActionName: 'Gameplay/ToggleObjective[/Keyboard/i]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -1400,6 +1422,18 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 368890179cf3ef14a955e643aee7fcc0, type: 2}
+  bunnyJumpSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d1b53db2beebfbf4dac540c6154440c2, type: 2}
+  bunnyLandSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6e035188c2f73d4418010946cf7077ae, type: 2}
+  bunnyImpactSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 74a9714a9b76bd54d8e2721d0a681c6e, type: 2}
 --- !u!1 &4670955279592314525
 GameObject:
   m_ObjectHideFlags: 0

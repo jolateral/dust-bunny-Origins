@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{1DD71A98-815D-4A62-B4D7-230C79020469}" SchemaVersion="133">
 	<States>
-		<WorkUnit Name="Default Work Unit" ID="{1DD71A98-815D-4A62-B4D7-230C79020469}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{1DD71A98-815D-4A62-B4D7-230C79020469}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="grounded" ID="{3D061369-8D7C-4386-B100-6BA504503FC7}">
+					<ChildrenList>
+						<State Name="None" ID="{D328E45F-CF43-461A-A10F-6ECD59D4AC2A}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="zones" ID="{1D8ACA51-0E72-437B-96E4-13129807EB70}">
+					<ChildrenList>
+						<State Name="zone1" ID="{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"/>
+						<State Name="zone2" ID="{868A53EB-5726-4480-B033-2D9A57B417C1}"/>
+					</ChildrenList>
+					<TransitionList>
+						<Transition>
+							<StartState Name="zone1" ID="{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"/>
+							<EndState Name="zone2" ID="{868A53EB-5726-4480-B033-2D9A57B417C1}"/>
+							<Time>5</Time>
+							<IsShared>false</IsShared>
+						</Transition>
+					</TransitionList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
 	</States>
 </WwiseDocument>

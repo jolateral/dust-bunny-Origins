@@ -10,11 +10,20 @@
     "Type": "Event",
     "GUID": "{4C2207F0-968C-4C87-928A-D17FD8804D4B}",
     "Language": "SFX",
-    "Hash": "{963278E3-D7D0-5464-0110-3B7B25C6C341}",
+    "Hash": "{58072439-C518-D611-8FD7-319D45C9B637}",
     "ObjectPath": "Play_sfx_bunnyroll_nl",
     "ShortName": "Play_sfx_bunnyroll_nl",
     "Path": "Event/Play_sfx_bunnyroll_nl.bnk",
     "Media": [
+     {
+      "Id": "408607457",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bunnyjumpsqueak_nl.wav",
+      "Path": "Media/408607457.wem",
+      "CachePath": "49/{49D7586B-5251-67F7-39A7-7185F0D47253}.wem"
+     },
      {
       "Id": "752394045",
       "Language": "SFX",
@@ -31,11 +40,14 @@
       "Name": "Play_sfx_bunnyroll_nl",
       "ObjectPath": "\\Events\\Default Work Unit\\SFX_Bunny\\Play_sfx_bunnyroll_nl",
       "GUID": "{4C2207F0-968C-4C87-928A-D17FD8804D4B}",
-      "MaxAttenuation": "10",
+      "MaxAttenuation": "20",
       "DurationType": "OneShot",
       "DurationMin": "0.438288",
       "DurationMax": "0.69573885",
       "MediaRefs": [
+       {
+        "Id": "408607457"
+       },
        {
         "Id": "752394045"
        }
@@ -44,6 +56,6 @@
     ]
    }
   ],
-  "FileHash": "{BBA3DDCC-2A52-7194-8B10-84B44FDA8030}"
+  "FileHash": "{A8790F2D-90A7-F080-3294-04572E9A9F27}"
  }
 }

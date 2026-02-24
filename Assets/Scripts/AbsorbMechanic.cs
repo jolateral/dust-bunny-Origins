@@ -162,6 +162,9 @@ public class AbsorbMechanic : MonoBehaviour
             Debug.Log("Too big to absorb!");
             ShowTooBigUI();
         }
+
+        AkUnitySoundEngine.SetRTPCValue("bunny_size", mySize, gameObject);
+        Debug.Log("Size = " + mySize);
     }
     void ShowTooBigUI()
     {

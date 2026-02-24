@@ -10,7 +10,7 @@
     "Type": "Event",
     "GUID": "{6E3FFD76-3CF8-41F9-A64C-F33756E4CC12}",
     "Language": "SFX",
-    "Hash": "{44985DD1-9729-6A9D-FD17-293B28AF36AB}",
+    "Hash": "{85D8CE1C-C99F-B677-73C2-300A77E4135A}",
     "ObjectPath": "Play_sfx_bunnyimpact_nl",
     "ShortName": "Play_sfx_bunnyimpact_nl",
     "Path": "Event/Play_sfx_bunnyimpact_nl.bnk",
@@ -56,8 +56,9 @@
      {
       "Id": "4038925685",
       "Name": "Play_sfx_bunnyimpact_nl",
-      "ObjectPath": "\\Events\\Default Work Unit\\Play_sfx_bunnyimpact_nl",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX_Bunny\\Play_sfx_bunnyimpact_nl",
       "GUID": "{6E3FFD76-3CF8-41F9-A64C-F33756E4CC12}",
+      "MaxAttenuation": "20",
       "DurationType": "OneShot",
       "DurationMin": "0.20452084",
       "DurationMax": "0.24072917",
@@ -76,9 +77,17 @@
        }
       ]
      }
+    ],
+    "GameParameters": [
+     {
+      "Id": "3519441192",
+      "Name": "velocity",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\velocity",
+      "GUID": "{00E52E05-195E-4593-9251-C1504F30131D}"
+     }
     ]
    }
   ],
-  "FileHash": "{BD39CF53-3FD9-C162-6950-1901F86EC72F}"
+  "FileHash": "{21FC8D04-96C9-9D6E-337D-4F44EAA70B2D}"
  }
 }
