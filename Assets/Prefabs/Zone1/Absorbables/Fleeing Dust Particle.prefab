@@ -101,7 +101,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8031618412154065244}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c7bad78af5f24924e962f25667ce4028, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -141,9 +141,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8031618412154065244}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Mass: 0.002
+  m_LinearDamping: 2
+  m_AngularDamping: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -174,6 +174,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FleeingAbsorbable
   fleeDistance: 4
   speedMultiplier: 0.7
+  minDistanceFromObstacles: 1.5
+  obstacleCheckRadius: 2
+  avoidanceStrength: 1.5
   growthMultiplier: 1.2
   turnSpeed: 5
   showGizmos: 1
