@@ -207,6 +207,7 @@ public class AbsorbMechanic : MonoBehaviour
         // Notify the objective UI that something was collected
         ObjectiveUI.Instance.SetObjective();
 
+        // Set bunny-size parameter for audio variation
         AkUnitySoundEngine.SetRTPCValue("bunny-size", mySize, gameObject);
     }
 
