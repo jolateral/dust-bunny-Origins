@@ -43,6 +43,9 @@ public class PaperItem : MonoBehaviour
     [Header("Gameplay Settings")]
     [Tooltip("Should this paper be destroyed after being read? (Single-piece only)")]
     public bool destroyAfterReading = false;
+
+    [Header("Audio")]
+    public AK.Wwise.Event memoryObjectSfx;
     
     // Internal state
     private bool hasBeenRead = false;
@@ -95,6 +98,9 @@ public class PaperItem : MonoBehaviour
     /// </summary>
     public void OnAbsorbed()
     {
+        // Play Memory Object SFX
+        memoryObjectSfx.Post(gameObject);
+
         if (IsMultiPiece())
         {
             HandleMultiPieceAbsorb();

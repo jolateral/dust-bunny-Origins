@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{23A40918-7249-4077-950F-043885E57312}" SchemaVersion="133">
 	<Switches>
-		<WorkUnit Name="Default Work Unit" ID="{23A40918-7249-4077-950F-043885E57312}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{23A40918-7249-4077-950F-043885E57312}" PersistMode="Standalone">
+			<ChildrenList>
+				<SwitchGroup Name="grounded" ID="{1B78D9AD-0460-435A-B6EC-E913EE9ADA24}">
+					<PropertyList>
+						<Property Name="UseGameParameter" Type="bool" Value="True"/>
+					</PropertyList>
+					<SwitchOnRTPC>
+						<GameParameterRef Name="grounded" ID="{9A83BFC7-4F47-4C56-B662-00C885D7086D}"/>
+						<Curve Name="" ID="{55DB8E12-4DA0-4E54-A866-6339DECB5C19}">
+							<PropertyList>
+								<Property Name="Flags" Type="int32" Value="65537"/>
+							</PropertyList>
+							<PointList>
+								<Point>
+									<XPos>0</XPos>
+									<YPos>0</YPos>
+									<Flags>5</Flags>
+								</Point>
+								<Point>
+									<XPos>1</XPos>
+									<YPos>0</YPos>
+									<Flags>37</Flags>
+								</Point>
+							</PointList>
+						</Curve>
+					</SwitchOnRTPC>
+				</SwitchGroup>
+			</ChildrenList>
+		</WorkUnit>
 	</Switches>
 </WwiseDocument>

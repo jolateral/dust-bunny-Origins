@@ -133,6 +133,15 @@ public class DustBunnyController : MonoBehaviour
         distToGround = playerCollider.bounds.extents.y;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + groundCheckOffset);
 
+        if (!isGrounded)
+        {
+            AkUnitySoundEngine.SetRTPCValue("grounded", 1, gameObject);
+        }
+        else
+        {
+            AkUnitySoundEngine.SetRTPCValue("grounded", 0, gameObject);
+        }
+
         if (isGliding)
         {
             if (_animator)

@@ -6,6 +6,8 @@ public class GameMenu : MonoBehaviour
 {
     [SerializeField] private GameObject firstSelected;
 
+    public AK.Wwise.Event uiSelect;
+
     private void OnEnable()
     {
         if (EventSystem.current != null && firstSelected != null)
@@ -15,11 +17,14 @@ public class GameMenu : MonoBehaviour
         }
     }
 
-    public void StartGame(){
+    public void StartGame()
+    {
+        uiSelect.Post(gameObject);
         SceneManager.LoadScene("Level");
     }
 
-    public void QuitGame(){
+    public void QuitGame()
+    {
         Debug.Log("Quit DustBunny Game"); 
         Application.Quit();
     }

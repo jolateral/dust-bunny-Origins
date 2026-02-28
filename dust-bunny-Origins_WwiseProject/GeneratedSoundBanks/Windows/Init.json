@@ -10,11 +10,31 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{095CDEB7-0D61-8AE6-1E32-E29AD62CBA80}",
+    "Hash": "{FAA89543-4A6B-BB8E-D855-79A3C9F3F59E}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
     "Plugins": {
+     "Custom": [
+      {
+       "Id": "97464601",
+       "Name": "Parametric EQ (Custom)",
+       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Room\\[Effect Slot [0]: (Parametric EQ)]\\Parametric EQ (Custom)",
+       "GUID": "{FE1D00E9-C7B6-46EC-8526-9387802B973E}",
+       "LibName": "Wwise Parametric EQ",
+       "LibId": "6881283"
+      }
+     ],
+     "ShareSets": [
+      {
+       "Id": "602546716",
+       "Name": "Room_Large",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Rooms\\Room_Large",
+       "GUID": "{AD8EFAFC-7121-4D5F-BE4D-B13FBD6CEBAE}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ],
      "AudioDevices": [
       {
        "Id": "2317455096",
@@ -47,19 +67,91 @@
       "Id": "2077253480",
       "Name": "Room",
       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Room",
-      "GUID": "{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}"
+      "GUID": "{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}",
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "97464601"
+        }
+       ],
+       "ShareSets": [
+        {
+         "Id": "602546716"
+        }
+       ]
+      }
      }
     ],
     "GameParameters": [
+     {
+      "Id": "404510017",
+      "Name": "bunny_size",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\bunny_size",
+      "GUID": "{6749505B-A3CA-4BC2-B69F-EE8891A95801}"
+     },
+     {
+      "Id": "2907122923",
+      "Name": "grounded",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\grounded",
+      "GUID": "{9A83BFC7-4F47-4C56-B662-00C885D7086D}"
+     },
      {
       "Id": "3519441192",
       "Name": "velocity",
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\velocity",
       "GUID": "{00E52E05-195E-4593-9251-C1504F30131D}"
      }
+    ],
+    "StateGroups": [
+     {
+      "Id": "831766718",
+      "Name": "zones",
+      "ObjectPath": "\\States\\Default Work Unit\\zones",
+      "GUID": "{1D8ACA51-0E72-437B-96E4-13129807EB70}",
+      "States": [
+       {
+        "Id": "831766780",
+        "Name": "zone1",
+        "ObjectPath": "\\States\\Default Work Unit\\zones\\zone1",
+        "GUID": "{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"
+       },
+       {
+        "Id": "831766783",
+        "Name": "zone2",
+        "ObjectPath": "\\States\\Default Work Unit\\zones\\zone2",
+        "GUID": "{868A53EB-5726-4480-B033-2D9A57B417C1}"
+       }
+      ]
+     },
+     {
+      "Id": "2907122923",
+      "Name": "grounded",
+      "ObjectPath": "\\States\\Default Work Unit\\grounded",
+      "GUID": "{3D061369-8D7C-4386-B100-6BA504503FC7}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\grounded\\None",
+        "GUID": "{D328E45F-CF43-461A-A10F-6ECD59D4AC2A}"
+       }
+      ]
+     }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "2907122923",
+      "Name": "grounded",
+      "ObjectPath": "\\Switches\\Default Work Unit\\grounded",
+      "GUID": "{1B78D9AD-0460-435A-B6EC-E913EE9ADA24}",
+      "GameParameterRef": {
+       "Id": "2907122923"
+      },
+      "Switches": []
+     }
     ]
    }
   ],
-  "FileHash": "{1D3950FA-2736-CC96-0E6A-03683C875554}"
+  "FileHash": "{BAC2DB98-D3DB-EE1B-7284-646834DEED14}"
  }
 }

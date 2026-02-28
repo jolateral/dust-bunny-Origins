@@ -1,0 +1,61 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "3975145325",
+    "Type": "Event",
+    "GUID": "{1739B67D-1F53-4924-9D60-0AB8C815D5A6}",
+    "Language": "SFX",
+    "Hash": "{C30A652D-FFBF-B9B5-C90F-E172DC06125F}",
+    "ObjectPath": "Play_sfx_bridge_creak_nl",
+    "ShortName": "Play_sfx_bridge_creak_nl",
+    "Path": "Event/Play_sfx_bridge_creak_nl.bnk",
+    "Media": [
+     {
+      "Id": "442927121",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bridge_land_nl.wav",
+      "Path": "Media/442927121.wem",
+      "CachePath": "76/{767AB578-6899-0452-6C95-D19D1AA60497}.wem"
+     },
+     {
+      "Id": "657416441",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bridge_creak_nl.wav",
+      "Path": "Media/657416441.wem",
+      "CachePath": "61/{61A6A687-FE4A-3B29-F81B-C06273004B30}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3975145325",
+      "Name": "Play_sfx_bridge_creak_nl",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX_Object\\Play_sfx_bridge_creak_nl",
+      "GUID": "{1739B67D-1F53-4924-9D60-0AB8C815D5A6}",
+      "MaxAttenuation": "50",
+      "DurationType": "OneShot",
+      "DurationMin": "5.288625",
+      "DurationMax": "5.288625",
+      "MediaRefs": [
+       {
+        "Id": "442927121"
+       },
+       {
+        "Id": "657416441"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{70DC7B99-2950-B040-4EE3-E86D2C25848F}"
+ }
+}

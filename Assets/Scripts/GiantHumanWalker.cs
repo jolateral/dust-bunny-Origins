@@ -24,6 +24,8 @@ public class GiantHumanWalker : MonoBehaviour
     private bool isWalkingRoutineActive = false;
     private float baseY; // Stores the original floor height
 
+    public AK.Wwise.Event humanStep;
+
     void Start()
     {
         // Remember the starting height so we don't sink into the floor
@@ -101,6 +103,7 @@ public class GiantHumanWalker : MonoBehaviour
             // Wait a moment at the waypoint (unless it's the very last one outside the door)
             if (currentWaypointIndex < waypoints.Length - 1)
             {
+                humanStep.Post(gameObject);
                 yield return new WaitForSeconds(pauseAtWaypoint);
             }
 

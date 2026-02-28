@@ -14,6 +14,9 @@ public class DashKnockBridge : MonoBehaviour
     [SerializeField] private float ignorePlayerCollisionTime = 0.5f; // prevents roll impact from pushing it
     [SerializeField] private float unlockDelay = 0f;                  // small delay can help stability (0–0.05)
 
+    [Header("Audio")]
+    public AK.Wwise.Event bridgeCreakSfx;
+
     private bool triggered;
 
     private void Reset()
@@ -45,6 +48,8 @@ public class DashKnockBridge : MonoBehaviour
     private IEnumerator UnlockWithoutImpact(Collider playerCollider)
     {
         triggered = true;
+
+        bridgeCreakSfx.Post(gameObject);
 
         // Temporarily ignore collision so the dash impulse doesn't transfer into the bridge
         if (playerCollider != null)

@@ -79,6 +79,8 @@ public class PaperUIManager : MonoBehaviour
     private MultiPiecePaperData currentPaperData;
     public MultiPiecePaperData CurrentPaperData => currentPaperData;
 
+    public AK.Wwise.Event uiSelect;
+
     /// <summary>
     /// Initialize singleton and setup
     /// </summary>
@@ -460,6 +462,7 @@ public class PaperUIManager : MonoBehaviour
     public void DismissPaper()
     {
         if (isPaperShowing)
+            uiSelect.Post(gameObject);
             StartCoroutine(HidePaper());
     }
 }
