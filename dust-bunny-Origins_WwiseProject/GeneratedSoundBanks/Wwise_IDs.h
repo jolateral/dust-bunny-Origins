@@ -36,6 +36,7 @@ namespace AK
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_005 = 1142362397U;
         static const AkUniqueID PLAY_SFX_UI_SELECT_NL = 4289076888U;
         static const AkUniqueID PLAY_SFX_WOODBLOCK_IMPACT_WOOD = 841695155U;
+        static const AkUniqueID STOP_MUS_4_4_100BPM_THEME_NL = 4187300339U;
     } // namespace EVENTS
 
     namespace STATES

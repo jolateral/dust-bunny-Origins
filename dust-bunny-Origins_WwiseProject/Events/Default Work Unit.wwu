@@ -130,9 +130,6 @@
 						<Event Name="Play_mus_4_4_100bpm_theme_nl" ID="{C077037B-7E5E-4D2E-ABCE-FE65F0CB78CB}">
 							<ChildrenList>
 								<Action Name="" ID="{CDFF1AA8-7A61-4943-8F3B-F996A1BBC0F6}" ShortID="777938472">
-									<PropertyList>
-										<Property Name="Delay" Type="Real64" Value="5"/>
-									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="mus_4-4_100bpm_theme_nl" ID="{3930D1D3-FE6E-4D67-96B5-69B7D7BBC01E}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
@@ -169,6 +166,20 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_mus_4_4_100bpm_theme_nl" ID="{510C773A-DEE8-4A36-B919-06343D7E6C96}">
+							<ChildrenList>
+								<Action Name="" ID="{FC4E70D9-6F5E-432F-8C71-7FEF46169E88}" ShortID="1014222603">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="mus_4-4_100bpm_theme_nl" ID="{3930D1D3-FE6E-4D67-96B5-69B7D7BBC01E}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -261,6 +272,7 @@
 										<Action Name="" ID="{86558D29-6480-4B83-AAA4-3FCF299D33D4}" ShortID="1011945911">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="8"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList/>
 											<ChildrenList>
@@ -280,6 +292,14 @@
 												</EventActionException>
 											</ChildrenList>
 										</Action>
+										<Action Name="" ID="{85BC8F1B-52F5-46AB-9970-3FAFED2B2114}" ShortID="430631717">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="10"/>
+												<Property Name="Delay" Type="Real64" Value="3"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList/>
+										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_001" ID="{8F6C20EA-2F74-4780-AD59-ABE03435B843}">
@@ -287,6 +307,7 @@
 										<Action Name="" ID="{FD37A127-29B1-42C1-BB0B-F9A8784C2F5F}" ShortID="340962259">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="8"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList/>
 											<ChildrenList>
@@ -313,6 +334,14 @@
 												</Reference>
 											</ReferenceList>
 										</Action>
+										<Action Name="" ID="{94D6D177-ABBB-435D-A583-7484AD0CBE9F}" ShortID="539189676">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="10"/>
+												<Property Name="Delay" Type="Real64" Value="3"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList/>
+										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_005" ID="{2B4E98FC-76AF-42A3-B405-E47AB1B9481C}">
@@ -327,6 +356,7 @@
 										<Action Name="" ID="{EADC3C24-ED8A-4402-B1A4-5B490F8F6A77}" ShortID="574247880">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="8"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList/>
 											<ChildrenList>
@@ -346,6 +376,14 @@
 												</EventActionException>
 											</ChildrenList>
 										</Action>
+										<Action Name="" ID="{12FE6D03-0F63-4707-8507-99DEB37BB4D7}" ShortID="202007426">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="10"/>
+												<Property Name="Delay" Type="Real64" Value="3"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList/>
+										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_002" ID="{87EF5FB6-7480-4581-85BD-4C381C4AFD51}">
@@ -360,6 +398,7 @@
 										<Action Name="" ID="{F4117E5E-50CB-4E1E-B8E0-26EA3A5219A8}" ShortID="1045829972">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="8"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList/>
 											<ChildrenList>
@@ -379,6 +418,14 @@
 												</EventActionException>
 											</ChildrenList>
 										</Action>
+										<Action Name="" ID="{4BD9209C-02C7-426C-9128-3BC5EA405E3B}" ShortID="197384425">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="10"/>
+												<Property Name="Delay" Type="Real64" Value="3"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList/>
+										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_004" ID="{DD8E71D4-775C-4296-BCAA-183AEDA9C9AC}">
@@ -393,6 +440,7 @@
 										<Action Name="" ID="{AA9882B9-F054-4127-A46E-E0289A661873}" ShortID="600946309">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="8"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
 											</PropertyList>
 											<ReferenceList/>
 											<ChildrenList>
@@ -411,6 +459,14 @@
 													</ReferenceList>
 												</EventActionException>
 											</ChildrenList>
+										</Action>
+										<Action Name="" ID="{82325297-4DEB-4DF0-812E-607B4BF1BEE8}" ShortID="182329761">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="10"/>
+												<Property Name="Delay" Type="Real64" Value="3"/>
+												<Property Name="Scope" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList/>
 										</Action>
 									</ChildrenList>
 								</Event>
