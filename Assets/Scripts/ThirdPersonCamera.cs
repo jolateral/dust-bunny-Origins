@@ -1,110 +1,51 @@
 using UnityEngine;
-// Important: This namespace is required for Gamepad support
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
     public Transform target; // Drag Player here
     
-    [Header("Distance Settings")]
+    [Header("--- Distance Settings ---")]
     public float baseDistance = 10.0f;
     public float height = 5.0f;
     
-    [Header("Katamari-Style POV")]
-    [Tooltip("Wider FOV to see more of the environment (Katamari-style)")]
-    public float fieldOfView = 75f;
-    [Tooltip("Look-at point above player center - puts player in bottom third of screen")]
-    public float lookAtHeightOffset = 3f;
+    [Header("--- Controls ---")]
+    public float rotationSpeed = 2.0f;
+
+    [Header("--- Collision Settings (Anti-Clipping) ---")]
+    public LayerMask collisionLayers; 
     
-    [Header("Controls")]
-    public float rotationSpeed = 1.0f; // Adjusted sensitivity
+    [Tooltip("The physical thickness of the camera.")]
+    public float cameraRadius = 0.5f; 
     
-    [Header("Initial Look Target")]
-    [Tooltip("Optional: Camera will face this object at start. Leave empty to use default rotation.")]
-    public Transform initialLookTarget;
+    [Tooltip("Extra buffer distance to prevent the screen corners from clipping.")]
+    public float collisionPadding = 0.2f; // NEW: Buffer zone
+    
+    public float recoverSpeed = 10f;
 
     private float currentX = 0.0f;
     private float currentY = 0.0f;
-    private Camera cam;
+    private float currentDistance; 
 
     void Start()
     {
-        // Hide mouse cursor
         Cursor.lockState = CursorLockMode.Locked;
-        
-        cam = GetComponent<Camera>();
-        if (cam != null)
-            cam.fieldOfView = fieldOfView;
-        
-        // Initialize camera to face dust particle if target exists
-        InitializeCameraRotation();
-    }
-    
-    void InitializeCameraRotation()
-    {
-        if (!target) return;
-        
-        Transform lookTarget = initialLookTarget;
-        
-        // If no initialLookTarget is assigned, try to find "Dust Particle" by name
-        if (lookTarget == null)
-        {
-            GameObject dustParticle = GameObject.Find("Dust Particle");
-            if (dustParticle != null)
-            {
-                lookTarget = dustParticle.transform;
-            }
-        }
-        
-        if (lookTarget != null)
-        {
-            // Direction from player to dust particle
-            Vector3 directionToTarget = lookTarget.position - target.position;
-
-            // Horizontal (XZ) direction from player to dust particle
-            Vector3 flatDir = new Vector3(directionToTarget.x, 0f, directionToTarget.z);
-            if (flatDir.sqrMagnitude < 0.0001f)
-            {
-                return; // Avoid degenerate case if they are on top of each other
-            }
-
-            flatDir.Normalize();
-
-            // Yaw: we want the direction from camera -> player to line up
-            // with player -> dust, so dust is in front of the bunny
-            currentX = Mathf.Atan2(flatDir.x, flatDir.z) * Mathf.Rad2Deg;
-
-            // Pitch: angle based on vertical offset to dust
-            float horizontalDistance = new Vector2(directionToTarget.x, directionToTarget.z).magnitude;
-            currentY = Mathf.Atan2(directionToTarget.y, horizontalDistance) * Mathf.Rad2Deg;
-
-            // Clamp vertical rotation to valid range
-            currentY = Mathf.Clamp(currentY, -20f, 60f);
-        }
+        currentDistance = baseDistance;
     }
 
     void Update()
     {
-        // 1. Get Gamepad Input (New Input System)
         Vector2 rightStick = Vector2.zero;
         if (Gamepad.current != null)
         {
             rightStick = Gamepad.current.rightStick.ReadValue();
         }
 
-        // 2. Get Mouse Input (Legacy Input System)
-        // We combine both so you can use either device at any time
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        // 3. Apply Rotation
-        // Add Stick X + Mouse X
         currentX += (rightStick.x + mouseX) * rotationSpeed;
-        
-        // Subtract Stick Y + Mouse Y (Invert Y axis logic)
         currentY -= (rightStick.y + mouseY) * rotationSpeed;
-        
-        // Limit vertical rotation so camera doesn't flip
         currentY = Mathf.Clamp(currentY, -20f, 60f);
     }
 
@@ -112,22 +53,37 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         if (!target) return;
 
-        // Dynamic Distance based on Target Size (Growth)
         float currentScale = target.localScale.x;
-        float actualDistance = baseDistance * currentScale;
+        float targetBaseDistance = baseDistance * currentScale;
         float actualHeight = height * currentScale;
 
-        // Calculate Rotation and Position
-        Vector3 dir = new Vector3(0, 0, -actualDistance);
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+        Vector3 direction = new Vector3(0, 0, -targetBaseDistance);
         
-        // Final position logic
-        transform.position = target.position + rotation * dir;
-        transform.position += Vector3.up * actualHeight; // Add height offset
-        
-        // Look at point above player = player appears in bottom third (Katamari-style)
-        float scaledLookOffset = lookAtHeightOffset * currentScale;
-        Vector3 lookAtPoint = target.position + Vector3.up * scaledLookOffset;
+        Vector3 lookAtPoint = target.position + Vector3.up * actualHeight;
+        Vector3 desiredPosition = lookAtPoint + rotation * direction;
+
+        float targetDistance = targetBaseDistance;
+        Vector3 castDir = desiredPosition - lookAtPoint;
+
+        // 核心修改：如果射线打到墙壁
+        if (Physics.SphereCast(lookAtPoint, cameraRadius * currentScale, castDir.normalized, out RaycastHit hit, targetBaseDistance, collisionLayers))
+        {
+            // 在击中点之前，再往后退一点点 (collisionPadding)，确保镜头玻璃不穿墙
+            targetDistance = Mathf.Max(0.1f, hit.distance - (collisionPadding * currentScale));
+        }
+
+        if (targetDistance < currentDistance)
+        {
+            currentDistance = targetDistance; // 瞬间拉近，防止穿墙
+        }
+        else
+        {
+            currentDistance = Mathf.Lerp(currentDistance, targetDistance, Time.deltaTime * recoverSpeed); // 平滑恢复
+        }
+
+        Vector3 finalDirection = new Vector3(0, 0, -currentDistance);
+        transform.position = lookAtPoint + rotation * finalDirection;
         transform.LookAt(lookAtPoint);
     }
 }
