@@ -5,7 +5,7 @@ using System.Collections;
 /// <summary>
 /// AbsorbMechanic.cs (UPDATED — now supports KeyItem)
 /// 
-/// This handles all absorption logic when the player rolls into a "StickyObject".
+/// This handles all absorption logic when the player touches a "StickyObject" (absorb on contact).
 /// 
 /// Supported item types (checked in this order):
 /// 1. FleeingAbsorbable  — moving items with bonus growth on catch
@@ -51,31 +51,24 @@ public class AbsorbMechanic : MonoBehaviour
     /// <summary>Timestamp of the last time the too-small message was shown.</summary>
     private float nextTooBigMessageTime = 0f;
 
-    private DustBunnyController controller;
-
     public AK.Wwise.Event bunnyAbsorbSfx;
 
     // -----------------------------------------------------------------------
     // Unity Messages
     // -----------------------------------------------------------------------
 
-    void Start()
-    {
-        controller = GetComponent<DustBunnyController>();
-    }
-
     void OnCollisionEnter(Collision collision)
     {
-        // Only absorb when the player is in Rolling Mode (dash/Shift held)
-        if (controller.isRolling && collision.gameObject.CompareTag("StickyObject"))
+        // Absorb on contact — touching any absorbable (StickyObject) absorbs it
+        if (collision.gameObject.CompareTag("StickyObject"))
         {
             AttemptAbsorb(collision.gameObject);
         }
     }
+
     void OnCollisionStay(Collision collision)
     {
-        // Only absorb when the player is in Rolling Mode (dash/Shift held)
-        if (controller.isRolling && collision.gameObject.CompareTag("StickyObject"))
+        if (collision.gameObject.CompareTag("StickyObject"))
         {
             AttemptAbsorb(collision.gameObject);
         }
