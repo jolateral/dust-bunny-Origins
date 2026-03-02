@@ -34801,7 +34801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1002072311622276208, guid: 9bed229fb084045f68bcecd70810f4e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -193.04
+      value: -194.04
       objectReference: {fileID: 0}
     - target: {fileID: 1002072311622276208, guid: 9bed229fb084045f68bcecd70810f4e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -34809,7 +34809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1002072311622276208, guid: 9bed229fb084045f68bcecd70810f4e0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.01
+      value: 0.99
       objectReference: {fileID: 0}
     - target: {fileID: 1002072311622276208, guid: 9bed229fb084045f68bcecd70810f4e0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -34850,8 +34850,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6883403238992338957, guid: 9bed229fb084045f68bcecd70810f4e0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2095918851}
   m_SourcePrefab: {fileID: 100100000, guid: 9bed229fb084045f68bcecd70810f4e0, type: 3}
+--- !u!1 &2095918850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6883403238992338957, guid: 9bed229fb084045f68bcecd70810f4e0, type: 3}
+  m_PrefabInstance: {fileID: 2095918849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2095918851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095918850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a02787457c21450eafec17af3e5993d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialTrigger
+  tutorialText: Press X to roll and absorb an object
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  triggerDistance: 5
+  oneTimeOnly: 1
+  showDelay: 0.5
 --- !u!1 &2104662110
 GameObject:
   m_ObjectHideFlags: 0
