@@ -25,7 +25,7 @@ public class AbsorbMechanic : MonoBehaviour
     public float growthFactor = 0.05f;
 
     [Tooltip("Player must be this many times bigger than the target to absorb it.")]
-    public float sizeTolerance = 1.2f;
+    public float sizeTolerance = 1.1f;
 
     [Header("Visual Settings")]
     [Tooltip("How much the item shrinks after being absorbed (0.3 = 30% of original size).")]

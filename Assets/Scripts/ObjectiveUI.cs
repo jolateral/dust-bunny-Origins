@@ -3,15 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-using UnityEngine.InputSystem;
-
 public class ObjectiveUI : MonoBehaviour
 {
     public static ObjectiveUI Instance;
 
     [Header("Refs")]
     public TextMeshProUGUI objectiveText;
-    public RectTransform panel;     // drag the ObjectiveText rect OR a parent panel rect
+    public RectTransform panel;     
 
     [Header("Slide")]
     public float slideTime = 0.35f;
@@ -22,6 +20,9 @@ public class ObjectiveUI : MonoBehaviour
     [Header("Toggle")]
     public bool startVisible = true;
     public InputActionReference toggleObjectiveAction;
+
+    [Header("Optional TMP Sprites")]
+    public TMP_SpriteAsset spriteAsset;
 
     private Vector2 shownPos;
     private Vector2 hiddenPos;
@@ -46,9 +47,6 @@ public class ObjectiveUI : MonoBehaviour
         isVisible = startVisible;
         panel.anchoredPosition = isVisible ? shownPos : hiddenPos;
         objectiveText.gameObject.SetActive(true); // keep active so it can slide
-
-        //if (infoIcon != null)
-        //    infoIcon.SetActive(!isVisible);
     }
 
     private void OnEnable()
@@ -81,27 +79,18 @@ public class ObjectiveUI : MonoBehaviour
     {
         isVisible = true;
         StartSlide(shownPos);
-
-        //if (infoIcon != null)
-        //    infoIcon.SetActive(false);   // hide icon when panel visible
     }
 
     public void SlideOut()
     {
         isVisible = false;
         StartSlide(hiddenPos);
-
-        //if (infoIcon != null)
-        //    infoIcon.SetActive(true);    // show icon when panel hidden
     }
 
     public void SetObjective()
     {
         var paperData = PaperUIManager.Instance != null ? PaperUIManager.Instance.CurrentPaperData : null;
         if (paperData == null) return;
-
-        // If objective was hidden, you can choose to slide it in when it updates:
-        // SlideIn();
 
         if (paperData.GetCollectedCount() >= paperData.totalPieces)
         {
@@ -114,10 +103,10 @@ public class ObjectiveUI : MonoBehaviour
 
         objectiveText.text =
             $"Find the memory fragments of the childhood drawing. " +
-            $"{paperData.GetCollectedCount()}/{paperData.totalPieces} absorbed.";
+            $"{paperData.GetCollectedCount()}/{paperData.totalPieces} absorbed.\nPress  <sprite=3>to toggle.";
     }
 
-    // --- Sliding ---
+    // Sliding
     private void StartSlide(Vector2 target)
     {
         if (slideRoutine != null) StopCoroutine(slideRoutine);

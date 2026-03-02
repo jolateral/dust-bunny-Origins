@@ -10,7 +10,7 @@ public class MemoryUIManager : MonoBehaviour
     public CanvasGroup uiGroup; // Used for fading
 
     [Header("Optional TMP Sprites")]
-    public TMP_SpriteAsset spriteAsset; // drag your controller sprite asset here
+    public TMP_SpriteAsset spriteAsset; 
 
     void Awake()
     {

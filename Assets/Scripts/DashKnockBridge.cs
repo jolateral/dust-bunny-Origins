@@ -11,7 +11,6 @@ public class DashKnockBridge : MonoBehaviour
 
     [Header("Behavior")]
     [SerializeField] private bool oneTime = true;
-    [SerializeField] private float ignorePlayerCollisionTime = 0.5f; // prevents roll impact from pushing it
     [SerializeField] private float unlockDelay = 0f;                  // small delay can help stability (0–0.05)
 
     [Header("Audio")]
@@ -35,7 +34,7 @@ public class DashKnockBridge : MonoBehaviour
         rb.useGravity = false;
     }
 
-    private void OnCollisionEnter(Collision col)
+    private void OnCollisionStay(Collision col)
     {
         if (triggered && oneTime) return;
 
@@ -51,10 +50,6 @@ public class DashKnockBridge : MonoBehaviour
 
         bridgeCreakSfx.Post(gameObject);
 
-        // Temporarily ignore collision so the dash impulse doesn't transfer into the bridge
-        if (playerCollider != null)
-            Physics.IgnoreCollision(bridgeCollider, playerCollider, true);
-
         // Ttiny delay so we unlock *after* the impact frame
         if (unlockDelay > 0f)
             yield return new WaitForSeconds(unlockDelay);
@@ -68,12 +63,5 @@ public class DashKnockBridge : MonoBehaviour
         // Remove any leftover impulse (just in case)
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-
-        // Re-enable collision after a moment
-        yield return new WaitForSeconds(ignorePlayerCollisionTime);
-
-
-        if (playerCollider != null)
-            Physics.IgnoreCollision(bridgeCollider, playerCollider, false);
     }
 }

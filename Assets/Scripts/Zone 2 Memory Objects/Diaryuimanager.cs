@@ -73,6 +73,8 @@ public class DiaryUIManager : MonoBehaviour
     [Tooltip("Drag the Player GameObject here, or leave empty to auto-find.")]
     public DustBunnyController playerController;
 
+    public bool diaryShown = false;
+
     // -----------------------------------------------------------------------
     // Runtime State
     // -----------------------------------------------------------------------
@@ -149,6 +151,7 @@ public class DiaryUIManager : MonoBehaviour
     {
         // Don't double-open if already showing
         if (isDiaryShowing) return;
+        diaryShown = true;
 
         StopAllCoroutines();
         StartCoroutine(DisplayDiary(text, sprite));
