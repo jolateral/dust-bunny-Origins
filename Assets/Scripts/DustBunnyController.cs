@@ -45,6 +45,10 @@ public class DustBunnyController : MonoBehaviour
     [Tooltip("When pressing F in a launch zone with a Launch Point, time to auto-move to that position before gliding.")]
     public float glideMoveToLaunchDuration = 0.35f;
 
+    [Header("--- Visual Facing ---")]
+    [Tooltip("Yaw offset (in degrees) to make the bunny mesh visually point 'forward'. Adjust if the model faces sideways.")]
+    public float facingYawOffset = 0f;
+
     [Header("--- Debug & Status ---")]
     [Tooltip("Tolerance for normal ground check (walk, jump).")]
     public float groundCheckOffset = 0.1f;
@@ -266,6 +270,7 @@ public class DustBunnyController : MonoBehaviour
         {
             // Calculate target angle based on camera
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
+            // For normal grounded movement, use the original system (no facing offset) so walking/turning feels natural.
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
@@ -359,9 +364,9 @@ public class DustBunnyController : MonoBehaviour
         {
             Vector3 flat = new Vector3(launchDir.x, 0f, launchDir.z);
             if (flat.sqrMagnitude > 0.001f)
-                transform.rotation = Quaternion.LookRotation(flat.normalized);
+                transform.rotation = Quaternion.LookRotation(Quaternion.Euler(0f, facingYawOffset, 0f) * flat.normalized);
             else
-                transform.rotation = Quaternion.LookRotation(launchDir, Vector3.back);
+                transform.rotation = Quaternion.LookRotation(Quaternion.Euler(0f, facingYawOffset, 0f) * launchDir, Vector3.back);
         }
 
         // Launch velocity exactly along launch direction (no extra world-up boost so direction matches)
@@ -409,9 +414,10 @@ public class DustBunnyController : MonoBehaviour
         if (launchDir.sqrMagnitude < 0.01f) launchDir = Vector3.forward;
         launchDir = launchDir.normalized;
         Vector3 flat = new Vector3(launchDir.x, 0f, launchDir.z);
-        Quaternion endRot = flat.sqrMagnitude > 0.001f
+        Quaternion baseEndRot = flat.sqrMagnitude > 0.001f
             ? Quaternion.LookRotation(flat.normalized)
             : Quaternion.LookRotation(launchDir, Vector3.back);
+        Quaternion endRot = baseEndRot * Quaternion.Euler(0f, facingYawOffset, 0f);
         float elapsed = 0f;
         float dur = Mathf.Max(0.01f, glideMoveToLaunchDuration);
         while (elapsed < dur)
@@ -437,7 +443,20 @@ public class DustBunnyController : MonoBehaviour
             _animator.SetBool("isRolling", false);
         }
 
-        // Horizontal movement: camera-relative drift (WASD). Facing is locked — no rotation from input.
+        // While gliding, lock the bunny's facing so it always looks in the camera's horizontal forward direction,
+        // adjusted by the visual facing offset. Camera can turn, bunny will follow, but input won't spin the model.
+        if (camTransform != null)
+        {
+            Vector3 camForward = camTransform.forward;
+            camForward.y = 0f;
+            if (camForward.sqrMagnitude > 0.001f)
+            {
+                Quaternion lookRot = Quaternion.LookRotation(camForward.normalized) * Quaternion.Euler(0f, facingYawOffset, 0f);
+                transform.rotation = lookRot;
+            }
+        }
+
+        // Horizontal movement: camera-relative drift (WASD). Facing is locked; input only affects velocity, not rotation.
         float h = moveInput.x;
         float v = moveInput.y;
         Vector3 direction = new Vector3(h, 0f, v).normalized;
@@ -498,6 +517,7 @@ public class DustBunnyController : MonoBehaviour
         // 2. Face Direction Instantly
         if (dashDir != Vector3.zero)
         {
+            // For dash, also use the default behavior (no facing offset) outside of gliding.
             transform.rotation = Quaternion.LookRotation(dashDir);
         }
 
