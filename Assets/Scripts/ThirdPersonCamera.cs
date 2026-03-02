@@ -31,6 +31,13 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         currentDistance = baseDistance;
+
+        // Initialize camera to start behind the target, aligned with the bunny facing the level.
+        if (target != null)
+        {
+            currentX = target.eulerAngles.y;
+            currentY = 15f; // slight downward tilt so you see the bunny and what it's facing
+        }
     }
 
     void Update()
