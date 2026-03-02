@@ -56,6 +56,7 @@ namespace AK
 
             namespace STATE
             {
+                static const AkUniqueID NONE = 748895195U;
                 static const AkUniqueID ZONE1 = 831766780U;
                 static const AkUniqueID ZONE2 = 831766783U;
             } // namespace STATE

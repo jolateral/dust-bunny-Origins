@@ -263,6 +263,9 @@
 										</Property>
 										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-1.5</Value>
+											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{09810E23-48D5-42D3-990F-BCD240FFA523}">
@@ -934,6 +937,11 @@
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
 										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-1.5</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -2118,6 +2126,10 @@
 									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
+									<CustomState>
+										<StateRef Name="None" ID="{D6D77D91-BE32-43DB-BBCE-BE363B544DC2}"/>
+										<CustomState Name="" ID="{3B66E8E4-A42F-4088-8D3D-677F00938A71}" ShortID="851979594"/>
+									</CustomState>
 									<CustomState>
 										<StateRef Name="zone2" ID="{868A53EB-5726-4480-B033-2D9A57B417C1}"/>
 										<CustomState Name="" ID="{ACA1FA5A-26AD-42D5-BB56-55AD47F5F451}" ShortID="748150379"/>

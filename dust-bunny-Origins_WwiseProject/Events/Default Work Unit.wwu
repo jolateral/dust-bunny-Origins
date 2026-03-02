@@ -163,6 +163,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_mus_zones" ID="{177723F1-67E6-48F6-BA16-0BD415C65DFF}">
+							<ChildrenList>
+								<Action Name="" ID="{9CB88991-A7EA-4A25-9B9F-761C30D7EC34}" ShortID="836818518">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambience" ID="{A9D14555-D6E7-4107-8050-20701AA3B253}" ShortID="442510119">
@@ -247,10 +258,54 @@
 												</Reference>
 											</ReferenceList>
 										</Action>
+										<Action Name="" ID="{86558D29-6480-4B83-AAA4-3FCF299D33D4}" ShortID="1011945911">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="8"/>
+											</PropertyList>
+											<ReferenceList/>
+											<ChildrenList>
+												<EventActionException Name="" ID="{B482CAB6-797C-4027-8248-74588F10D1F4}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+												<EventActionException Name="" ID="{C7103E40-E70D-4ADA-8768-37AE9A6CC7E5}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+											</ChildrenList>
+										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_001" ID="{8F6C20EA-2F74-4780-AD59-ABE03435B843}">
 									<ChildrenList>
+										<Action Name="" ID="{FD37A127-29B1-42C1-BB0B-F9A8784C2F5F}" ShortID="340962259">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="8"/>
+											</PropertyList>
+											<ReferenceList/>
+											<ChildrenList>
+												<EventActionException Name="" ID="{38370C10-62F7-435F-B055-56583F0EA5EF}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+												<EventActionException Name="" ID="{DF1EE21E-3945-4432-8387-8EBF9DC9F158}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+											</ChildrenList>
+										</Action>
 										<Action Name="" ID="{A585A394-9C38-48C4-9EE4-EF66EEE1BF75}" ShortID="215707134">
 											<ReferenceList>
 												<Reference Name="Target">
@@ -269,6 +324,28 @@
 												</Reference>
 											</ReferenceList>
 										</Action>
+										<Action Name="" ID="{EADC3C24-ED8A-4402-B1A4-5B490F8F6A77}" ShortID="574247880">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="8"/>
+											</PropertyList>
+											<ReferenceList/>
+											<ChildrenList>
+												<EventActionException Name="" ID="{8F646E3B-156C-4F07-A623-DE5F8ADCA07E}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+												<EventActionException Name="" ID="{03573C69-E785-4E6A-82F3-92715B3610A8}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+											</ChildrenList>
+										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_002" ID="{87EF5FB6-7480-4581-85BD-4C381C4AFD51}">
@@ -280,6 +357,28 @@
 												</Reference>
 											</ReferenceList>
 										</Action>
+										<Action Name="" ID="{F4117E5E-50CB-4E1E-B8E0-26EA3A5219A8}" ShortID="1045829972">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="8"/>
+											</PropertyList>
+											<ReferenceList/>
+											<ChildrenList>
+												<EventActionException Name="" ID="{286E369F-904C-4297-A741-9403614A93A4}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+												<EventActionException Name="" ID="{FCDD2E73-415B-4375-9142-A2E4E645324B}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+											</ChildrenList>
+										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_004" ID="{DD8E71D4-775C-4296-BCAA-183AEDA9C9AC}">
@@ -290,6 +389,28 @@
 													<ObjectRef Name="sfx_memory_drawing_nl_004" ID="{C23E6FBA-98CE-4D6F-AE6B-9D5DDEF7DC5B}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{AA9882B9-F054-4127-A46E-E0289A661873}" ShortID="600946309">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="8"/>
+											</PropertyList>
+											<ReferenceList/>
+											<ChildrenList>
+												<EventActionException Name="" ID="{AFD52370-2369-4930-9C59-1055AD234A81}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+												<EventActionException Name="" ID="{AC7C301C-E9A7-49AD-99B0-2E06EDBB104A}">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</EventActionException>
+											</ChildrenList>
 										</Action>
 									</ChildrenList>
 								</Event>
@@ -303,17 +424,6 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="sfx_car_move_nl" ID="{0CEE900A-01F0-4341-94DB-55BC51F3DBC7}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-					</ChildrenList>
-				</Event>
-				<Event Name="Play_mus_zones" ID="{177723F1-67E6-48F6-BA16-0BD415C65DFF}">
-					<ChildrenList>
-						<Action Name="" ID="{9CB88991-A7EA-4A25-9B9F-761C30D7EC34}" ShortID="836818518">
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
