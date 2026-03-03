@@ -68,6 +68,7 @@ public class DustBunnyController : MonoBehaviour
     private float defaultDrag;
     private float distToGround;
     private float baseScale; // Scale at Start — speed scales with size relative to this
+    private float baseMass;  // Rigidbody mass at Start — mass scales with size (volume) when absorbing/gliding
     private float scaleAtGlideStart;   // Scale when we started gliding (for min check)
     private float glideStartTime;      // When we started gliding (grace period so we don't end immediately on ground)
 
@@ -113,6 +114,7 @@ public class DustBunnyController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<Collider>();
         baseScale = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
+        baseMass = rb.mass;
         
         if (Camera.main != null)
         {
@@ -175,6 +177,11 @@ public class DustBunnyController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Keep mass in sync with scale (absorption grows, gliding shrinks)
+        float scaleRatio = CurrentScale / baseScale;
+        scaleRatio = Mathf.Max(0.01f, scaleRatio);
+        rb.mass = baseMass * scaleRatio * scaleRatio * scaleRatio; // volume-proportional (density constant)
+
         if (isMovingToLaunch)
         {
             rb.linearVelocity = Vector3.zero;
@@ -205,7 +212,11 @@ public class DustBunnyController : MonoBehaviour
         if (context.started) jumpHeld = true;
         if (context.canceled) jumpHeld = false;
 
-        if (context.performed && isGrounded && !isRolling)
+        // Trigger on started so jump is responsive; use direct ground check so it works even if input fires before Update()
+        if (!context.started) return;
+        if (isRolling) return;
+        float checkDist = playerCollider != null ? playerCollider.bounds.extents.y + groundCheckOffset : distToGround + groundCheckOffset;
+        if (Physics.Raycast(transform.position, Vector3.down, checkDist))
             PerformJump();
     }
 
@@ -323,7 +334,8 @@ public class DustBunnyController : MonoBehaviour
     {
         // Reset vertical velocity for consistent jump height (scale with size so jump height feels consistent)
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        rb.AddForce(Vector3.up * (jumpForce * ScaleFactor), ForceMode.Impulse);
+        // Impulse = velocity * mass so jump height stays consistent when mass changes (absorption/glide)
+        rb.AddForce(Vector3.up * (jumpForce * ScaleFactor * rb.mass), ForceMode.Impulse);
     }
 
     // --- Gliding ---
