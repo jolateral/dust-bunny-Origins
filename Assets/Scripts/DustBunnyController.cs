@@ -216,8 +216,13 @@ public class DustBunnyController : MonoBehaviour
         if (!context.started) return;
         if (isRolling) return;
         float checkDist = playerCollider != null ? playerCollider.bounds.extents.y + groundCheckOffset : distToGround + groundCheckOffset;
-        if (Physics.Raycast(transform.position, Vector3.down, checkDist))
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, checkDist))
+        {
+            BouncyObject bouncy = hit.collider.GetComponent<BouncyObject>();
+            if (bouncy != null && bouncy.TryBounce(rb))
+                return; // Bouncy object handled the jump
             PerformJump();
+        }
     }
 
     public void OnDash(InputAction.CallbackContext context)
