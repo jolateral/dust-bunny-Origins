@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{D14CD876-85B6-DEEA-CF44-2FBC82984FE5}",
+    "Hash": "{4D017393-A0B0-FC7B-EE2D-7EAB2F84B5B9}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -19,7 +19,7 @@
       {
        "Id": "97464601",
        "Name": "Parametric EQ (Custom)",
-       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Room\\[Effect Slot [0]: (Parametric EQ)]\\Parametric EQ (Custom)",
+       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Zone1\\[Effect Slot [0]: (Parametric EQ)]\\Parametric EQ (Custom)",
        "GUID": "{FE1D00E9-C7B6-46EC-8526-9387802B973E}",
        "LibName": "Wwise Parametric EQ",
        "LibId": "6881283"
@@ -64,9 +64,9 @@
     ],
     "AuxBusses": [
      {
-      "Id": "2077253480",
-      "Name": "Room",
-      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Room",
+      "Id": "831766780",
+      "Name": "Zone1",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Zone1",
       "GUID": "{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}",
       "PluginRefs": {
        "Custom": [
@@ -80,6 +80,12 @@
         }
        ]
       }
+     },
+     {
+      "Id": "831766783",
+      "Name": "Zone2",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Zone2",
+      "GUID": "{C1D22865-FEF6-4F59-891F-D670A7DF784A}"
      }
     ],
     "GameParameters": [
@@ -158,6 +164,6 @@
     ]
    }
   ],
-  "FileHash": "{F227E8D8-30FA-4088-C6AA-AB800043D627}"
+  "FileHash": "{6A883D2C-92CF-D803-16BA-E958FB5860FA}"
  }
 }

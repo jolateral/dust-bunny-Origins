@@ -15,9 +15,7 @@ namespace AK
     {
         static const AkUniqueID PLAY_AMB_ROOM2_LP = 2291298689U;
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
-        static const AkUniqueID PLAY_MUS_4_4_72BPM_ZONE1_LP = 563199701U;
         static const AkUniqueID PLAY_MUS_4_4_100BPM_THEME_NL = 513704729U;
-        static const AkUniqueID PLAY_MUS_4_4_130BPM_ZONE2 = 2240500888U;
         static const AkUniqueID PLAY_MUS_ZONES = 3793537147U;
         static const AkUniqueID PLAY_SFX_BRIDGE_CREAK_NL = 3975145325U;
         static const AkUniqueID PLAY_SFX_BRIDGE_LAND_NL = 92681520U;
@@ -92,7 +90,8 @@ namespace AK
 
     namespace AUX_BUSSES
     {
-        static const AkUniqueID ROOM = 2077253480U;
+        static const AkUniqueID ZONE1 = 831766780U;
+        static const AkUniqueID ZONE2 = 831766783U;
     } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
