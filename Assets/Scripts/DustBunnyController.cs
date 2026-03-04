@@ -8,7 +8,7 @@ public class DustBunnyController : MonoBehaviour
 {
     [Header("--- Movement Settings ---")]
     public float walkSpeed = 3.5f;
-    public float jumpForce = 16f;
+    public float jumpForce = 1f;
     public float turnSmoothTime = 0.1f;
 
     [Header("--- Jump Feel (Gravity) ---")]
@@ -72,9 +72,15 @@ public class DustBunnyController : MonoBehaviour
     {
         get
         {
-            float scaleRatio = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / (3f * baseScale);
+            // Ratio of current average scale to starting average scale.
+            float scaleRatio = CurrentScale / baseScale;
+
+            // Don't let the bunny get *too* weak when very small.
             scaleRatio = Mathf.Max(0.5f, scaleRatio);
-            return Mathf.Pow(scaleRatio, 0.5f);
+
+            // Sub-linear growth so movement/jump clearly increase with size
+            // without becoming unmanageable when huge.
+            return Mathf.Pow(scaleRatio, 0.75f);
         }
     }
 
@@ -82,8 +88,11 @@ public class DustBunnyController : MonoBehaviour
     {
         get
         {
-            float scaleRatio = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / (3f * baseScale);
-            return Mathf.Max(1f, scaleRatio);
+            // Match gravity scaling to movement/jump scaling so
+            // bigger bunnies feel heavier but still more powerful.
+            float scaleRatio = CurrentScale / baseScale;
+            scaleRatio = Mathf.Max(0.5f, scaleRatio);
+            return Mathf.Pow(scaleRatio, 0.75f);
         }
     }
 
