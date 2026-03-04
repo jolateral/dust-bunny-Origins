@@ -251,211 +251,121 @@
 							<ChildrenList>
 								<Event Name="Play_sfx_memory_drawing_nl_003" ID="{DFA35869-C2B8-4DF4-9D44-B3B859C1A17C}">
 									<ChildrenList>
+										<Action Name="" ID="{7019C5F1-3F8D-4C56-A46D-1669ED4863A7}" ShortID="470070985">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="22"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
 										<Action Name="" ID="{A5625814-EACF-43EB-9E7C-BD1FC0913720}" ShortID="720755495">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_memory_drawing_nl_003" ID="{694BE2F9-1B5D-43C4-93C3-077CE1F62F74}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
-										<Action Name="" ID="{86558D29-6480-4B83-AAA4-3FCF299D33D4}" ShortID="1011945911">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="8"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList/>
-											<ChildrenList>
-												<EventActionException Name="" ID="{B482CAB6-797C-4027-8248-74588F10D1F4}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-												<EventActionException Name="" ID="{C7103E40-E70D-4ADA-8768-37AE9A6CC7E5}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-											</ChildrenList>
-										</Action>
-										<Action Name="" ID="{85BC8F1B-52F5-46AB-9970-3FAFED2B2114}" ShortID="430631717">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="10"/>
-												<Property Name="Delay" Type="Real64" Value="3"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList/>
-										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_001" ID="{8F6C20EA-2F74-4780-AD59-ABE03435B843}">
 									<ChildrenList>
-										<Action Name="" ID="{FD37A127-29B1-42C1-BB0B-F9A8784C2F5F}" ShortID="340962259">
+										<Action Name="" ID="{B60F6CD3-DBA6-405C-B147-03139422E884}" ShortID="481934839">
 											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="8"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
+												<Property Name="ActionType" Type="int16" Value="22"/>
 											</PropertyList>
-											<ReferenceList/>
-											<ChildrenList>
-												<EventActionException Name="" ID="{38370C10-62F7-435F-B055-56583F0EA5EF}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-												<EventActionException Name="" ID="{DF1EE21E-3945-4432-8387-8EBF9DC9F158}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-											</ChildrenList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
+												</Reference>
+											</ReferenceList>
 										</Action>
 										<Action Name="" ID="{A585A394-9C38-48C4-9EE4-EF66EEE1BF75}" ShortID="215707134">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_memory_drawing_nl_001" ID="{75B59607-4356-4056-9EC5-CFD0BBDB989C}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
-										<Action Name="" ID="{94D6D177-ABBB-435D-A583-7484AD0CBE9F}" ShortID="539189676">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="10"/>
-												<Property Name="Delay" Type="Real64" Value="3"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList/>
-										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_005" ID="{2B4E98FC-76AF-42A3-B405-E47AB1B9481C}">
 									<ChildrenList>
+										<Action Name="" ID="{E5D80FAF-0247-455D-9C0A-C668CB03B51B}" ShortID="104726691">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="22"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
 										<Action Name="" ID="{85156D3D-26AB-4127-9E07-8DCB5FB6A17A}" ShortID="783302265">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_memory_drawing_nl_005" ID="{DB1834B7-67A6-4840-9651-5B6C55DF46FF}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
-										<Action Name="" ID="{EADC3C24-ED8A-4402-B1A4-5B490F8F6A77}" ShortID="574247880">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="8"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList/>
-											<ChildrenList>
-												<EventActionException Name="" ID="{8F646E3B-156C-4F07-A623-DE5F8ADCA07E}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-												<EventActionException Name="" ID="{03573C69-E785-4E6A-82F3-92715B3610A8}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-											</ChildrenList>
-										</Action>
-										<Action Name="" ID="{12FE6D03-0F63-4707-8507-99DEB37BB4D7}" ShortID="202007426">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="10"/>
-												<Property Name="Delay" Type="Real64" Value="3"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList/>
-										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_002" ID="{87EF5FB6-7480-4581-85BD-4C381C4AFD51}">
 									<ChildrenList>
+										<Action Name="" ID="{CCB2B339-7813-41C3-852A-101420414366}" ShortID="495936107">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="22"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
 										<Action Name="" ID="{44BF955C-8D59-41B6-B43C-856145E8714C}" ShortID="834431108">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_memory_drawing_nl_002" ID="{24C5F8F9-5074-4943-98BB-D63FD19E5D5D}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
-										<Action Name="" ID="{F4117E5E-50CB-4E1E-B8E0-26EA3A5219A8}" ShortID="1045829972">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="8"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList/>
-											<ChildrenList>
-												<EventActionException Name="" ID="{286E369F-904C-4297-A741-9403614A93A4}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-												<EventActionException Name="" ID="{FCDD2E73-415B-4375-9142-A2E4E645324B}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-											</ChildrenList>
-										</Action>
-										<Action Name="" ID="{4BD9209C-02C7-426C-9128-3BC5EA405E3B}" ShortID="197384425">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="10"/>
-												<Property Name="Delay" Type="Real64" Value="3"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList/>
-										</Action>
 									</ChildrenList>
 								</Event>
 								<Event Name="Play_sfx_memory_drawing_nl_004" ID="{DD8E71D4-775C-4296-BCAA-183AEDA9C9AC}">
 									<ChildrenList>
+										<Action Name="" ID="{2DC50143-1471-496A-ADCC-64B4C95B2D82}" ShortID="939681647">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="22"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
 										<Action Name="" ID="{04E1F7A6-9471-4A6E-8089-7A0644A72F60}" ShortID="988363969">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="1"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_memory_drawing_nl_004" ID="{C23E6FBA-98CE-4D6F-AE6B-9D5DDEF7DC5B}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
-										</Action>
-										<Action Name="" ID="{AA9882B9-F054-4127-A46E-E0289A661873}" ShortID="600946309">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="8"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList/>
-											<ChildrenList>
-												<EventActionException Name="" ID="{AFD52370-2369-4930-9C59-1055AD234A81}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room2_lp" ID="{94B68A31-ACF8-45D6-BA0B-686242286CCE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-												<EventActionException Name="" ID="{AC7C301C-E9A7-49AD-99B0-2E06EDBB104A}">
-													<ReferenceList>
-														<Reference Name="Target">
-															<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-														</Reference>
-													</ReferenceList>
-												</EventActionException>
-											</ChildrenList>
-										</Action>
-										<Action Name="" ID="{82325297-4DEB-4DF0-812E-607B4BF1BEE8}" ShortID="182329761">
-											<PropertyList>
-												<Property Name="ActionType" Type="int16" Value="10"/>
-												<Property Name="Delay" Type="Real64" Value="3"/>
-												<Property Name="Scope" Type="int16" Value="1"/>
-											</PropertyList>
-											<ReferenceList/>
 										</Action>
 									</ChildrenList>
 								</Event>
@@ -482,6 +392,20 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="sfx_ui_select_nl" ID="{8BD81CAE-6A82-45C8-A621-2F7E2713EA07}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Exit_ui" ID="{DF616011-E7BA-4B6B-B97E-C0071E7015F9}">
+							<ChildrenList>
+								<Action Name="" ID="{59A31DC2-0C22-43F6-95EE-DA9EA34650A9}" ShortID="994029892">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="None" ID="{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

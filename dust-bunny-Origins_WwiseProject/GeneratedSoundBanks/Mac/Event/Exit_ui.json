@@ -1,51 +1,36 @@
 {
  "SoundBanksInfo": {
-  "Platform": "Windows",
-  "BasePlatform": "Windows",
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
   "SchemaVersion": "16",
   "SoundBankVersion": "172",
   "SoundBanks": [
    {
-    "Id": "1142362395",
+    "Id": "1041028614",
     "Type": "Event",
-    "GUID": "{DFA35869-C2B8-4DF4-9D44-B3B859C1A17C}",
+    "GUID": "{DF616011-E7BA-4B6B-B97E-C0071E7015F9}",
     "Language": "SFX",
-    "Hash": "{768D6244-FD48-D8BB-4E18-C2220E954CFE}",
-    "ObjectPath": "Play_sfx_memory_drawing_nl_003",
-    "ShortName": "Play_sfx_memory_drawing_nl_003",
-    "Path": "Event/Play_sfx_memory_drawing_nl_003.bnk",
-    "Media": [
-     {
-      "Id": "645890679",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Loose",
-      "ShortName": "sfx_memory_drawing_nl_003.wav",
-      "Path": "Media/645890679.wem",
-      "CachePath": "F1/{F1445A48-90F4-1A48-E2DB-CAB063690542}.wem"
-     }
-    ],
+    "Hash": "{20D0C0E7-57EC-4EE7-9792-49D288FC2AD0}",
+    "ObjectPath": "Exit_ui",
+    "ShortName": "Exit_ui",
+    "Path": "Event/Exit_ui.bnk",
     "Events": [
      {
-      "Id": "1142362395",
-      "Name": "Play_sfx_memory_drawing_nl_003",
-      "ObjectPath": "\\Events\\Default Work Unit\\SFX_Object\\sfx_memory_drawing_nl\\Play_sfx_memory_drawing_nl_003",
-      "GUID": "{DFA35869-C2B8-4DF4-9D44-B3B859C1A17C}",
+      "Id": "1041028614",
+      "Name": "Exit_ui",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX_UI\\Exit_ui",
+      "GUID": "{DF616011-E7BA-4B6B-B97E-C0071E7015F9}",
+      "MaxAttenuation": "0",
       "DurationType": "OneShot",
-      "DurationMin": "7.6179166",
-      "DurationMax": "7.6179166",
-      "MediaRefs": [
-       {
-        "Id": "645890679"
-       }
-      ],
+      "DurationMin": "0",
+      "DurationMax": "0",
       "ActionSetState": [
        {
         "GroupId": "4071417932",
-        "Id": "3509424520",
-        "Name": "memory",
-        "ObjectPath": "\\States\\Default Work Unit\\player_state\\memory",
-        "GUID": "{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\None",
+        "GUID": "{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"
        }
       ]
      }
@@ -86,6 +71,6 @@
     ]
    }
   ],
-  "FileHash": "{AA9AFBEA-8EC6-680E-5B0E-8CF3A29ECC8B}"
+  "FileHash": "{B835E4C1-2AD6-5403-12BF-89184CCE1DC4}"
  }
 }

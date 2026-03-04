@@ -80,6 +80,7 @@ public class PaperUIManager : MonoBehaviour
     public MultiPiecePaperData CurrentPaperData => currentPaperData;
 
     public AK.Wwise.Event uiSelect;
+    //public AK.Wwise.Event exitUi;
 
     /// <summary>
     /// Initialize singleton and setup
@@ -406,6 +407,9 @@ public class PaperUIManager : MonoBehaviour
         {
             instructionText.gameObject.SetActive(false);
         }
+
+        // Set audio state to resume audio
+        AkUnitySoundEngine.SetState("player_state", "None");
         
         // Unfreeze player
         if (playerController != null)

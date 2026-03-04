@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{4D017393-A0B0-FC7B-EE2D-7EAB2F84B5B9}",
+    "Hash": "{4157EE79-BB32-68C6-15A9-1A8A333AC180}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -148,6 +148,38 @@
         "GUID": "{D328E45F-CF43-461A-A10F-6ECD59D4AC2A}"
        }
       ]
+     },
+     {
+      "Id": "4071417932",
+      "Name": "player_state",
+      "ObjectPath": "\\States\\Default Work Unit\\player_state",
+      "GUID": "{3F5075A1-FA7B-4885-B84E-40E19EF44046}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\None",
+        "GUID": "{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"
+       },
+       {
+        "Id": "3092587493",
+        "Name": "pause",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\pause",
+        "GUID": "{158B7945-9B0D-4E95-9616-1D04A91E7535}"
+       },
+       {
+        "Id": "3509424520",
+        "Name": "memory",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\memory",
+        "GUID": "{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"
+       },
+       {
+        "Id": "4176812997",
+        "Name": "gliding",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\gliding",
+        "GUID": "{95554B9D-CF8C-4D94-99F5-25CB4A858898}"
+       }
+      ]
      }
     ],
     "SwitchGroups": [
@@ -164,6 +196,6 @@
     ]
    }
   ],
-  "FileHash": "{6A883D2C-92CF-D803-16BA-E958FB5860FA}"
+  "FileHash": "{B10CDE8C-EAEB-4105-87EC-3B745E59CFF6}"
  }
 }

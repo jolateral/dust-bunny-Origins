@@ -10,7 +10,7 @@
     "Type": "Event",
     "GUID": "{87EF5FB6-7480-4581-85BD-4C381C4AFD51}",
     "Language": "SFX",
-    "Hash": "{8C6D6656-0A63-D27D-BE68-AFA6286F1650}",
+    "Hash": "{562CD12A-A34B-CC2E-9762-E586416D2187}",
     "ObjectPath": "Play_sfx_memory_drawing_nl_002",
     "ShortName": "Play_sfx_memory_drawing_nl_002",
     "Path": "Event/Play_sfx_memory_drawing_nl_002.bnk",
@@ -32,17 +32,60 @@
       "ObjectPath": "\\Events\\Default Work Unit\\SFX_Object\\sfx_memory_drawing_nl\\Play_sfx_memory_drawing_nl_002",
       "GUID": "{87EF5FB6-7480-4581-85BD-4C381C4AFD51}",
       "DurationType": "OneShot",
-      "DurationMin": "6.6179166",
-      "DurationMax": "6.6179166",
+      "DurationMin": "7.6179166",
+      "DurationMax": "7.6179166",
       "MediaRefs": [
        {
         "Id": "457121634"
+       }
+      ],
+      "ActionSetState": [
+       {
+        "GroupId": "4071417932",
+        "Id": "3509424520",
+        "Name": "memory",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\memory",
+        "GUID": "{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"
+       }
+      ]
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "4071417932",
+      "Name": "player_state",
+      "ObjectPath": "\\States\\Default Work Unit\\player_state",
+      "GUID": "{3F5075A1-FA7B-4885-B84E-40E19EF44046}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\None",
+        "GUID": "{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"
+       },
+       {
+        "Id": "3092587493",
+        "Name": "pause",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\pause",
+        "GUID": "{158B7945-9B0D-4E95-9616-1D04A91E7535}"
+       },
+       {
+        "Id": "3509424520",
+        "Name": "memory",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\memory",
+        "GUID": "{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"
+       },
+       {
+        "Id": "4176812997",
+        "Name": "gliding",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\gliding",
+        "GUID": "{95554B9D-CF8C-4D94-99F5-25CB4A858898}"
        }
       ]
      }
     ]
    }
   ],
-  "FileHash": "{010AF893-AC66-21EC-9DB2-2C7C063243A7}"
+  "FileHash": "{E30B75CB-25D9-7482-8901-948E535E6824}"
  }
 }

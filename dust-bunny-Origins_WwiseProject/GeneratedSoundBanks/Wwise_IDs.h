@@ -13,6 +13,7 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID EXIT_UI = 1041028614U;
         static const AkUniqueID PLAY_AMB_ROOM2_LP = 2291298689U;
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
         static const AkUniqueID PLAY_MUS_4_4_100BPM_THEME_NL = 513704729U;
@@ -48,6 +49,19 @@ namespace AK
                 static const AkUniqueID NONE = 748895195U;
             } // namespace STATE
         } // namespace GROUNDED
+
+        namespace PLAYER_STATE
+        {
+            static const AkUniqueID GROUP = 4071417932U;
+
+            namespace STATE
+            {
+                static const AkUniqueID GLIDING = 4176812997U;
+                static const AkUniqueID MEMORY = 3509424520U;
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID PAUSE = 3092587493U;
+            } // namespace STATE
+        } // namespace PLAYER_STATE
 
         namespace ZONES
         {
