@@ -23,6 +23,14 @@
 						</Transition>
 					</TransitionList>
 				</StateGroup>
+				<StateGroup Name="player_state" ID="{3F5075A1-FA7B-4885-B84E-40E19EF44046}">
+					<ChildrenList>
+						<State Name="None" ID="{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"/>
+						<State Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"/>
+						<State Name="gliding" ID="{95554B9D-CF8C-4D94-99F5-25CB4A858898}"/>
+						<State Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+					</ChildrenList>
+				</StateGroup>
 			</ChildrenList>
 		</WorkUnit>
 	</States>
