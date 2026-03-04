@@ -12,47 +12,32 @@ public class DustBunnyController : MonoBehaviour
     public float turnSmoothTime = 0.1f;
 
     [Header("--- Jump Feel (Gravity) ---")]
-    [Tooltip("Multiplier for gravity when falling. Higher = faster fall.")]
     public float fallMultiplier = 2.5f;
-    [Tooltip("Gravity multiplier while holding jump (lower = higher jump)")]
     public float heldJumpGravityMultiplier = 0.25f;
-    [Tooltip("Multiplier for gravity when jump is released early.")]
     public float lowJumpMultiplier = 2.5f;
 
     [Header("--- Dash / Roll Settings ---")]
-    public float dashForce = 2.5f; 
-    public float dashDuration = 0.5f; 
+    public float dashForce = 2.5f;
+    public float dashDuration = 0.5f;
     public float dashCooldown = 1.0f;
-    public float rollDrag = 0.5f; 
-
-    [Header("--- Impact Feel ---")]
-    public float dashFovKick = 10f; // How much the camera zooms out on dash
-    public float fovSmoothTime = 0.8f; // How fast camera returns to normal
+    public float rollDrag = 0.5f;
 
     [Header("--- Glide Settings ---")]
-    [Tooltip("Horizontal speed while gliding (same control as walking: left stick / WASD).")]
     public float glideHorizontalSpeed = 2f;
-    [Tooltip("Downward speed (sink rate) while gliding. Lower = floatier.")]
     public float glideSinkSpeed = 2f;
-    [Tooltip("Upward boost when pressing F to glide (jump into the glide). Prevents getting stuck on the platform.")]
     public float glideJumpForce = 6f;
-    [Tooltip("Initial forward speed when launching off the ledge.")]
     public float glideLaunchSpeed = 5f;
-    [Tooltip("Mass (scale) lost per second while gliding. Flying consumes mass.")]
     public float glideMassDrainPerSecond = 0.02f;
-    [Tooltip("Gliding stops when scale drops below this (relative to starting scale).")]
     public float minGlideScaleRatio = 0.1f;
-    [Tooltip("When pressing F in a launch zone with a Launch Point, time to auto-move to that position before gliding.")]
     public float glideMoveToLaunchDuration = 0.35f;
+    [SerializeField] private float glideYawExtra = -90f;
 
     [Header("--- Visual Facing ---")]
-    [Tooltip("Yaw offset (in degrees) to make the bunny mesh visually point 'forward'. Adjust if the model faces sideways.")]
     public float facingYawOffset = 0f;
+    [SerializeField] private Transform cameraTransform;
 
     [Header("--- Debug & Status ---")]
-    [Tooltip("Tolerance for normal ground check (walk, jump).")]
     public float groundCheckOffset = 0.1f;
-    [Tooltip("Tighter tolerance for ending glide — only land when really touching ground so bunny doesn't hop early.")]
     public float glideLandTolerance = 0.02f;
     public bool isRolling = false;
     public bool isGrounded;
@@ -60,52 +45,45 @@ public class DustBunnyController : MonoBehaviour
 
     private Rigidbody rb;
     private Collider playerCollider;
-    private Transform camTransform;
-    private Camera mainCam; // Reference to Camera component for FOV effects
-    private float defaultFov; // Store original FOV
+
     private float turnSmoothVelocity;
     private float lastDashTime = -10f;
     private float defaultDrag;
     private float distToGround;
-    private float baseScale; // Scale at Start — speed scales with size relative to this
-    private float baseMass;  // Rigidbody mass at Start — mass scales with size (volume) when absorbing/gliding
-    private float scaleAtGlideStart;   // Scale when we started gliding (for min check)
-    private float glideStartTime;      // When we started gliding (grace period so we don't end immediately on ground)
+    private float baseScale;
+    private float baseMass;
+    private float scaleAtGlideStart;
+    private float glideStartTime;
 
     [SerializeField] private Animator _animator;
 
-    private Vector2 moveInput;         
+    private Vector2 moveInput;
     private bool jumpHeld;
     private bool isInGlideLaunchZone;
     private GlideLaunchSpot currentGlideSpot;
     private bool isMovingToLaunch;
 
-    /// <summary> Average of localScale x,y,z (for minimum mass checks). </summary>
-    public float CurrentScale => (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;              
+    // Stores the last yaw we want to face (so idle never snaps)
+    private float lastTargetYaw;
 
-    // --- Scaling Logic ---
+    public float CurrentScale => (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
 
-    /// <summary> Speed scales sub-linearly with size (sqrt) so getting bigger doesn't make you feel much faster. </summary>
     private float ScaleFactor
     {
         get
         {
             float scaleRatio = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / (3f * baseScale);
             scaleRatio = Mathf.Max(0.5f, scaleRatio);
-            return Mathf.Pow(scaleRatio, 0.5f); // sqrt: speed grows slower than size
+            return Mathf.Pow(scaleRatio, 0.5f);
         }
     }
 
-    /// <summary> 
-    /// Gravity must scale linearly with size to maintain visual "snappiness".
-    /// If you are 10x bigger, you need much more gravity to not look like you're floating.
-    /// </summary>
     private float GravityFactor
     {
         get
         {
             float scaleRatio = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / (3f * baseScale);
-            return Mathf.Max(1f, scaleRatio); 
+            return Mathf.Max(1f, scaleRatio);
         }
     }
 
@@ -113,40 +91,28 @@ public class DustBunnyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<Collider>();
-        baseScale = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
+
+        baseScale = CurrentScale;
         baseMass = rb.mass;
-        
-        if (Camera.main != null)
-        {
-            camTransform = Camera.main.transform;
-            mainCam = Camera.main;
-            defaultFov = mainCam.fieldOfView;
-        }
 
         distToGround = playerCollider.bounds.extents.y;
 
-        // Unity 6: linearDamping replaces drag
         rb.linearDamping = 5f;
         defaultDrag = rb.linearDamping;
 
-        // Ensure rotation is locked so the bunny stays upright
         rb.freezeRotation = true;
+
+        lastTargetYaw = transform.eulerAngles.y;
+        if (!cameraTransform && Camera.main) cameraTransform = Camera.main.transform;
     }
 
     void Update()
     {
-        // Ground Check
         distToGround = playerCollider.bounds.extents.y;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + groundCheckOffset);
 
-        if (!isGrounded)
-        {
-            AkUnitySoundEngine.SetRTPCValue("grounded", 1, gameObject);
-        }
-        else
-        {
-            AkUnitySoundEngine.SetRTPCValue("grounded", 0, gameObject);
-        }
+        if (!isGrounded) AkUnitySoundEngine.SetRTPCValue("grounded", 1, gameObject);
+        else AkUnitySoundEngine.SetRTPCValue("grounded", 0, gameObject);
 
         if (isGliding)
         {
@@ -155,13 +121,15 @@ public class DustBunnyController : MonoBehaviour
                 _animator.SetBool("isRunning", false);
                 _animator.SetBool("isRolling", false);
             }
+
             float timeGliding = Time.time - glideStartTime;
             bool reallyLanded = Physics.Raycast(transform.position, Vector3.down, distToGround + glideLandTolerance);
+
             if (reallyLanded && timeGliding > 0.4f)
                 EndGliding();
             else if (!isGrounded)
             {
-                float currentScaleAvg = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
+                float currentScaleAvg = CurrentScale;
                 if (currentScaleAvg < scaleAtGlideStart * minGlideScaleRatio)
                     EndGliding();
             }
@@ -180,19 +148,20 @@ public class DustBunnyController : MonoBehaviour
         // Keep mass in sync with scale (absorption grows, gliding shrinks)
         float scaleRatio = CurrentScale / baseScale;
         scaleRatio = Mathf.Max(0.01f, scaleRatio);
-        rb.mass = baseMass * scaleRatio * scaleRatio * scaleRatio; // volume-proportional (density constant)
+        rb.mass = baseMass * scaleRatio * scaleRatio * scaleRatio;
 
         if (isMovingToLaunch)
         {
             rb.linearVelocity = Vector3.zero;
             return;
         }
+
         if (isGliding)
         {
             GlideMovement();
             return;
         }
-        // Only allow movement control if NOT rolling
+
         if (!isRolling)
         {
             MoveCharacter();
@@ -201,26 +170,22 @@ public class DustBunnyController : MonoBehaviour
     }
 
     // Input System Callbacks
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-    }
+    public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started) jumpHeld = true;
         if (context.canceled) jumpHeld = false;
 
-        // Trigger on started so jump is responsive; use direct ground check so it works even if input fires before Update()
         if (!context.started) return;
         if (isRolling) return;
+
         float checkDist = playerCollider != null ? playerCollider.bounds.extents.y + groundCheckOffset : distToGround + groundCheckOffset;
+
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, checkDist))
         {
             BouncyObject bouncy = hit.collider.GetComponent<BouncyObject>();
-            if (bouncy != null && bouncy.TryBounce(rb))
-                return; // Bouncy object handled the jump
+            if (bouncy != null && bouncy.TryBounce(rb)) return;
             PerformJump();
         }
     }
@@ -228,25 +193,26 @@ public class DustBunnyController : MonoBehaviour
     public void OnDash(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-
         if (!isRolling && Time.time >= lastDashTime + dashCooldown)
-        {
             StartCoroutine(PerformDash());
-        }
     }
 
     public void OnGlide(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
         if (isGliding || isRolling || isMovingToLaunch) return;
+
         bool inZone = isInGlideLaunchZone && currentGlideSpot != null;
         bool inAir = !isGrounded;
+
         if (!inZone && !inAir) return;
+
         if (inZone && currentGlideSpot.GetLaunchPoint() != null)
         {
             StartCoroutine(MoveToLaunchThenGlide());
             return;
         }
+
         StartGliding();
     }
 
@@ -265,132 +231,156 @@ public class DustBunnyController : MonoBehaviour
         }
     }
 
-    /// <summary> True when standing in a GlideLaunchSpot (can press Glide to launch). </summary>
     public bool CanGlideFromSpot => isInGlideLaunchZone && currentGlideSpot != null && !isGliding && !isRolling;
-
-    /// <summary> Prompt text from the current glide spot (e.g. "Press G (or R1) to glide"). </summary>
     public string GlidePromptText => currentGlideSpot != null ? currentGlideSpot.GetPromptText() : "";
 
-    // --- Core Movement Logic ---
+    // Rotation helper
+    float ComputeYawFromWorldDir(Vector3 dir)
+    {
+        dir.y = 0f;
+        if (dir.sqrMagnitude < 0.0001f) return lastTargetYaw;
 
+        dir.Normalize();
+
+        // Unity base yaw assumes +Z forward
+        float baseYaw = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+
+        // Your conventions:
+        // forward = +X (so rotate -90 from Unity's +Z)
+        // model is rotated 180° on Y
+        return baseYaw - 90f + 180f + facingYawOffset;
+    }
+    Vector3 GetCameraRelativeWorldDir(Vector2 input)
+    {
+        if (!cameraTransform)
+        {
+            cameraTransform = Camera.main ? Camera.main.transform : null;
+            if (!cameraTransform) return Vector3.zero;
+        }
+
+        Vector3 camForward = cameraTransform.forward;
+        Vector3 camRight = cameraTransform.right;
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        if (camForward.sqrMagnitude < 0.0001f || camRight.sqrMagnitude < 0.0001f)
+            return Vector3.zero;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        Vector3 worldDir = camForward * input.y + camRight * input.x;
+        worldDir.y = 0f;
+        return worldDir;
+    }
+
+    // Core Movement Logic
     void MoveCharacter()
     {
-        if (camTransform == null) return;
-
-        float h = moveInput.x;
-        float v = moveInput.y;
-
-        Vector3 direction = new Vector3(h, 0f, v).normalized;
-
-        if (direction.magnitude >= 0.1f)
+        // Deadzone
+        const float deadzone = 0.15f;
+        if (moveInput.sqrMagnitude < deadzone * deadzone)
         {
-            // Calculate target angle based on camera
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
-            // For normal grounded movement, use the original system (no facing offset) so walking/turning feels natural.
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-            // Apply movement velocity (scale with size so bigger bunny isn't slower)
-            Vector3 targetVelocity = moveDir * (walkSpeed * ScaleFactor);
-            targetVelocity.y = rb.linearVelocity.y; // Preserve gravity
-
-            rb.linearVelocity = targetVelocity;
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
+            if (_animator) _animator.SetBool("isRunning", false);
+            return;
         }
 
-        // Animation
-        if (_animator)
-        {
-            bool running = (Mathf.Abs(h) > 0.01f || Mathf.Abs(v) > 0.01f);
-            _animator.SetBool("isRunning", running);
-        }
+        // Get camera-relative movement direction
+        Vector3 worldDir = GetCameraRelativeWorldDir(moveInput);
+
+        if (worldDir.sqrMagnitude < 0.0001f)
+            return;
+
+        worldDir.Normalize();
+
+        // Rotate toward movement direction
+        float targetYaw = ComputeYawFromWorldDir(worldDir);
+
+        float yaw = Mathf.SmoothDampAngle(
+            transform.eulerAngles.y,
+            targetYaw,
+            ref turnSmoothVelocity,
+            turnSmoothTime
+        );
+
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+        lastTargetYaw = yaw;
+
+        // Move
+        Vector3 vel = worldDir * (walkSpeed * ScaleFactor);
+        vel.y = rb.linearVelocity.y;
+        rb.linearVelocity = vel;
+
+        if (_animator) _animator.SetBool("isRunning", true);
     }
 
     void ApplyBetterGravity()
     {
-        float currentMultiplier = 1f; // Default gravity state
+        float currentMultiplier = 1f;
 
-        // Determine which gravity multiplier state we are in
-        if (rb.linearVelocity.y < 0)
-        {
-            currentMultiplier = fallMultiplier; // Falling heavily
-        }
-        else if (rb.linearVelocity.y > 0 && !jumpHeld)
-        {
-            currentMultiplier = lowJumpMultiplier; // Rising but let go of jump (short hop)
-        }
-        else if (rb.linearVelocity.y > 0 && jumpHeld)
-        {
-            currentMultiplier = heldJumpGravityMultiplier; // Rising and holding jump
-        }
+        if (rb.linearVelocity.y < 0) currentMultiplier = fallMultiplier;
+        else if (rb.linearVelocity.y > 0 && !jumpHeld) currentMultiplier = lowJumpMultiplier;
+        else if (rb.linearVelocity.y > 0 && jumpHeld) currentMultiplier = heldJumpGravityMultiplier;
 
-        // Calculate the absolute total multiplier we want, factoring in the bunny's massive size
         float totalMultiplier = GravityFactor * currentMultiplier;
-
-        // Because Unity's Rigidbody already automatically applies 1x Physics.gravity.y every frame,
-        // we only need to add the difference. 
         float extraGravityMultiplier = totalMultiplier - 1f;
 
-        // Apply the downward force safely.
         rb.linearVelocity += Vector3.up * Physics.gravity.y * extraGravityMultiplier * Time.fixedDeltaTime;
     }
 
     void PerformJump()
     {
-        // Reset vertical velocity for consistent jump height (scale with size so jump height feels consistent)
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        // Impulse = velocity * mass so jump height stays consistent when mass changes (absorption/glide)
         rb.AddForce(Vector3.up * (jumpForce * ScaleFactor * rb.mass), ForceMode.Impulse);
     }
 
-    // --- Gliding ---
-
+    // Gliding
     void StartGliding()
     {
         isGliding = true;
         glideStartTime = Time.time;
         rb.useGravity = false;
-        scaleAtGlideStart = (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
+        scaleAtGlideStart = CurrentScale;
 
-        Vector3 launchDir;
+        // If spot gives a direction, use that. Otherwise use camera forward.
+        Vector3 launchDir = Vector3.zero;
+
         if (currentGlideSpot != null)
         {
             Vector3 spotDir = currentGlideSpot.GetLaunchDirection();
-            if (spotDir.sqrMagnitude > 0.01f)
-                launchDir = spotDir.normalized;
-            else if (camTransform != null)
-            {
-                launchDir = camTransform.forward;
-                launchDir.y = 0;
-                launchDir.Normalize();
-            }
-            else
-                launchDir = transform.forward;
-        }
-        else if (camTransform != null)
-        {
-            launchDir = camTransform.forward;
-            launchDir.y = 0;
-            launchDir.Normalize();
-        }
-        else
-            launchDir = transform.forward;
-
-        // Face the launch direction — use horizontal (XZ) only so bunny stays upright and faces target
-        if (launchDir.sqrMagnitude > 0.01f)
-        {
-            Vector3 flat = new Vector3(launchDir.x, 0f, launchDir.z);
-            if (flat.sqrMagnitude > 0.001f)
-                transform.rotation = Quaternion.LookRotation(Quaternion.Euler(0f, facingYawOffset, 0f) * flat.normalized);
-            else
-                transform.rotation = Quaternion.LookRotation(Quaternion.Euler(0f, facingYawOffset, 0f) * launchDir, Vector3.back);
+            if (spotDir.sqrMagnitude > 0.01f) launchDir = spotDir;
         }
 
-        // Launch velocity exactly along launch direction (no extra world-up boost so direction matches)
+        if (launchDir.sqrMagnitude < 0.01f)
+        {
+            launchDir = cameraTransform ? cameraTransform.forward : transform.forward;
+        }
+
+        launchDir.y = 0f;
+        if (launchDir.sqrMagnitude < 0.01f) launchDir = transform.forward;
+        launchDir.Normalize();
+
+        Vector3 faceDir = GetCameraRelativeWorldDir(moveInput);
+
+        if (faceDir.sqrMagnitude < 0.01f)
+        {
+            faceDir = cameraTransform ? cameraTransform.forward : transform.forward;
+            faceDir.y = 0f;
+        }
+
+        if (faceDir.sqrMagnitude > 0.01f)
+        {
+            faceDir.Normalize();
+            float yaw = ComputeYawFromWorldDir(faceDir) + glideYawExtra;
+            transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+            lastTargetYaw = yaw;
+        }
+
+        // Launch velocity
         float launchMagnitude = glideLaunchSpeed * ScaleFactor;
-        if (launchDir.y > 0.01f)
-            launchMagnitude += glideJumpForce * ScaleFactor * launchDir.y; // extra oomph when launching upward
         rb.linearVelocity = launchDir * launchMagnitude;
+
         if (_animator) _animator.SetBool("isRunning", false);
         SetGlidingAnimator(true);
     }
@@ -406,11 +396,13 @@ public class DustBunnyController : MonoBehaviour
     {
         if (!_animator) return;
         foreach (AnimatorControllerParameter p in _animator.parameters)
+        {
             if (p.name == "isGliding" && p.type == AnimatorControllerParameterType.Bool)
             {
                 _animator.SetBool("isGliding", value);
                 return;
             }
+        }
     }
 
     IEnumerator MoveToLaunchThenGlide()
@@ -421,33 +413,40 @@ public class DustBunnyController : MonoBehaviour
             StartGliding();
             yield break;
         }
+
         isMovingToLaunch = true;
         rb.linearVelocity = Vector3.zero;
+
         Vector3 startPos = transform.position;
         Quaternion startRot = transform.rotation;
         Vector3 endPos = launchPoint.position;
-        // Face launch direction during the move (not launch point rotation) so we never show "blue"
-        Vector3 launchDir = currentGlideSpot != null ? currentGlideSpot.GetLaunchDirection() : Vector3.forward;
-        if (launchDir.sqrMagnitude < 0.01f) launchDir = Vector3.forward;
-        launchDir = launchDir.normalized;
+
+        Vector3 launchDir = (currentGlideSpot != null) ? currentGlideSpot.GetLaunchDirection() : transform.forward;
+        if (launchDir.sqrMagnitude < 0.01f) launchDir = transform.forward;
+        launchDir.Normalize();
+
         Vector3 flat = new Vector3(launchDir.x, 0f, launchDir.z);
-        Quaternion baseEndRot = flat.sqrMagnitude > 0.001f
-            ? Quaternion.LookRotation(flat.normalized)
-            : Quaternion.LookRotation(launchDir, Vector3.back);
-        Quaternion endRot = baseEndRot * Quaternion.Euler(0f, facingYawOffset, 0f);
+        float endYaw = ComputeYawFromWorldDir(flat);
+        Quaternion endRot = Quaternion.Euler(0f, endYaw, 0f);
+
         float elapsed = 0f;
         float dur = Mathf.Max(0.01f, glideMoveToLaunchDuration);
+
         while (elapsed < dur)
         {
             elapsed += Time.fixedDeltaTime;
             float t = Mathf.Clamp01(elapsed / dur);
-            t = t * t * (3f - 2f * t); // smoothstep
+            t = t * t * (3f - 2f * t);
+
             rb.MovePosition(Vector3.Lerp(startPos, endPos, t));
             transform.rotation = Quaternion.Slerp(startRot, endRot, t);
+
             yield return new WaitForFixedUpdate();
         }
+
         rb.MovePosition(endPos);
         transform.rotation = endRot;
+
         isMovingToLaunch = false;
         StartGliding();
     }
@@ -460,131 +459,75 @@ public class DustBunnyController : MonoBehaviour
             _animator.SetBool("isRolling", false);
         }
 
-        // While gliding, lock the bunny's facing so it always looks in the camera's horizontal forward direction,
-        // adjusted by the visual facing offset. Camera can turn, bunny will follow, but input won't spin the model.
-        if (camTransform != null)
-        {
-            Vector3 camForward = camTransform.forward;
-            camForward.y = 0f;
-            if (camForward.sqrMagnitude > 0.001f)
-            {
-                Quaternion lookRot = Quaternion.LookRotation(camForward.normalized) * Quaternion.Euler(0f, facingYawOffset, 0f);
-                transform.rotation = lookRot;
-            }
-        }
-
-        // Horizontal movement: camera-relative drift (WASD). Facing is locked; input only affects velocity, not rotation.
-        float h = moveInput.x;
-        float v = moveInput.y;
-        Vector3 direction = new Vector3(h, 0f, v).normalized;
+        Vector3 worldDir = GetCameraRelativeWorldDir(moveInput);
 
         Vector3 velocity = rb.linearVelocity;
-        if (direction.magnitude >= 0.1f && camTransform != null)
+
+        if (worldDir.sqrMagnitude >= 0.01f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            velocity.x = moveDir.x * (glideHorizontalSpeed * ScaleFactor);
-            velocity.z = moveDir.z * (glideHorizontalSpeed * ScaleFactor);
+            worldDir.Normalize();
+
+            velocity.x = worldDir.x * (glideHorizontalSpeed * ScaleFactor);
+            velocity.z = worldDir.z * (glideHorizontalSpeed * ScaleFactor);
+
+            float extraYaw = (Time.time - glideStartTime > 0.35f) ? glideYawExtra : 0f;
+            float targetYaw = ComputeYawFromWorldDir(worldDir) + extraYaw;
+            float yaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetYaw, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+            lastTargetYaw = yaw;
         }
+
         velocity.y = -glideSinkSpeed;
         rb.linearVelocity = velocity;
 
-        // Drain mass over time (flying consumes mass)
+        // Drain mass
         float drain = glideMassDrainPerSecond * Time.fixedDeltaTime;
         Vector3 scale = transform.localScale;
-        scale.x = Mathf.Max(scale.x - drain, scaleAtGlideStart * minGlideScaleRatio);
-        scale.y = Mathf.Max(scale.y - drain, scaleAtGlideStart * minGlideScaleRatio);
-        scale.z = Mathf.Max(scale.z - drain, scaleAtGlideStart * minGlideScaleRatio);
+        float minScale = scaleAtGlideStart * minGlideScaleRatio;
+
+        scale.x = Mathf.Max(scale.x - drain, minScale);
+        scale.y = Mathf.Max(scale.y - drain, minScale);
+        scale.z = Mathf.Max(scale.z - drain, minScale);
+
         transform.localScale = scale;
     }
 
-    // --- The Improved Dash Coroutine ---
+    // Dash
     IEnumerator PerformDash()
     {
-        if (camTransform == null) yield break;
-
         isRolling = true;
         if (_animator) _animator.SetBool("isRolling", true);
         lastDashTime = Time.time;
 
-        // 1. Physics Setup for Impact
-        rb.linearDamping = rollDrag; 
-        rb.useGravity = false; // Disable gravity to dash straight (like a bullet)
+        rb.linearDamping = rollDrag;
+        rb.useGravity = false;
 
-        // Calculate Dash Direction
-        float h = moveInput.x;
-        float v = moveInput.y;
-        Vector3 dashDir;
+        Vector3 dashDir = GetCameraRelativeWorldDir(moveInput);
 
-        if (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f)
+        // If no input, dash straight where camera faces
+        if (dashDir.sqrMagnitude < 0.01f)
         {
-            Vector3 camForward = camTransform.forward;
-            Vector3 camRight = camTransform.right;
-            camForward.y = 0;
-            camRight.y = 0;
-            dashDir = (camForward.normalized * v + camRight.normalized * h).normalized;
-        }
-        else
-        {
-            dashDir = camTransform.forward;
-            dashDir.y = 0;
-            dashDir.Normalize();
+            dashDir = cameraTransform ? cameraTransform.forward : transform.forward;
+            dashDir.y = 0f;
         }
 
-        // 2. Face Direction Instantly
-        if (dashDir != Vector3.zero)
-        {
-            // For dash, also use the default behavior (no facing offset) outside of gliding.
-            transform.rotation = Quaternion.LookRotation(dashDir);
-        }
+        if (dashDir.sqrMagnitude < 0.01f) dashDir = transform.forward;
 
-        // 3. APPLY IMPACT
-        // Reset velocity first so we don't fight existing momentum
-        rb.linearVelocity = Vector3.zero; 
-        
-        // Use VelocityChange instead of Impulse for instant, mass-independent speed (scale with size)
+        dashDir.Normalize();
+
+        float yaw = ComputeYawFromWorldDir(dashDir);
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+        lastTargetYaw = yaw;
+
+        rb.linearVelocity = Vector3.zero;
         rb.AddForce(dashDir * (dashForce * ScaleFactor), ForceMode.VelocityChange);
-
-        // 4. Camera Juice (FOV Kick)
-        if (mainCam != null)
-        {
-            StartCoroutine(FovKick());
-        }
 
         yield return new WaitForSeconds(dashDuration);
 
-        // 5. Reset State
         isRolling = false;
         if (_animator) _animator.SetBool("isRolling", false);
-        
+
         rb.linearDamping = defaultDrag;
-        rb.useGravity = true; // Re-enable gravity
-    }
-
-    // Helper coroutine to create a visual "Zoom" effect during dash
-    IEnumerator FovKick()
-    {
-        float targetFov = defaultFov + dashFovKick;
-        float elapsed = 0f;
-
-        // Zoom Out
-        while(elapsed < 0.1f)
-        {
-            if(!mainCam) yield break;
-            mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, targetFov, elapsed / 0.1f);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        // Return to Normal
-        elapsed = 0f;
-        while (elapsed < fovSmoothTime)
-        {
-            if (!mainCam) yield break;
-            mainCam.fieldOfView = Mathf.Lerp(targetFov, defaultFov, elapsed / fovSmoothTime);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        if (mainCam) mainCam.fieldOfView = defaultFov;
+        rb.useGravity = true;
     }
 }
