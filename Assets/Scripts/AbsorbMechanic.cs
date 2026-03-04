@@ -44,6 +44,16 @@ public class AbsorbMechanic : MonoBehaviour
     [Tooltip("How many seconds before the too-small hint can show again.")]
     public float tooBigMessageCooldown = .075f;
 
+    [Header("Spill Settings")]
+    [Tooltip("How many generic absorbed items can be lost in a single hit at most.")]
+    public int maxItemsLostOnHit = 3;
+
+    [Tooltip("Horizontal strength of the force applied to spilled items.")]
+    public float spillForce = 3f;
+
+    [Tooltip("Upward strength of the force applied to spilled items.")]
+    public float spillUpwardForce = 2f;
+
     // -----------------------------------------------------------------------
     // Private Fields
     // -----------------------------------------------------------------------
@@ -51,11 +61,31 @@ public class AbsorbMechanic : MonoBehaviour
     /// <summary>Timestamp of the last time the too-small message was shown.</summary>
     private float nextTooBigMessageTime = 0f;
 
+    /// <summary>Absorbed items that can be spilled when the player takes a hit.</summary>
+    private readonly System.Collections.Generic.List<GameObject> droppableItems = new System.Collections.Generic.List<GameObject>();
+
+    /// <summary>Original (pre-absorption) local scale for each droppable item.</summary>
+    private readonly System.Collections.Generic.Dictionary<GameObject, Vector3> droppableOriginalScales =
+        new System.Collections.Generic.Dictionary<GameObject, Vector3>();
+
+    /// <summary>Minimum scale we allow the bunny to shrink back to when spilling.</summary>
+    private float startingScaleMagnitude;
+
+    /// <summary>Cached reference to the player's collider for spill collision ignore.</summary>
+    private Collider playerCollider;
+
     public AK.Wwise.Event bunnyAbsorbSfx;
 
     // -----------------------------------------------------------------------
     // Unity Messages
     // -----------------------------------------------------------------------
+
+    void Start()
+    {
+        // Assume fairly uniform scaling; track a baseline so we don't shrink below it.
+        startingScaleMagnitude = transform.localScale.magnitude;
+        playerCollider = GetComponent<Collider>();
+    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -180,6 +210,10 @@ public class AbsorbMechanic : MonoBehaviour
         // Parent the item to the player so it travels with the bunny
         item.transform.SetParent(this.transform);
 
+        // Remember the item's original scale before we shrink it for the bunny surface,
+        // so we can restore that scale if it later spills out.
+        Vector3 originalScale = item.transform.localScale;
+
         // Shrink the item so it looks proportional stuck on the bunny surface
         item.transform.localScale *= absorbedItemScaleMultiplier;
 
@@ -188,6 +222,15 @@ public class AbsorbMechanic : MonoBehaviour
 
         // Random rotation so items look messily stuck together
         item.transform.localRotation = Random.rotation;
+
+        // Track generic items so they can be spilled later on hit,
+        // and remember their original (pre-absorption) scale.
+        bool canDropLater = (paper == null && memory == null && key == null);
+        if (canDropLater && !droppableItems.Contains(item))
+        {
+            droppableItems.Add(item);
+            droppableOriginalScales[item] = originalScale;
+        }
 
         // Grow the bunny
         transform.localScale += Vector3.one * growthFactor;
@@ -219,5 +262,123 @@ public class AbsorbMechanic : MonoBehaviour
 
         if (MemoryUIManager.Instance != null)
             MemoryUIManager.Instance.ShowMemory(tooBigMessage, tooBigColor);
+    }
+
+    // -----------------------------------------------------------------------
+    // Spill Logic
+    // -----------------------------------------------------------------------
+
+    /// <summary>
+    /// Causes some previously absorbed generic items to fall off the bunny,
+    /// reducing its size. Dropped items become absorbable again.
+    /// </summary>
+    /// <param name="requestedCount">Maximum number of items to spill.</param>
+    public void SpillAbsorbables(int requestedCount)
+    {
+        if (requestedCount <= 0 || droppableItems.Count == 0)
+            return;
+
+        int maxAllowed = Mathf.Max(1, maxItemsLostOnHit);
+        int spillCount = Mathf.Min(requestedCount, maxAllowed);
+        spillCount = Mathf.Min(spillCount, droppableItems.Count);
+
+        int actuallySpilled = 0;
+
+        for (int i = 0; i < spillCount; i++)
+        {
+            if (droppableItems.Count == 0)
+                break;
+
+            // Choose a random droppable item so the pile thins out organically.
+            int idx = Random.Range(0, droppableItems.Count);
+            GameObject item = droppableItems[idx];
+            droppableItems.RemoveAt(idx);
+
+            if (item == null)
+                continue;
+
+            // Restore the size the item had out in the world before absorption.
+            if (droppableOriginalScales.TryGetValue(item, out Vector3 originalScale))
+            {
+                item.transform.localScale = originalScale;
+                droppableOriginalScales.Remove(item);
+            }
+
+            actuallySpilled++;
+
+            // Detach so it no longer follows the bunny.
+            item.transform.SetParent(null);
+
+            // Make sure it can be absorbed again.
+            item.tag = "StickyObject";
+
+            // Restore physics: give it a collider and rigidbody if missing.
+            Collider col = item.GetComponent<Collider>();
+            if (col == null)
+                col = item.AddComponent<BoxCollider>();
+            col.enabled = true;
+
+            Rigidbody rb = item.GetComponent<Rigidbody>();
+            if (rb == null)
+                rb = item.AddComponent<Rigidbody>();
+            rb.isKinematic = false;
+
+            // Briefly ignore collision with the bunny so the item doesn't get
+            // immediately re-absorbed the same frame it spills out.
+            if (playerCollider != null && col != null)
+            {
+                Physics.IgnoreCollision(playerCollider, col, true);
+                StartCoroutine(ReenableCollisionLater(col));
+            }
+
+            // Nudge slightly away from the bunny center and toss outward/upward.
+            Vector3 fromCenter = (item.transform.position - transform.position);
+            fromCenter.y = 0f;
+            if (fromCenter.sqrMagnitude < 0.01f)
+                fromCenter = Random.insideUnitSphere;
+
+            fromCenter.y = 0f;
+            fromCenter.Normalize();
+
+            Vector3 force = fromCenter * spillForce + Vector3.up * spillUpwardForce;
+            rb.AddForce(force, ForceMode.Impulse);
+        }
+
+        if (actuallySpilled <= 0)
+            return;
+
+        // Shrink the bunny based on how many items were lost,
+        // but don't go below the starting scale magnitude.
+        float totalLoss = growthFactor * actuallySpilled;
+        Vector3 scale = transform.localScale - Vector3.one * totalLoss;
+
+        float minMagnitude = startingScaleMagnitude;
+        if (scale.magnitude < minMagnitude)
+        {
+            // Rescale uniformly back up to the minimum allowed magnitude.
+            if (scale.magnitude > 0f)
+            {
+                float factor = minMagnitude / scale.magnitude;
+                scale *= factor;
+            }
+            else
+            {
+                // Fallback to a safe non-zero scale.
+                scale = Vector3.one * (minMagnitude / Mathf.Sqrt(3f));
+            }
+        }
+
+        transform.localScale = scale;
+    }
+
+    private IEnumerator ReenableCollisionLater(Collider itemCollider)
+    {
+        // Small delay so the spilled item can separate from the bunny.
+        yield return new WaitForSeconds(0.4f);
+
+        if (playerCollider != null && itemCollider != null)
+        {
+            Physics.IgnoreCollision(playerCollider, itemCollider, false);
+        }
     }
 }

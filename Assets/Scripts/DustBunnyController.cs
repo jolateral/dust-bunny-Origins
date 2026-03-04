@@ -66,6 +66,11 @@ public class DustBunnyController : MonoBehaviour
     // Stores the last yaw we want to face (so idle never snaps)
     private float lastTargetYaw;
 
+    [Header("--- Car Hit Settings ---")]
+    public float carKnockbackForce = 6f;
+    public float carVerticalBoost = 3f;
+    public int carMaxItemsLost = 3;
+
     public float CurrentScale => (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
 
     private float ScaleFactor
@@ -175,6 +180,54 @@ public class DustBunnyController : MonoBehaviour
         {
             MoveCharacter();
             ApplyBetterGravity();
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        HandleCarHit(collision.collider);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        HandleCarHit(other);
+    }
+
+    void HandleCarHit(Collider other)
+    {
+        if (other == null) return;
+
+        // Treat objects tagged "Car" or with a MovingCar component as dangerous cars.
+        bool isCar = other.CompareTag("Car") || other.GetComponentInParent<MovingCar>() != null;
+        if (!isCar) return;
+
+        // Compute knockback direction away from the car, flattened on the XZ plane.
+        Vector3 hitSourcePos = other.bounds.center;
+        Vector3 knockDir = transform.position - hitSourcePos;
+        knockDir.y = 0f;
+
+        if (knockDir.sqrMagnitude < 0.001f)
+        {
+            knockDir = -other.transform.forward;
+            knockDir.y = 0f;
+        }
+
+        if (knockDir.sqrMagnitude < 0.001f)
+            return;
+
+        knockDir.Normalize();
+
+        // Apply an impulse that pushes the bunny away and pops it slightly upward.
+        rb.linearVelocity = Vector3.zero;
+        Vector3 impulse = knockDir * carKnockbackForce + Vector3.up * carVerticalBoost;
+        rb.AddForce(impulse * rb.mass, ForceMode.Impulse);
+
+        // Spill some absorbed items so the bunny loses size/mass, but can recollect them.
+        AbsorbMechanic absorber = GetComponent<AbsorbMechanic>();
+        if (absorber != null && carMaxItemsLost > 0)
+        {
+            int toSpill = Random.Range(1, carMaxItemsLost + 1);
+            absorber.SpillAbsorbables(toSpill);
         }
     }
 
