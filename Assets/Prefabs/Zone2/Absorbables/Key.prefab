@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5504224910379067436}
   - component: {fileID: 4060735908546946452}
   - component: {fileID: 1179936832300572963}
+  - component: {fileID: 5113042228518684096}
+  - component: {fileID: 2873241868352616394}
   m_Layer: 0
   m_Name: Key
   m_TagString: StickyObject
@@ -29,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7029481248411945550}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -7.258, y: 44.37, z: 58.067}
   m_LocalScale: {x: 51.61695, y: 51.61695, z: 51.61695}
   m_ConstrainProportionsScale: 0
@@ -150,3 +152,36 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &5113042228518684096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7029481248411945550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a02787457c21450eafec17af3e5993d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialTrigger
+  tutorialText: A key... to open the diary?
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  triggerDistance: 5
+  oneTimeOnly: 1
+  showDelay: 0.5
+--- !u!114 &2873241868352616394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7029481248411945550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce28ea1ad3e5417089b56ff8d5d17e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatingKeyBehaviour
+  floatHeight: 4.62
+  bobAmplitude: 0.15
+  bobSpeed: 4.98
+  spinSpeed: 82.8
