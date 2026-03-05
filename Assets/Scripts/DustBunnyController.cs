@@ -23,7 +23,7 @@ public class DustBunnyController : MonoBehaviour
     public float rollDrag = 0.5f;
 
     [Header("--- Glide Settings ---")]
-    public float glideHorizontalSpeed = 2f;
+    public float glideHorizontalSpeed = 1f;
     public float glideSinkSpeed = 2f;
     public float glideJumpForce = 6f;
     public float glideLaunchSpeed = 5f;
