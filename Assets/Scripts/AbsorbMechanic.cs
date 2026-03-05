@@ -195,7 +195,23 @@ public class AbsorbMechanic : MonoBehaviour
         KeyItem key = item.GetComponent<KeyItem>();
         if (key != null)
         {
-            key.OnAbsorbed(); // Sets KeyItem.CollectedKeys[keyID] = true
+            key.OnAbsorbed();
+
+            // Handle physics and parenting first
+            Destroy(item.GetComponent<Rigidbody>());
+            Destroy(item.GetComponent<Collider>());
+            item.transform.SetParent(this.transform);
+
+            // NOW activate floating — parent is valid at this point
+            FloatingKeyBehaviour floater = item.GetComponent<FloatingKeyBehaviour>();
+            if (floater != null)
+                floater.StartFloating(this.transform);
+
+            // Grow bunny and play sound
+            transform.localScale += Vector3.one * growthFactor;
+            if (bunnyAbsorbSfx != null) bunnyAbsorbSfx.Post(gameObject);
+            ObjectiveUI.Instance.SetObjective();
+            return;
         }
 
         // ===================================================================

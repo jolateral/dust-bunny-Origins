@@ -84,6 +84,9 @@ public class KeyItem : MonoBehaviour
 
         Debug.Log($"[KeyItem] Key '{keyID}' collected!");
 
+        // Activate floating behaviour so the key hovers above the bunny
+        FloatingKeyBehaviour floater = GetComponent<FloatingKeyBehaviour>();
+
         // Optional: spawn pickup particles at the key's current position
         if (pickupParticlePrefab != null)
         {
