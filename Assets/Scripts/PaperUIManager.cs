@@ -411,9 +411,13 @@ public class PaperUIManager : MonoBehaviour
         // Set audio state to resume audio
         AkUnitySoundEngine.SetState("player_state", "None");
         
-        // Unfreeze player
+        // Unfreeze player and briefly suppress jump so the Space/confirm press
+        // used to close the paper doesn't immediately trigger a jump.
         if (playerController != null)
+        {
+            playerController.SuppressJumpForSeconds(0.2f);
             playerController.enabled = true;
+        }
     }
     
     /// <summary>
