@@ -396,6 +396,7 @@ MonoBehaviour:
   fadeSpeed: 3
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
   playerController: {fileID: 2070879653}
+  diaryShown: 0
 --- !u!4 &34835352
 Transform:
   m_ObjectHideFlags: 0
@@ -722,10 +723,13 @@ MonoBehaviour:
   target: {fileID: 2070879654}
   baseDistance: 12
   height: 5
-  fieldOfView: 75
-  lookAtHeightOffset: 3
   rotationSpeed: 1
-  initialLookTarget: {fileID: 0}
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  cameraRadius: 0.5
+  collisionPadding: 0.2
+  recoverSpeed: 10
 --- !u!114 &654630873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1610,6 +1614,18 @@ PrefabInstance:
     - target: {fileID: 3034633759700572231, guid: fcb0a0bff459c4794a0c4ed8516b0a46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584694948823481861, guid: fcb0a0bff459c4794a0c4ed8516b0a46, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -101.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584694948823481861, guid: fcb0a0bff459c4794a0c4ed8516b0a46, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584694948823481861, guid: fcb0a0bff459c4794a0c4ed8516b0a46, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -202.91
       objectReference: {fileID: 0}
     - target: {fileID: 8187119788660097180, guid: fcb0a0bff459c4794a0c4ed8516b0a46, type: 3}
       propertyPath: m_Name
