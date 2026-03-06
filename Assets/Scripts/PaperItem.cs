@@ -125,7 +125,12 @@ public class PaperItem : MonoBehaviour
         
         // Mark this piece as collected
         multiPieceData.CollectPiece(pieceIndex);
-        
+
+        if (ObjectiveUI.Instance != null)
+        {
+            ObjectiveUI.Instance.RevealFragment(pieceIndex, multiPieceData.totalPieces);
+        }
+
         // Show the puzzle UI with current progress
         if (PaperUIManager.Instance != null)
         {
