@@ -16,6 +16,9 @@ namespace AK
         static const AkUniqueID EXIT_UI = 1041028614U;
         static const AkUniqueID PLAY_AMB_ROOM2_LP = 2291298689U;
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
+        static const AkUniqueID PLAY_AMB_ROOMHIGH_LP = 122448171U;
+        static const AkUniqueID PLAY_AMB_ROOMLOW_LP = 3704798373U;
+        static const AkUniqueID PLAY_AMB_ROOMMID_LP = 3437152325U;
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
         static const AkUniqueID PLAY_MUS_ZONES = 3793537147U;
         static const AkUniqueID PLAY_SFX_BRIDGE_CREAK_NL = 3975145325U;
