@@ -23,7 +23,7 @@ public class DustBunnyController : MonoBehaviour
     public float rollDrag = 0.5f;
 
     [Header("--- Glide Settings ---")]
-    public float glideHorizontalSpeed = 2f;
+    public float glideHorizontalSpeed = 1f;
     public float glideSinkSpeed = 2f;
     public float glideJumpForce = 6f;
     public float glideLaunchSpeed = 5f;
@@ -65,6 +65,9 @@ public class DustBunnyController : MonoBehaviour
 
     // Stores the last yaw we want to face (so idle never snaps)
     private float lastTargetYaw;
+
+    // Time until which jump input should be ignored (e.g., just after closing UI overlays).
+    private float jumpSuppressedUntil;
 
     [Header("--- Car Hit Settings ---")]
     public float carKnockbackForce = 6f;
@@ -231,6 +234,18 @@ public class DustBunnyController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Prevents jump input from being processed for a short time.
+    /// Used by UI overlays that are dismissed with the same button as jump.
+    /// </summary>
+    /// <param name="seconds">Duration in seconds to suppress jump.</param>
+    public void SuppressJumpForSeconds(float seconds)
+    {
+        float until = Time.time + Mathf.Max(0f, seconds);
+        if (until > jumpSuppressedUntil)
+            jumpSuppressedUntil = until;
+    }
+
     // Input System Callbacks
     public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
 
@@ -240,6 +255,14 @@ public class DustBunnyController : MonoBehaviour
         if (context.canceled) jumpHeld = false;
 
         if (!context.started) return;
+
+        // Ignore jump while or shortly after UI overlays that use the same button are active.
+        if (Time.time < jumpSuppressedUntil) return;
+
+        // Also hard-block jump if blocking UIs are currently open.
+        if (PaperUIManager.Instance != null && PaperUIManager.Instance.IsPaperShowing()) return;
+        if (DiaryUIManager.Instance != null && DiaryUIManager.Instance.IsDiaryShowing()) return;
+
         if (isRolling) return;
 
         float checkDist = playerCollider != null ? playerCollider.bounds.extents.y + groundCheckOffset : distToGround + groundCheckOffset;

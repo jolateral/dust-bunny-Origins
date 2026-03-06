@@ -252,9 +252,13 @@ public class DiaryUIManager : MonoBehaviour
         if (instructionText != null)
             instructionText.gameObject.SetActive(false);
 
-        // --- 5. Unfreeze the player ---
+        // --- 5. Unfreeze the player and briefly suppress jump so the same
+        // Space/confirm press used to close the diary doesn't immediately trigger a jump.
         if (playerController != null)
+        {
+            playerController.SuppressJumpForSeconds(0.2f);
             playerController.enabled = true;
+        }
 
         isDiaryShowing = false;
     }
