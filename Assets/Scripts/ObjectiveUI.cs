@@ -1,55 +1,88 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// ObjectiveUI.cs
+///
+/// Manages the fragment progress panel in the top-right corner.
+///
+/// BEHAVIOUR:
+/// - Starts completely hidden (alpha 0, disabled)
+/// - Fades IN after the player dismisses the paper UI
+/// - Fades OUT instantly when the paper UI opens
+/// - Auto-fades out after all pieces are collected
+/// </summary>
 public class ObjectiveUI : MonoBehaviour
 {
+    // -----------------------------------------------------------------------
+    // Singleton
+    // -----------------------------------------------------------------------
+
     public static ObjectiveUI Instance;
 
-    [Header("Refs")]
-    public TextMeshProUGUI objectiveText;
-    public RectTransform panel;     
+    // -----------------------------------------------------------------------
+    // Inspector References
+    // -----------------------------------------------------------------------
 
-    [Header("Slide")]
-    public float slideTime = 0.35f;
-    public float offscreenPadding = 40f; // extra push offscreen
+    [Header("Panel References")]
+    [Tooltip("The CanvasGroup on the Panel — used for fading in and out.")]
+    public CanvasGroup panelCanvasGroup;
 
-    //public GameObject infoIcon;
+    [Tooltip("The RectTransform of the Panel (still needed to find the GameObject).")]
+    public RectTransform panel;
 
-    [Header("Toggle")]
-    public bool startVisible = true;
+    [Tooltip("The FragmentProgressUI component on the Panel child.")]
+    public FragmentProgressUI fragmentProgressUI;
+
+    [Header("Fade Settings")]
+    [Tooltip("How long the panel takes to fade in or out.")]
+    public float fadeTime = 0.4f;
+
+    [Header("Toggle Input")]
+    [Tooltip("Input action that toggles the panel. Optional.")]
     public InputActionReference toggleObjectiveAction;
 
-    [Header("Optional TMP Sprites")]
-    public TMP_SpriteAsset spriteAsset;
+    // -----------------------------------------------------------------------
+    // Private State
+    // -----------------------------------------------------------------------
 
-    private Vector2 shownPos;
-    private Vector2 hiddenPos;
-    private bool isVisible;
-    private Coroutine slideRoutine;
+    private bool isVisible = false;
+    private bool hasCollectedAny = false;
+    private Coroutine fadeRoutine;
     private Coroutine hideRoutine;
+
+    // -----------------------------------------------------------------------
+    // Unity Messages
+    // -----------------------------------------------------------------------
 
     void Awake()
     {
         Instance = this;
 
-        if (panel == null && objectiveText != null)
-            panel = objectiveText.rectTransform;
+        if (panelCanvasGroup == null && panel != null)
+        {
+            // Auto-add a CanvasGroup if one wasn't assigned
+            panelCanvasGroup = panel.gameObject.GetComponent<CanvasGroup>();
+            if (panelCanvasGroup == null)
+                panelCanvasGroup = panel.gameObject.AddComponent<CanvasGroup>();
+        }
 
-        // Save current anchored position as "shown"
-        shownPos = panel.anchoredPosition;
+        // Start fully hidden and disabled
+        if (panelCanvasGroup != null)
+        {
+            panelCanvasGroup.alpha = 0f;
+            panelCanvasGroup.blocksRaycasts = false;
+            panelCanvasGroup.interactable = false;
+        }
 
-        // Move off-screen to the right by width + padding
-        hiddenPos = shownPos + new Vector2(panel.rect.width + offscreenPadding, 0f);
-
-        // Start state
-        isVisible = startVisible;
-        panel.anchoredPosition = isVisible ? shownPos : hiddenPos;
-        objectiveText.gameObject.SetActive(true); // keep active so it can slide
+        if (panel != null)
+            panel.gameObject.SetActive(false);
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         if (toggleObjectiveAction != null)
         {
@@ -58,80 +91,173 @@ public class ObjectiveUI : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         if (toggleObjectiveAction != null)
             toggleObjectiveAction.action.performed -= OnToggleObjective;
     }
 
+    // -----------------------------------------------------------------------
+    // Input
+    // -----------------------------------------------------------------------
+
     private void OnToggleObjective(InputAction.CallbackContext ctx)
     {
-        Toggle();
+        if (hasCollectedAny)
+            Toggle();
     }
+
+    // -----------------------------------------------------------------------
+    // Public API
+    // -----------------------------------------------------------------------
 
     public void Toggle()
     {
-        if (isVisible) SlideOut();
-        else SlideIn();
+        if (isVisible) FadeOut();
+        else FadeIn();
     }
 
-    public void SlideIn()
+    public void FadeIn()
     {
+        if (!hasCollectedAny) return;
+
+        panel.gameObject.SetActive(true);
         isVisible = true;
-        StartSlide(shownPos);
+
+        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+        fadeRoutine = StartCoroutine(FadeTo(1f));
     }
 
-    public void SlideOut()
+    public void FadeOut()
     {
         isVisible = false;
-        StartSlide(hiddenPos);
+
+        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+        fadeRoutine = StartCoroutine(FadeTo(0f));
     }
 
-    public void SetObjective()
+    /// <summary>
+    /// Called by PaperUIManager the instant paper opens.
+    /// Hides the panel immediately with no animation.
+    /// </summary>
+    public void HideForPaper()
     {
-        var paperData = PaperUIManager.Instance != null ? PaperUIManager.Instance.CurrentPaperData : null;
-        if (paperData == null) return;
-
-        if (paperData.GetCollectedCount() >= paperData.totalPieces)
+        if (fadeRoutine != null)
         {
-            objectiveText.text = "All memory fragments collected!";
-
-            if (hideRoutine != null) StopCoroutine(hideRoutine);
-            hideRoutine = StartCoroutine(SlideOutAfterDelay(3f));
-            return;
+            StopCoroutine(fadeRoutine);
+            fadeRoutine = null;
         }
 
-        objectiveText.text =
-            $"Find the memory fragments of the childhood drawing. " +
-            $"{paperData.GetCollectedCount()}/{paperData.totalPieces} absorbed.\nPress  <sprite=3>to toggle.";
-    }
+        isVisible = false;
 
-    // Sliding
-    private void StartSlide(Vector2 target)
-    {
-        if (slideRoutine != null) StopCoroutine(slideRoutine);
-        slideRoutine = StartCoroutine(SlideTo(target));
-    }
-
-    private IEnumerator SlideTo(Vector2 target)
-    {
-        Vector2 start = panel.anchoredPosition;
-        float t = 0f;
-
-        while (t < 1f)
+        if (panelCanvasGroup != null)
         {
-            t += Time.deltaTime / slideTime;
-            float eased = Mathf.SmoothStep(0f, 1f, t);
-            panel.anchoredPosition = Vector2.Lerp(start, target, eased);
+            panelCanvasGroup.alpha = 0f;
+            panelCanvasGroup.blocksRaycasts = false;
+            panelCanvasGroup.interactable = false;
+        }
+
+        if (panel != null)
+            panel.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Called by PaperUIManager after paper fully closes.
+    /// Fades the panel back in.
+    /// </summary>
+    public void ShowAfterPaper()
+    {
+        if (!hasCollectedAny) return;
+
+        var paperData = PaperUIManager.Instance != null
+            ? PaperUIManager.Instance.CurrentPaperData
+            : null;
+
+        if (paperData != null && paperData.IsComplete()) return;
+
+        FadeIn();
+    }
+
+    /// <summary>
+    /// Called when a fragment is collected.
+    /// Syncs all fragment image data silently.
+    /// Panel only appears after ShowAfterPaper() is called.
+    /// </summary>
+    public void SetObjective()
+    {
+        var paperData = PaperUIManager.Instance != null
+            ? PaperUIManager.Instance.CurrentPaperData
+            : null;
+
+        if (paperData == null) return;
+
+        hasCollectedAny = true;
+
+        int collected = paperData.GetCollectedCount();
+        int total = paperData.totalPieces;
+
+        if (fragmentProgressUI != null)
+            fragmentProgressUI.SyncProgress(paperData.GetCollectedPieces(), total);
+
+        // Auto-hide after a delay once all pieces are collected
+        if (collected >= total)
+        {
+            if (hideRoutine != null) StopCoroutine(hideRoutine);
+            hideRoutine = StartCoroutine(FadeOutAfterDelay(3f));
+        }
+    }
+
+    /// <summary>
+    /// Reveal a single fragment image by index.
+    /// Called from PaperItem immediately when a piece is absorbed.
+    /// Panel is still hidden — this just updates the image data so it's
+    /// ready to show when ShowAfterPaper() is called.
+    /// </summary>
+    public void RevealFragment(int pieceIndex, int total)
+    {
+        hasCollectedAny = true;
+
+        if (fragmentProgressUI != null)
+            fragmentProgressUI.RevealFragment(pieceIndex, total);
+    }
+
+    // -----------------------------------------------------------------------
+    // Private Helpers
+    // -----------------------------------------------------------------------
+
+    private IEnumerator FadeTo(float targetAlpha)
+    {
+        if (panelCanvasGroup == null) yield break;
+
+        float startAlpha = panelCanvasGroup.alpha;
+        float elapsed = 0f;
+
+        while (elapsed < fadeTime)
+        {
+            elapsed += Time.deltaTime;
+            panelCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsed / fadeTime);
             yield return null;
         }
 
-        panel.anchoredPosition = target;
+        panelCanvasGroup.alpha = targetAlpha;
+
+        // If fully faded out, disable the GameObject
+        if (targetAlpha <= 0f)
+        {
+            panelCanvasGroup.blocksRaycasts = false;
+            panelCanvasGroup.interactable = false;
+            panel.gameObject.SetActive(false);
+        }
+        else
+        {
+            panelCanvasGroup.blocksRaycasts = true;
+            panelCanvasGroup.interactable = true;
+        }
     }
 
-    private IEnumerator SlideOutAfterDelay(float delay)
+    private IEnumerator FadeOutAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SlideOut();
+        FadeOut();
     }
 }
