@@ -9,10 +9,9 @@ using System.Collections;
 /// Manages the visual fragment progress display inside the ObjectiveUI panel.
 /// Shows the dashed outline and reveals each fragment image as pieces are collected.
 ///
-/// Fragment images are set to full alpha immediately when collected (not faded)
-/// because the panel itself is hidden at that point — the fade-in of the panel
-/// handles the reveal effect. Once the panel fades in, all collected fragments
-/// are already fully visible.
+/// IMPORTANT: This script's GameObject starts DISABLED, which means Awake() never
+/// runs until the panel is first activated. All initialization is therefore done in
+/// EnsureInitialized(), which is called defensively at the top of every public method.
 /// </summary>
 public class FragmentProgressUI : MonoBehaviour
 {
@@ -50,13 +49,41 @@ public class FragmentProgressUI : MonoBehaviour
     /// <summary>Whether the outline and counter have been made visible yet.</summary>
     private bool hasShownOutline = false;
 
+    /// <summary>Whether EnsureInitialized has already run.</summary>
+    private bool isInitialized = false;
+
     // -----------------------------------------------------------------------
     // Unity Messages
     // -----------------------------------------------------------------------
 
     void Awake()
     {
-        revealed = new bool[fragmentImages != null ? fragmentImages.Length : 5];
+        EnsureInitialized();
+    }
+
+    void OnEnable()
+    {
+        // OnEnable fires even when the GameObject is first activated,
+        // so this catches the case where Awake never ran due to starting disabled.
+        EnsureInitialized();
+    }
+
+    // -----------------------------------------------------------------------
+    // Initialization
+    // -----------------------------------------------------------------------
+
+    /// <summary>
+    /// Safe initialization that can be called multiple times — only runs once.
+    /// Called from both Awake and OnEnable to handle the disabled-at-start case.
+    /// </summary>
+    private void EnsureInitialized()
+    {
+        if (isInitialized) return;
+        isInitialized = true;
+
+        // Initialize the revealed tracker
+        int count = (fragmentImages != null) ? fragmentImages.Length : 5;
+        revealed = new bool[count];
 
         // Keep outline fully hidden at start
         SetAlpha(outlineImage, 0f);
@@ -81,23 +108,33 @@ public class FragmentProgressUI : MonoBehaviour
 
     /// <summary>
     /// Call this when the player collects a fragment.
-    /// Sets the fragment image to full alpha immediately (panel is hidden anyway)
-    /// so when the panel fades in, the fragment is already there.
+    /// Sets the fragment image to full alpha immediately so it is ready
+    /// when the panel fades in after the paper UI closes.
     /// </summary>
     public void RevealFragment(int pieceIndex, int total)
     {
+        // Always initialize first in case this is called before OnEnable
+        EnsureInitialized();
+
         totalPieces = total;
 
+        // Guard: index out of range
         if (fragmentImages == null || pieceIndex < 0 || pieceIndex >= fragmentImages.Length)
         {
-            Debug.LogWarning($"[FragmentProgressUI] pieceIndex {pieceIndex} out of range!");
+            Debug.LogWarning($"[FragmentProgressUI] pieceIndex {pieceIndex} is out of range! " +
+                             $"fragmentImages length = {(fragmentImages != null ? fragmentImages.Length : 0)}");
             return;
         }
 
+        // Guard: revealed array size mismatch (safety net)
+        if (revealed == null || revealed.Length != fragmentImages.Length)
+            revealed = new bool[fragmentImages.Length];
+
+        // Guard: already revealed
         if (revealed[pieceIndex]) return;
         revealed[pieceIndex] = true;
 
-        // Make outline and counter visible the first time
+        // Show outline and counter the first time
         ShowOutlineAndCounter();
 
         // Count collected
@@ -107,33 +144,35 @@ public class FragmentProgressUI : MonoBehaviour
 
         UpdateCounter(collectedCount, total);
 
-        // Set to full alpha immediately — the panel's own fade handles the reveal
-        // No point running a fade coroutine on a panel that isn't visible yet
-        Image img = fragmentImages[pieceIndex];
-        SetAlpha(img, 1f);
+        // Set to full alpha immediately — the panel's own fade handles the visual reveal
+        SetAlpha(fragmentImages[pieceIndex], 1f);
     }
 
     /// <summary>
     /// Sync the UI with all currently collected pieces.
-    /// Used when the panel becomes visible after being hidden (catch-up).
+    /// Used as a catch-up when the panel becomes visible after being hidden.
     /// </summary>
     public void SyncProgress(System.Collections.Generic.List<int> collectedIndices, int total)
     {
+        EnsureInitialized();
+
         totalPieces = total;
 
         if (collectedIndices == null || collectedIndices.Count == 0) return;
 
-        // Show outline and counter now that something has been collected
+        // Show outline and counter
         ShowOutlineAndCounter();
+
+        // Safety net for array size mismatch
+        if (revealed == null || (fragmentImages != null && revealed.Length != fragmentImages.Length))
+            revealed = new bool[fragmentImages != null ? fragmentImages.Length : 5];
 
         foreach (int idx in collectedIndices)
         {
-            if (idx < 0 || idx >= fragmentImages.Length) continue;
+            if (fragmentImages == null || idx < 0 || idx >= fragmentImages.Length) continue;
             if (revealed[idx]) continue;
 
             revealed[idx] = true;
-
-            // Set immediately — no fade needed during sync
             SetAlpha(fragmentImages[idx], 1f);
         }
 
@@ -145,24 +184,9 @@ public class FragmentProgressUI : MonoBehaviour
     /// </summary>
     public void ResetAll()
     {
+        isInitialized = false;
         hasShownOutline = false;
-
-        if (revealed != null)
-            for (int i = 0; i < revealed.Length; i++)
-                revealed[i] = false;
-
-        SetAlpha(outlineImage, 0f);
-
-        if (fragmentImages != null)
-            foreach (Image img in fragmentImages)
-                SetAlpha(img, 0f);
-
-        if (counterText != null)
-        {
-            Color c = counterText.color;
-            c.a = 0f;
-            counterText.color = c;
-        }
+        EnsureInitialized();
     }
 
     // -----------------------------------------------------------------------
@@ -170,8 +194,8 @@ public class FragmentProgressUI : MonoBehaviour
     // -----------------------------------------------------------------------
 
     /// <summary>
-    /// Makes the outline and counter visible the first time a fragment is collected.
-    /// Only runs once — subsequent calls do nothing.
+    /// Makes outline and counter visible the first time a fragment is collected.
+    /// Only runs once.
     /// </summary>
     private void ShowOutlineAndCounter()
     {
@@ -197,7 +221,7 @@ public class FragmentProgressUI : MonoBehaviour
             : $"{collected}/{total}";
     }
 
-    /// <summary>Set an Image's alpha directly.</summary>
+    /// <summary>Safely set an Image's alpha.</summary>
     private void SetAlpha(Image img, float alpha)
     {
         if (img == null) return;

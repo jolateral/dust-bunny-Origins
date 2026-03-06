@@ -1,5 +1,4 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -10,9 +9,9 @@ using UnityEngine.InputSystem;
 /// Manages the fragment progress panel in the top-right corner.
 ///
 /// BEHAVIOUR:
-/// - Starts completely hidden (alpha 0, disabled)
-/// - Fades IN after the player dismisses the paper UI
-/// - Fades OUT instantly when the paper UI opens
+/// - Starts completely hidden (panel GameObject disabled, alpha 0)
+/// - Fades IN after the player dismisses the paper UI (ShowAfterPaper)
+/// - Hides INSTANTLY when the paper UI opens (HideForPaper)
 /// - Auto-fades out after all pieces are collected
 /// </summary>
 public class ObjectiveUI : MonoBehaviour
@@ -28,13 +27,13 @@ public class ObjectiveUI : MonoBehaviour
     // -----------------------------------------------------------------------
 
     [Header("Panel References")]
-    [Tooltip("The CanvasGroup on the Panel — used for fading in and out.")]
-    public CanvasGroup panelCanvasGroup;
-
-    [Tooltip("The RectTransform of the Panel (still needed to find the GameObject).")]
+    [Tooltip("The RectTransform of the Panel child.")]
     public RectTransform panel;
 
-    [Tooltip("The FragmentProgressUI component on the Panel child.")]
+    [Tooltip("The CanvasGroup on the Panel — used for fading. Add a CanvasGroup component to Panel if missing.")]
+    public CanvasGroup panelCanvasGroup;
+
+    [Tooltip("The FragmentProgressUI component on the Panel.")]
     public FragmentProgressUI fragmentProgressUI;
 
     [Header("Fade Settings")]
@@ -62,10 +61,10 @@ public class ObjectiveUI : MonoBehaviour
     {
         Instance = this;
 
+        // Auto-grab CanvasGroup from Panel if not assigned
         if (panelCanvasGroup == null && panel != null)
         {
-            // Auto-add a CanvasGroup if one wasn't assigned
-            panelCanvasGroup = panel.gameObject.GetComponent<CanvasGroup>();
+            panelCanvasGroup = panel.GetComponent<CanvasGroup>();
             if (panelCanvasGroup == null)
                 panelCanvasGroup = panel.gameObject.AddComponent<CanvasGroup>();
         }
@@ -117,17 +116,22 @@ public class ObjectiveUI : MonoBehaviour
         else FadeIn();
     }
 
+    /// <summary>Fade the panel in. Only works if at least one fragment has been collected.</summary>
     public void FadeIn()
     {
         if (!hasCollectedAny) return;
 
-        panel.gameObject.SetActive(true);
+        // Enable the GameObject BEFORE fading so the CanvasGroup is active
+        if (panel != null)
+            panel.gameObject.SetActive(true);
+
         isVisible = true;
 
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);
         fadeRoutine = StartCoroutine(FadeTo(1f));
     }
 
+    /// <summary>Fade the panel out.</summary>
     public void FadeOut()
     {
         isVisible = false;
@@ -138,7 +142,7 @@ public class ObjectiveUI : MonoBehaviour
 
     /// <summary>
     /// Called by PaperUIManager the instant paper opens.
-    /// Hides the panel immediately with no animation.
+    /// Hides the panel immediately with no animation so it never overlaps the paper view.
     /// </summary>
     public void HideForPaper()
     {
@@ -163,7 +167,7 @@ public class ObjectiveUI : MonoBehaviour
 
     /// <summary>
     /// Called by PaperUIManager after paper fully closes.
-    /// Fades the panel back in.
+    /// Fades the panel back in so the player can see their progress.
     /// </summary>
     public void ShowAfterPaper()
     {
@@ -180,8 +184,7 @@ public class ObjectiveUI : MonoBehaviour
 
     /// <summary>
     /// Called when a fragment is collected.
-    /// Syncs all fragment image data silently.
-    /// Panel only appears after ShowAfterPaper() is called.
+    /// Syncs all fragment image data silently — panel stays hidden until ShowAfterPaper().
     /// </summary>
     public void SetObjective()
     {
@@ -209,14 +212,14 @@ public class ObjectiveUI : MonoBehaviour
 
     /// <summary>
     /// Reveal a single fragment image by index.
-    /// Called from PaperItem immediately when a piece is absorbed.
-    /// Panel is still hidden — this just updates the image data so it's
-    /// ready to show when ShowAfterPaper() is called.
+    /// Updates data immediately — panel stays hidden until ShowAfterPaper().
     /// </summary>
     public void RevealFragment(int pieceIndex, int total)
     {
         hasCollectedAny = true;
 
+        // fragmentProgressUI's panel is disabled, but EnsureInitialized() inside
+        // RevealFragment handles that safely without needing the GameObject active.
         if (fragmentProgressUI != null)
             fragmentProgressUI.RevealFragment(pieceIndex, total);
     }
@@ -241,12 +244,12 @@ public class ObjectiveUI : MonoBehaviour
 
         panelCanvasGroup.alpha = targetAlpha;
 
-        // If fully faded out, disable the GameObject
         if (targetAlpha <= 0f)
         {
             panelCanvasGroup.blocksRaycasts = false;
             panelCanvasGroup.interactable = false;
-            panel.gameObject.SetActive(false);
+            if (panel != null)
+                panel.gameObject.SetActive(false);
         }
         else
         {
