@@ -6,6 +6,7 @@ using UnityEngine;
 /// Attach this to a Diary GameObject in the world.
 /// When the player rolls into the diary while carrying the matching key,
 /// the diary "unlocks" and DiaryUIManager shows the full-screen diary image.
+/// The key disappears from the player when the diary is unlocked.
 /// 
 /// If the player rolls into the diary WITHOUT the key, an optional hint message
 /// is shown (via MemoryUIManager or a simple Debug.Log, your choice).
@@ -99,7 +100,7 @@ public class DiaryItem : MonoBehaviour
         DustBunnyController player = collision.gameObject.GetComponent<DustBunnyController>();
         if (player == null) return;
 
-        // If already unlocked, do nothing (or optionally re-show the diary)
+        // If already unlocked, do nothing
         if (hasBeenUnlocked) return;
 
         // Check whether the player is carrying the matching key
@@ -120,7 +121,7 @@ public class DiaryItem : MonoBehaviour
     // -----------------------------------------------------------------------
 
     /// <summary>
-    /// The player has the key — unlock the diary and show the UI.
+    /// The player has the key — hide the key, unlock the diary, and show the UI.
     /// </summary>
     private void UnlockDiary()
     {
@@ -131,6 +132,33 @@ public class DiaryItem : MonoBehaviour
         // Play unlock sound
         if (unlockSfx != null)
             unlockSfx.Post(gameObject);
+
+        // --- Hide the floating key ---
+        // The key is parented to the player after absorption, but
+        // FindObjectsByType still finds it regardless of where it is in the hierarchy.
+        KeyItem[] allKeys = FindObjectsByType<KeyItem>(FindObjectsSortMode.None);
+        foreach (KeyItem k in allKeys)
+        {
+            // Only affect the key that matches this diary's keyID
+            if (k.keyID != keyID) continue;
+
+            // Stop the floating/spinning behaviour immediately
+            FloatingKeyBehaviour floater = k.GetComponent<FloatingKeyBehaviour>();
+            if (floater != null)
+                floater.enabled = false;
+
+            // Hide all renderers on the key and any child meshes instantly
+            // so it visually disappears the moment the diary is touched
+            Renderer[] renderers = k.GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in renderers)
+                r.enabled = false;
+
+            // Fully destroy the key GameObject after a short delay
+            // so any audio events on it have time to finish playing
+            Destroy(k.gameObject, 0.5f);
+
+            break; // Only one key per diary
+        }
 
         // Show the diary UI (full-screen image, just like the paper system)
         if (DiaryUIManager.Instance != null)
@@ -172,10 +200,10 @@ public class DiaryItem : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        // Brown/red cube to mark the diary in the editor
+        // Brown cube when locked, green when unlocked (runtime only)
         Gizmos.color = hasBeenUnlocked
-            ? new Color(0f, 1f, 0f, 0.4f)    // Green when unlocked (runtime only)
-            : new Color(0.6f, 0.3f, 0.1f, 0.6f); // Brown when locked
+            ? new Color(0f, 1f, 0f, 0.4f)
+            : new Color(0.6f, 0.3f, 0.1f, 0.6f);
 
         Gizmos.DrawCube(transform.position, transform.localScale);
 
