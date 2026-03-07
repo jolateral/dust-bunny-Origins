@@ -16,7 +16,10 @@ namespace AK
         static const AkUniqueID EXIT_UI = 1041028614U;
         static const AkUniqueID PLAY_AMB_ROOM2_LP = 2291298689U;
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
-        static const AkUniqueID PLAY_MUS_4_4_100BPM_THEME_NL = 513704729U;
+        static const AkUniqueID PLAY_AMB_ROOMHIGH_LP = 122448171U;
+        static const AkUniqueID PLAY_AMB_ROOMLOW_LP = 3704798373U;
+        static const AkUniqueID PLAY_AMB_ROOMMID_LP = 3437152325U;
+        static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
         static const AkUniqueID PLAY_MUS_ZONES = 3793537147U;
         static const AkUniqueID PLAY_SFX_BRIDGE_CREAK_NL = 3975145325U;
         static const AkUniqueID PLAY_SFX_BRIDGE_LAND_NL = 92681520U;
@@ -27,6 +30,7 @@ namespace AK
         static const AkUniqueID PLAY_SFX_BUNNYMOVE = 1920786589U;
         static const AkUniqueID PLAY_SFX_BUNNYROLL_NL = 4212669292U;
         static const AkUniqueID PLAY_SFX_CAR_MOVE_NL = 4207159517U;
+        static const AkUniqueID PLAY_SFX_ENDSEQ = 1833036738U;
         static const AkUniqueID PLAY_SFX_FOOTSTEP_HEAVY_NL = 1631605133U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_001 = 1142362393U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_002 = 1142362394U;
@@ -35,7 +39,7 @@ namespace AK
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_005 = 1142362397U;
         static const AkUniqueID PLAY_SFX_UI_SELECT_NL = 4289076888U;
         static const AkUniqueID PLAY_SFX_WOODBLOCK_IMPACT_WOOD = 841695155U;
-        static const AkUniqueID STOP_MUS_4_4_100BPM_THEME_NL = 4187300339U;
+        static const AkUniqueID STOP_MUS_STARTMENU = 200855961U;
     } // namespace EVENTS
 
     namespace STATES

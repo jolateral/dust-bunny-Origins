@@ -3087,7 +3087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &223783456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4934,7 +4934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &306068092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14339,7 +14339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &533839616
 Transform:
   m_ObjectHideFlags: 0
@@ -14372,8 +14372,8 @@ MonoBehaviour:
   initialState: 0
   closePortalTriggerList: 
   rooms:
-  - {fileID: 1682379082}
-  - {fileID: 306068092}
+  - {fileID: 0}
+  - {fileID: 0}
   isStatic: 0
 --- !u!65 &533839618
 BoxCollider:
@@ -17736,7 +17736,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: c25b38c3a0c51bf4093c6f702427f7c9, type: 2}
-  roomToneAuxSend: 0
+  roomToneAuxSend: 1
   isStatic: 0
 --- !u!114 &747882391
 MonoBehaviour:
@@ -18830,7 +18830,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8171223912212083703, guid: 8ccc0544d879c0f4fb8803ec989aa949, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1301387435}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2066534636579091580, guid: 8ccc0544d879c0f4fb8803ec989aa949, type: 3}
       insertIndex: -1
@@ -18861,6 +18864,11 @@ MonoBehaviour:
 --- !u!4 &835776613 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4615534053790241104, guid: 8ccc0544d879c0f4fb8803ec989aa949, type: 3}
+  m_PrefabInstance: {fileID: 835776610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &835776614 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8171223912212083703, guid: 8ccc0544d879c0f4fb8803ec989aa949, type: 3}
   m_PrefabInstance: {fileID: 835776610}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &837757574 stripped
@@ -22181,7 +22189,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: c25b38c3a0c51bf4093c6f702427f7c9, type: 2}
-  roomToneAuxSend: 0
+  roomToneAuxSend: 1
   isStatic: 0
 --- !u!114 &1042788588
 MonoBehaviour:
@@ -23059,8 +23067,8 @@ MonoBehaviour:
   initialState: 0
   closePortalTriggerList: 
   rooms:
-  - {fileID: 1682379082}
-  - {fileID: 1682379082}
+  - {fileID: 747882390}
+  - {fileID: 1042788587}
   isStatic: 0
 --- !u!65 &1090622522
 BoxCollider:
@@ -24152,7 +24160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1136666902
 Transform:
   m_ObjectHideFlags: 0
@@ -24186,7 +24194,7 @@ MonoBehaviour:
   closePortalTriggerList: 
   rooms:
   - {fileID: 223783456}
-  - {fileID: 1682379082}
+  - {fileID: 1042788587}
   isStatic: 0
 --- !u!65 &1136666904
 BoxCollider:
@@ -24859,7 +24867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1217014389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26420,6 +26428,77 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 374822478}
   m_SourcePrefab: {fileID: 100100000, guid: 936709706adf8b848935b7b0e8f93385, type: 3}
+--- !u!1 &1301387434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1301387435}
+  - component: {fileID: 1301387436}
+  - component: {fileID: 1301387437}
+  m_Layer: 7
+  m_Name: EndSeqTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1301387435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301387434}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 835776614}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1301387436
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301387434}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.245, y: 0.245, z: 0.245}
+  m_Center: {x: 0, y: 0.12, z: 0}
+--- !u!114 &1301387437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301387434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d19a4d83dad704bb89b4566a389062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndSeqTrigger
+  playerTag: Player
+  endingScene: EndSeq
+  delayBeforeFade: 5
+  fadeDuration: 3
+  triggered: 0
 --- !u!4 &1312063141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6543583056927506121, guid: ebf3c4a4553d43d478f196673189ffd4, type: 3}
@@ -27405,7 +27484,7 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: c25b38c3a0c51bf4093c6f702427f7c9, type: 2}
-  roomToneAuxSend: 0
+  roomToneAuxSend: 1
   isStatic: 0
 --- !u!114 &1381379375
 MonoBehaviour:
@@ -27492,7 +27571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1388062900
 Transform:
   m_ObjectHideFlags: 0
@@ -27525,8 +27604,8 @@ MonoBehaviour:
   initialState: 0
   closePortalTriggerList: 
   rooms:
-  - {fileID: 1217014389}
-  - {fileID: 1682379082}
+  - {fileID: 0}
+  - {fileID: 747882390}
   isStatic: 0
 --- !u!65 &1388062902
 BoxCollider:
@@ -32549,7 +32628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1682379082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37034,8 +37113,8 @@ MonoBehaviour:
   initialState: 0
   closePortalTriggerList: 
   rooms:
-  - {fileID: 1682379082}
-  - {fileID: 1682379082}
+  - {fileID: 1381379374}
+  - {fileID: 747882390}
   isStatic: 0
 --- !u!65 &1941420675
 BoxCollider:

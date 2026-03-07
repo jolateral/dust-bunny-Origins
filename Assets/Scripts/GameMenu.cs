@@ -24,7 +24,7 @@ public class GameMenu : MonoBehaviour
     {
         uiSelect.Post(gameObject);
         stopMusic.Post(gameObject);
-        SceneManager.LoadScene("Level");
+        FadeSequenceManager.Instance.FadeToScene("Level", 3f);
     }
 
     public void QuitGame()
