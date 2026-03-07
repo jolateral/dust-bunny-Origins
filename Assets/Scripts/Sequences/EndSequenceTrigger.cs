@@ -1,16 +1,34 @@
 using UnityEngine;
+using System.Collections;
 
 public class EndSequenceTrigger : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Scene")]
+    public string endingScene = "EndSeq";
+
+    [Header("Timing")]
+    public float delayBeforeFade = 2f;
+    public float fadeDuration = 2f;
+
+    private bool triggered = false;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (triggered) return;
+
+        if (other.CompareTag("Player"))
+        {
+            triggered = true;
+            StartCoroutine(EndSequence());
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator EndSequence()
     {
-        
+        // Wait before fading
+        yield return new WaitForSeconds(delayBeforeFade);
+
+        // Fade to ending scene
+        FadeSequenceManager.Instance.FadeToScene(endingScene, fadeDuration);
     }
 }
