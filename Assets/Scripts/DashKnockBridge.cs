@@ -11,7 +11,8 @@ public class DashKnockBridge : MonoBehaviour
 
     [Header("Behavior")]
     [SerializeField] private bool oneTime = true;
-    [SerializeField] private float unlockDelay = 0f;                  // small delay can help stability (0–0.05)
+    [SerializeField] private float unlockDelay = 0f;
+    [SerializeField] private float extraFallAcceleration = 30f;
 
     [Header("Audio")]
     public AK.Wwise.Event bridgeCreakSfx;
@@ -50,7 +51,6 @@ public class DashKnockBridge : MonoBehaviour
 
         bridgeCreakSfx.Post(gameObject);
 
-        // Ttiny delay so we unlock *after* the impact frame
         if (unlockDelay > 0f)
             yield return new WaitForSeconds(unlockDelay);
         else
@@ -60,8 +60,16 @@ public class DashKnockBridge : MonoBehaviour
         rb.isKinematic = false;
         rb.useGravity = true;
 
-        // Remove any leftover impulse (just in case)
+        // Remove any leftover impulse 
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!rb.isKinematic && triggered)
+        {
+            rb.AddForce(Vector3.down * extraFallAcceleration, ForceMode.Acceleration);
+        }
     }
 }
