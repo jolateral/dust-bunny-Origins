@@ -26491,14 +26491,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1301387434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00d19a4d83dad704bb89b4566a389062, type: 3}
+  m_Script: {fileID: 11500000, guid: 88ecf8fce8554f346907d0737f51f9c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndSeqTrigger
-  playerTag: Player
   endingScene: EndSeq
-  delayBeforeFade: 5
-  fadeDuration: 3
-  triggered: 0
+  delayBeforeFade: 2
+  fadeDuration: 2
 --- !u!4 &1312063141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6543583056927506121, guid: ebf3c4a4553d43d478f196673189ffd4, type: 3}
@@ -37074,6 +37072,7 @@ GameObject:
   - component: {fileID: 1941420673}
   - component: {fileID: 1941420675}
   - component: {fileID: 1941420674}
+  - component: {fileID: 1941420676}
   m_Layer: 0
   m_Name: Zone1toZone2
   m_TagString: Untagged
@@ -37110,7 +37109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomPortal
   triggerList: f7e1664c
   useOtherObject: 0
-  initialState: 0
+  initialState: 1
   closePortalTriggerList: 
   rooms:
   - {fileID: 1381379374}
@@ -37126,10 +37125,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 511
+    m_Bits: 1
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -37137,6 +37136,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1941420676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941420672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7a482e861e9b241bf741345c77da50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
+  triggerList: f7f422d6
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: b61a1b8c5e3d1ef49a181bc7556a3549, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 
 --- !u!1001 &1947744671
 PrefabInstance:
   m_ObjectHideFlags: 0

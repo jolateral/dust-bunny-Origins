@@ -80,6 +80,11 @@
 										<Value>True</Value>
 									</ValueList>
 								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -105,6 +110,11 @@
 						<Sound Name="amb_roomlow_lp" ID="{CC6D7BA8-9421-4216-8A34-015D0CB211AA}" ShortID="875828625">
 							<PropertyList>
 								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-9</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -130,6 +140,11 @@
 						<Sound Name="amb_roommid_lp" ID="{7191708D-FC2F-4F7D-B9E3-2EB2028DED07}" ShortID="781617846">
 							<PropertyList>
 								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -205,13 +220,6 @@
 							</ReferenceList>
 							<ChildrenList>
 								<MusicPlaylistContainer Name="mus_zone2" ID="{050815E7-33DF-41C9-8C2D-3088DF7E8B7B}" ShortID="241321071">
-									<PropertyList>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-3</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -259,7 +267,7 @@
 														</MusicPlaylistItem>
 														<MusicPlaylistItem Name="" ID="{EEB5A526-DA39-4D6D-A1BD-FAB63CD33349}" ShortID="696104684">
 															<PropertyList>
-																<Property Name="LoopCount" Type="int16" Value="3"/>
+																<Property Name="LoopCount" Type="int16" Value="2"/>
 																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
 																<Property Name="Weight" Type="Real64">
 																	<ValueList>
@@ -1341,13 +1349,6 @@
 									</ChildrenList>
 								</MusicPlaylistContainer>
 								<MusicPlaylistContainer Name="mus_zone1" ID="{5D3270E5-0974-45E0-99C6-5D8909340175}" ShortID="950584491">
-									<PropertyList>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-3</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -1455,11 +1456,6 @@
 														<MusicPlaylistItem Name="" ID="{91796E65-9DD9-46C9-A942-C089CB683911}" ShortID="410173841">
 															<PropertyList>
 																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
-																<Property Name="Weight" Type="Real64">
-																	<ValueList>
-																		<Value>100</Value>
-																	</ValueList>
-																</Property>
 															</PropertyList>
 															<ReferenceList>
 																<Reference Name="Segment">
@@ -3947,6 +3943,11 @@
 								</ObjectList>
 								<ObjectList Name="Entries">
 									<MultiSwitchEntry Name="" ID="{C261E737-46C3-411A-BA73-4E622B9E3F3F}">
+										<ReferenceList>
+											<Reference Name="AudioNode">
+												<ObjectRef Name="mus_zone1" ID="{5D3270E5-0974-45E0-99C6-5D8909340175}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+											</Reference>
+										</ReferenceList>
 										<ObjectLists>
 											<ObjectList Name="EntryPath">
 												<PluginInnerObject Name="" ID="{41C1BE3E-44A5-4C16-BAAA-95C45FE58EAE}" PluginName="EntryPathSlot" CompanyID="0" PluginID="88">
