@@ -96,18 +96,16 @@ public class DiaryItem : MonoBehaviour
     /// </summary>
     void OnCollisionEnter(Collision collision)
     {
-        // Only react to the player
         DustBunnyController player = collision.gameObject.GetComponent<DustBunnyController>();
         if (player == null) return;
 
-        // If already unlocked, do nothing
         if (hasBeenUnlocked) return;
 
-        // Check whether the player is carrying the matching key
         bool hasKey = KeyItem.CollectedKeys.ContainsKey(keyID) && KeyItem.CollectedKeys[keyID];
 
         if (hasKey)
         {
+            ForcePlayerIdle(player);
             UnlockDiary();
         }
         else
@@ -213,5 +211,24 @@ public class DiaryItem : MonoBehaviour
             $"📖 Diary\nKey: {keyID}"
         );
 #endif
+    }
+    private void ForcePlayerIdle(DustBunnyController player)
+    {
+        if (player == null) return;
+
+        Animator anim = player.GetComponent<Animator>();
+        if (anim != null)
+        {
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isRolling", false);
+            anim.SetBool("isGliding", false);
+        }
+
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 }

@@ -16,6 +16,12 @@ public class DustBunnyController : MonoBehaviour
     public float heldJumpGravityMultiplier = 0.25f;
     public float lowJumpMultiplier = 2.5f;
 
+    [Header("--- Jump Assistance ---")]
+    public float coyoteTime = 0.2f;
+    private float lastGroundedTime = -999f;
+    public float jumpCooldown = 0.3f;
+    private float lastJumpTime = -999f;
+
     [Header("--- Dash / Roll Settings ---")]
     public float dashForce = 2.5f;
     public float dashDuration = 0.5f;
@@ -127,6 +133,9 @@ public class DustBunnyController : MonoBehaviour
     {
         distToGround = playerCollider.bounds.extents.y;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + groundCheckOffset);
+
+        if (isGrounded)
+            lastGroundedTime = Time.time;
 
         if (!isGrounded) AkUnitySoundEngine.SetRTPCValue("grounded", 1, gameObject);
         else AkUnitySoundEngine.SetRTPCValue("grounded", 0, gameObject);
@@ -256,22 +265,36 @@ public class DustBunnyController : MonoBehaviour
 
         if (!context.started) return;
 
-        // Ignore jump while or shortly after UI overlays that use the same button are active.
         if (Time.time < jumpSuppressedUntil) return;
 
-        // Also hard-block jump if blocking UIs are currently open.
         if (PaperUIManager.Instance != null && PaperUIManager.Instance.IsPaperShowing()) return;
         if (DiaryUIManager.Instance != null && DiaryUIManager.Instance.IsDiaryShowing()) return;
 
         if (isRolling) return;
 
-        float checkDist = playerCollider != null ? playerCollider.bounds.extents.y + groundCheckOffset : distToGround + groundCheckOffset;
+        // Prevent rapid double jumps
+        if (Time.time < lastJumpTime + jumpCooldown) return;
+
+        float checkDist = playerCollider != null
+            ? playerCollider.bounds.extents.y + groundCheckOffset
+            : distToGround + groundCheckOffset;
+
+        bool canCoyoteJump = Time.time <= lastGroundedTime + coyoteTime;
 
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, checkDist))
         {
             BouncyObject bouncy = hit.collider.GetComponent<BouncyObject>();
             if (bouncy != null && bouncy.TryBounce(rb)) return;
+
             PerformJump();
+            lastJumpTime = Time.time;
+            lastGroundedTime = -999f;
+        }
+        else if (canCoyoteJump)
+        {
+            PerformJump();
+            lastJumpTime = Time.time;
+            lastGroundedTime = -999f;
         }
     }
 

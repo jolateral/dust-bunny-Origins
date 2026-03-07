@@ -91,13 +91,15 @@ public class PaperItem : MonoBehaviour
             }
         }
     }
-    
+
     /// <summary>
     /// Called when player absorbs this object
     /// This is triggered by the AbsorbMechanic script
     /// </summary>
     public void OnAbsorbed()
     {
+        ForcePlayerIdle();
+
         // Play Memory Object SFX
         memoryObjectSfx.Post(gameObject);
 
@@ -110,7 +112,7 @@ public class PaperItem : MonoBehaviour
             HandleSinglePieceAbsorb();
         }
     }
-    
+
     /// <summary>
     /// Handle absorption of a multi-piece paper fragment
     /// </summary>
@@ -249,5 +251,26 @@ public class PaperItem : MonoBehaviour
             );
         }
         #endif
+    }
+
+    private void ForcePlayerIdle()
+    {
+        DustBunnyController player = FindFirstObjectByType<DustBunnyController>();
+        if (player == null) return;
+
+        Animator anim = player.GetComponent<Animator>();
+        if (anim != null)
+        {
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isRolling", false);
+            anim.SetBool("isGliding", false);
+        }
+
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 }
