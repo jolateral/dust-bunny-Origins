@@ -21,7 +21,7 @@ public class CameraScaleDistance : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player").transform;
 
         baseScale = player.localScale.x;
-        orbital.HorizontalAxis.Value = 90f;
+        orbital.HorizontalAxis.Value = -90f;
     }
 
     void LateUpdate()

@@ -44,6 +44,9 @@ public class ObjectiveUI : MonoBehaviour
     [Tooltip("Input action that toggles the panel. Optional.")]
     public InputActionReference toggleObjectiveAction;
 
+    [Header("Objective Text")]
+    public GameObject objectiveText;
+
     // -----------------------------------------------------------------------
     // Private State
     // -----------------------------------------------------------------------
@@ -194,7 +197,14 @@ public class ObjectiveUI : MonoBehaviour
 
         if (paperData == null) return;
 
-        hasCollectedAny = true;
+        // FIRST fragment collected
+        if (!hasCollectedAny)
+        {
+            hasCollectedAny = true;
+
+            if (objectiveText != null)
+                objectiveText.SetActive(false);
+        }
 
         int collected = paperData.GetCollectedCount();
         int total = paperData.totalPieces;
@@ -202,7 +212,6 @@ public class ObjectiveUI : MonoBehaviour
         if (fragmentProgressUI != null)
             fragmentProgressUI.SyncProgress(paperData.GetCollectedPieces(), total);
 
-        // Auto-hide after a delay once all pieces are collected
         if (collected >= total)
         {
             if (hideRoutine != null) StopCoroutine(hideRoutine);
@@ -216,10 +225,14 @@ public class ObjectiveUI : MonoBehaviour
     /// </summary>
     public void RevealFragment(int pieceIndex, int total)
     {
-        hasCollectedAny = true;
+        if (!hasCollectedAny)
+        {
+            hasCollectedAny = true;
 
-        // fragmentProgressUI's panel is disabled, but EnsureInitialized() inside
-        // RevealFragment handles that safely without needing the GameObject active.
+            if (objectiveText != null)
+                objectiveText.SetActive(false);
+        }
+
         if (fragmentProgressUI != null)
             fragmentProgressUI.RevealFragment(pieceIndex, total);
     }
