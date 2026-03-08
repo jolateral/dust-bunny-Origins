@@ -3,7 +3,7 @@ using TMPro;
 using System.Collections;
 
 /// <summary>
-/// AbsorbMechanic.cs (UPDATED — now supports KeyItem)
+/// AbsorbMechanic.cs (UPDATED — now supports KeyItem & Orbital Floating)
 /// 
 /// This handles all absorption logic when the player touches a "StickyObject" (absorb on contact).
 /// 
@@ -27,12 +27,15 @@ public class AbsorbMechanic : MonoBehaviour
     [Tooltip("Player must be this many times bigger than the target to absorb it.")]
     public float sizeTolerance = 1.1f;
 
-    [Header("Visual Settings")]
-    [Tooltip("How much the item shrinks after being absorbed (0.3 = 30% of original size).")]
-    public float absorbedItemScaleMultiplier = 0.3f;
+    [Header("Visual Settings (Orbital)")]
+    [Tooltip("How much the item shrinks after being absorbed (e.g., 0.05 makes it a tiny floating speck).")]
+    public float absorbedItemScaleMultiplier = 0.05f;
 
-    [Tooltip("How far from the center the item sits on the bunny surface.")]
-    public float surfaceStickRadius = 0.5f;
+    [Tooltip("How far from the center the items orbit.")]
+    public float surfaceStickRadius = 1.0f;
+
+    [Tooltip("How fast the tiny items orbit around the bunny.")]
+    public float orbitSpeed = 45f;
 
     [Header("Absorb Constraint")]
     [Tooltip("Message shown when the player is too small to absorb something.")]
@@ -189,13 +192,11 @@ public class AbsorbMechanic : MonoBehaviour
 
         // ===================================================================
         // 5. KEY ITEM — mark the key as collected
-        //    The key sticks to the bunny visually (same as any other item),
-        //    but OnAbsorbed() also sets the flag that DiaryItem checks.
         // ===================================================================
         KeyItem key = item.GetComponent<KeyItem>();
         if (key != null)
         {
-            key.OnAbsorbed();
+            key.OnAbsorbed(); // FIXED ERROR CS1061
 
             // Handle physics and parenting first
             Destroy(item.GetComponent<Rigidbody>());
@@ -215,8 +216,7 @@ public class AbsorbMechanic : MonoBehaviour
         }
 
         // ===================================================================
-        // 6. VISUAL ABSORPTION — attach item to bunny, shrink, randomize position
-        //    This runs for ALL successfully absorbed items.
+        // 6. VISUAL ABSORPTION — Extreme shrink + Orbital Floating
         // ===================================================================
 
         // Remove physics so the item doesn't fight the bunny's movement
@@ -226,21 +226,19 @@ public class AbsorbMechanic : MonoBehaviour
         // Parent the item to the player so it travels with the bunny
         item.transform.SetParent(this.transform);
 
-        // Remember the item's original scale before we shrink it for the bunny surface,
-        // so we can restore that scale if it later spills out.
+        // Remember the item's original scale before we shrink it
         Vector3 originalScale = item.transform.localScale;
 
-        // Shrink the item so it looks proportional stuck on the bunny surface
+        // Shrink the item drastically so it looks like a tiny floating particle
         item.transform.localScale *= absorbedItemScaleMultiplier;
 
-        // Place it on a random spot on the bunny's surface (Katamari clump effect)
-        item.transform.localPosition = Random.onUnitSphere * surfaceStickRadius;
+        // Add the Orbit script so it continuously floats around the bunny
+        OrbitBehaviour orbit = item.AddComponent<OrbitBehaviour>();
+        orbit.target = this.transform;
+        orbit.radius = surfaceStickRadius;
+        orbit.speed = orbitSpeed;
 
-        // Random rotation so items look messily stuck together
-        item.transform.localRotation = Random.rotation;
-
-        // Track generic items so they can be spilled later on hit,
-        // and remember their original (pre-absorption) scale.
+        // Track generic items so they can be spilled later on hit
         bool canDropLater = (paper == null && memory == null && key == null);
         if (canDropLater && !droppableItems.Contains(item))
         {
@@ -267,10 +265,6 @@ public class AbsorbMechanic : MonoBehaviour
     // UI Helpers
     // -----------------------------------------------------------------------
 
-    /// <summary>
-    /// Shows the "too small" hint message via MemoryUIManager.
-    /// Respects a cooldown so the message doesn't spam every frame.
-    /// </summary>
     void ShowTooBigUI()
     {
         if (Time.time < nextTooBigMessageTime) return;
@@ -284,11 +278,6 @@ public class AbsorbMechanic : MonoBehaviour
     // Spill Logic
     // -----------------------------------------------------------------------
 
-    /// <summary>
-    /// Causes some previously absorbed generic items to fall off the bunny,
-    /// reducing its size. Dropped items become absorbable again.
-    /// </summary>
-    /// <param name="requestedCount">Maximum number of items to spill.</param>
     public void SpillAbsorbables(int requestedCount)
     {
         if (requestedCount <= 0 || droppableItems.Count == 0)
@@ -305,7 +294,6 @@ public class AbsorbMechanic : MonoBehaviour
             if (droppableItems.Count == 0)
                 break;
 
-            // Choose a random droppable item so the pile thins out organically.
             int idx = Random.Range(0, droppableItems.Count);
             GameObject item = droppableItems[idx];
             droppableItems.RemoveAt(idx);
@@ -325,6 +313,10 @@ public class AbsorbMechanic : MonoBehaviour
             // Detach so it no longer follows the bunny.
             item.transform.SetParent(null);
 
+            // REMOVE ORBIT BEHAVIOUR so it stops floating when spilled
+            OrbitBehaviour orbit = item.GetComponent<OrbitBehaviour>();
+            if (orbit != null) Destroy(orbit);
+
             // Make sure it can be absorbed again.
             item.tag = "StickyObject";
 
@@ -339,15 +331,12 @@ public class AbsorbMechanic : MonoBehaviour
                 rb = item.AddComponent<Rigidbody>();
             rb.isKinematic = false;
 
-            // Briefly ignore collision with the bunny so the item doesn't get
-            // immediately re-absorbed the same frame it spills out.
             if (playerCollider != null && col != null)
             {
                 Physics.IgnoreCollision(playerCollider, col, true);
                 StartCoroutine(ReenableCollisionLater(col));
             }
 
-            // Nudge slightly away from the bunny center and toss outward/upward.
             Vector3 fromCenter = (item.transform.position - transform.position);
             fromCenter.y = 0f;
             if (fromCenter.sqrMagnitude < 0.01f)
@@ -363,15 +352,12 @@ public class AbsorbMechanic : MonoBehaviour
         if (actuallySpilled <= 0)
             return;
 
-        // Shrink the bunny based on how many items were lost,
-        // but don't go below the starting scale magnitude.
         float totalLoss = growthFactor * actuallySpilled;
         Vector3 scale = transform.localScale - Vector3.one * totalLoss;
 
         float minMagnitude = startingScaleMagnitude;
         if (scale.magnitude < minMagnitude)
         {
-            // Rescale uniformly back up to the minimum allowed magnitude.
             if (scale.magnitude > 0f)
             {
                 float factor = minMagnitude / scale.magnitude;
@@ -379,7 +365,6 @@ public class AbsorbMechanic : MonoBehaviour
             }
             else
             {
-                // Fallback to a safe non-zero scale.
                 scale = Vector3.one * (minMagnitude / Mathf.Sqrt(3f));
             }
         }
@@ -389,12 +374,55 @@ public class AbsorbMechanic : MonoBehaviour
 
     private IEnumerator ReenableCollisionLater(Collider itemCollider)
     {
-        // Small delay so the spilled item can separate from the bunny.
         yield return new WaitForSeconds(0.4f);
 
         if (playerCollider != null && itemCollider != null)
         {
             Physics.IgnoreCollision(playerCollider, itemCollider, false);
         }
+    }
+}
+
+/// <summary>
+/// A lightweight component attached at runtime to make absorbed items orbit the player.
+/// </summary>
+public class OrbitBehaviour : MonoBehaviour
+{
+    public Transform target;
+    public float radius = 1f;
+    public float speed = 45f;
+    
+    private Vector3 axis;
+    private float angle;
+    private float heightOffset;
+
+    void Start()
+    {
+        // Give each item a random starting angle and rotation axis
+        axis = Random.onUnitSphere;
+        angle = Random.Range(0f, 360f);
+
+        // Calculate the physical center of the target so they orbit the body, not the feet
+        if (target != null)
+        {
+            Collider col = target.GetComponent<Collider>();
+            if (col != null) heightOffset = col.bounds.extents.y;
+        }
+    }
+
+    void Update()
+    {
+        if (target == null) return;
+
+        angle += speed * Time.deltaTime;
+        
+        // Calculate orbital position
+        Vector3 offset = Quaternion.AngleAxis(angle, axis) * Vector3.forward * radius;
+        
+        // Follow the target and apply the orbit
+        transform.position = target.position + (Vector3.up * heightOffset) + offset;
+
+        // Make the item itself spin slightly while orbiting
+        transform.Rotate(axis, speed * 1.5f * Time.deltaTime);
     }
 }

@@ -14943,7 +14943,7 @@ GameObject:
   - component: {fileID: 499579101}
   m_Layer: 0
   m_Name: 'Main Camera '
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26022,7 +26022,7 @@ GameObject:
   - component: {fileID: 1076957472}
   m_Layer: 0
   m_Name: ThirdPersonCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50892,11 +50892,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 255829953252060862, guid: b489336329e89fb418d2ed4646a1ca20, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 737983536119159965, guid: b489336329e89fb418d2ed4646a1ca20, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 2332833633916285803, guid: b489336329e89fb418d2ed4646a1ca20, type: 3}
       propertyPath: m_LocalPosition.x
@@ -50944,23 +50944,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3498168255989572890, guid: b489336329e89fb418d2ed4646a1ca20, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 4641407466917099818, guid: b489336329e89fb418d2ed4646a1ca20, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 4794504646939499502, guid: b489336329e89fb418d2ed4646a1ca20, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 7482366487180188839, guid: b489336329e89fb418d2ed4646a1ca20, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 8661183404321574504, guid: b489336329e89fb418d2ed4646a1ca20, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51969,6 +51969,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4214717061640914858, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
+      propertyPath: hitShakeDuration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214717061640914858, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
+      propertyPath: carKnockbackForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214717061640914858, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
       propertyPath: groundCheckOffset
       value: 0.1
       objectReference: {fileID: 0}
@@ -51983,6 +51991,10 @@ PrefabInstance:
     - target: {fileID: 4214717061640914858, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
       propertyPath: glideHorizontalSpeed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214717061640914858, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
+      propertyPath: hitShakeBaseMagnitude
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4214717061640914858, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
       propertyPath: heldJumpGravityMultiplier

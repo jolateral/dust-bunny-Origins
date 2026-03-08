@@ -48,6 +48,7 @@ public class DustBunnyController : MonoBehaviour
     public bool isRolling = false;
     public bool isGrounded;
     public bool isGliding;
+    private bool isHit = false; // Flag to prevent movement during knockback
 
     private Rigidbody rb;
     private Collider playerCollider;
@@ -79,6 +80,13 @@ public class DustBunnyController : MonoBehaviour
     public float carKnockbackForce = 6f;
     public float carVerticalBoost = 3f;
     public int carMaxItemsLost = 3;
+    public float hitStunDuration = 0.4f; // Duration player loses control after being hit
+    
+    // NEW: Camera shake settings upon getting hit
+    [Tooltip("Duration of the camera shake when hit by a car.")]
+    public float hitShakeDuration = 0.3f; 
+    [Tooltip("Base magnitude of the camera shake. Scales with the bunny's size.")]
+    public float hitShakeBaseMagnitude = 1.5f;
 
     public float CurrentScale => (transform.localScale.x + transform.localScale.y + transform.localScale.z) / 3f;
 
@@ -86,14 +94,8 @@ public class DustBunnyController : MonoBehaviour
     {
         get
         {
-            // Ratio of current average scale to starting average scale.
             float scaleRatio = CurrentScale / baseScale;
-
-            // Don't let the bunny get *too* weak when very small.
             scaleRatio = Mathf.Max(0.5f, scaleRatio);
-
-            // Sub-linear growth so movement/jump clearly increase with size
-            // without becoming unmanageable when huge.
             return Mathf.Pow(scaleRatio, 0.75f);
         }
     }
@@ -102,8 +104,6 @@ public class DustBunnyController : MonoBehaviour
     {
         get
         {
-            // Match gravity scaling to movement/jump scaling so
-            // bigger bunnies feel heavier but still more powerful.
             float scaleRatio = CurrentScale / baseScale;
             scaleRatio = Mathf.Max(0.5f, scaleRatio);
             return Mathf.Pow(scaleRatio, 0.75f);
@@ -171,7 +171,6 @@ public class DustBunnyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Keep mass in sync with scale (absorption grows, gliding shrinks)
         float scaleRatio = CurrentScale / baseScale;
         scaleRatio = Mathf.Max(0.01f, scaleRatio);
         rb.mass = baseMass * scaleRatio * scaleRatio * scaleRatio;
@@ -188,7 +187,8 @@ public class DustBunnyController : MonoBehaviour
             return;
         }
 
-        if (!isRolling)
+        // If we are not being hit and not rolling, move normally
+        if (!isRolling && !isHit)
         {
             MoveCharacter();
             ApplyBetterGravity();
@@ -207,7 +207,7 @@ public class DustBunnyController : MonoBehaviour
 
     void HandleCarHit(Collider other)
     {
-        if (other == null) return;
+        if (other == null || isHit) return; // Prevent multi-hits during stun
 
         // Treat objects tagged "Car" or with a MovingCar component as dangerous cars.
         bool isCar = other.CompareTag("Car") || other.GetComponentInParent<MovingCar>() != null;
@@ -229,25 +229,58 @@ public class DustBunnyController : MonoBehaviour
 
         knockDir.Normalize();
 
+        // Start the Hit Stun routine to block movement
+        StartCoroutine(HitStunRoutine());
+
         // Apply an impulse that pushes the bunny away and pops it slightly upward.
         rb.linearVelocity = Vector3.zero;
         Vector3 impulse = knockDir * carKnockbackForce + Vector3.up * carVerticalBoost;
+        
+        // Use Impulse with mass considered for better feel at different sizes
         rb.AddForce(impulse * rb.mass, ForceMode.Impulse);
 
-        // Spill some absorbed items so the bunny loses size/mass, but can recollect them.
+        // Spill some absorbed items
         AbsorbMechanic absorber = GetComponent<AbsorbMechanic>();
         if (absorber != null && carMaxItemsLost > 0)
         {
             int toSpill = Random.Range(1, carMaxItemsLost + 1);
             absorber.SpillAbsorbables(toSpill);
         }
+
+        // Play animation if available
+        if (_animator)
+        {
+            _animator.SetBool("isRunning", false);
+        }
+
+        // NEW: Trigger Camera Shake upon getting hit!
+        if (Camera.main != null)
+        {
+            ThirdPersonCamera camScript = Camera.main.GetComponent<ThirdPersonCamera>();
+            if (camScript != null)
+            {
+                // The shake magnitude scales with the bunny's size to make big hits feel heavier
+                float finalShakeMagnitude = hitShakeBaseMagnitude * ScaleFactor;
+                camScript.TriggerShake(hitShakeDuration, finalShakeMagnitude);
+            }
+            else
+            {
+                Debug.LogWarning("ThirdPersonCamera script not found on Main Camera. Cannot shake.");
+            }
+        }
     }
 
-    /// <summary>
-    /// Prevents jump input from being processed for a short time.
-    /// Used by UI overlays that are dismissed with the same button as jump.
-    /// </summary>
-    /// <param name="seconds">Duration in seconds to suppress jump.</param>
+    // Coroutine to handle loss of control during hit feedback
+    IEnumerator HitStunRoutine()
+    {
+        isHit = true;
+        // End glide if being hit mid-air
+        if (isGliding) EndGliding();
+        
+        yield return new WaitForSeconds(hitStunDuration);
+        isHit = false;
+    }
+
     public void SuppressJumpForSeconds(float seconds)
     {
         float until = Time.time + Mathf.Max(0f, seconds);
@@ -265,6 +298,8 @@ public class DustBunnyController : MonoBehaviour
 
         if (!context.started) return;
 
+        if (isHit) return; // Prevent jumping during knockback
+
         if (Time.time < jumpSuppressedUntil) return;
 
         if (PaperUIManager.Instance != null && PaperUIManager.Instance.IsPaperShowing()) return;
@@ -272,7 +307,6 @@ public class DustBunnyController : MonoBehaviour
 
         if (isRolling) return;
 
-        // Prevent rapid double jumps
         if (Time.time < lastJumpTime + jumpCooldown) return;
 
         float checkDist = playerCollider != null
@@ -300,14 +334,14 @@ public class DustBunnyController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (!context.performed || isHit) return; // Prevent dashing during knockback
         if (!isRolling && Time.time >= lastDashTime + dashCooldown)
             StartCoroutine(PerformDash());
     }
 
     public void OnGlide(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (!context.performed || isHit) return; // Prevent gliding during knockback
         if (isGliding || isRolling || isMovingToLaunch) return;
 
         bool inZone = isInGlideLaunchZone && currentGlideSpot != null;
@@ -342,22 +376,16 @@ public class DustBunnyController : MonoBehaviour
     public bool CanGlideFromSpot => isInGlideLaunchZone && currentGlideSpot != null && !isGliding && !isRolling;
     public string GlidePromptText => currentGlideSpot != null ? currentGlideSpot.GetPromptText() : "";
 
-    // Rotation helper
     float ComputeYawFromWorldDir(Vector3 dir)
     {
         dir.y = 0f;
         if (dir.sqrMagnitude < 0.0001f) return lastTargetYaw;
 
         dir.Normalize();
-
-        // Unity base yaw assumes +Z forward
         float baseYaw = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-
-        // Your conventions:
-        // forward = +X (so rotate -90 from Unity's +Z)
-        // model is rotated 180° on Y
         return baseYaw - 90f + 180f + facingYawOffset;
     }
+
     Vector3 GetCameraRelativeWorldDir(Vector2 input)
     {
         if (!cameraTransform)
@@ -382,10 +410,8 @@ public class DustBunnyController : MonoBehaviour
         return worldDir;
     }
 
-    // Core Movement Logic
     void MoveCharacter()
     {
-        // Deadzone
         const float deadzone = 0.15f;
         if (moveInput.sqrMagnitude < deadzone * deadzone)
         {
@@ -394,28 +420,16 @@ public class DustBunnyController : MonoBehaviour
             return;
         }
 
-        // Get camera-relative movement direction
         Vector3 worldDir = GetCameraRelativeWorldDir(moveInput);
-
-        if (worldDir.sqrMagnitude < 0.0001f)
-            return;
+        if (worldDir.sqrMagnitude < 0.0001f) return;
 
         worldDir.Normalize();
-
-        // Rotate toward movement direction
         float targetYaw = ComputeYawFromWorldDir(worldDir);
 
-        float yaw = Mathf.SmoothDampAngle(
-            transform.eulerAngles.y,
-            targetYaw,
-            ref turnSmoothVelocity,
-            turnSmoothTime
-        );
-
+        float yaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetYaw, ref turnSmoothVelocity, turnSmoothTime);
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
         lastTargetYaw = yaw;
 
-        // Move
         Vector3 vel = worldDir * (walkSpeed * ScaleFactor);
         vel.y = rb.linearVelocity.y;
         rb.linearVelocity = vel;
@@ -426,7 +440,6 @@ public class DustBunnyController : MonoBehaviour
     void ApplyBetterGravity()
     {
         float currentMultiplier = 1f;
-
         if (rb.linearVelocity.y < 0) currentMultiplier = fallMultiplier;
         else if (rb.linearVelocity.y > 0 && !jumpHeld) currentMultiplier = lowJumpMultiplier;
         else if (rb.linearVelocity.y > 0 && jumpHeld) currentMultiplier = heldJumpGravityMultiplier;
@@ -443,7 +456,6 @@ public class DustBunnyController : MonoBehaviour
         rb.AddForce(Vector3.up * (jumpForce * ScaleFactor * rb.mass), ForceMode.Impulse);
     }
 
-    // Gliding
     void StartGliding()
     {
         isGliding = true;
@@ -451,9 +463,7 @@ public class DustBunnyController : MonoBehaviour
         rb.useGravity = false;
         scaleAtGlideStart = CurrentScale;
 
-        // If spot gives a direction, use that. Otherwise use camera forward.
         Vector3 launchDir = Vector3.zero;
-
         if (currentGlideSpot != null)
         {
             Vector3 spotDir = currentGlideSpot.GetLaunchDirection();
@@ -461,16 +471,13 @@ public class DustBunnyController : MonoBehaviour
         }
 
         if (launchDir.sqrMagnitude < 0.01f)
-        {
             launchDir = cameraTransform ? cameraTransform.forward : transform.forward;
-        }
 
         launchDir.y = 0f;
         if (launchDir.sqrMagnitude < 0.01f) launchDir = transform.forward;
         launchDir.Normalize();
 
         Vector3 faceDir = GetCameraRelativeWorldDir(moveInput);
-
         if (faceDir.sqrMagnitude < 0.01f)
         {
             faceDir = cameraTransform ? cameraTransform.forward : transform.forward;
@@ -485,7 +492,6 @@ public class DustBunnyController : MonoBehaviour
             lastTargetYaw = yaw;
         }
 
-        // Launch velocity
         float launchMagnitude = glideLaunchSpeed * ScaleFactor;
         rb.linearVelocity = launchDir * launchMagnitude;
 
@@ -568,13 +574,11 @@ public class DustBunnyController : MonoBehaviour
         }
 
         Vector3 worldDir = GetCameraRelativeWorldDir(moveInput);
-
         Vector3 velocity = rb.linearVelocity;
 
         if (worldDir.sqrMagnitude >= 0.01f)
         {
             worldDir.Normalize();
-
             velocity.x = worldDir.x * (glideHorizontalSpeed * ScaleFactor);
             velocity.z = worldDir.z * (glideHorizontalSpeed * ScaleFactor);
 
@@ -588,7 +592,6 @@ public class DustBunnyController : MonoBehaviour
         velocity.y = -glideSinkSpeed;
         rb.linearVelocity = velocity;
 
-        // Drain mass
         float drain = glideMassDrainPerSecond * Time.fixedDeltaTime;
         Vector3 scale = transform.localScale;
         float minScale = scaleAtGlideStart * minGlideScaleRatio;
@@ -596,11 +599,9 @@ public class DustBunnyController : MonoBehaviour
         scale.x = Mathf.Max(scale.x - drain, minScale);
         scale.y = Mathf.Max(scale.y - drain, minScale);
         scale.z = Mathf.Max(scale.z - drain, minScale);
-
         transform.localScale = scale;
     }
 
-    // Dash
     IEnumerator PerformDash()
     {
         isRolling = true;
@@ -611,16 +612,12 @@ public class DustBunnyController : MonoBehaviour
         rb.useGravity = false;
 
         Vector3 dashDir = GetCameraRelativeWorldDir(moveInput);
-
-        // If no input, dash straight where camera faces
         if (dashDir.sqrMagnitude < 0.01f)
         {
             dashDir = cameraTransform ? cameraTransform.forward : transform.forward;
             dashDir.y = 0f;
         }
-
         if (dashDir.sqrMagnitude < 0.01f) dashDir = transform.forward;
-
         dashDir.Normalize();
 
         float yaw = ComputeYawFromWorldDir(dashDir);
@@ -634,7 +631,6 @@ public class DustBunnyController : MonoBehaviour
 
         isRolling = false;
         if (_animator) _animator.SetBool("isRolling", false);
-
         rb.linearDamping = defaultDrag;
         rb.useGravity = true;
     }
