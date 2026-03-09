@@ -66,6 +66,7 @@ public class DustBunnyController : MonoBehaviour
 
     private Vector2 moveInput;
     private bool jumpHeld;
+    private bool glideHeld;
     private bool isInGlideLaunchZone;
     private GlideLaunchSpot currentGlideSpot;
     private bool isMovingToLaunch;
@@ -180,6 +181,10 @@ public class DustBunnyController : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             return;
         }
+
+        // Start gliding when in air and holding glide (e.g. jumped while holding)
+        if (!isGliding && !isRolling && !isMovingToLaunch && !isHit && glideHeld && !isGrounded)
+            StartGliding();
 
         if (isGliding)
         {
@@ -341,21 +346,31 @@ public class DustBunnyController : MonoBehaviour
 
     public void OnGlide(InputAction.CallbackContext context)
     {
-        if (!context.performed || isHit) return; // Prevent gliding during knockback
-        if (isGliding || isRolling || isMovingToLaunch) return;
-
-        bool inZone = isInGlideLaunchZone && currentGlideSpot != null;
-        bool inAir = !isGrounded;
-
-        if (!inZone && !inAir) return;
-
-        if (inZone && currentGlideSpot.GetLaunchPoint() != null)
+        if (context.started)
         {
-            StartCoroutine(MoveToLaunchThenGlide());
-            return;
-        }
+            glideHeld = true;
+            if (isHit) return;
+            if (isGliding || isRolling || isMovingToLaunch) return;
 
-        StartGliding();
+            bool inZone = isInGlideLaunchZone && currentGlideSpot != null;
+            bool inAir = !isGrounded;
+
+            if (!inZone && !inAir) return;
+
+            if (inZone && currentGlideSpot.GetLaunchPoint() != null)
+            {
+                StartCoroutine(MoveToLaunchThenGlide());
+                return;
+            }
+
+            StartGliding();
+        }
+        else if (context.canceled)
+        {
+            glideHeld = false;
+            if (isGliding)
+                EndGliding();
+        }
     }
 
     public void EnterGlideLaunchZone(GlideLaunchSpot spot)
@@ -562,7 +577,8 @@ public class DustBunnyController : MonoBehaviour
         transform.rotation = endRot;
 
         isMovingToLaunch = false;
-        StartGliding();
+        if (glideHeld)
+            StartGliding();
     }
 
     void GlideMovement()

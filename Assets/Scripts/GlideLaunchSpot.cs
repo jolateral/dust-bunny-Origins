@@ -2,7 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// Place this on a trigger collider at the top of a bookshelf (or any high spot).
-/// When the player stands in the zone, they can press the Glide button (F / R1) to jump off and glide.
+/// When the player stands in the zone, they can hold the Glide button (F / R2) to jump off and glide.
 /// Tutorial text is shown via TutorialTrigger (assign one here, or on a child/sibling).
 /// </summary>
 [RequireComponent(typeof(Collider))]
@@ -65,7 +65,7 @@ public class GlideLaunchSpot : MonoBehaviour
 
     /// <summary> Launch direction for this spot (world space). If zero, controller uses camera forward. </summary>
     public Vector3 GetLaunchDirection() => launchDirection;
-    public string GetPromptText() => tutorialTrigger != null ? tutorialTrigger.tutorialText : "Press  <sprite=1>to glide";
+    public string GetPromptText() => tutorialTrigger != null ? tutorialTrigger.tutorialText : "Hold  <sprite=1>to glide";
 
     /// <summary> Minimum scale required to take the leap (design doc: "accumulate a certain amount of mass"). 0 = no requirement. </summary>
     public float GetMinScaleToGlide() => minScaleToGlide;
