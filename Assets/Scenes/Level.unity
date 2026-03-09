@@ -15050,8 +15050,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499579090}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15218493, y: 0, z: 0, w: 0.98835206}
-  m_LocalPosition: {x: -35.383026, y: -15.155113, z: -10.842041}
+  m_LocalRotation: {x: 0.38606566, y: -0.0000000064899415, z: 0.0000000027161204, w: 0.92247134}
+  m_LocalPosition: {x: -35.383026, y: -13.548024, z: -10.842041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25826,8 +25826,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076957463}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15218492, y: 0.00000012819099, z: -0.000000019738646, w: 0.98835206}
-  m_LocalPosition: {x: -35.383026, y: -14.977882, z: -11.405136}
+  m_LocalRotation: {x: 0.38606566, y: 0.00000003887926, z: -0.000000016271452, w: 0.92247134}
+  m_LocalPosition: {x: -35.383026, y: -12.977882, z: -11.405136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25932,7 +25932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5d7c088409d9a40b7b09aa707777f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineOrbitalFollow
-  TargetOffset: {x: 0, y: 0, z: 0}
+  TargetOffset: {x: 0, y: 2, z: 0}
   TrackerSettings:
     BindingMode: 4
     PositionDamping: {x: 1, y: 1, z: 1}
@@ -25966,7 +25966,7 @@ MonoBehaviour:
   VerticalAxis:
     Value: 17.5
     Center: 17.5
-    Range: {x: 5, y: 45}
+    Range: {x: 0, y: 45}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -26094,7 +26094,7 @@ MonoBehaviour:
   MinimumDistanceFromTarget: 0.01
   AvoidObstacles:
     Enabled: 1
-    DistanceLimit: 4
+    DistanceLimit: 0
     MinimumOcclusionTime: 0
     CameraRadius: 0.5
     UseFollowTarget:
