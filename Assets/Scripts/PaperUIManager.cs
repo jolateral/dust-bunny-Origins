@@ -133,6 +133,26 @@ public class PaperUIManager : MonoBehaviour
             instructionText.gameObject.SetActive(false);
     }
 
+    void Start()
+    {
+        ResetUI();
+    }
+
+    void ResetUI()
+    {
+        isPaperShowing = false;
+        waitingForInput = false;
+        isMultiPieceMode = false;
+        currentPaperData = null;
+
+        if (backgroundGroup != null) backgroundGroup.alpha = 0;
+        if (singlePieceGroup != null) singlePieceGroup.alpha = 0;
+        if (multiPieceGroup != null) multiPieceGroup.alpha = 0;
+
+        if (instructionText != null)
+            instructionText.gameObject.SetActive(false);
+    }
+
     void Update()
     {
         if (isPaperShowing && waitingForInput)
