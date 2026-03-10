@@ -18967,6 +18967,265 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: aa459d046844f8a4c9116a257d2b2a06, type: 2}
   debug: 0
+--- !u!1 &705339058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 705339059}
+  - component: {fileID: 705339063}
+  - component: {fileID: 705339062}
+  - component: {fileID: 705339061}
+  - component: {fileID: 705339060}
+  m_Layer: 0
+  m_Name: Right_Curtain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &705339059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705339058}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.7071079}
+  m_LocalPosition: {x: -33.666668, y: 28.333334, z: 15}
+  m_LocalScale: {x: 2, y: 0.33333334, z: 5.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1460781034}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &705339060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705339058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9fad76b156b354b90623382e0c0cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ClothDynamics::ClothDynamics.GPUClothDynamics
+  _meshObjects: []
+  _meshProxy: {fileID: 0}
+  _useMeshProxy: 1
+  _logo: {fileID: 2800000, guid: 96b2057b71a117b42b43efafb7f67d5f, type: 3}
+  _advancedMode: 0
+  _runSim: 1
+  _timestep: 0.005
+  _timeMultiplier: 1
+  _iterationNum: 2
+  _subSteps: 1
+  _bufferScale: 16
+  _updateBufferSize: 1
+  _delayInit: 0
+  _gravity: {x: 0, y: -9.81, z: 0}
+  _wind: {fileID: 0}
+  _windIntensity: 0
+  _findWind: 1
+  _vertexMass: 1
+  _staticFriction: 0.9
+  _dynamicFriction: 0.1
+  _worldPositionImpact: 0.5
+  _worldRotationImpact: 0.5
+  _distanceCompressionStiffness: 0
+  _distanceStretchStiffness: 2
+  _bendingStiffness: 0
+  _deltaScale: 1
+  _clampDelta: 0.05
+  _pointConstraintType: 0
+  _pointConstraintCustomIndices: 
+  _enableMouseInteraction: 0
+  _deltaConstraintMul: 0.001
+  _getDepthPos:
+    _distLimit: 0.1
+    _debug: 0
+    _pointScale: 0.01
+    _unityDepthTextureCopy: {fileID: 0}
+  _dampingMethod: 1
+  _dampingVel: 0.999
+  _clampVel: 10
+  _dampingStiffness: 1
+  _usePreCache: 0
+  _preCacheFile: {fileID: 0}
+  _scaleCacheByParent: 1
+  _useCollisionFinder: 0
+  _useCustomVoxelCenter: 0
+  _customVoxelCenter: {fileID: 705339059}
+  _voxelCubeScale: 264.00006
+  _voxelCubeSteps: 32
+  _vertexScale: 0.5
+  _vertexNormalScale: 0.05
+  _useTriangleMesh: 1
+  _triangleScale: 0.2
+  _triangleNormalScale: 0
+  _autoSphereScale: 1.1
+  _secondClothScale: 1
+  _staticCollisionRadius: 0.005
+  _collisionFinder:
+    _gridCount: 64
+    _clothMaskValue: 0.001
+    _initWithGPU: 1
+    _numparticles: 0
+    _renderDebugPoints: 0
+    _debugMesh: {fileID: 0}
+    _debugMat: {fileID: 0}
+    _debugVertexScale: 1
+    _debugObject: {fileID: 0}
+    _useDirectDispatch: 0
+    _unifiedSphereSize: 0
+  _gridOffset:
+    x: -124.33989
+    y: NaN
+    z: 48.48463
+  _predictiveContact: 0
+  _useSelfCollision: 0
+  _selfCollisionScale: 1
+  _selfCollisionTriangles: 0
+  _useNeighbourCheck: 0
+  _useCollidableObjectsList: 0
+  _collidableObjects: []
+  _collidableObjectsBias: 0.02
+  _useDefaultSphereCollision: 1
+  _usePredictiveContactColliders: 0
+  _usePlaneScaleY: 0
+  _useClothSkinning: 1
+  _skinComponent: {fileID: 0}
+  _blendSkinning: 1
+  _minBlend: 0.01
+  _useSurfacePush: 0
+  _surfacePush: 50
+  _surfaceOffset: 0
+  _skinningForSurfacePush: 0.8
+  _forceSurfacePushColliders: 0
+  _useLOD: 0
+  _distLod: 8
+  _lodCurve: {fileID: 0}
+  _cam: {fileID: 0}
+  _lodTimeStepAdd: 0.002
+  _weightsCurve: {fileID: 0}
+  _weightsToleranceDistance: 0.05
+  _scaleWeighting: 50
+  _minRadius: 0.001
+  _skinPrefab: {fileID: 0}
+  _useFrustumClipping: 1
+  _camCullDist: 1
+  _useShadowCulling: 1
+  _cullingLights: []
+  _updateTransformCenter: 0
+  _scaleBoundingBox: 0
+  _calcVoxelPosRoughly: 1
+  _useReadbackCenter: 1
+  _sewEdges: 1
+  _fixDoubles: 1
+  _vertexIdsToUvId: 2
+  _weldVertices: 0
+  _weldThreshold: 1e-10
+  _useReadbackVertices: 0
+  _readbackVertexEveryX: 10
+  _readbackVertexScale: 0.01
+  _useGarmentMesh: 0
+  _updateGarmentMesh: 1
+  _onlyAtStart: 0
+  _garmentSeamLength: 0.02
+  _blendGarment: 20
+  _pushVertsByNormals: 0
+  _showBoundingBox: 1
+  _debugBuffers: 0
+  _showWeldEdges: 0
+  _weldEdgeId: -1
+  _showBendingConstraints: 0
+  _debugBendingId: -1
+  _slowCPUWriteBack: 0
+  _debugMode: 0
+  _applyTransformAtExport: 0
+--- !u!64 &705339061
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705339058}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &705339062
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705339058}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &705339063
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705339058}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &717610914 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6937706803990510609, guid: dfc6bc7903afe5c499373d3a77272e1c, type: 3}
@@ -21902,8 +22161,9 @@ GameObject:
   - component: {fileID: 874417285}
   - component: {fileID: 874417284}
   - component: {fileID: 874417283}
+  - component: {fileID: 874417286}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Left_Curtain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21917,13 +22177,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874417281}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -45, y: 56, z: 15}
-  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.7071079}
+  m_LocalPosition: {x: -56.333332, y: 28.333334, z: 15}
+  m_LocalScale: {x: 2, y: 0.33333334, z: 5.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1460781034}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!64 &874417283
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22003,6 +22263,151 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874417281}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &874417286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874417281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9fad76b156b354b90623382e0c0cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ClothDynamics::ClothDynamics.GPUClothDynamics
+  _meshObjects: []
+  _meshProxy: {fileID: 0}
+  _useMeshProxy: 1
+  _logo: {fileID: 2800000, guid: 96b2057b71a117b42b43efafb7f67d5f, type: 3}
+  _advancedMode: 0
+  _runSim: 1
+  _timestep: 0.005
+  _timeMultiplier: 1
+  _iterationNum: 2
+  _subSteps: 1
+  _bufferScale: 16
+  _updateBufferSize: 1
+  _delayInit: 0
+  _gravity: {x: 0, y: -9.81, z: 0}
+  _wind: {fileID: 0}
+  _windIntensity: 0
+  _findWind: 1
+  _vertexMass: 1
+  _staticFriction: 0.9
+  _dynamicFriction: 0.1
+  _worldPositionImpact: 0.5
+  _worldRotationImpact: 0.5
+  _distanceCompressionStiffness: 0
+  _distanceStretchStiffness: 2
+  _bendingStiffness: 0
+  _deltaScale: 1
+  _clampDelta: 0.05
+  _pointConstraintType: 0
+  _pointConstraintCustomIndices: 
+  _enableMouseInteraction: 0
+  _deltaConstraintMul: 0.001
+  _getDepthPos:
+    _distLimit: 0.1
+    _debug: 0
+    _pointScale: 0.01
+    _unityDepthTextureCopy: {fileID: 0}
+  _dampingMethod: 1
+  _dampingVel: 0.999
+  _clampVel: 10
+  _dampingStiffness: 1
+  _usePreCache: 0
+  _preCacheFile: {fileID: 0}
+  _scaleCacheByParent: 1
+  _useCollisionFinder: 0
+  _useCustomVoxelCenter: 0
+  _customVoxelCenter: {fileID: 874417282}
+  _voxelCubeScale: 264.00006
+  _voxelCubeSteps: 32
+  _vertexScale: 0.5
+  _vertexNormalScale: 0.05
+  _useTriangleMesh: 1
+  _triangleScale: 0.2
+  _triangleNormalScale: 0
+  _autoSphereScale: 1.1
+  _secondClothScale: 1
+  _staticCollisionRadius: 0.005
+  _collisionFinder:
+    _gridCount: 64
+    _clothMaskValue: 0.001
+    _initWithGPU: 1
+    _numparticles: 0
+    _renderDebugPoints: 0
+    _debugMesh: {fileID: 0}
+    _debugMat: {fileID: 0}
+    _debugVertexScale: 1
+    _debugObject: {fileID: 0}
+    _useDirectDispatch: 0
+    _unifiedSphereSize: 0
+  _gridOffset:
+    x: -184.32005
+    y: 74.95503
+    z: NaN
+  _predictiveContact: 0
+  _useSelfCollision: 0
+  _selfCollisionScale: 1
+  _selfCollisionTriangles: 0
+  _useNeighbourCheck: 0
+  _useCollidableObjectsList: 0
+  _collidableObjects: []
+  _collidableObjectsBias: 0.02
+  _useDefaultSphereCollision: 1
+  _usePredictiveContactColliders: 0
+  _usePlaneScaleY: 0
+  _useClothSkinning: 1
+  _skinComponent: {fileID: 0}
+  _blendSkinning: 1
+  _minBlend: 0.01
+  _useSurfacePush: 0
+  _surfacePush: 50
+  _surfaceOffset: 0
+  _skinningForSurfacePush: 0.8
+  _forceSurfacePushColliders: 0
+  _useLOD: 0
+  _distLod: 8
+  _lodCurve: {fileID: 0}
+  _cam: {fileID: 0}
+  _lodTimeStepAdd: 0.002
+  _weightsCurve: {fileID: 0}
+  _weightsToleranceDistance: 0.05
+  _scaleWeighting: 50
+  _minRadius: 0.001
+  _skinPrefab: {fileID: 0}
+  _useFrustumClipping: 1
+  _camCullDist: 1
+  _useShadowCulling: 1
+  _cullingLights: []
+  _updateTransformCenter: 0
+  _scaleBoundingBox: 0
+  _calcVoxelPosRoughly: 1
+  _useReadbackCenter: 1
+  _sewEdges: 1
+  _fixDoubles: 1
+  _vertexIdsToUvId: 2
+  _weldVertices: 0
+  _weldThreshold: 1e-10
+  _useReadbackVertices: 0
+  _readbackVertexEveryX: 10
+  _readbackVertexScale: 0.01
+  _useGarmentMesh: 0
+  _updateGarmentMesh: 1
+  _onlyAtStart: 0
+  _garmentSeamLength: 0.02
+  _blendGarment: 20
+  _pushVertsByNormals: 0
+  _showBoundingBox: 1
+  _debugBuffers: 0
+  _showWeldEdges: 0
+  _weldEdgeId: -1
+  _showBendingConstraints: 0
+  _debugBendingId: -1
+  _slowCPUWriteBack: 0
+  _debugMode: 0
+  _applyTransformAtExport: 0
 --- !u!1001 &880422058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35257,6 +35662,7 @@ Transform:
   - {fileID: 1139879190}
   - {fileID: 677802573}
   - {fileID: 874417282}
+  - {fileID: 705339059}
   m_Father: {fileID: 1413896875}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1462215899
@@ -52113,7 +52519,7 @@ PrefabInstance:
       objectReference: {fileID: 1863075445}
     - target: {fileID: 6876165616831943278, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
       propertyPath: growthFactor
-      value: 0.05
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 6876165616831943278, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
       propertyPath: tooBigColor.b
