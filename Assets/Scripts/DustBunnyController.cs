@@ -50,6 +50,13 @@ public class DustBunnyController : MonoBehaviour
     public bool isGliding;
     private bool isHit = false; // Flag to prevent movement during knockback
 
+    [Header("--- Ground Check ---")]
+    [SerializeField] private LayerMask groundLayers = ~0;
+    [SerializeField] private float groundCheckRadius = 0.2f;
+    [SerializeField] private float strictGroundCheckRadius = 0.08f;
+    [SerializeField] private float strictGroundCheckDistance = 0.12f;
+    [SerializeField] private float glideGroundIgnoreTime = 0.15f;
+
     private Rigidbody rb;
     private Collider playerCollider;
 
@@ -133,7 +140,7 @@ public class DustBunnyController : MonoBehaviour
     void Update()
     {
         distToGround = playerCollider.bounds.extents.y;
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + groundCheckOffset);
+        isGrounded = CheckGrounded();
 
         if (isGrounded)
             lastGroundedTime = Time.time;
@@ -150,11 +157,17 @@ public class DustBunnyController : MonoBehaviour
             }
 
             float timeGliding = Time.time - glideStartTime;
-            bool reallyLanded = Physics.Raycast(transform.position, Vector3.down, distToGround + glideLandTolerance);
 
-            if (reallyLanded && timeGliding > 0.4f)
+            // Ignore ground checks briefly right after glide starts,
+            // otherwise the bunny can instantly "land" from the same platform/ledge.
+            bool canCheckLanding = timeGliding > glideGroundIgnoreTime;
+            bool reallyLanded = canCheckLanding && CheckGroundedStrict();
+
+            if (reallyLanded)
+            {
                 EndGliding();
-            else if (!isGrounded)
+            }
+            else
             {
                 float currentScaleAvg = CurrentScale;
                 if (currentScaleAvg < scaleAtGlideStart * minGlideScaleRatio)
@@ -183,7 +196,7 @@ public class DustBunnyController : MonoBehaviour
         }
 
         // Start gliding when in air and holding glide (e.g. jumped while holding)
-        if (!isGliding && !isRolling && !isMovingToLaunch && !isHit && glideHeld && !isGrounded)
+        if (!isGliding && !isRolling && !isMovingToLaunch && !isHit && glideHeld && !CheckGroundedStrict())
             StartGliding();
 
         if (isGliding)
@@ -258,7 +271,6 @@ public class DustBunnyController : MonoBehaviour
             _animator.SetBool("isRunning", false);
         }
 
-        // NEW: Trigger Camera Shake upon getting hit!
         if (Camera.main != null)
         {
             ThirdPersonCamera camScript = Camera.main.GetComponent<ThirdPersonCamera>();
@@ -302,28 +314,31 @@ public class DustBunnyController : MonoBehaviour
         if (context.canceled) jumpHeld = false;
 
         if (!context.started) return;
-
-        if (isHit) return; // Prevent jumping during knockback
-
+        if (isHit) return;
         if (Time.time < jumpSuppressedUntil) return;
-
         if (PaperUIManager.Instance != null && PaperUIManager.Instance.IsPaperShowing()) return;
         if (DiaryUIManager.Instance != null && DiaryUIManager.Instance.IsDiaryShowing()) return;
-
         if (isRolling) return;
-
         if (Time.time < lastJumpTime + jumpCooldown) return;
 
-        float checkDist = playerCollider != null
-            ? playerCollider.bounds.extents.y + groundCheckOffset
-            : distToGround + groundCheckOffset;
-
+        bool groundedNow = CheckGrounded();
         bool canCoyoteJump = Time.time <= lastGroundedTime + coyoteTime;
 
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, checkDist))
+        if (groundedNow)
         {
-            BouncyObject bouncy = hit.collider.GetComponent<BouncyObject>();
-            if (bouncy != null && bouncy.TryBounce(rb)) return;
+            if (TryGetGroundHit(out RaycastHit hit))
+            {
+                BouncyObject bouncy = hit.collider.GetComponent<BouncyObject>();
+                if (bouncy == null)
+                    bouncy = hit.collider.GetComponentInParent<BouncyObject>();
+
+                if (bouncy != null && bouncy.TryBounce(rb))
+                {
+                    lastJumpTime = Time.time;
+                    lastGroundedTime = -999f;
+                    return;
+                }
+            }
 
             PerformJump();
             lastJumpTime = Time.time;
@@ -353,7 +368,7 @@ public class DustBunnyController : MonoBehaviour
             if (isGliding || isRolling || isMovingToLaunch) return;
 
             bool inZone = isInGlideLaunchZone && currentGlideSpot != null;
-            bool inAir = !isGrounded;
+            bool inAir = !CheckGroundedStrict();
 
             if (!inZone && !inAir) return;
 
@@ -649,5 +664,74 @@ public class DustBunnyController : MonoBehaviour
         if (_animator) _animator.SetBool("isRolling", false);
         rb.linearDamping = defaultDrag;
         rb.useGravity = true;
+    }
+
+    bool CheckGrounded()
+    {
+        if (playerCollider == null) return false;
+
+        Bounds bounds = playerCollider.bounds;
+
+        Vector3 checkPos = new Vector3(
+            bounds.center.x,
+            bounds.min.y + 0.05f,
+            bounds.center.z
+        );
+
+        return Physics.CheckSphere(
+            checkPos,
+            groundCheckRadius,
+            groundLayers,
+            QueryTriggerInteraction.Ignore
+        );
+    }
+
+    bool TryGetGroundHit(out RaycastHit hit)
+    {
+        hit = default;
+
+        if (playerCollider == null) return false;
+
+        Bounds bounds = playerCollider.bounds;
+
+        Vector3 origin = new Vector3(
+            bounds.center.x,
+            bounds.min.y + 0.2f,
+            bounds.center.z
+        );
+
+        float rayDistance = 0.35f;
+
+        return Physics.Raycast(
+            origin,
+            Vector3.down,
+            out hit,
+            rayDistance,
+            groundLayers,
+            QueryTriggerInteraction.Ignore
+        );
+    }
+
+    bool CheckGroundedStrict()
+    {
+        if (playerCollider == null) return false;
+
+        Bounds bounds = playerCollider.bounds;
+
+        Vector3 origin = new Vector3(
+            bounds.center.x,
+            bounds.min.y + 0.02f,
+            bounds.center.z
+        );
+
+        return Physics.SphereCast(
+            origin,
+            strictGroundCheckRadius,
+            Vector3.down,
+            out _,
+            strictGroundCheckDistance,
+            groundLayers,
+            QueryTriggerInteraction.Ignore
+        );
     }
 }
