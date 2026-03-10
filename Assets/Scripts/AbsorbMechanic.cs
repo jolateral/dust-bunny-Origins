@@ -22,7 +22,7 @@ public class AbsorbMechanic : MonoBehaviour
 
     [Header("Growth Settings")]
     [Tooltip("How much the bunny grows per absorbed item.")]
-    public float growthFactor = 0.02f;
+    public float growthFactor = 0.04f;
 
     [Tooltip("Player must be this many times bigger than the target to absorb it.")]
     public float sizeTolerance = 1.1f;
