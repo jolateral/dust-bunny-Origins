@@ -18,20 +18,30 @@ public class CameraScaleDistance : MonoBehaviour
     [Tooltip("Max FOV cap (degrees) to prevent extreme wide-angle distortion.")]
     public float maxFov = 85f;
 
+    [Header("Katamari-Style Framing")]
+    [Range(-0.5f, 0.5f)]
+    public float bunnyScreenPositionY = -5f;
+    [Tooltip("Look-at target offset above player. Higher = camera tilts down more, showing more of the world ahead.")]
+    public float lookAheadOffsetY = 2.5f;
+
     private CinemachineOrbitalFollow orbital;
     private CinemachineCamera vcam;
+    private CinemachineRotationComposer composer;
     private float baseScale;
 
     void Start()
     {
         orbital = GetComponent<CinemachineOrbitalFollow>();
         vcam = GetComponent<CinemachineCamera>();
+        composer = GetComponent<CinemachineRotationComposer>();
 
         if (!player && GameObject.FindGameObjectWithTag("Player"))
             player = GameObject.FindGameObjectWithTag("Player").transform;
 
         baseScale = player.localScale.x;
         orbital.HorizontalAxis.Value = -90f;
+
+        ApplyKatamariFraming();
     }
 
     void LateUpdate()
@@ -55,6 +65,25 @@ public class CameraScaleDistance : MonoBehaviour
             var lens = vcam.Lens;
             lens.FieldOfView = Mathf.Lerp(lens.FieldOfView, targetFov, Time.deltaTime * smoothSpeed);
             vcam.Lens = lens;
+        }
+
+        ApplyKatamariFraming();
+    }
+
+    void ApplyKatamariFraming()
+    {
+        if (orbital != null)
+        {
+            var offset = orbital.TargetOffset;
+            offset.y = lookAheadOffsetY;
+            orbital.TargetOffset = offset;
+        }
+
+        if (composer != null)
+        {
+            var comp = composer.Composition;
+            comp.ScreenPosition.y = bunnyScreenPositionY;
+            composer.Composition = comp;
         }
     }
 }
