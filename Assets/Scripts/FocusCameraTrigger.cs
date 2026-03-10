@@ -2,20 +2,29 @@ using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// A diagnostic version of the camera focus trigger with Debug Logs.
+/// A standalone trigger that temporarily hijacks the camera to focus on a specific point,
+/// completely freezes the player (disabling DustBunnyController and physics), 
+/// and smoothly returns control afterward.
 /// </summary>
 public class CameraFocusTrigger : MonoBehaviour
 {
     [Header("--- Target Settings ---")]
+    [Tooltip("The exact position where the camera should move to during the cinematic.")]
     public Transform cameraStandpoint;
+    
+    [Tooltip("The object or point the camera should look at.")]
     public Transform focusTarget;
 
     [Header("--- Timing Settings ---")]
+    [Tooltip("Time it takes to move from the player to the camera standpoint.")]
     public float transitionInTime = 1.5f;
+    [Tooltip("How long the camera stays at the standpoint.")]
     public float holdTime = 2.0f;
+    [Tooltip("Time it takes to return to the player.")]
     public float transitionOutTime = 1.0f;
 
     [Header("--- Optional Settings ---")]
+    [Tooltip("Should this only trigger once?")]
     public bool triggerOnlyOnce = true;
 
     private bool hasTriggered = false;
@@ -24,29 +33,16 @@ public class CameraFocusTrigger : MonoBehaviour
     void Start()
     {
         mainCam = Camera.main;
-        
-        // --- Setup Checks ---
-        if (mainCam == null) Debug.LogError("[CameraFocus] Error: Main Camera not found! Is your camera tagged as 'MainCamera'?");
-        if (cameraStandpoint == null) Debug.LogError("[CameraFocus] Error: Missing Camera Standpoint!");
-        if (focusTarget == null) Debug.LogError("[CameraFocus] Error: Missing Focus Target!");
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // Log EVERYTHING that touches this trigger
-        Debug.Log($"[CameraFocus] Something entered the trigger: {other.gameObject.name}");
-
-        // Check if it's the player
+        // Check if it's the player and if it hasn't been triggered yet
         if (!hasTriggered && other.CompareTag("Player"))
         {
-            Debug.Log("[CameraFocus] SUCCESS: Player detected! Starting cinematic...");
             if (triggerOnlyOnce) hasTriggered = true;
             
             StartCoroutine(CinematicFocusRoutine(other.gameObject));
-        }
-        else if (!other.CompareTag("Player"))
-        {
-            Debug.Log($"[CameraFocus] FAILED: Ignored {other.gameObject.name} because its Tag is NOT 'Player'. Its current tag is: {other.tag}");
         }
     }
 
@@ -54,57 +50,96 @@ public class CameraFocusTrigger : MonoBehaviour
     {
         if (mainCam == null) yield break;
 
-        Debug.Log("[CameraFocus] Step 1: Disabling player and camera controls...");
+        // Get all necessary components
         DustBunnyController bunnyController = player.GetComponent<DustBunnyController>();
         Rigidbody bunnyRb = player.GetComponent<Rigidbody>();
+        
+        // Find the custom ThirdPersonCamera script
         ThirdPersonCamera tpCamera = FindFirstObjectByType<ThirdPersonCamera>();
         
-        // Find CinemachineBrain safely
-        Behaviour cinemachineBrain = mainCam.GetComponent("CinemachineBrain") as Behaviour;
+        // Find CinemachineBrain if it exists
+        Behaviour cinemachineBrain = null;
+        Component[] components = mainCam.GetComponents<Component>();
+        foreach (Component comp in components)
+        {
+            if (comp.GetType().Name == "CinemachineBrain")
+            {
+                cinemachineBrain = (Behaviour)comp;
+                break;
+            }
+        }
 
-        if (bunnyController != null) bunnyController.enabled = false;
-        if (bunnyRb != null) bunnyRb.linearVelocity = Vector3.zero; 
+        // --- 1. ABSOLUTE PLAYER FREEZE ---
+        if (bunnyController != null) 
+        {
+            // Disable the controller so no input is processed
+            bunnyController.enabled = false; 
+        }
+        if (bunnyRb != null) 
+        {
+            // Kill all momentum and disable physics/gravity temporarily
+            bunnyRb.linearVelocity = Vector3.zero; 
+            bunnyRb.angularVelocity = Vector3.zero;
+            bunnyRb.isKinematic = true; 
+        }
+
+        // --- 2. DISABLE CAMERA CONTROLS ---
         if (tpCamera != null) tpCamera.enabled = false;
         if (cinemachineBrain != null) cinemachineBrain.enabled = false;
 
+        // --- 3. SAVE ORIGINAL CAMERA STATE ---
         Vector3 originalPos = mainCam.transform.position;
         Quaternion originalRot = mainCam.transform.rotation;
+
         Vector3 targetPos = cameraStandpoint.position;
         Quaternion targetRot = Quaternion.LookRotation(focusTarget.position - cameraStandpoint.position);
 
-        Debug.Log("[CameraFocus] Step 2: Transitioning IN...");
+        // --- 4. TRANSITION IN ---
         float elapsed = 0f;
         while (elapsed < transitionInTime)
         {
             float t = Mathf.SmoothStep(0f, 1f, elapsed / transitionInTime);
+            
             mainCam.transform.position = Vector3.Lerp(originalPos, targetPos, t);
             mainCam.transform.rotation = Quaternion.Slerp(originalRot, targetRot, t);
+            
             elapsed += Time.deltaTime;
-            yield return null;
+            yield return null; 
         }
         
         mainCam.transform.position = targetPos;
         mainCam.transform.rotation = targetRot;
 
-        Debug.Log($"[CameraFocus] Step 3: Holding focus for {holdTime} seconds...");
+        // --- 5. HOLD FOCUS ---
         yield return new WaitForSeconds(holdTime);
 
-        Debug.Log("[CameraFocus] Step 4: Transitioning OUT...");
+        // --- 6. TRANSITION OUT ---
         elapsed = 0f;
         while (elapsed < transitionOutTime)
         {
             float t = Mathf.SmoothStep(0f, 1f, elapsed / transitionOutTime);
+            
             mainCam.transform.position = Vector3.Lerp(targetPos, originalPos, t);
             mainCam.transform.rotation = Quaternion.Slerp(targetRot, originalRot, t);
+            
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        Debug.Log("[CameraFocus] Step 5: Restoring controls...");
+        // --- 7. RESTORE EVERYTHING ---
         if (tpCamera != null) tpCamera.enabled = true;
         if (cinemachineBrain != null) cinemachineBrain.enabled = true;
-        if (bunnyController != null) bunnyController.enabled = true;
         
-        Debug.Log("[CameraFocus] Sequence complete!");
+        // UNFREEZE THE PLAYER
+        if (bunnyRb != null) 
+        {
+            // Re-enable physics and gravity
+            bunnyRb.isKinematic = false; 
+        }
+        if (bunnyController != null) 
+        {
+            // Re-enable input and movement
+            bunnyController.enabled = true; 
+        }
     }
 }
