@@ -1,0 +1,55 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+#pragma kernel GetWorldPos
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+//RWTexture2D<float4> Result;
+RWStructuredBuffer<int> resultBuffer;
+StructuredBuffer<float3> vertexBuffer;
+float4 cursorPos;
+float4x4 localToWorldMatrix;
+uint vertexCount;
+
+[numthreads(128, 1, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+	float dist = distance(mul(localToWorldMatrix, float4(vertexBuffer[id.x].xyz, 1)).xyz, cursorPos.xyz);
+	int distValue = int(dist * 1000);
+	int lastValue = 0;
+	InterlockedMin(resultBuffer[0], distValue, lastValue);
+
+	if (id.x < vertexCount && uint(distValue) < uint(lastValue) && dist < cursorPos.w)
+	{
+		resultBuffer[1] = int(id.x);
+	}
+}
+
+//RWStructuredBuffer<float> posBuffer;
+RWTexture2D<float4> posBuffer;
+Texture2D<float> _DepthTexture;
+SamplerState my_linear_clamp_sampler;
+float4 coordPos;
+
+uint2 packIndex(uint index)
+{
+	const uint vSize = 2;
+	return uint2(index % vSize, index / vSize);
+}
+
+[numthreads(1, 1, 1)]
+void GetWorldPos(uint3 id : SV_DispatchThreadID)
+{
+	float2 coord = coordPos.xy;
+
+	//uint width, height;
+	//_DepthTexture.GetDimensions(width, height);
+
+	//Get voxel space position
+	posBuffer[packIndex(id.x)] = _DepthTexture.SampleLevel(my_linear_clamp_sampler, coord.xy, 0, 0).r;
+	//posBuffer[id.x] = _DepthTexture[uint2(width, height)].r;
+
+	resultBuffer[0] = 9999999;
+	resultBuffer[1] = -1;
+
+}

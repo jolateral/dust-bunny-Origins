@@ -1,0 +1,974 @@
+﻿#pragma kernel SubDivZero
+#pragma kernel SubDivOneAndTwo
+#pragma kernel CalcTotalCount
+#pragma kernel ClearVoxelBuffer
+#pragma kernel ClearAllIntBuffers
+#pragma kernel ClearAllVectorBuffers
+#pragma kernel WriteTriangles
+#pragma kernel WriteTrianglesFromNormalSkinning
+#pragma kernel ClearCounterBuffer
+#pragma kernel SetLastCounter
+#pragma kernel SubDivOneAndTwo2
+#pragma kernel SubDivZero2
+#pragma kernel CalcArgBuffer
+#pragma kernel SetLastCounterNew
+#pragma kernel WriteVertices
+#pragma kernel WriteVerticesFromNormalSkinning
+#pragma kernel UpdateSkinnerParticles
+#pragma kernel CSCopyTexData
+#pragma kernel CSCopyDataToTex
+#pragma kernel CalcTotalCountDirect
+#pragma kernel CalcArgBufferDirect
+#pragma kernel WriteTrianglesFromNormalSkinningBlends
+#pragma kernel WriteVerticesFromNormalSkinningBlends
+
+
+//#pragma multi_compile_local _ WRITE_SPHERE_DATA
+
+uint _lastParticleSum;
+uint _spheresPerVoxel;
+uint _sphereDataLength;
+uint _numClothParticles;
+bool _useTrisMesh;
+bool _useSelfCollision;
+bool _useSelfCollisionTriangles;
+
+float _collisionSize;
+float _selfCollisionScale;
+float4 _cubeMinVec;
+
+struct sData
+{
+	float4 pr;
+	float4 nId;
+	float4 temp;
+};
+
+StructuredBuffer<sData> _sphereDataBuffer;
+RWStructuredBuffer<int> _usedVoxelListBuffer;
+RWStructuredBuffer<uint> _usedVoxelListInverseBuffer;
+RWStructuredBuffer<uint> _counterPerVoxelBuffer;
+RWStructuredBuffer<sData> _voxelDataBuffer;
+RWStructuredBuffer<uint> _lastCounterPerVoxelBuffer;
+RWStructuredBuffer<uint> _lastCounterPerVoxelBuffer2;
+
+uint _texWidth;
+uint _texWidthExtra;
+
+
+//float _triThickness;
+
+#define epsilon 1e-7
+
+uint2 packIndex(uint index)
+{
+	const uint vSize = _texWidth;
+	return uint2(index % vSize, index / vSize);
+}
+
+uint2 packIndexExtra(uint index)
+{
+	const uint vSize = _texWidthExtra;
+	return uint2(index % vSize, index / vSize);
+}
+
+float dbox(float3 p, float b)
+{
+	return length(max(abs(p) - b, 0.0f));
+}
+
+inline float max3(float a, float b, float c)
+{
+	return max(max(a, b), c);
+}
+
+inline float max_element(float3 v)
+{
+	return max3(v.x, v.y, v.z);
+}
+
+inline float sd_cube(float3 p, float r)
+{
+	return max_element(abs(p) - r);
+}
+
+float dot2(in float3 v) { return dot(v, v); }
+
+bool PointInTriangle(float3 p, float3 pA, float3 pB, float3 pC)
+{
+	float3 a = pA - p;
+	float3 b = pB - p;
+	float3 c = pC - p;
+
+	float3 normPBC = cross(b, c); // Normal of PBC (u)
+	float3 normPCA = cross(c, a); // Normal of PCA (v)
+	float3 normPAB = cross(a, b); // Normal of PAB (w)
+
+	if (dot(normPBC, normPCA) < 0.0f)
+	{
+		return false;
+	}
+	else if (dot(normPBC, normPAB) < 0.0f)
+	{
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+float3 ClosestPointToLine(float3 start, float3 end, float3 pos)
+{
+	float3 lVec = end - start;
+	float t = clamp(dot(pos - start, lVec) / (epsilon + dot2(lVec)), 0.0f, 1.0f);
+	return start + lVec * t;
+}
+
+float3 ClosestPointToTri(float3 pA, float3 pB, float3 pC, float3 pos)
+{
+	float3 normal = normalize(cross(pB - pA, pC - pA));
+	float surfaceDist = dot(normal, pos - pA);
+	pos = pos - normal * surfaceDist;
+
+	if (PointInTriangle(pos, pA, pB, pC))
+	{
+		return pos;
+	}
+
+	float3 c1 = ClosestPointToLine(pA, pB, pos);
+	float3 c2 = ClosestPointToLine(pB, pC, pos);
+	float3 c3 = ClosestPointToLine(pC, pA, pos);
+
+	float mag1 = dot2(pos - c1);
+	float mag2 = dot2(pos - c2);
+	float mag3 = dot2(pos - c3);
+
+	float minValue = min(mag1, mag2);
+	minValue = min(minValue, mag3);
+
+	if (minValue == mag1)
+	{
+		return c1;
+	}
+	else if (minValue == mag2)
+	{
+		return c2;
+	}
+	return c3;
+}
+
+//float DistSegmentToSegment(float3 S1_start, float3 S1_end, float3 S2_start, float3 S2_end)
+//{
+//	float3 u = S1_end - S1_start;
+//	float3 v = S2_end - S2_start;
+//	float3 w = S1_start - S2_start;
+//	float a = dot(u, u);         // always >= 0
+//	float b = dot(u, v);
+//	float c = dot(v, v);         // always >= 0
+//	float d = dot(u, w);
+//	float e = dot(v, w);
+//	float D = a * c - b * b;        // always >= 0
+//	float sc, sN, sD = D;       // sc = sN / sD, default sD = D >= 0
+//	float tc, tN, tD = D;       // tc = tN / tD, default tD = D >= 0
+//
+//	// compute the line parameters of the two closest points
+//	if (D < epsilon)
+//	{ // the lines are almost parallel
+//		sN = 0.0f;         // force using point P0 on segment S1
+//		sD = 1.0f;         // to prevent possible division by 0.0 later
+//		tN = e;
+//		tD = c;
+//	}
+//	else
+//	{
+//		// get the closest points on the infinite lines
+//		sN = (b * e - c * d);
+//		tN = (a * e - b * d);
+//		if (sN < 0.0)
+//		{
+//			// sc < 0 => the s=0 edge is visible
+//			sN = 0.0f;
+//			tN = e;
+//			tD = c;
+//		}
+//		else if (sN > sD)
+//		{
+//			// sc > 1  => the s=1 edge is visible
+//			sN = sD;
+//			tN = e + b;
+//			tD = c;
+//		}
+//	}
+//
+//	if (tN < 0.0)
+//	{
+//		// tc < 0 => the t=0 edge is visible
+//		tN = 0.0f;
+//		// recompute sc for this edge
+//		if (-d < 0.0)
+//			sN = 0.0f;
+//		else if (-d > a)
+//			sN = sD;
+//		else
+//		{
+//			sN = -d;
+//			sD = a;
+//		}
+//	}
+//	else if (tN > tD)
+//	{
+//		// tc > 1  => the t=1 edge is visible
+//		tN = tD;
+//		// recompute sc for this edge
+//		if ((-d + b) < 0.0)
+//			sN = 0;
+//		else if ((-d + b) > a)
+//			sN = sD;
+//		else
+//		{
+//			sN = (-d + b);
+//			sD = a;
+//		}
+//	}
+//	// finally do the division to get sc and tc
+//	sc = (abs(sN) < epsilon ? 0.0f : sN / sD);
+//	tc = (abs(tN) < epsilon ? 0.0f : tN / tD);
+//
+//	// get the difference of the two closest points
+//	float3 dP = w + (sc * u) - (tc * v);  // =  S1(sc) - S2(tc)
+//
+//	return length(dP);   // return the closest distance
+//}
+
+uint _numClothParticles2;
+uint _selfAndAutoSpheresCount;
+float _secondClothScale;
+
+sData SetupSphereScale(sData sphere, uint i)
+{
+	//uint voxelIndex = threadId.x;
+	float scale = _useSelfCollision && i < _numClothParticles ? _selfCollisionScale : i < _numClothParticles2 ? _secondClothScale : i < _selfAndAutoSpheresCount ? 1.0f : _collisionSize;
+	sphere.pr.w *= scale;
+	return sphere;
+}
+
+bool CheckCollision(sData sphere, float4 minPos, float3 vPos, uint i, float scaled = 1)
+{
+	bool collide = false;
+	float3 bbox = minPos.xyz + vPos * minPos.w * 2 * scaled + float3(1, 1, 1) * minPos.w * scaled;
+
+	float4 pr = sphere.pr;
+	//if (_useTrisMesh && uint(sphere.nId.w) >= _selfAndAutoSpheresCount)
+	if ((_useSelfCollisionTriangles && i < _numClothParticles) || (_useTrisMesh && i >= _selfAndAutoSpheresCount))
+	{
+		//float dist = udTriangle(sphere.pr.xyz, sphere.nId.xyz, sphere.temp.xyz, bbox);// -_triThickness;
+		//collide = dist < voxelSize* scaled&& sphere.pr.w > 0;
+		pr.xyz = ClosestPointToTri(sphere.pr.xyz, sphere.nId.xyz, sphere.temp.xyz, bbox);
+	}
+	collide = dbox(bbox - pr.xyz, minPos.w * scaled) < pr.w;
+	//collide = sd_cube(bbox - pr.xyz, minPos.w * scaled) < pr.w;
+
+	//float dist = DistSegmentToSegment(bbox, bbox + 0.0001, pr.xyz, pr.xyz + sphere.temp.xyz);
+	//collide = collide || dist < 2 * minPos.w * scaled + 2 * pr.w;
+	return collide;
+}
+
+[numthreads(256, 1, 1)]
+void SubDivZero(uint3 id : SV_DispatchThreadID)//, uint3 threadId : SV_GroupThreadID, uint3 groupId : SV_GroupID)
+{
+	uint i = id.x;
+	if (i >= _sphereDataLength)return;
+
+	float4 cubeMinVec = _cubeMinVec;
+	sData sphere = SetupSphereScale(_sphereDataBuffer[i], i);
+	const uint grid = 4U;
+
+	for (uint voxelIndex = 0u; voxelIndex < 64U; voxelIndex++)
+	{
+		float3 vPos = float3(voxelIndex % grid, (voxelIndex / grid) % grid, voxelIndex / (grid * grid));
+
+		if (CheckCollision(sphere, cubeMinVec, vPos, i))
+		{
+			int dataIndex = 0;
+			InterlockedCompareExchange(_usedVoxelListBuffer[voxelIndex + 1], 0, 1, dataIndex);
+
+			if (dataIndex <= 0)
+			{
+				InterlockedAdd(_usedVoxelListBuffer[0], 1, dataIndex);
+				_usedVoxelListBuffer[voxelIndex + 1] = dataIndex + 1;
+				_usedVoxelListInverseBuffer[dataIndex + 1] = voxelIndex;
+			}
+			else {
+				dataIndex = dataIndex - 1;
+			}
+
+			uint counterPerVoxel;
+			InterlockedAdd(_counterPerVoxelBuffer[voxelIndex], 1u, counterPerVoxel);
+		}
+	}
+}
+
+[numthreads(256, 1, 1)]
+void SubDivZero2(uint3 id : SV_DispatchThreadID)//, uint3 threadId : SV_GroupThreadID, uint3 groupId : SV_GroupID)
+{
+	uint i = id.x;
+	if (i >= _sphereDataLength)return;
+
+	float4 cubeMinVec = _cubeMinVec;
+	sData sphere = SetupSphereScale(_sphereDataBuffer[i], i);
+	const uint grid = 4U;
+
+	const uint count = _usedVoxelListBuffer[0];
+	for (uint dataIndex = 0u; dataIndex < count; dataIndex++)
+	{
+		uint voxelIndex = _usedVoxelListInverseBuffer[dataIndex + 1];
+		float3 vPos = float3(voxelIndex % grid, (voxelIndex / grid) % grid, voxelIndex / (grid * grid));
+
+		if (CheckCollision(sphere, cubeMinVec, vPos, i))
+		{
+			uint counterPerVoxel;
+			InterlockedAdd(_counterPerVoxelBuffer[voxelIndex], 1u, counterPerVoxel);
+
+			uint index = _lastCounterPerVoxelBuffer[dataIndex] + counterPerVoxel;
+			_voxelDataBuffer[index] = sphere;
+
+			//InterlockedMax(_usedVoxelListInverseBuffer[0], counterPerVoxel + 1);
+		}
+	}
+}
+
+uint _newSpheresPerVoxel;
+uint _grid;
+uint _gridCount;
+//uint _level;
+float _scaled;
+
+RWStructuredBuffer<int> _usedVoxelListInverseBuffer2;
+RWStructuredBuffer<uint> _counterPerVoxelBuffer2;
+RWStructuredBuffer<sData> _voxelDataBuffer2;
+//RWStructuredBuffer<uint> _maxCounterBuffer;
+RWStructuredBuffer<uint> _lastVoxelCountBuffer;
+StructuredBuffer<uint> _usedVoxelListInverseBufferR;
+
+//uint totalRealCount;
+//uint lastVoxelCount;
+
+void GetDataIndexAndCount(uint i, uint lastVoxelCount, out uint dataIndex, out uint realCount)
+{
+	dataIndex = 0u;
+	realCount = 0u;
+	for (uint n = 0u; n < lastVoxelCount; n++)
+	{
+		realCount += _counterPerVoxelBuffer[_usedVoxelListInverseBufferR[n + 1]];
+		//realCount = _lastCounterPerVoxelBuffer[n+1];
+		if (i < realCount)
+		{
+			dataIndex = n;
+			break;
+		}
+	}
+}
+
+sData GetSphereData(uint i, uint dataIndex, uint realCount, out uint voxelIndex)
+{
+	voxelIndex = _usedVoxelListInverseBufferR[dataIndex + 1];
+	uint counter = i - (realCount - _counterPerVoxelBuffer[voxelIndex]);
+	uint index = _lastCounterPerVoxelBuffer[dataIndex] + counter;
+	return _voxelDataBuffer[index];
+}
+
+void SetupSubDiv(uint i, uint grid, float scaled, out sData sphere, out float3 voxelPos, out float4 minPos)
+{
+	uint dataIndex;
+	uint realCount;
+	const uint lastVoxelCount = _lastVoxelCountBuffer[0];
+	GetDataIndexAndCount(i, lastVoxelCount, dataIndex, realCount);
+
+	const float4 cubeMinVec = _cubeMinVec;
+
+	uint voxelIndex;
+	sphere = GetSphereData(i, dataIndex, realCount, voxelIndex);
+
+	voxelPos = float3(voxelIndex % grid, (voxelIndex / grid) % grid, voxelIndex / (grid * grid));
+	voxelPos = clamp(voxelPos, 0, grid - 1);
+	minPos = float4(cubeMinVec.xyz + voxelPos * cubeMinVec.w * 2 * scaled * 4, cubeMinVec.w);
+}
+
+
+[numthreads(256, 1, 1)]
+void SubDivOneAndTwo(uint3 id : SV_DispatchThreadID)
+{
+	uint i = id.x;
+	const uint totalRealCount = _lastVoxelCountBuffer[1];
+	if (i >= totalRealCount)return;
+
+	const uint grid = _grid;
+	const float scaled = _scaled;
+
+	sData sphere; float3 voxelPos; float4 minPos;
+	SetupSubDiv(i, grid, scaled, sphere, voxelPos, minPos);
+	uint nId = sphere.nId.w;
+
+	for (uint vIndex = 0u; vIndex < 64u; vIndex++)
+	{
+		float3 vPos = float3(vIndex % 4, (vIndex / 4) % 4, vIndex / (4 * 4));
+		float3 voxelPos2 = voxelPos * 4 + vPos;
+		voxelPos2 = clamp(voxelPos2, 0, (4 * grid) - 1);
+		int newVoxelNum = (int)(voxelPos2.x + voxelPos2.y * (4 * grid) + voxelPos2.z * (4 * grid) * (4 * grid));
+
+		if (CheckCollision(sphere, minPos, vPos, nId, scaled))
+		{
+
+			int newDataIndex = 0;
+			InterlockedCompareExchange(_usedVoxelListBuffer[newVoxelNum + 1], 0, 1, newDataIndex);
+
+			if (newDataIndex <= 0)
+			{
+				InterlockedAdd(_usedVoxelListBuffer[0], 1, newDataIndex);
+				_usedVoxelListBuffer[newVoxelNum + 1] = newDataIndex + 1;
+				_usedVoxelListInverseBuffer2[newDataIndex + 1] = newVoxelNum;
+			}
+			else {
+				newDataIndex = newDataIndex - 1;
+			}
+
+			uint counterPerVoxel;
+			InterlockedAdd(_counterPerVoxelBuffer2[newVoxelNum], 1u, counterPerVoxel);
+
+			//uint index = (_level == 2u ? (dataIndex * 64u + vIndex) : newVoxelNum) * _newSpheresPerVoxel + counterPerVoxel;
+			//_voxelDataBuffer2[index] = sphere;
+
+			//InterlockedMax(_usedVoxelListInverseBuffer[0], counterPerVoxel+1);
+
+		}
+	}
+}
+
+
+[numthreads(256, 1, 1)]
+void SubDivOneAndTwo2(uint3 id : SV_DispatchThreadID)
+{
+	uint i = id.x;
+	const uint totalRealCount = _lastVoxelCountBuffer[1];
+	if (i >= totalRealCount)return;
+
+	const uint grid = _grid;
+	const float scaled = _scaled;
+
+	sData sphere; float3 voxelPos; float4 minPos;
+	SetupSubDiv(i, grid, scaled, sphere, voxelPos, minPos);
+	uint nId = sphere.nId.w;
+
+	for (uint vIndex = 0u; vIndex < 64u; vIndex++)
+	{
+		float3 vPos = float3(vIndex % 4, (vIndex / 4) % 4, vIndex / (4 * 4));
+		float3 voxelPos2 = voxelPos * 4 + vPos;
+		voxelPos2 = clamp(voxelPos2, 0, (4 * grid) - 1);
+		int newVoxelNum = (int)(voxelPos2.x + voxelPos2.y * (4 * grid) + voxelPos2.z * (4 * grid) * (4 * grid));
+
+		if (CheckCollision(sphere, minPos, vPos, nId, scaled))
+		{
+			int newDataIndex = _usedVoxelListBuffer[newVoxelNum + 1] - 1;
+
+			uint counterPerVoxel;
+			InterlockedAdd(_counterPerVoxelBuffer2[newVoxelNum], 1u, counterPerVoxel);
+
+			uint index2 = _lastCounterPerVoxelBuffer2[newDataIndex] + counterPerVoxel;
+			_voxelDataBuffer2[index2] = sphere;
+
+			//InterlockedMax(_usedVoxelListInverseBuffer[0], counterPerVoxel + 1);
+		}
+	}
+}
+
+
+RWStructuredBuffer<uint> _argsBuffer;
+
+[numthreads(1, 1, 1)]
+void CalcTotalCount(uint3 id : SV_DispatchThreadID)
+{
+	uint totalRealCount = 0u;
+	const uint count = _usedVoxelListBuffer[0];
+	for (uint i = 0u; i < count; i++)
+	{
+		totalRealCount += _counterPerVoxelBuffer[_usedVoxelListInverseBuffer[i + 1]];
+	}
+	_lastVoxelCountBuffer[0] = count;
+	_lastVoxelCountBuffer[1] = totalRealCount;
+	_argsBuffer[0] = ceil(totalRealCount / 256.0f);
+}
+
+[numthreads(1, 1, 1)]
+void CalcTotalCountDirect(uint3 id : SV_DispatchThreadID)
+{
+	uint totalRealCount = 0u;
+	const uint count = _usedVoxelListBuffer[0];
+	for (uint i = 0u; i < count; i++)
+	{
+		totalRealCount += _counterPerVoxelBuffer[_usedVoxelListInverseBuffer[i + 1]];
+	}
+	_lastVoxelCountBuffer[0] = count;
+	_lastVoxelCountBuffer[1] = totalRealCount;
+	//_argsBuffer[0] = ceil(totalRealCount / 256.0f);
+}
+
+//RWStructuredBuffer<int> _lastUsedVoxelListBuffer;
+
+[numthreads(512, 1, 1)]
+void ClearVoxelBuffer(uint3 id : SV_DispatchThreadID)
+{
+	//_lastUsedVoxelListBuffer[id.x] = _usedVoxelListBuffer[packIndexExtra(id.x)];
+	_usedVoxelListBuffer[id.x] = 0;
+}
+
+[numthreads(512, 1, 1)]
+void ClearAllIntBuffers(uint3 id : SV_DispatchThreadID)
+{
+	const uint gridSize = _gridCount * _gridCount * _gridCount;
+	if (id.x < gridSize) {
+		_counterPerVoxelBuffer[id.x] = 0;
+		_counterPerVoxelBuffer2[id.x] = 0;
+	}
+	if (id.x < gridSize + 512) {
+		_usedVoxelListBuffer[id.x] = 0;
+		_usedVoxelListInverseBuffer[id.x] = 0;
+		_usedVoxelListInverseBuffer2[id.x] = 0;
+	}
+}
+
+[numthreads(256, 1, 1)]
+void ClearAllVectorBuffers(uint3 id : SV_DispatchThreadID)
+{
+	_voxelDataBuffer[id.x].pr = 0;
+	_voxelDataBuffer[id.x].nId = 0;
+	_voxelDataBuffer[id.x].temp = 0;
+	_voxelDataBuffer2[id.x].pr = 0;
+	_voxelDataBuffer2[id.x].nId = 0;
+	_voxelDataBuffer2[id.x].temp = 0;
+}
+
+uint _meshTrisLength;
+float4x4 _meshMatrix;
+StructuredBuffer<uint> _trisData;
+uint _lastTrisSum;
+Texture2D<float4> _skinned_data_1;
+Texture2D<float4> _skinned_data_2;
+uint _skinned_tex_width;
+float _normalScale;
+
+RWStructuredBuffer<sData> _sphereDataBufferRW;
+
+
+[numthreads(256, 1, 1)]
+void WriteTriangles(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _meshTrisLength)return;
+
+	uint n = _lastTrisSum + id.x;
+	uint index = _lastParticleSum + id.x;
+
+	float4x4 _matNoTrans = _meshMatrix;
+	_matNoTrans._14 = 0;
+	_matNoTrans._24 = 0;
+	_matNoTrans._34 = 0;
+
+	//float sphereRadius = _sphereDataBuffer[index].pr.w;
+	//sphereRadius = max(0.05, sphereRadius * 5);
+
+	float3 normal = 0;
+	uint2 skinned_tex_uv;
+	uint tIndex = _trisData[n * 3 + 0];
+	skinned_tex_uv.x = tIndex % _skinned_tex_width;
+	skinned_tex_uv.y = tIndex / _skinned_tex_width;
+	float4 data_1 = _skinned_data_1[skinned_tex_uv];
+	normal.x = data_1.w;
+	normal.yz = _skinned_data_2[skinned_tex_uv].xy;
+	normal = mul(_matNoTrans, float4(normal, 1)).xyz;
+	_sphereDataBufferRW[index].pr.xyz = mul(_meshMatrix, float4(data_1.xyz, 1)).xyz - normal * _normalScale;
+	tIndex = _trisData[n * 3 + 1];
+	skinned_tex_uv.x = tIndex % _skinned_tex_width;
+	skinned_tex_uv.y = tIndex / _skinned_tex_width;
+	data_1 = _skinned_data_1[skinned_tex_uv];
+	normal.x = data_1.w;
+	normal.yz = _skinned_data_2[skinned_tex_uv].xy;
+	normal = mul(_matNoTrans, float4(normal, 1)).xyz;
+	_sphereDataBufferRW[index].nId.xyz = mul(_meshMatrix, float4(data_1.xyz, 1)).xyz - normal * _normalScale;
+	tIndex = _trisData[n * 3 + 2];
+	skinned_tex_uv.x = tIndex % _skinned_tex_width;
+	skinned_tex_uv.y = tIndex / _skinned_tex_width;
+	data_1 = _skinned_data_1[skinned_tex_uv];
+	normal.x = data_1.w;
+	normal.yz = _skinned_data_2[skinned_tex_uv].xy;
+	normal = mul(_matNoTrans, float4(normal, 1)).xyz;
+	_sphereDataBufferRW[index].temp.xyz = mul(_meshMatrix, float4(data_1.xyz, 1)).xyz - normal * _normalScale;
+
+	//_sphereDataBuffer[index].pr.xyz = mul(_meshMatrix, float4(_vertexData[_trisData[n * 3 + 0]], 1)).xyz;
+	//_sphereDataBuffer[index].nId.xyz = mul(_meshMatrix, float4(_vertexData[_trisData[n * 3 + 1]], 1)).xyz;
+	//_sphereDataBuffer[index].temp.xyz = mul(_meshMatrix, float4(_vertexData[_trisData[n * 3 + 2]], 1)).xyz;
+}
+
+struct SVertOut
+{
+	float3 pos;
+	float3 norm;
+	float4 tang;
+};
+StructuredBuffer<SVertOut> _meshVertsOut;
+
+uint _rtArrayWidth;
+Texture2D<float4> _rtArray;
+
+[numthreads(256, 1, 1)]
+void WriteTrianglesFromNormalSkinning(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _meshTrisLength)return;
+
+	uint n = _lastTrisSum + id.x;
+	uint index = _lastParticleSum + id.x;
+
+	float4x4 _matNoTrans = _meshMatrix;
+	_matNoTrans._14 = 0;
+	_matNoTrans._24 = 0;
+	_matNoTrans._34 = 0;
+
+	//float sphereRadius = _sphereDataBuffer[index].pr.w;
+	//sphereRadius = max(0.05, sphereRadius * 5);
+
+	float3 normal = 0;
+	uint tIndex = _trisData[n * 3 + 0];
+	SVertOut vin = _meshVertsOut[tIndex];
+	normal = mul(_matNoTrans, float4(vin.norm, 1)).xyz;
+	_sphereDataBufferRW[index].pr.xyz = mul(_meshMatrix, float4(vin.pos, 1)).xyz - normal * _normalScale;
+	
+	tIndex = _trisData[n * 3 + 1];
+	vin = _meshVertsOut[tIndex];
+	normal = mul(_matNoTrans, float4(vin.norm, 1)).xyz;
+	_sphereDataBufferRW[index].nId.xyz = mul(_meshMatrix, float4(vin.pos, 1)).xyz - normal * _normalScale;
+	
+	tIndex = _trisData[n * 3 + 2];
+	vin = _meshVertsOut[tIndex];
+	normal = mul(_matNoTrans, float4(vin.norm, 1)).xyz;
+	_sphereDataBufferRW[index].temp.xyz = mul(_meshMatrix, float4(vin.pos, 1)).xyz - normal * _normalScale;
+
+}
+
+[numthreads(256, 1, 1)]
+void WriteTrianglesFromNormalSkinningBlends(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _meshTrisLength)return;
+
+	uint n = _lastTrisSum + id.x;
+	uint index = _lastParticleSum + id.x;
+
+	float4x4 _matNoTrans = _meshMatrix;
+	_matNoTrans._14 = 0;
+	_matNoTrans._24 = 0;
+	_matNoTrans._34 = 0;
+
+	//float sphereRadius = _sphereDataBuffer[index].pr.w;
+	//sphereRadius = max(0.05, sphereRadius * 5);
+	const uint width = _rtArrayWidth;
+
+	float3 normal = 0;
+	uint tIndex = _trisData[n * 3 + 0];
+	float3 result = _rtArray[uint2(tIndex % width, tIndex / width)].xyz;
+	SVertOut vin = _meshVertsOut[tIndex];
+	normal = mul(_matNoTrans, float4(vin.norm, 1)).xyz;
+	_sphereDataBufferRW[index].pr.xyz = mul(_meshMatrix, float4(vin.pos + result, 1)).xyz - normal * _normalScale;
+
+	tIndex = _trisData[n * 3 + 1];
+	result = _rtArray[uint2(tIndex % width, tIndex / width)].xyz;
+	vin = _meshVertsOut[tIndex];
+	normal = mul(_matNoTrans, float4(vin.norm, 1)).xyz;
+	_sphereDataBufferRW[index].nId.xyz = mul(_meshMatrix, float4(vin.pos + result, 1)).xyz - normal * _normalScale;
+
+	tIndex = _trisData[n * 3 + 2];
+	result = _rtArray[uint2(tIndex % width, tIndex / width)].xyz;
+	vin = _meshVertsOut[tIndex];
+	normal = mul(_matNoTrans, float4(vin.norm, 1)).xyz;
+	_sphereDataBufferRW[index].temp.xyz = mul(_meshMatrix, float4(vin.pos + result, 1)).xyz - normal * _normalScale;
+
+}
+
+
+
+[numthreads(256, 1, 1)]
+void WriteVertices(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _meshTrisLength)return;
+
+	uint n = id.x;
+	uint index = _lastParticleSum + n;
+
+	float4x4 _matNoTrans = _meshMatrix;
+	_matNoTrans._14 = 0;
+	_matNoTrans._24 = 0;
+	_matNoTrans._34 = 0;
+
+	float3 normal = 0;
+	uint2 skinned_tex_uv;
+	skinned_tex_uv.x = n % _skinned_tex_width;
+	skinned_tex_uv.y = n / _skinned_tex_width;
+	float4 data_1 = _skinned_data_1[skinned_tex_uv];
+	normal.x = data_1.w;
+	normal.yz = _skinned_data_2[skinned_tex_uv].xy;
+	normal = mul(_matNoTrans, float4(normal, 1)).xyz;
+	float sphereRadius = _sphereDataBufferRW[index].pr.w;
+	_sphereDataBufferRW[index].pr.xyz = mul(_meshMatrix, float4(data_1.xyz, 1)).xyz - normal * _normalScale * max(0.05, sphereRadius * 5);
+	_sphereDataBufferRW[index].nId.xyz = normal;
+}
+
+
+[numthreads(256, 1, 1)]
+void WriteVerticesFromNormalSkinning(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _meshTrisLength)return;
+
+	uint n = id.x;
+	uint index = _lastParticleSum + n;
+
+	float4x4 _matNoTrans = _meshMatrix;
+	_matNoTrans._14 = 0;
+	_matNoTrans._24 = 0;
+	_matNoTrans._34 = 0;
+
+	float3 normal = 0;
+	SVertOut vin = _meshVertsOut[n];
+	normal = mul(_matNoTrans, float4(vin.norm, 1)).xyz;
+	float sphereRadius = _sphereDataBufferRW[index].pr.w;
+	_sphereDataBufferRW[index].pr.xyz = mul(_meshMatrix, float4(vin.pos, 1)).xyz - normal * _normalScale * max(0.05, sphereRadius * 5);
+	_sphereDataBufferRW[index].nId.xyz = normal;
+}
+
+[numthreads(256, 1, 1)]
+void WriteVerticesFromNormalSkinningBlends(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _meshTrisLength)return;
+
+	uint n = id.x;
+	uint index = _lastParticleSum + n;
+
+	float4x4 _matNoTrans = _meshMatrix;
+	_matNoTrans._14 = 0;
+	_matNoTrans._24 = 0;
+	_matNoTrans._34 = 0;
+
+	const uint width = _rtArrayWidth;
+	float3 result = _rtArray[uint2(n % width, n / width)].xyz;
+
+	float3 normal = 0;
+	SVertOut vin = _meshVertsOut[n];
+	normal = mul(_matNoTrans, float4(vin.norm, 1)).xyz;
+	float sphereRadius = _sphereDataBufferRW[index].pr.w;
+	_sphereDataBufferRW[index].pr.xyz = mul(_meshMatrix, float4(vin.pos + result, 1)).xyz - normal * _normalScale * max(0.05, sphereRadius * 5);
+	_sphereDataBufferRW[index].nId.xyz = normal;
+}
+
+
+Texture2D<float4> _positionBufferTex;
+Texture2D<float4> _normalBufferTex;
+uint _skinnerVertexTexWidth;
+
+[numthreads(256, 1, 1)] // TODO: play around with numthread size
+void UpdateSkinnerParticles(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _meshTrisLength) return;
+
+	uint counter = _lastParticleSum + id.x;
+
+	uint vertexID = id.x;
+	uint2 texcoord = uint2(vertexID % _skinnerVertexTexWidth, (_skinnerVertexTexWidth - 1) - vertexID / _skinnerVertexTexWidth); //TODO needs visual debug if all points get used
+	float sphereRadius = _sphereDataBufferRW[counter].pr.w;
+
+	float3 normal = _normalBufferTex[texcoord].xyz;
+	float3 unscaledPos = _positionBufferTex[texcoord].xyz - normal * _normalScale * max(0.05, sphereRadius * 5);
+	_sphereDataBufferRW[counter].pr.xyz = unscaledPos; // float4(unscaledPos, counter + 1); //float4((unscaledPos - _gridScale.xyz) * _gridScale.w + _gridScale.xyz, counter + 1);
+	_sphereDataBufferRW[counter].nId.xyz = normal;
+	_sphereDataBufferRW[counter].nId.w = counter;
+}
+
+#pragma kernel UpdateAllParticleTris
+
+float4x4 _localToWorldMatrix;
+uint _vertsLength;
+StructuredBuffer<float3> _positionbuffer;
+//RWStructuredBuffer<sData> _sphereDataBufferRW;
+
+[numthreads(256, 1, 1)]
+void UpdateAllParticleTris(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _vertsLength) return;
+
+	uint counter = _lastParticleSum + id.x;
+
+	_sphereDataBufferRW[counter].pr.xyz = mul(_localToWorldMatrix, float4(_positionbuffer[_trisData[id.x * 3 + 0]], 1)).xyz;
+	_sphereDataBufferRW[counter].nId.xyz = mul(_localToWorldMatrix, float4(_positionbuffer[_trisData[id.x * 3 + 1]], 1)).xyz;
+	_sphereDataBufferRW[counter].temp.xyz = mul(_localToWorldMatrix, float4(_positionbuffer[_trisData[id.x * 3 + 2]], 1)).xyz;
+
+	_sphereDataBufferRW[counter].nId.w = _trisData[id.x * 3 + 0];
+	_sphereDataBufferRW[counter].temp.w = id.x;
+}
+
+#pragma kernel UpdateAllParticles
+[numthreads(256, 1, 1)]
+void UpdateAllParticles(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _vertsLength) return;
+
+	uint counter = _lastParticleSum + id.x;
+
+	float3 unscaledPos = mul(_localToWorldMatrix, float4(_positionbuffer[id.x], 1)).xyz;
+	_sphereDataBufferRW[counter].pr.xyz = unscaledPos;// float4(unscaledPos, counter + 1); //float4((unscaledPos - _gridScale.xyz) * _gridScale.w + _gridScale.xyz, counter + 1);
+	_sphereDataBufferRW[counter].nId.w = counter;
+
+}
+
+//#pragma kernel UpdateSkinnerParticles
+//
+//Texture2D<float4> _positionBufferTex;
+//Texture2D<float4> _normalBufferTex;
+//uint _skinnerVertexTexWidth;
+//
+//[numthreads(128, 1, 1)] // TODO: play around with numthread size
+//void UpdateSkinnerParticles(uint3 id : SV_DispatchThreadID)
+//{
+//	if (id.x >= _vertsLength) return;
+//
+//	uint counter = _lastParticleSum + id.x;
+//
+//	uint vertexID = id.x;
+//	uint2 texcoord = uint2(vertexID % _skinnerVertexTexWidth, (_skinnerVertexTexWidth - 1) - vertexID / _skinnerVertexTexWidth); //TODO needs visual debug if all points get used
+//	float sphereRadius = _sphereDataBuffer[counter].pr.w;
+//
+//	float3 normal = _normalBufferTex[texcoord].xyz;
+//	float3 unscaledPos = _positionBufferTex[texcoord].xyz - normal * _normalScale * max(0.05, sphereRadius * 5);
+//	_sphereDataBuffer[counter].pr.xyz = unscaledPos; // float4(unscaledPos, counter + 1); //float4((unscaledPos - _gridScale.xyz) * _gridScale.w + _gridScale.xyz, counter + 1);
+//	_sphereDataBuffer[counter].nId.xyz = normal;
+//	_sphereDataBuffer[counter].nId.w = counter;
+//}
+
+#pragma kernel SetupAutoSpheres
+
+float _autoSphereSize;
+uint _numAutoSpheres;
+struct BonesStruct
+{
+	float4 pos;
+	float4 rot;
+};
+StructuredBuffer<BonesStruct> _autoBonesBuffer;
+struct SphereStruct
+{
+	float4 offset;
+	uint boneId;
+};
+StructuredBuffer<SphereStruct> _autoSphereBuffer;
+
+float3 Rotate(float4 q, float3 v)
+{
+	float3 t = 2.0f * cross(q.xyz, v);
+	return v + q.w * t + cross(q.xyz, t); //changed q.w to -q.w;
+}
+
+[numthreads(8, 1, 1)]
+void SetupAutoSpheres(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numAutoSpheres) return;
+
+	uint n = id.x;
+	uint index = _lastParticleSum + n;
+
+	SphereStruct data = _autoSphereBuffer[n];
+	BonesStruct bone = _autoBonesBuffer[data.boneId];
+	float3 spherePos = bone.pos.xyz + Rotate(bone.rot, data.offset.xyz);
+	float4 sphere = float4(spherePos, data.offset.w * _autoSphereSize);
+
+	float3 velocity = spherePos - _sphereDataBufferRW[index].pr.xyz;
+
+	_sphereDataBufferRW[index].pr = sphere;
+	_sphereDataBufferRW[index].temp.xyz = velocity;
+}
+
+
+
+
+RWStructuredBuffer<uint> _argsBuffer2;
+
+[numthreads(1, 1, 1)]
+void CalcArgBuffer(uint3 id : SV_DispatchThreadID)
+{
+	const uint count = _usedVoxelListBuffer[0];
+	_argsBuffer2[0] = ceil(count / 512.0f);
+	_usedVoxelListInverseBuffer[0] = 0;
+}
+
+[numthreads(1, 1, 1)]
+void CalcArgBufferDirect(uint3 id : SV_DispatchThreadID)
+{
+	const uint count = _usedVoxelListBuffer[0];
+	//_argsBuffer2[0] = ceil(count / 512.0f);
+	_usedVoxelListInverseBuffer[0] = 0;
+}
+
+[numthreads(1, 1, 1)]
+void SetLastCounter(uint3 id : SV_DispatchThreadID)
+{
+	uint rCount = 0;
+	const uint count = _usedVoxelListBuffer[0];
+	for (uint n = 0; n < count; n++)
+	{
+		_lastCounterPerVoxelBuffer[n] = rCount;
+		rCount += _counterPerVoxelBuffer[_usedVoxelListInverseBuffer[n + 1]];
+	}
+	_usedVoxelListInverseBuffer[0] = rCount;
+}
+
+RWStructuredBuffer<uint> _scanCountBuffer;
+[numthreads(512, 1, 1)]
+void SetLastCounterNew(uint3 id : SV_DispatchThreadID)
+{
+	uint n = id.x;
+	uint blockSize = _counterPerVoxelBuffer[_usedVoxelListInverseBuffer[n + 1]];
+	_scanCountBuffer[n + 1] = blockSize;
+	InterlockedAdd(_usedVoxelListInverseBuffer[0], blockSize);
+
+	if (id.x == 0) {
+		_scanCountBuffer[0] = 0;
+	}
+}
+
+
+//[numthreads(512, 1, 1)]
+[numthreads(1, 1, 1)]
+void ClearCounterBuffer(uint3 id : SV_DispatchThreadID)
+{
+	//_counterPerVoxelBuffer2[packIndex(id.x)] = 0;
+	//if (id.x == 0)
+	_usedVoxelListInverseBuffer[0] = 0;
+}
+
+
+RWStructuredBuffer<uint> _counterPerVoxelBuffer2Copy;
+uint _texWidthCopy;
+
+uint2 packIndexCopy(uint index, uint vSize)
+{
+	return uint2(index % vSize, index / vSize);
+}
+
+uint _threadSize;
+
+[numthreads(512, 1, 1)]
+void CSCopyTexData(uint3 id : SV_DispatchThreadID)
+{
+	uint index = id.x;
+	if (index < _threadSize)
+		_counterPerVoxelBuffer2Copy[index] = _counterPerVoxelBuffer2[index];
+}
+
+[numthreads(512, 1, 1)]
+void CSCopyDataToTex(uint3 id : SV_DispatchThreadID)
+{
+	uint index = id.x;
+	if (index < _threadSize)
+		_counterPerVoxelBuffer2[index] = _counterPerVoxelBuffer2Copy[index];
+}

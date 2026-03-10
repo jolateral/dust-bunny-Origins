@@ -1,0 +1,166 @@
+﻿#pragma kernel CSVertsAndNormals
+#pragma kernel CSOnlyVerts
+#pragma kernel CSCombiner
+#pragma kernel CSCombinerN
+#pragma kernel CSCombinerNT
+
+uint width;
+uint vertexCount;
+uint _shapeCount;
+StructuredBuffer<float3> dataBuffer;
+StructuredBuffer<float3> dataBufferN;
+RWTexture2D<float4> rt;
+RWTexture2D<float4> rtN;
+RWTexture2D<float4> rtT;
+Texture2DArray<float4> _rtArray;
+Texture2DArray<float4> _rtArrayN;
+Texture2DArray<float4> _rtArrayT;
+float _blendWeightArray[512];
+int _remapArray[512];
+
+[numthreads(8, 8, 1)]
+void CSVertsAndNormals(uint3 id : SV_DispatchThreadID)
+{
+	uint index = id.x + id.y * width;
+	if (index >= vertexCount)
+		return;
+
+	float3 data = dataBuffer[index];
+	float3 dataN = dataBufferN[index];
+	rt[id.xy] = float4(data, 1);
+	rtN[id.xy] = float4(dataN, 1);
+}
+
+
+[numthreads(8, 8, 1)]
+void CSOnlyVerts(uint3 id : SV_DispatchThreadID)
+{
+	uint index = id.x + id.y * width;
+	if (index >= vertexCount)
+		return;
+
+	float3 data = dataBuffer[index];
+	rt[id.xy] = float4(data, 1);
+}
+
+[numthreads(8, 8, 1)]
+void CSCombiner(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= width || id.y >= width)return;
+
+	const uint length = _shapeCount;
+
+	float3 result = 0;
+	for (uint i = 0u; i < length; i++)
+	{
+		int remap = _remapArray[i];
+		float4 vertexPos = _rtArray[uint3(id.xy, remap)];
+		result += vertexPos.xyz * _blendWeightArray[i] * 0.01f;
+	}
+
+	rt[id.xy] = float4(result,0);
+}
+
+[numthreads(8, 8, 1)]
+void CSCombinerN(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= width || id.y >= width)return;
+
+	const uint length = _shapeCount;
+
+	float3 result = 0;
+	float3 resultN = 0;
+
+	for (uint i = 0u; i < length; i++)
+	{
+		int remap = _remapArray[i];
+		float blend = _blendWeightArray[i] * 0.01f;
+		float4 vertexPos = _rtArray[uint3(id.xy, remap)];
+		result += vertexPos.xyz * blend;
+		float4 normalPos = _rtArrayN[uint3(id.xy, remap)];
+		resultN += normalPos.xyz * blend;
+	}
+
+	rt[id.xy] = float4(result, 0);
+	rtN[id.xy] = float4(resultN, 0);
+}
+
+[numthreads(8, 8, 1)]
+void CSCombinerNT(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= width || id.y >= width)return;
+
+	const uint length = _shapeCount;
+
+	float3 result = 0;
+	float3 resultN = 0;
+	float3 resultT = 0;
+
+	for (uint i = 0u; i < length; i++)
+	{
+		int remap = _remapArray[i];
+		float blend = _blendWeightArray[i] * 0.01f;
+		float4 vertexPos = _rtArray[uint3(id.xy, remap)];
+		result += vertexPos.xyz * blend;
+		float4 normalPos = _rtArrayN[uint3(id.xy, remap)];
+		resultN += normalPos.xyz * blend;
+		float4 tangentPos = _rtArrayT[uint3(id.xy, remap)];
+		resultT += tangentPos.xyz * blend;
+	}
+
+	rt[id.xy] = float4(result, 0);
+	rtN[id.xy] = float4(resultN, 0);
+	rtT[id.xy] = float4(resultT, 0);
+}
+
+//// Encoding/decoding [0..1) floats into 8 bit/channel RGBA. Note that 1.0 will not be encoded properly.
+//inline float4 EncodeFloatRGBA(float v)
+//{
+//	float4 kEncodeMul = float4(1.0, 255.0, 65025.0, 16581375.0);
+//	float kEncodeBit = 1.0 / 255.0;
+//	float4 enc = kEncodeMul * v;
+//	enc = frac(enc);
+//	enc -= enc.yzww * kEncodeBit;
+//	return enc;
+//}
+//inline float DecodeFloatRGBA(float4 enc)
+//{
+//	float4 kDecodeDot = float4(1.0, 1 / 255.0, 1 / 65025.0, 1 / 16581375.0);
+//	return dot(enc, kDecodeDot);
+//}
+//
+////Pack 3 values into 1 float
+//float PackToFloat(float3 vec)
+//{
+//	uint3 value = uint3(((vec + 1.0f) * 0.5f) * 255.0f);
+//	uint packedColor = (value.x << 16) | (value.y << 8) | value.z;
+//	float packedFloat = (float)(((double)packedColor) / ((double)(1 << 24)));
+//	return packedFloat;
+//}
+//
+////UnPack 3 values from 1 float
+//float3 UnPackFloat(float src)
+//{
+//	float r = frac(src);
+//	float g = frac(src * 256.0f);
+//	float b = frac(src * 65536.0f);
+//	//Unpack to the -1..1 range
+//	r = (r * 2.0f) - 1.0f;
+//	g = (g * 2.0f) - 1.0f;
+//	b = (b * 2.0f) - 1.0f;
+//	return float3(r, g, b);
+//}
+
+//[numthreads(8,8,1)]
+//void CSMain (uint3 id : SV_DispatchThreadID)
+//{
+//    uint index = id.x + id.y * width;
+//
+//    if (index >= vertexCount)
+//        return;
+//
+//    float3 data = dataBuffer[index] - staticData.xyz;
+//	float3 normals = dataBufferN[index];
+//
+//    rt[id.xy] = float4(data, PackToFloat(normals));
+//}

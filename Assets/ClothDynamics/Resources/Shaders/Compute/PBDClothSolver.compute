@@ -1,0 +1,2945 @@
+//#define USE_UNITY_2019 1
+bool _useNeighbourCheck;
+
+#pragma multi_compile_local _ USE_NEIGHBOUR_CHECK
+
+// struct declarations
+struct EdgeStruct {
+	int startIndex;
+	int endIndex;
+};
+
+struct DistanceConstraintStruct {
+	EdgeStruct edge;
+	float restLength;
+};
+
+struct BendingConstraintStruct {
+	int index0;
+	int index1;
+	int index2;
+	int index3;
+	float restAngle;
+};
+
+struct CollidableSphereStruct {
+	float3 center;
+	float radius;
+	float3 posVel;
+	float3 rotVel;
+	float friction;
+};
+
+struct CollidableSDFStruct {
+	float3 center;
+	float4 extent;
+	float4 rotation;
+	float3 posVel;
+	float3 rotVel;
+	uint sdfType;
+};
+
+// Uniform data
+uint _numParticles;
+uint _numDistanceConstraints;
+uint _numBendingConstraints;
+//uint _numAllConstraints;
+uint _numCollidableSpheres;
+uint _numCollidableSDFs;
+uint _numPointConstraints;
+float4 _gravity;
+float _invMass;
+float _dt;
+float _stretchStiffness;
+float _compressionStiffness;
+float _bendingStiffness;
+float _staticFriction;
+float _dynamicFriction;
+float _normalScale;
+float _collidableObjectsBias;
+float4 _windVec;
+
+// Buffer data
+RWStructuredBuffer<float3> _positions;
+RWStructuredBuffer<float4> _projectedPositions;
+RWStructuredBuffer<float4> _velocities;
+RWStructuredBuffer<float> _frictions;
+//RWStructuredBuffer<float3> _deltaPos;
+RWStructuredBuffer<uint3> _deltaPosAsInt;
+RWStructuredBuffer<int> _deltaCount;
+StructuredBuffer<DistanceConstraintStruct> _distanceConstraints;
+StructuredBuffer<BendingConstraintStruct> _bendingConstraints;
+StructuredBuffer<CollidableSphereStruct> _collidableSpheres;
+StructuredBuffer<CollidableSDFStruct> _collidableSDFs;
+StructuredBuffer<int> _pointConstraints;
+StructuredBuffer<float3> _randomBuffer;
+//StructuredBuffer<float3> _normalsBufferR;
+StructuredBuffer<uint2> _connectionInfoBuffer;
+StructuredBuffer<uint> _connectedVertsBuffer;
+
+bool _hasTempPointConstraint;
+uint _tempPointConstraint;
+float3 _deltaPointConstraint;
+float4x4 _worldToLocalMatrix;
+float4x4 _localToWorldMatrix;
+
+struct sData
+{
+	float4 pr;
+	float4 nId;
+	float4 temp;
+};
+
+bool _useSelfCollisionTriangles;
+bool _useTrisMesh;
+//uint _lastParticleSum;
+uint _selfAndAutoSpheresCount;
+uint _gridCount;
+uint _numSelfParticles;
+
+#define WORK_GROUP_SIZE 256
+
+#define COLLISION_LIMIT 64
+
+#define epsilon 1e-7
+//1e-7 => 0.0000001
+
+groupshared float4 groupData0[WORK_GROUP_SIZE];
+groupshared float4 groupData1[WORK_GROUP_SIZE];
+groupshared float4 groupData2[WORK_GROUP_SIZE];
+groupshared float4 groupData3[WORK_GROUP_SIZE];
+groupshared float4 groupData4[WORK_GROUP_SIZE];
+
+// ---------------------------------------------------------------
+// --------------- Step 5: Apply External Forces -----------------
+// ---------------------------------------------------------------
+
+#pragma kernel ApplyExternalForces
+
+float4 _posCloth;
+float4 _posVel;
+float4 _rotVel;
+//float4 _rotAccel;
+//float4 _posAccel;
+float _worldPositionImpact;
+float _worldRotationImpact;
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void ApplyExternalForces(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+
+	float4 vel = _velocities[id.x];
+	float3 velocity = vel.xyz + (_gravity.xyz + _windVec.xyz) * _invMass * _dt;// + _globalOffsetPos;// * _invMass * _dt;// * _invMass * _dt * 0.5f;// * _invMass * _dt;
+
+	//float3 pos = mul(_worldToLocalMatrix, float4(_positions[id.x].xyz, 1)).xyz;
+	//float3 rot = cross(_rotAccel.xyz, pos);
+	//float3 force = cross(_rotVel.xyz, cross(_rotVel.xyz, pos));
+	//float3 inertia = 2 * cross(_rotVel.xyz, velocity);
+	//float3 angularAccel = rot + inertia + force;
+	//velocity -= (_posAccel.xyz * _worldPositionImpact + angularAccel * _worldRotationImpact) * _dt;
+
+	float3 pos = _positions[id.x].xyz - _posCloth.xyz;
+	float3 rot = cross(_rotVel.xyz, pos);
+	//float3 force = cross(_rotVel.xyz, cross(_rotVel.xyz, pos));
+	//float3 inertia = 2 * cross(_rotVel.xyz, velocity);
+	//float3 angularAccel = rot + inertia + force;
+	velocity -= (_posVel.xyz * _worldPositionImpact + rot * _worldRotationImpact) * _dt;
+
+	//extra approximated centrifugal force 
+	float w = length(_rotVel.xyz);
+	pos.y *= 0.25f;
+	velocity += clamp((w * w) * length(pos) * normalize(pos + _gravity.xyz * 0.01) * _worldRotationImpact * 0.5 * _dt, -1, 1);
+
+	_velocities[id.x] = float4(velocity, vel.w);
+}
+
+
+// ---------------------------------------------------------------
+// ------------------ Step 6: Damp Velocities --------------------
+// ---------------------------------------------------------------
+
+#pragma kernel DampVelocities
+
+float _clampVel;
+float _dampingVel;
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void DampVelocities(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numParticles) return;
+
+	float4 vel = _velocities[id.x];
+	float3 velocity = vel.xyz + epsilon;
+	velocity = velocity * (_dampingVel + epsilon);
+	float lenVel = min(length(velocity), _clampVel + epsilon);
+	_velocities[id.x] = float4(normalize(velocity) * lenVel, vel.w);
+}
+
+
+// ---------------------------------------------------------------
+// --------------- Step 7: Apply Explicit Euler ------------------
+// ---------------------------------------------------------------
+
+#pragma kernel ApplyExplicitEuler
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void ApplyExplicitEuler(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numParticles) return;
+
+	float3 delta = _velocities[id.x].xyz * _dt;
+	_projectedPositions[id.x].xyz = _positions[id.x] + delta;
+}
+
+// ---------------------------------------------------------------
+// -------------- Step 9-11: Project Constraints -----------------
+// ---------------------------------------------------------------
+
+#pragma kernel ProjectConstraintDeltas
+
+// helper function for atomic add
+void AtomicAddDelta(int indexIntoDeltaPos, float newDeltaVal, int axis)
+{
+	uint i_val = asuint(newDeltaVal);
+	uint tmp0 = 0;
+	uint tmp1;
+
+	[allow_uav_condition]
+	while (true) {
+		InterlockedCompareExchange(_deltaPosAsInt[indexIntoDeltaPos][axis], tmp0, i_val, tmp1);
+
+		if (tmp1 == tmp0) {
+			break;
+		}
+
+		tmp0 = tmp1;
+		i_val = asuint(newDeltaVal + asfloat(tmp1));
+	}
+}
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void ProjectConstraintDeltas(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numDistanceConstraints) return;
+
+	// read data from the current distance constraint
+	DistanceConstraintStruct constraint = _distanceConstraints[id.x];
+	int startIndex = constraint.edge.startIndex;
+	int endIndex = constraint.edge.endIndex;
+	float restLength = constraint.restLength;
+
+	// atomic add the number of constraints to _deltaCount buffer
+	InterlockedAdd(_deltaCount[startIndex], 1);
+	InterlockedAdd(_deltaCount[endIndex], 1);
+
+	// Calculate Deltas
+	// get positions
+	float3 pi = _projectedPositions[startIndex].xyz;
+	float3 pj = _projectedPositions[endIndex].xyz;
+	// make edge vector
+	float3 n = pi - pj;
+	// get current length
+	float L = length(n);
+
+	// normalize edge vector
+	if (L >= epsilon) {
+		n = normalize(n);
+	}
+	float wi = _invMass;
+	float wj = _invMass;
+	float wSum = (epsilon + wi + wj);
+	float stiffness = L < restLength ? _compressionStiffness : _stretchStiffness;
+
+	float3 deltaPosPI = -stiffness * wi / wSum * (L - restLength) * n; //Minus
+	float3 deltaPosPJ = stiffness * wj / wSum * (L - restLength) * n; //Plus
+
+	AtomicAddDelta(startIndex, deltaPosPI.x, 0);
+	AtomicAddDelta(startIndex, deltaPosPI.y, 1);
+	AtomicAddDelta(startIndex, deltaPosPI.z, 2);
+
+	AtomicAddDelta(endIndex, deltaPosPJ.x, 0);
+	AtomicAddDelta(endIndex, deltaPosPJ.y, 1);
+	AtomicAddDelta(endIndex, deltaPosPJ.z, 2);
+
+}
+
+#pragma kernel BendingConstraintDeltas
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void BendingConstraintDeltas(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numBendingConstraints) return;
+
+	BendingConstraintStruct constraint = _bendingConstraints[id.x];
+
+	float3 p0 = _projectedPositions[constraint.index0].xyz;
+	float3 p1 = _projectedPositions[constraint.index1].xyz;
+	float3 p2 = _projectedPositions[constraint.index2].xyz;
+	float3 p3 = _projectedPositions[constraint.index3].xyz;
+	float restAngle = constraint.restAngle;
+
+	float3 wing = p3 - p2;
+	float wingLength = length(wing);
+
+	//if (wingLength >= epsilon) {
+		//get normals
+	float3 n1 = cross(p2 - p0, p3 - p0);
+	n1 /= epsilon + dot(n1, n1);
+
+	float3 n2 = cross(p3 - p1, p2 - p1);
+	n2 /= epsilon + dot(n2, n2);
+	//unlike in the original PBD paper,
+	// both normals point in same direction
+
+	//getting constraints along gradients (gradpC)
+	float invWingLength = 1.0f / (epsilon + wingLength);
+
+	float3 q0 = wingLength * n1;
+	float3 q1 = wingLength * n2;
+	float3 q2 = dot(p0 - p3, wing) * invWingLength * n1
+		+ dot(p1 - p3, wing) * invWingLength * n2;
+	float3 q3 = dot(p2 - p0, wing) * invWingLength * n1
+		+ dot(p2 - p1, wing) * invWingLength * n2;
+
+	//find current angle
+	n1 = normalize(n1);
+	n2 = normalize(n2);
+
+	float d = dot(n1, n2);
+	d = clamp(d, -1.0f, 1.0f);
+	float currentAngle = acos(d);
+
+	//find lamda ( where deltap = lamda*wi*gradConstraint )
+	float lamda = 0;
+	lamda += _invMass * dot(q0, q0);
+	lamda += _invMass * dot(q1, q1);
+	lamda += _invMass * dot(q2, q2);
+	lamda += _invMass * dot(q3, q3);
+
+	//if (lamda != 0.0f) {
+
+	float angles = currentAngle - restAngle;
+	//angles = clamp(angles, -1.5, 1.5);
+
+	lamda = (angles / (epsilon + lamda)) * _bendingStiffness;
+
+	if (dot(cross(n1, n2), wing) > 0.0f) {
+		lamda = -lamda;
+	}
+
+	float3 deltaPos0 = -_invMass * lamda * q0;
+	float3 deltaPos1 = -_invMass * lamda * q1;
+	float3 deltaPos2 = -_invMass * lamda * q2;
+	float3 deltaPos3 = -_invMass * lamda * q3;
+
+	AtomicAddDelta(constraint.index0, deltaPos0.x, 0);
+	AtomicAddDelta(constraint.index0, deltaPos0.y, 1);
+	AtomicAddDelta(constraint.index0, deltaPos0.z, 2);
+	InterlockedAdd(_deltaCount[constraint.index0], 1);
+
+	AtomicAddDelta(constraint.index1, deltaPos1.x, 0);
+	AtomicAddDelta(constraint.index1, deltaPos1.y, 1);
+	AtomicAddDelta(constraint.index1, deltaPos1.z, 2);
+	InterlockedAdd(_deltaCount[constraint.index1], 1);
+
+	AtomicAddDelta(constraint.index2, deltaPos2.x, 0);
+	AtomicAddDelta(constraint.index2, deltaPos2.y, 1);
+	AtomicAddDelta(constraint.index2, deltaPos2.z, 2);
+	InterlockedAdd(_deltaCount[constraint.index2], 1);
+
+	AtomicAddDelta(constraint.index3, deltaPos3.x, 0);
+	AtomicAddDelta(constraint.index3, deltaPos3.y, 1);
+	AtomicAddDelta(constraint.index3, deltaPos3.z, 2);
+	InterlockedAdd(_deltaCount[constraint.index3], 1);
+	//}
+//}
+}
+
+float _deltaScale;
+float _clampDelta;
+
+//float3 normalizeX(float3 v)
+//{
+//	return rsqrt(dot(v, v)) * v;
+//}
+
+#pragma kernel AverageConstraintDeltas
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void AverageConstraintDeltas(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	int index = id.x;
+
+	float3 deltaP = float3(0, 0, 0);
+
+	if (_deltaCount[index] > 0) {
+		//_deltaPos[index].x = asfloat(_deltaPosAsInt[index].x);
+		//_deltaPos[index].y = asfloat(_deltaPosAsInt[index].y);
+		//_deltaPos[index].z = asfloat(_deltaPosAsInt[index].z);
+		//_deltaPos[index] /= float(_deltaCount[index]);
+		deltaP.x = asfloat(_deltaPosAsInt[index].x);
+		deltaP.y = asfloat(_deltaPosAsInt[index].y);
+		deltaP.z = asfloat(_deltaPosAsInt[index].z);
+		deltaP /= float(_deltaCount[index]);
+	}
+
+	//float3 deltaVec = _deltaPos[index] * _deltaScale;
+	float3 deltaVec = deltaP * _deltaScale;
+	float len = length(deltaVec);
+	if (len > 0)deltaVec = normalize(deltaVec) * min(len, _clampDelta);
+
+	//deltaVec = lerp(deltaVec, 0, saturate(exp(length(deltaVec)) * 0.5));
+	deltaVec = lerp(deltaVec, 0, saturate(exp((length(deltaVec) - 1.5) * 4) * 8 - 0.016));
+	_projectedPositions[index].xyz += deltaVec;
+
+	// reset delta buffers to zero
+	//_deltaPos[index] = float3(0, 0, 0);
+
+	_deltaPosAsInt[index] = uint3(0, 0, 0);
+
+	_deltaCount[index] = 0;
+}
+
+#pragma kernel SatisfySphereCollisions
+
+//#define MAX_IMPLICITS 256
+//float4x4 CollisionSphereTransformations[MAX_IMPLICITS];//changed row_major!
+//float4x4 CollisionSphereInverseTransformations[MAX_IMPLICITS];
+
+
+float3 SphereConstraint(float3 position, float4 sphere, uint idX)
+{
+	//if(!IsFree(position))
+	//    return 0;
+
+	//inverse transform the position
+	//float3 transformedPosition = (mul(CollisionSphereInverseTransformations[i], float4(position.xyz,1))).xyz;
+	float3 transformedPosition = (position.xyz - sphere.xyz) / (epsilon + sphere.w);
+
+	//find the force
+	float3 force = float3(0, 0, 0);
+	float len = length(transformedPosition);
+
+	if (len < 1)
+	{
+		force = (1 - len) * (transformedPosition / (epsilon + len));
+
+		//float4x4 transform = CollisionSphereTransformations[i];
+		////remove the translation
+		//transform._14 = 0;
+		//transform._24 = 0;
+		//transform._34 = 0;
+		//transform._44 = 1;
+		//force = (mul(transform,float4(force,1))).xyz;
+
+		force *= sphere.w;
+
+		_frictions[idX] = _staticFriction;
+	}
+
+	return force;
+}
+
+float3 SphereConstraint(float3 position, float4 sphere, uint idX, float3 center, float3 posVel, float3 rotVel, float friction)
+{
+	float3 transformedPosition = (position.xyz - sphere.xyz) / (epsilon + sphere.w);
+	float3 force = float3(0, 0, 0);
+	float len = length(transformedPosition);
+	float3 posDir = position.xyz - center;
+	float3 rot = cross(rotVel, posDir);
+	if (len < 1)
+	{
+		force = (1 - len) * (transformedPosition / (epsilon + len));
+		force *= sphere.w;
+		force += (posVel + rot) * 0.5 * _dynamicFriction * _dt; // * _invMass
+		_frictions[idX] = _staticFriction * friction;
+	}
+	return force;
+}
+
+
+
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SatisfySphereCollisions(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numParticles) return;
+
+	float3 projectedPosition = _projectedPositions[id.x].xyz;
+	for (uint i = 0; i < _numCollidableSpheres; i++)
+	{
+		CollidableSphereStruct data = _collidableSpheres[i];
+		float4 sphere = float4(data.center, data.radius + _collidableObjectsBias);
+		projectedPosition += SphereConstraint(projectedPosition, sphere, id.x, sphere.xyz, data.posVel, data.rotVel, data.friction);
+
+		//float3 p = projectedPosition - sphere.xyz;
+		//float3 normal = calcNormal(p);
+		//float dist = max(0,-sdTorus(p, float2(2.0, 1.0)));
+		//projectedPosition += dist * normal * 0.1;
+
+		//float3 center = _collidableSpheres[i].center;
+		//float radius = _collidableSpheres[i].radius;
+
+		//if (length(projectedPosition - center) < radius) {
+		//	float3 n = normalize(projectedPosition - center);
+		//	projectedPosition = center + n * (radius + 0.01f);
+		//	_frictions[id.x] = 0.8f;
+		//}
+	}
+
+	_projectedPositions[id.x].xyz = projectedPosition;
+}
+
+//#pragma kernel SatisfyAutoSpheres
+//
+//float _autoSphereSize;
+//uint _numAutoSpheres;
+//struct BonesStruct
+//{
+//	float4 pos;
+//	float4 rot;
+//};
+//StructuredBuffer<BonesStruct> _autoBonesBuffer;
+//struct SphereStruct
+//{
+//	float4 offset;
+//	uint boneId;
+//};
+//StructuredBuffer<SphereStruct> _autoSphereBuffer;
+//
+float3 Rotate(float4 q, float3 v)
+{
+	float3 t = 2.0f * cross(q.xyz, v);
+	return v + q.w * t + cross(q.xyz, t); //changed q.w to -q.w;
+}
+//
+//[numthreads(WORK_GROUP_SIZE, 1, 1)]
+//void SatisfyAutoSpheres(uint3 id : SV_DispatchThreadID) {
+//	if (id.x >= _numParticles) return;
+//
+//	float3 projectedPosition = _projectedPositions[id.x].xyz;
+//	for (uint i = 0u; i < _numAutoSpheres; ++i)
+//	{
+//		SphereStruct data = _autoSphereBuffer[i];
+//		BonesStruct bone = _autoBonesBuffer[data.boneId];
+//		float3 spherePos = bone.pos.xyz + Rotate(bone.rot, data.offset.xyz);
+//		float4 sphere = float4(spherePos, data.offset.w * _autoSphereSize);
+//		projectedPosition += SphereConstraint(projectedPosition, sphere, id.x);
+//	}
+//	_projectedPositions[id.x].xyz = projectedPosition;
+//}
+
+
+#pragma kernel SatisfySDFCollisions
+
+bool IsPointInCube(float3 position, float3 extent) {
+	return abs(position.x) < extent.x && abs(position.y) < extent.y && abs(position.z) < extent.z;
+}
+
+float3 ClosestPointOnBox(float3 P, float3 p, float3 b)
+{
+	float3 pB = max(abs(P - p) - b, 0.0f);
+	float3 d = P - pB;
+	if (P.x < p.x - b.x) { d.x = P.x + pB.x; }
+	if (P.y < p.y - b.y) { d.y = P.y + pB.y; }
+	if (P.z < p.z - b.z) { d.z = P.z + pB.z; }
+	return d;
+}
+
+float4 QuatInv(in float4 q)
+{
+	return float4(-q.xyz, q.w);
+}
+//float3 Rotate(in float3 v, in float4 q)
+//{
+//	float3 t = 2.0f * cross(q.xyz, v);
+//	return v + q.w * t + cross(q.xyz, t);
+//}
+
+float3 RotateInverse(float4 q, float3 v)
+{
+	float3 t = 2.0 * cross(q.xyz, v);
+	return v - q.w * t + cross(q.xyz, t); //changed q.w to -q.w;
+}
+inline float min3(float a, float b, float c)
+{
+	return min(min(a, b), c);
+}
+inline float max3(float a, float b, float c)
+{
+	return max(max(a, b), c);
+}
+
+inline float max_element(float3 v)
+{
+	return max3(v.x, v.y, v.z);
+}
+
+inline float sdPlane(float3 p, float4 n)
+{
+	return dot(p, n.xyz) - n.w;
+}
+
+inline float sd_cube(float3 p, float3 r)
+{
+	return max_element(abs(p) - r);
+}
+
+inline float sdTorus(float3 p, float2 t)
+{
+	float2 q = float2(length(p.xz) - t.x, p.y);
+	return length(q) - t.y;
+}
+
+inline float sdCapsule(float3 p, float3 a = 1, float3 b = 1, float r = 1)
+{
+	a.y -= r;
+	b.y -= r;
+	float3 pa = p - a, ba = b - a + epsilon;
+	float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
+	return length(pa - ba * h) - r;
+}
+
+inline float sdSphereR(float3 p, float radius)
+{
+	return length(p) - radius;
+}
+
+#define SIGNED_DIST_MAX 3.402823466e+38F
+//1000.0
+
+inline float sumx(float3 v)
+{
+	return v.x + v.y + v.z;
+}
+
+inline float2 solve_quadratic(float a, float b, float c)
+{
+	// ax^2 + bx + c = 0, a non-zero
+	float q = b * b - 4.0 * a * c;
+	if (q < 0.0) {
+		return float2(SIGNED_DIST_MAX, SIGNED_DIST_MAX);
+	}
+	float r0 = -b / (2.0 * a);
+	float r1 = sqrt(q + epsilon) / (2.0 * a);
+	return float2(r0 - r1, r0 + r1);
+}
+
+float sd_ellipsoid(float3 p, float3 r = 1)
+{
+	// move ellipse so that target point is at originPos, centre in positive space
+	// f(v) = (v.x - c.x)^2/r.x^2 + (v.y - c.y)^2/r.y^2 + (v.z - c.z)^2/r.z^2 - 1
+	float3 c = abs(p);
+	float3 c2 = c * c + epsilon;
+	float3 r2 = r * r + epsilon;
+	float d = SIGNED_DIST_MAX;
+
+	// gather terms of quadratic
+	float3 qa = 1.0 / r2;
+	float3 qb = -2.0 * c / r2;
+	float3 qc = c2 / r2;
+	float qcs = sumx(qc) - 1.0;
+
+	// check corners:
+	// solve f(v)=0 for v.x=v.y=v.z=t
+	{
+		float2 t0 = abs(solve_quadratic(sumx(qa), sumx(qb), qcs));
+		d = min3(d, t0.x, t0.y);
+	}
+
+	// interior of convex shape always hits corners first, so early out
+	if (qcs <= 0.0) {
+		return -d;
+	}
+
+	// check edges:
+	// df/dx=0 => v.x=c.x, solve f(v)=0 for v.x=c.x, v.y=v.z=t
+	// then do the same for y and z cases
+	{
+		float2 t = abs(solve_quadratic(qa.y + qa.z, qb.y + qb.z, qc.y + qc.z - 1.0));
+		d = min(d, max(min(t.x, t.y), c.x));
+	}
+	{
+		float2 t = abs(solve_quadratic(qa.x + qa.z, qb.x + qb.z, qc.x + qc.z - 1.0));
+		d = min(d, max(min(t.x, t.y), c.y));
+	}
+	{
+		float2 t = abs(solve_quadratic(qa.x + qa.y, qb.x + qb.y, qc.x + qc.y - 1.0));
+		d = min(d, max(min(t.x, t.y), c.z));
+	}
+
+	// check faces:
+	// df/dx=df/dy=0 => v.xy=c.xy, so f(v)=0 => |v.z - c.z|=r.z
+	{
+		d = min(d, max3(c.x, c.y, abs(c.z - r.z)));
+		d = min(d, max3(c.x, abs(c.y - r.y), c.z));
+		d = min(d, max3(abs(c.x - r.x), c.y, c.z));
+	}
+
+	// done
+	return d;
+}
+
+float sdEllipsoid(float3 p, float3 r) // not exact
+{
+	float k0 = length(p / r);
+	float k1 = length(p / (r * r));
+	return k0 * (k0 - 1.0) / k1;
+}
+
+float sdRoundCone(float3 p, float r1, float r2, float h)
+{
+	float2 q = float2(length(p.xz), p.y);
+
+	float b = (r1 - r2) / h;
+	float a = sqrt(1.0 - b * b);
+	float k = dot(q, float2(-b, a));
+
+	if (k < 0.0) return length(q) - r1;
+	if (k > a * h) return length(q - float2(0.0, h)) - r2;
+
+	return dot(q, float2(a, b)) - r1;
+}
+
+float sdCappedCylinder(float3 p, float3 s, float h = 0.5, float r = 1)
+{
+	p /= s;
+	float2 d = abs(float2(length(p.xz), p.y)) - float2(h, r);
+	return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
+}
+
+//float sd_CappedCylinder(float3 p, float3 s, float2 h = 0.5)
+//{
+//	p /= s;
+//	float2 d = abs(float2(length(p.xz), p.y)) - h; //TODO is there a way to replace length? sin/cos?
+//	float2 d2 = max(d, 0.0);
+//	return min(max(d.x, d.y), 0.0) + abs(max(d2.x, d2.y));
+//}
+
+//#define DELTA_SCALE 0.001
+
+float sdFunc(float3 p, float4 s, uint sdfType)
+{
+	float sd = 0;
+	//[branch]
+	//[forcecase]
+	//[call]
+	switch (sdfType)
+	{
+	case 0:
+		return sd_cube(p, s.xyz * 0.5f) - s.w;
+	case 1:
+		return sdCapsule(p, float3(0, -1, 0) * s.y, float3(0, 1, 0) * s.y, (s.x + s.z) * 0.25);
+	case 2:
+		return sdEllipsoid(p, s.xyz);// sd_ellipsoid(p, s.xyz);//
+	case 3:
+		return sdSphereR(p, s.x);
+	case 4:
+		return sdRoundCone(p, s.x, s.y, s.z - s.w);
+	case 5:
+		return sdCappedCylinder(p, s.xyz) - s.w;
+	default:
+		return sdPlane(p, float4(0, 1, 0, s.y + s.w));
+	}
+	//return sdTorus(p, parameters);
+	return sd;
+}
+
+float3 calcNormal(in float3 p, float4 s, uint sdfType) // for function f(p)
+{
+	const float h = 0.0001; // replace by an appropriate value
+	const float2 k = float2(1, -1);
+	return normalize(k.xyy * sdFunc(p + k.xyy * h, s, sdfType) +
+		k.yyx * sdFunc(p + k.yyx * h, s, sdfType) +
+		k.yxy * sdFunc(p + k.yxy * h, s, sdfType) +
+		k.xxx * sdFunc(p + k.xxx * h, s, sdfType));
+}
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SatisfySDFCollisions(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numParticles) return;
+
+	float3 projectedPosition = _projectedPositions[id.x].xyz;
+
+	for (uint i = 0; i < _numCollidableSDFs; i++) {
+
+		CollidableSDFStruct sdf = _collidableSDFs[i];
+		float3 center = sdf.center;
+		float4 extent = sdf.extent;
+		float4 rotation = sdf.rotation;
+		uint sdfType = sdf.sdfType;
+
+		//if (sdfType == 0)
+		//{
+		//	float3 P = Rotate(QuatInv(rotation), projectedPosition);
+		//	float3 BC = Rotate(QuatInv(rotation), center);
+		//	float3 BS = extent - _collidableObjectsBias;
+		//	float3 cob = ClosestPointOnBox(P, BC, BS);
+		//	cob = Rotate(rotation, cob);
+
+		//	float4 sphere = float4(cob, _collidableObjectsBias * 3);
+		//	projectedPosition += SphereConstraint(projectedPosition, sphere, id.x, center, sdf.posVel, sdf.rotVel);
+		//}
+		//else {
+		float3 p = projectedPosition - center;
+		p = RotateInverse(rotation, p);
+
+		float4 parameters = float4(extent.xyz * 2 + _collidableObjectsBias, _collidableObjectsBias);
+		float3 normal = calcNormal(p, parameters, sdfType);
+		float dist = max(0, -sdFunc(p, parameters, sdfType));
+		//projectedPosition += clamp(dist * normal * 0.02,-0.1,0.1);
+
+		float3 force = float3(0, 0, 0);
+		float3 posDir = projectedPosition.xyz - center;
+		float3 rot = cross(sdf.rotVel, posDir);
+		if (dist > 0)
+		{
+			force = dist * Rotate(rotation, normal) * 0.5;
+			force += (sdf.posVel + rot) * 0.5 * _dynamicFriction * _dt; // * _invMass
+			_frictions[id.x] = _staticFriction * extent.w;
+		}
+		projectedPosition += force;
+
+		//}
+		//float3 delta = velocity;
+		//projectedPosition += delta;
+		//float3 localPosition = projectedPosition - center;
+
+		//if (IsPointInCube(localPosition, extent)) {
+		//	int closestAxis = -1;
+		//	float closestDist = 99999;
+		//	for (int i = 0; i < 3; i++) {
+		//		float dist = abs(localPosition[i] - extent[i]);
+		//		if (dist < closestDist) {
+		//			closestDist = dist;
+		//			closestAxis = i;
+		//		}
+		//	}
+
+		//	float3 newPos = localPosition;
+		//	if (closestAxis == 0) {
+		//		newPos.x = (extent.x + 0.001f) * sign(localPosition.x);
+		//	}
+		//	else if (closestAxis == 1) {
+		//		newPos.y = (extent.y + 0.001f) * sign(localPosition.y);
+		//	}
+		//	else if (closestAxis == 2) {
+		//		newPos.z = (extent.z + 0.001f) * sign(localPosition.z);
+		//	}
+
+		//	projectedPosition = newPos + center;
+		//	_frictions[id.x] = 0.1f;
+		//}
+
+
+	}
+
+	_projectedPositions[id.x].xyz = projectedPosition;
+}
+
+StructuredBuffer<float4> _pointConstraintsVec;
+
+#pragma kernel SatisfyPointConstraints
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SatisfyPointConstraints(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numPointConstraints) return;
+
+	uint index = _pointConstraints[id.x];
+	float4 vec = _pointConstraintsVec[id.x];
+	if (_hasTempPointConstraint && index == _tempPointConstraint) {
+		_projectedPositions[index].xyz = _positions[index] + _deltaPointConstraint;
+	}
+	else if (vec.w > 0) {
+		_projectedPositions[index].xyz = lerp(_projectedPositions[index].xyz, vec.xyz, vec.w - 1);
+	}
+	else
+		_projectedPositions[index].xyz = _positions[index];
+}
+
+#pragma kernel SatisfyVertexCollisions
+
+//float _selfCollisionScale;
+//StructuredBuffer<float> collisionMaskBuffer;
+
+StructuredBuffer<sData> _voxelDataBuffer;
+//StructuredBuffer<int> _lastUsedVoxelListBuffer;
+StructuredBuffer<uint> _counterPerVoxelBuffer2;
+uint _texWidth;
+uint _texWidthExtra;
+
+uint2 packIndex(uint index)
+{
+	const uint vSize = _texWidth;
+	return uint2(index % vSize, index / vSize);
+}
+
+float4 _cubeMinPos;
+uint _newSpheresPerVoxel;
+//float _triThickness;
+
+float dot2(in float3 v) { return dot(v, v); }
+float udTriangle(in float3 v1, in float3 v2, in float3 v3, in float3 p)
+{
+	float3 v21 = v2 - v1; float3 p1 = p - v1;
+	float3 v32 = v3 - v2; float3 p2 = p - v2;
+	float3 v13 = v1 - v3; float3 p3 = p - v3;
+	float3 nor = cross(v21, v13);
+
+	return sqrt((sign(dot(cross(v21, nor), p1)) +
+		sign(dot(cross(v32, nor), p2)) +
+		sign(dot(cross(v13, nor), p3)) < 2.0f)
+		?
+		min(min(
+			dot2(v21 * clamp(dot(v21, p1) / dot2(v21), 0.0f, 1.0f) - p1),
+			dot2(v32 * clamp(dot(v32, p2) / dot2(v32), 0.0f, 1.0f) - p2)),
+			dot2(v13 * clamp(dot(v13, p3) / dot2(v13), 0.0f, 1.0f) - p3))
+		:
+		dot(nor, p1) * dot(nor, p1) / dot2(nor));
+}
+
+bool PointInTriangle(float3 p, float3 pA, float3 pB, float3 pC)
+{
+	float3 a = pA - p;
+	float3 b = pB - p;
+	float3 c = pC - p;
+
+	float3 normPBC = cross(b, c); // Normal of PBC (u)
+	float3 normPCA = cross(c, a); // Normal of PCA (v)
+	float3 normPAB = cross(a, b); // Normal of PAB (w)
+
+	if (dot(normPBC, normPCA) < 0.0f)
+	{
+		return false;
+	}
+	else if (dot(normPBC, normPAB) < 0.0f)
+	{
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+float3 ClosestPointToLine(float3 start, float3 end, float3 pos)
+{
+	float3 lVec = end - start;
+	float t = clamp(dot(pos - start, lVec) / (epsilon + dot2(lVec)), 0.0f, 1.0f);
+	return start + lVec * t;
+}
+
+float3 ClosestPointToTri(float3 pA, float3 pB, float3 pC, float3 pos)
+{
+	float3 normal = normalize(cross(pB - pA, pC - pA));
+	float surfaceDist = dot(normal, pos - pA);
+	pos = pos - normal * surfaceDist;
+
+	if (PointInTriangle(pos, pA, pB, pC))
+	{
+		return pos;
+	}
+
+	float3 c1 = ClosestPointToLine(pA, pB, pos);
+	float3 c2 = ClosestPointToLine(pB, pC, pos);
+	float3 c3 = ClosestPointToLine(pC, pA, pos);
+
+	float mag1 = dot2(pos - c1);
+	float mag2 = dot2(pos - c2);
+	float mag3 = dot2(pos - c3);
+
+	float minValue = min(mag1, mag2);
+	minValue = min(minValue, mag3);
+
+	if (minValue == mag1)
+	{
+		return c1;
+	}
+	else if (minValue == mag2)
+	{
+		return c2;
+	}
+	return c3;
+}
+
+//float3 TriangleConstraint(float3 position, float4 pA, float3 pB, float3 pC, uint idX)
+//{
+//	//float dist = udTriangle(pA.xyz, pB, pC, position);// -_triThickness;
+//	//float3 normal = normalize(cross(pB - pA.xyz, pC - pA.xyz));
+//	//float surfaceDist = dot(normal, position - pA.xyz);
+//	//float3 tPosition = (normal * surfaceDist) / pA.w;
+//	float3 transformedPosition = (position - ClosestPointToTri(pA.xyz, pB, pC, position)) / pA.w;
+//	float3 force = float3(0, 0, 0);
+//	//float len = dist / pA.w;
+//	float len = length(transformedPosition);
+//	if (len < 1)
+//	{
+//		force = (1 - len) * (transformedPosition / len);
+//		force *= pA.w;
+//		_frictions[idX] = 0.8f;
+//	}
+//
+//	return force;
+//}
+StructuredBuffer<int> _usedVoxelListBuffer;
+StructuredBuffer<uint> _lastCounterPerVoxelBuffer2;
+StructuredBuffer<uint> _trisData;
+
+uint2 packIndexExtra(uint index)
+{
+	const uint vSize = _texWidthExtra;
+	return uint2(index % vSize, index / vSize);
+}
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SatisfyVertexCollisions(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+
+	uint vid = id.x;
+
+	const uint grid = _gridCount;// 64u;
+	const float voxelSize = _cubeMinPos.w / ((float)grid);
+	const float voxelExtend = voxelSize * 0.5f;
+
+	float4 projectedPosition = _projectedPositions[vid];
+	//float3 tempPosition = projectedPosition.xyz;
+
+	uint3 voxelPos = (projectedPosition.xyz - _cubeMinPos.xyz) * grid / _cubeMinPos.w;
+	voxelPos = clamp(voxelPos, 0, grid - 1);
+	uint voxelIndex = voxelPos.x + voxelPos.y * grid + voxelPos.z * grid * grid;
+	uint dataIndex = _usedVoxelListBuffer[voxelIndex + 1] - 1;
+
+#if defined(USE_NEIGHBOUR_CHECK) || defined(USE_UNITY_2019)
+#ifdef USE_UNITY_2019
+	uint2 info = _useNeighbourCheck ? _connectionInfoBuffer[vid] : 0;
+	uint start = info.x;
+	uint end = info.y;
+#else
+	uint2 info = _connectionInfoBuffer[vid];
+	uint start = info.x;
+	uint end = info.y;
+#endif
+#endif
+
+	uint n = 0;
+	uint counter = _counterPerVoxelBuffer2[voxelIndex];
+	for (uint i = 0u; i < counter; i++)
+	{
+		if (n > 128)break;
+		uint index = _lastCounterPerVoxelBuffer2[dataIndex] + i;
+		//uint index = (lastDataIndex * 64 + vIndex) * _newSpheresPerVoxel + i;
+
+		sData sphere = _voxelDataBuffer[index];
+		uint sid = sphere.nId.w;
+		//uint sid = _trisData[uint(sphere.temp.w) * 3]; //TODO
+
+		if (sid == vid) continue;
+
+#if defined(USE_NEIGHBOUR_CHECK) || defined(USE_UNITY_2019)
+		//#ifdef USE_UNITY_2019
+		//		if (_useNeighbourCheck) {
+		//#endif
+		bool foundNeighbour = false;
+		for (uint c = start; c < end; c++) {
+			if (_connectedVertsBuffer[c] == sid) {
+				foundNeighbour = true;
+				break;
+			}
+			uint2 info2 = _connectionInfoBuffer[_connectedVertsBuffer[c]];
+			uint start2 = info2.x;
+			uint end2 = info2.y;
+			for (uint c2 = start2; c2 < end2; c2++) {
+				if (_connectedVertsBuffer[c2] == sid) {
+					foundNeighbour = true;
+					break;
+				}
+			}
+		}
+		if (foundNeighbour)continue;
+		//#ifdef USE_UNITY_2019
+		//		}
+		//#endif
+#endif
+
+		float4 pr = sphere.pr;
+		if ((_useSelfCollisionTriangles && sid < _numSelfParticles) || (_useTrisMesh && sid >= _selfAndAutoSpheresCount))
+		{
+			//float3 pos1 = ClosestPointToTri(_projectedPositions[_trisData[uint(sphere.temp.w) * 3 + 0]].xyz, _projectedPositions[_trisData[uint(sphere.temp.w) * 3 + 1]].xyz, _projectedPositions[_trisData[uint(sphere.temp.w) * 3 + 2]].xyz, projectedPosition.xyz);
+			pr.xyz = ClosestPointToTri(sphere.pr.xyz, sphere.nId.xyz, sphere.temp.xyz, projectedPosition.xyz);
+		}
+		float3 vec = projectedPosition.xyz - pr.xyz;
+		float len = dot2(vec);
+
+		if (len > epsilon && pr.w > 0)
+		{
+			float3 force = SphereConstraint(projectedPosition.xyz, pr, vid);
+			projectedPosition.xyz += force;
+			//if(sid < _numParticles) _projectedPositions[sid].xyz -= force;
+			//float3 deltaPos0 = SphereConstraint(projectedPosition.xyz, pr, vid);
+			//AtomicAddDelta(vid, deltaPos0.x, 0);
+			//AtomicAddDelta(vid, deltaPos0.y, 1);
+			//AtomicAddDelta(vid, deltaPos0.z, 2);
+			//InterlockedAdd(_deltaCount[vid], 1);
+		}
+		n++;
+	}
+
+	//total = total / max(1.0f, count);// / 0.005f;
+	//projectedPosition.xyz += total;
+
+	//projectedPosition.xyz = lerp(projectedPosition.xyz, tempPosition, saturate(exp(length(projectedPosition.xyz - tempPosition)*2-2) * 0.5));
+	//projectedPosition.xyz = clamp(projectedPosition.xyz, 200, 500);
+	_projectedPositions[vid].xyz = projectedPosition.xyz;
+}
+
+
+
+float _weightContact;
+float _deltaTime;
+float _collisionRadius;
+struct PointPointContactDesc
+{
+	float4 normal;
+	uint p0;
+	uint3 p1;
+};
+RWStructuredBuffer<PointPointContactDesc> _pointPointContactBuffer;
+RWStructuredBuffer<PointPointContactDesc> _pointPointContactBuffer2;
+RWStructuredBuffer<PointPointContactDesc> _pointPointContactBuffer3;
+RWStructuredBuffer<uint> _countContactBuffer;
+RWStructuredBuffer<uint> _countContactBuffer2;
+RWStructuredBuffer<uint> _countContactBuffer3;
+
+float DistSegmentToSegment(float3 S1_start, float3 S1_end, float3 S2_start, float3 S2_end)
+{
+	float3 u = S1_end - S1_start;
+	float3 v = S2_end - S2_start;
+	float3 w = S1_start - S2_start;
+	float a = dot(u, u);         // always >= 0
+	float b = dot(u, v);
+	float c = dot(v, v);         // always >= 0
+	float d = dot(u, w);
+	float e = dot(v, w);
+	float D = a * c - b * b;        // always >= 0
+	float sc, sN, sD = D;       // sc = sN / sD, default sD = D >= 0
+	float tc, tN, tD = D;       // tc = tN / tD, default tD = D >= 0
+
+	// compute the line parameters of the two closest points
+	if (D < epsilon)
+	{ // the lines are almost parallel
+		sN = 0.0f;         // force using point P0 on segment S1
+		sD = 1.0f;         // to prevent possible division by 0.0 later
+		tN = e;
+		tD = c;
+	}
+	else
+	{
+		// get the closest points on the infinite lines
+		sN = (b * e - c * d);
+		tN = (a * e - b * d);
+		if (sN < 0.0)
+		{
+			// sc < 0 => the s=0 edge is visible
+			sN = 0.0f;
+			tN = e;
+			tD = c;
+		}
+		else if (sN > sD)
+		{
+			// sc > 1  => the s=1 edge is visible
+			sN = sD;
+			tN = e + b;
+			tD = c;
+		}
+	}
+
+	if (tN < 0.0)
+	{
+		// tc < 0 => the t=0 edge is visible
+		tN = 0.0f;
+		// recompute sc for this edge
+		if (-d < 0.0)
+			sN = 0.0f;
+		else if (-d > a)
+			sN = sD;
+		else
+		{
+			sN = -d;
+			sD = a;
+		}
+	}
+	else if (tN > tD)
+	{
+		// tc > 1  => the t=1 edge is visible
+		tN = tD;
+		// recompute sc for this edge
+		if ((-d + b) < 0.0)
+			sN = 0;
+		else if ((-d + b) > a)
+			sN = sD;
+		else
+		{
+			sN = (-d + b);
+			sD = a;
+		}
+	}
+	// finally do the division to get sc and tc
+	sc = (abs(sN) < epsilon ? 0.0f : sN / sD);
+	tc = (abs(tN) < epsilon ? 0.0f : tN / tD);
+
+	// get the difference of the two closest points
+	float3 dP = w + (sc * u) - (tc * v);  // =  S1(sc) - S2(tc)
+
+	return length(dP);   // return the closest distance
+}
+
+
+#pragma kernel PointPointPredictiveContact
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void PointPointPredictiveContact(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+
+	const float cRadius = _collisionRadius;
+	const uint grid = _gridCount;// 64u;
+	const float voxelSize = _cubeMinPos.w / ((float)grid);
+	const float voxelExtend = voxelSize * 0.5f;
+
+	uint vid = id.x;
+
+	float3 pos0 = _projectedPositions[vid].xyz;
+	uint3 voxelPos = (pos0 - _cubeMinPos.xyz) * grid / _cubeMinPos.w;
+	voxelPos = clamp(voxelPos, 0, grid - 1);
+	uint voxelIndex = voxelPos.x + voxelPos.y * grid + voxelPos.z * grid * grid;
+	uint dataIndex = _usedVoxelListBuffer[voxelIndex + 1] - 1;
+
+	//uint3 lastVoxelPos = voxelPos / 4;
+	//int lastVoxelIndex = lastVoxelPos.x + lastVoxelPos.y * 16 + lastVoxelPos.z * 16 * 16;
+	//int lastDataIndex = _lastUsedVoxelListBuffer[lastVoxelIndex + 1] - 1;
+	//uint3 vPos = voxelPos - lastVoxelPos * 4;
+	//int vIndex = vPos.x + vPos.y * 4 + vPos.z * 4 * 4;
+
+	uint counter = _counterPerVoxelBuffer2[voxelIndex];
+	float3 d0 = pos0 + _velocities[vid].xyz * _deltaTime;
+
+	PointPointContactDesc ppc;
+	ppc.normal = 0;
+	ppc.p0 = 0;
+	ppc.p1 = 0;
+
+	uint countPP = 0;
+	uint countA = 0;
+	uint countB = 0;
+
+#if defined(USE_NEIGHBOUR_CHECK) || defined(USE_UNITY_2019)
+#ifdef USE_UNITY_2019
+	uint2 info = _useNeighbourCheck ? _connectionInfoBuffer[vid] : 0;
+	uint start = info.x;
+	uint end = info.y;
+#else
+	uint2 info = _connectionInfoBuffer[vid];
+	uint start = info.x;
+	uint end = info.y;
+#endif
+#endif
+
+	for (uint i = 0u; i < counter; i++)
+	{
+		uint index = _lastCounterPerVoxelBuffer2[dataIndex] + i;
+		//uint index = (lastDataIndex * 64 + vIndex) * _newSpheresPerVoxel + i;
+
+		sData sphere = _voxelDataBuffer[index];
+		uint sid = sphere.nId.w;
+		//uint sid = nId;// (_useSelfCollisionTriangles && nId < _numSelfParticles) ? _trisData[uint(sphere.temp.w) * 3] : nId;
+
+		if (sid == vid)continue;
+
+#if defined(USE_NEIGHBOUR_CHECK) || defined(USE_UNITY_2019)
+		//#ifdef USE_UNITY_2019
+		//		if (_useNeighbourCheck) {
+		//#endif
+		bool foundNeighbour = false;
+		for (uint c = start; c < end; c++) {
+			if (_connectedVertsBuffer[c] == sid) {
+				foundNeighbour = true;
+				break;
+			}
+			uint2 info2 = _connectionInfoBuffer[_connectedVertsBuffer[c]];
+			uint start2 = info2.x;
+			uint end2 = info2.y;
+			for (uint c2 = start2; c2 < end2; c2++) {
+				if (_connectedVertsBuffer[c2] == sid) {
+					foundNeighbour = true;
+					break;
+				}
+			}
+		}
+		if (foundNeighbour)continue;
+		//#ifdef USE_UNITY_2019
+		//		}
+		//#endif
+#endif
+
+		float4 pr = sphere.pr;
+		if ((_useSelfCollisionTriangles && sid < _numSelfParticles) || (_useTrisMesh && sid >= _selfAndAutoSpheresCount))
+			pr.xyz = ClosestPointToTri(sphere.pr.xyz, sphere.nId.xyz, sphere.temp.xyz, pos0);
+
+		float3 pos1 = pr.xyz;
+
+		float3 vec = pos0 - pos1;
+		float vecDist = dot2(vec);
+		//float4 normal = float4(sign(vec)*normalize(cross(sphere.nId.xyz - sphere.pr.xyz, sphere.temp.xyz - sphere.pr.xyz)), pr.w);
+		float4 normal = float4(normalize(vec), pr.w);
+		float3 d1 = pos1 + (sid < _numSelfParticles ? (_useSelfCollisionTriangles ? length(_velocities[sid].xyz) * normal.xyz : _velocities[sid].xyz) : sphere.temp.xyz) * _deltaTime;
+		float dist = DistSegmentToSegment(pos0, d0, pos1, d1);
+
+
+		if (vecDist > epsilon && pr.w > 0 && sid < _numSelfParticles && dist < cRadius + 2 * pr.w)
+		{
+			ppc.normal = normal;
+			ppc.p0 = vid;
+			ppc.p1.x = sid;
+			ppc.p1.y = _useSelfCollisionTriangles ? _trisData[uint(sphere.temp.w) * 3 + 1] : 0;
+			ppc.p1.z = _useSelfCollisionTriangles ? _trisData[uint(sphere.temp.w) * 3 + 2] : 0;
+			//ppc.tri = uint3(sid, _trisData[uint(sphere.nId.w) * 3 + 1], _trisData[uint(sphere.nId.w) * 3 + 2]);
+
+			InterlockedAdd(_countContactBuffer[0], 1u, countPP);
+			_pointPointContactBuffer[countPP] = ppc;
+			countA++;
+		}
+		if (vecDist > epsilon && pr.w > 0 && sid >= _numSelfParticles && dist < cRadius + 2 * pr.w)
+		{
+			ppc.normal = normal;
+			ppc.p0 = vid;
+			ppc.p1.x = index;
+
+			InterlockedAdd(_countContactBuffer2[0], 1u, countPP);
+			_pointPointContactBuffer2[countPP] = ppc;
+			countB++;
+		}
+
+		if (countA > COLLISION_LIMIT || countB > COLLISION_LIMIT)break;
+	}
+}
+
+
+#pragma kernel PointPointPredictiveContactColliders
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void PointPointPredictiveContactColliders(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+
+	const float cRadius = _collisionRadius;
+	uint vid = id.x;
+
+	float3 pos0 = _projectedPositions[vid].xyz;
+	float3 d0 = pos0 + _velocities[vid].xyz * _deltaTime;
+
+	PointPointContactDesc ppc;
+	ppc.normal = 0;
+	ppc.p0 = 0;
+	ppc.p1 = 0;
+
+	uint countPP = 0;
+
+	for (uint j = 0; j < _numCollidableSpheres; j++)
+	{
+		CollidableSphereStruct data = _collidableSpheres[j];
+		float4 sphere = float4(data.center, data.radius + _collidableObjectsBias);
+
+		float3 pos1 = sphere.xyz;
+		float3 d1 = pos1 + data.posVel.xyz * _deltaTime;
+
+		float3 vec = pos0 - pos1;
+		float4 normal = float4(normalize(vec), sphere.w);
+		float dist = DistSegmentToSegment(pos0, d0, pos1, d1);
+
+		if (sphere.w > 0 && dist < (cRadius + sphere.w))
+		{
+			ppc.normal = normal;
+			ppc.p0 = vid;
+			ppc.p1.x = j;
+
+			InterlockedAdd(_countContactBuffer3[0], 1u, countPP);
+			_pointPointContactBuffer3[countPP] = ppc;
+		}
+	}
+
+	for (uint k = 0; k < _numCollidableSDFs; k++)
+	{
+		CollidableSDFStruct sdf = _collidableSDFs[k];
+		float3 center = sdf.center;
+		float4 extent = sdf.extent;
+		float4 rotation = sdf.rotation;
+		uint sdfType = sdf.sdfType;
+
+		float3 p = pos0 - center;
+		p = RotateInverse(rotation, p);
+
+		float4 parameters = float4(extent.xyz * 2 + _collidableObjectsBias, _collidableObjectsBias);
+		float3 normal = calcNormal(p, parameters, sdfType);
+
+		float3 pos1 = center;
+		float3 d1 = pos1 + sdf.posVel.xyz * _deltaTime;
+
+		float radius = max(extent.x, max(extent.y, extent.z)) * 2;
+
+		float3 vec = pos0 - pos1;
+		//float4 normalRadius = float4(Rotate(rotation, normal), radius);
+		float4 normalRadius = float4(normalize(vec), radius);
+		float dist = DistSegmentToSegment(pos0, d0, pos1, d1);
+
+		if (radius > 0 && dist < (cRadius + radius))
+		{
+			ppc.normal = normalRadius;
+			ppc.p0 = vid;
+			ppc.p1.x = _numCollidableSpheres + k;
+
+			InterlockedAdd(_countContactBuffer3[0], 1u, countPP);
+			_pointPointContactBuffer3[countPP] = ppc;
+		}
+	}
+
+}
+
+#pragma kernel PPPCClear
+[numthreads(256, 1, 1)]
+void PPPCClear(uint3 id : SV_DispatchThreadID)
+{
+	_pointPointContactBuffer3[id.x].normal = 0;
+	_pointPointContactBuffer3[id.x].p0 = 0;
+	_pointPointContactBuffer3[id.x].p1 = 0;
+}
+
+#pragma kernel CountContactStart
+[numthreads(1, 1, 1)]
+void CountContactStart(uint3 id : SV_DispatchThreadID)
+{
+	_countContactBuffer[0] = 0;
+	_countContactBuffer2[0] = 0;
+	_countContactBuffer3[0] = 0;
+}
+
+#pragma kernel CountContactSetup
+[numthreads(1, 1, 1)]
+void CountContactSetup(uint3 id : SV_DispatchThreadID)
+{
+	_countContactBuffer[0] = max(1, ceil(_countContactBuffer[0] / 256.0f));
+	_countContactBuffer2[0] = max(1, ceil(_countContactBuffer2[0] / 256.0f));
+	_countContactBuffer3[0] = max(1, ceil(_countContactBuffer3[0] / 256.0f));
+}
+
+
+#pragma kernel SelfContactCollisions
+[numthreads(256, 1, 1)]
+void SelfContactCollisions(uint3 id : SV_DispatchThreadID)
+{
+	const float cRadius = _collisionRadius;
+
+	PointPointContactDesc ppc = _pointPointContactBuffer[id.x];
+
+	//if (ppc.p1.x < _numParticles)
+	//{
+
+	float3 pos0 = _projectedPositions[ppc.p0].xyz;
+	float3 pos1 = _useSelfCollisionTriangles ? ClosestPointToTri(_projectedPositions[ppc.p1.x].xyz, _projectedPositions[ppc.p1.y].xyz, _projectedPositions[ppc.p1.z].xyz, pos0) : _projectedPositions[ppc.p1.x].xyz;
+	float3 vec = pos0 - pos1;
+
+	//float3 vec = _projectedPositions[ppc.p0].xyz - _projectedPositions[ppc.p1].xyz;
+	float len = dot2(vec);
+	float con = dot(ppc.normal.xyz, vec) - ppc.normal.w * 0.25f;
+
+	//float3 deltaPos0 = SphereConstraint(_projectedPositions[ppc.p0].xyz, float4(_projectedPositions[ppc.p1].xyz, ppc.normal.w), ppc.p0);
+
+	if (len > epsilon && ppc.normal.w > 0 && con >= 0)
+	{
+		float dist = sqrt(len);
+		float move = max(0, ppc.normal.w - dist);
+		float3 dir = ppc.normal.xyz;
+		dir *= move;
+		//_frictions[ppc.p0] = move > 0 ? _staticFriction : 1.0;
+
+		float3 deltaPos0 = dir;
+		AtomicAddDelta(ppc.p0, deltaPos0.x, 0);
+		AtomicAddDelta(ppc.p0, deltaPos0.y, 1);
+		AtomicAddDelta(ppc.p0, deltaPos0.z, 2);
+		InterlockedAdd(_deltaCount[ppc.p0], 1);
+
+		float3 deltaPos1 = -dir;
+		AtomicAddDelta(ppc.p1.x, deltaPos1.x, 0);
+		AtomicAddDelta(ppc.p1.x, deltaPos1.y, 1);
+		AtomicAddDelta(ppc.p1.x, deltaPos1.z, 2);
+		InterlockedAdd(_deltaCount[ppc.p1.x], 1);
+
+		if (_useSelfCollisionTriangles)
+		{
+			AtomicAddDelta(ppc.p1.y, deltaPos1.x, 0);
+			AtomicAddDelta(ppc.p1.y, deltaPos1.y, 1);
+			AtomicAddDelta(ppc.p1.y, deltaPos1.z, 2);
+			InterlockedAdd(_deltaCount[ppc.p1.y], 1);
+
+			AtomicAddDelta(ppc.p1.z, deltaPos1.x, 0);
+			AtomicAddDelta(ppc.p1.z, deltaPos1.y, 1);
+			AtomicAddDelta(ppc.p1.z, deltaPos1.z, 2);
+			InterlockedAdd(_deltaCount[ppc.p1.z], 1);
+		}
+	}
+	//}
+}
+
+#pragma kernel CollidersContactCollisions
+[numthreads(256, 1, 1)]
+void CollidersContactCollisions(uint3 id : SV_DispatchThreadID)
+{
+	const float cRadius = _collisionRadius;
+
+	PointPointContactDesc ppc = _pointPointContactBuffer3[id.x];
+
+	if (ppc.p1.x < _numCollidableSpheres)
+	{
+		uint j = ppc.p1.x;
+
+		CollidableSphereStruct data = _collidableSpheres[j];
+		float4 sphere = float4(data.center, data.radius + _collidableObjectsBias);
+		float3 projectedPosition = _projectedPositions[ppc.p0].xyz;
+		float3 vec = projectedPosition - sphere.xyz;
+		float len = dot2(vec) + epsilon;
+		float distPlane = dot(ppc.normal.xyz, vec);
+		float con = distPlane - sphere.w;
+
+		float3 deltaPos0 = SphereConstraint(projectedPosition, sphere, ppc.p0, sphere.xyz, data.posVel, data.rotVel, data.friction);
+		if (con < 0)
+		{
+			float dist = abs(sqrt(len) - sphere.w);
+			float move = dist;// -con;// max(0, dist);
+			float3 dir = ppc.normal.xyz;
+			dir *= move;
+			//_projectedPositions[ppc.p0].xyz += dir;
+			deltaPos0 += dir;
+		}
+		AtomicAddDelta(ppc.p0, deltaPos0.x, 0);
+		AtomicAddDelta(ppc.p0, deltaPos0.y, 1);
+		AtomicAddDelta(ppc.p0, deltaPos0.z, 2);
+		InterlockedAdd(_deltaCount[ppc.p0], 1);
+
+	}
+	else
+	{
+		uint k = ppc.p1.x - _numCollidableSpheres;
+
+		float3 projectedPosition = _projectedPositions[ppc.p0].xyz;
+
+		CollidableSDFStruct sdf = _collidableSDFs[k];
+		float3 center = sdf.center;
+		float4 extent = sdf.extent;
+		float4 rotation = sdf.rotation;
+		uint sdfType = sdf.sdfType;
+
+		float3 p = projectedPosition - center;
+		p = RotateInverse(rotation, p);
+
+		float4 parameters = float4(extent.xyz * 2 + _collidableObjectsBias, _collidableObjectsBias);
+		float3 normal = calcNormal(p, parameters, sdfType);
+		float dist = sdFunc(p, parameters, sdfType);
+		float distInv = max(0, -dist);
+
+		float3 normalRot = Rotate(rotation, normal);
+
+		float3 force = float3(0, 0, 0);
+		if (distInv > 0)
+		{
+			force = distInv * normalRot * 0.5;
+			float3 posDir = projectedPosition.xyz - center;
+			float3 rot = cross(sdf.rotVel, posDir);
+			force += (sdf.posVel + rot) * 0.5 * _dynamicFriction * _dt; // * _invMass
+			_frictions[id.x] = _staticFriction * extent.w;
+		}
+
+		float3 vec = projectedPosition - center.xyz;
+		//float len = dot2(vec) + epsilon;
+		//float con = dot(ppc.normal.xyz, vec) - sqrt(len) + dist;
+
+		float r = ppc.normal.w;
+		float distPlane = dot(ppc.normal.xyz, vec);
+		float con = distPlane - r;
+
+		float3 deltaPos0 = force;
+		if (con < 0)
+		{
+			float move = distInv;
+			float3 dir = ppc.normal.xyz;
+			dir *= move;
+			//_projectedPositions[ppc.p0].xyz += dir;
+			deltaPos0 += dir;
+		}
+
+		AtomicAddDelta(ppc.p0, deltaPos0.x, 0);
+		AtomicAddDelta(ppc.p0, deltaPos0.y, 1);
+		AtomicAddDelta(ppc.p0, deltaPos0.z, 2);
+		InterlockedAdd(_deltaCount[ppc.p0], 1);
+	}
+}
+
+
+#pragma kernel OtherSpheresContactCollisions
+[numthreads(256, 1, 1)]
+void OtherSpheresContactCollisions(uint3 id : SV_DispatchThreadID)
+{
+	//if (id.x >= _numParticles) return;
+
+	PointPointContactDesc ppc = _pointPointContactBuffer2[id.x];
+	//if (ppc.p1 >= _numParticles)
+	//{
+	float3 pp = _projectedPositions[ppc.p0].xyz;
+	sData sphere = _voxelDataBuffer[ppc.p1.x];
+	uint sid = sphere.nId.w;
+
+	float4 pr = sphere.pr;
+
+	if (_useTrisMesh && sid >= _selfAndAutoSpheresCount)
+		pr.xyz = ClosestPointToTri(sphere.pr.xyz, sphere.nId.xyz, sphere.temp.xyz, pp.xyz);
+
+	float3 vec = pp - pr.xyz;
+	float len = dot2(vec);
+	float con = dot(ppc.normal.xyz, vec) + pr.w;
+	if (len > epsilon && ppc.normal.w > 0 && con >= 0)
+	{
+		float dist = sqrt(len);
+		float move = max(0, pr.w - dist);
+		float3 dir = ppc.normal.xyz;
+		dir *= move;
+		//_projectedPositions[ppc.p0].xyz += dir;
+		//_projectedPositions[ppc.p0].xyz += SphereConstraint(pp, pr, ppc.p0);
+		_frictions[ppc.p0] = move > 0 ? _staticFriction : 1.0;
+
+		float3 deltaPos0 = dir;
+		AtomicAddDelta(ppc.p0, deltaPos0.x, 0);
+		AtomicAddDelta(ppc.p0, deltaPos0.y, 1);
+		AtomicAddDelta(ppc.p0, deltaPos0.z, 2);
+		InterlockedAdd(_deltaCount[ppc.p0], 1);
+	}
+	//}
+}
+
+
+// ---------------------------------------------------------------
+// --------- Step 13-14: Update Velocities and Position ----------
+// ---------------------------------------------------------------
+
+
+#pragma kernel UpdatePositions
+
+Texture2D<float4> _skinned_data_1;
+//uint skinned_tex_height;
+uint _skinned_tex_width;
+float _blendSkinning;
+float _minBlend;
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void UpdatePositions(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numParticles) return;
+
+	float4 vel = _velocities[id.x];
+	float blend = saturate(max(_minBlend, vel.w * _blendSkinning));
+	uint2 skinned_tex_uv;
+	skinned_tex_uv.x = id.x % _skinned_tex_width;
+	skinned_tex_uv.y = id.x / _skinned_tex_width;
+	float4 data_1 = mul(_localToWorldMatrix, float4(_skinned_data_1[skinned_tex_uv].xyz, 1));
+	float3 delta = (_projectedPositions[id.x].xyz - _positions[id.x]) / _dt * _frictions[id.x];
+	_velocities[id.x] = lerp(float4(delta, vel.w), float4(0, 0, 0, vel.w), floor(blend));
+	_positions[id.x] = lerp(_projectedPositions[id.x].xyz, data_1.xyz, blend);
+	_frictions[id.x] = 1;
+}
+
+
+struct SVertOut
+{
+	float3 pos;
+	float3 norm;
+	float4 tang;
+};
+StructuredBuffer<SVertOut> _meshVertsOut;
+
+
+uint _rtArrayWidth;
+Texture2D<float4> _rtArray;
+
+#pragma kernel UpdatePositions2
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void UpdatePositions2(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numParticles) return;
+
+	float4 vel = _velocities[id.x];
+	float blend = saturate(max(_minBlend, vel.w * _blendSkinning));
+	SVertOut vin = _meshVertsOut[id.x];
+
+	float4 data_1 = mul(_localToWorldMatrix, float4(vin.pos.xyz, 1));
+	float3 delta = (_projectedPositions[id.x].xyz - _positions[id.x]) / _dt * _frictions[id.x];
+	_velocities[id.x] = lerp(float4(delta, vel.w), float4(0, 0, 0, vel.w), floor(blend));
+	_positions[id.x] = lerp(_projectedPositions[id.x].xyz, data_1.xyz, blend);
+	_frictions[id.x] = 1;
+}
+
+#pragma kernel UpdatePositions2Blends
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void UpdatePositions2Blends(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numParticles) return;
+
+	float4 vel = _velocities[id.x];
+	float blend = saturate(max(_minBlend, vel.w * _blendSkinning));
+	SVertOut vin = _meshVertsOut[id.x];
+
+	const uint width = _rtArrayWidth;
+	float3 result = _rtArray[uint2(id.x % width, id.x / width)].xyz;
+
+	float4 data_1 = mul(_localToWorldMatrix, float4(vin.pos.xyz + result, 1));
+	float3 delta = (_projectedPositions[id.x].xyz - _positions[id.x]) / _dt * _frictions[id.x];
+	_velocities[id.x] = lerp(float4(delta, vel.w), float4(0, 0, 0, vel.w), floor(blend));
+	_positions[id.x] = lerp(_projectedPositions[id.x].xyz, data_1.xyz, blend);
+	_frictions[id.x] = 1;
+}
+#pragma kernel UpdatePositionsNoSkinning
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void UpdatePositionsNoSkinning(uint3 id : SV_DispatchThreadID) {
+	if (id.x >= _numParticles) return;
+
+	float4 vel = _velocities[id.x];
+	float3 delta = (_projectedPositions[id.x].xyz - _positions[id.x]) / _dt * _frictions[id.x];
+	_velocities[id.x] = float4(delta, vel.w);
+	_positions[id.x] = _projectedPositions[id.x].xyz;
+	_frictions[id.x] = 1;
+}
+
+
+//StructuredBuffer<sData> _sphereDataBufferR;
+float _surfacePush;
+float _surfaceOffset;
+
+float CheckIfPosIsInsideOfMesh(float3 projectedPosition, uint vid)
+{
+	const uint grid = _gridCount;// 64u;
+	const float voxelSize = _cubeMinPos.w / ((float)grid);
+	const float voxelExtend = voxelSize * 0.5f;
+
+
+	uint3 voxelPos = (projectedPosition - _cubeMinPos.xyz) * grid / _cubeMinPos.w;
+	voxelPos = clamp(voxelPos, 0, grid - 1);
+	uint voxelIndex = voxelPos.x + voxelPos.y * grid + voxelPos.z * grid * grid;
+	uint dataIndex = _usedVoxelListBuffer[voxelIndex + 1] - 1;
+
+	uint counter = _counterPerVoxelBuffer2[voxelIndex];
+
+	float lastDist = 9999999;
+	float3 normal = float3(0, 1, 0);
+	float3 surfacePos = 0;
+
+	sData nearSphere = (sData)0;
+	for (uint i = 0u; i < counter; i++)
+	{
+		uint index = _lastCounterPerVoxelBuffer2[dataIndex] + i;
+		sData sphere = _voxelDataBuffer[index];
+		uint sid = sphere.nId.w;
+		if (sid == vid) continue;
+
+		bool meshParticles = sid >= _selfAndAutoSpheresCount;
+		float4 pr = sphere.pr;
+		if (_useTrisMesh && meshParticles)
+			pr.xyz = ClosestPointToTri(sphere.pr.xyz, sphere.nId.xyz, sphere.temp.xyz, projectedPosition.xyz);
+
+		float dist = distance(pr.xyz, projectedPosition);
+		if (dist < lastDist && meshParticles)
+		{
+			lastDist = dist;
+			nearSphere = sphere;
+			surfacePos = pr.xyz;
+		}
+	}
+
+	normal = _useTrisMesh ? normalize(cross(nearSphere.nId.xyz - nearSphere.pr.xyz, nearSphere.temp.xyz - nearSphere.pr.xyz)) : nearSphere.nId.xyz;
+
+	surfacePos = surfacePos + normal * _normalScale * (_useTrisMesh ? 1 : max(0.05, nearSphere.pr.w * 5)) - normal * _surfaceOffset;
+	//surfacePos = surfacePos + normal * _normalScale * max(0.05, nearSphere.pr.w * 5);
+	//if (_useTrisMesh)surfacePos += normal * _triSurfaceOffset;
+
+	return sign(nearSphere.pr.w) * max(0, dot(normal, surfacePos - projectedPosition));
+}
+
+float _skinningForSurfacePush;
+void UseDQS(uint vid, float3 projectedPosition, float d)
+{
+	uint2 skinned_tex_uv;
+	skinned_tex_uv.x = vid % _skinned_tex_width;
+	skinned_tex_uv.y = vid / _skinned_tex_width;
+	float4 skinPos = mul(_localToWorldMatrix, float4(_skinned_data_1[skinned_tex_uv].xyz, 1));
+	float3 blendPos = lerp(_positions[vid].xyz, skinPos.xyz, _skinningForSurfacePush);
+	_projectedPositions[vid].xyz = lerp(projectedPosition, blendPos, saturate(d * _surfacePush));//normal * d * 10;
+
+}
+
+void UseSkinning(uint vid, float3 projectedPosition, float d)
+{
+	SVertOut vin = _meshVertsOut[vid];
+	float4 skinPos = mul(_localToWorldMatrix, float4(vin.pos.xyz, 1));
+	float3 blendPos = lerp(_positions[vid].xyz, skinPos.xyz, _skinningForSurfacePush);
+	_projectedPositions[vid].xyz = lerp(projectedPosition, blendPos, saturate(d * _surfacePush));//normal * d * 10;
+}
+
+void UseSkinningBlends(uint vid, float3 projectedPosition, float d)
+{
+	SVertOut vin = _meshVertsOut[vid];
+	const uint width = _rtArrayWidth;
+	float3 	result = _rtArray[uint2(vid % width, vid / width)].xyz;
+	float4 skinPos = mul(_localToWorldMatrix, float4(vin.pos.xyz + result, 1));
+	float3 blendPos = lerp(_positions[vid].xyz, skinPos.xyz, _skinningForSurfacePush);
+	_projectedPositions[vid].xyz = lerp(projectedPosition, blendPos, saturate(d * _surfacePush));//normal * d * 10;
+}
+
+#pragma kernel SurfacePush
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SurfacePush(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	uint vid = id.x;
+	float3 projectedPosition = _projectedPositions[vid].xyz;
+	float d = CheckIfPosIsInsideOfMesh(projectedPosition, vid);
+	_projectedPositions[vid].xyz = lerp(projectedPosition, _positions[vid].xyz, saturate(d * _surfacePush));//normal * d * 10;
+}
+#pragma kernel SurfacePushDQS
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SurfacePushDQS(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	uint vid = id.x;
+	float3 projectedPosition = _projectedPositions[vid].xyz;
+	float d = CheckIfPosIsInsideOfMesh(projectedPosition, vid);
+	UseDQS(vid, projectedPosition, d);
+}
+#pragma kernel SurfacePushSkinning
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SurfacePushSkinning(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	uint vid = id.x;
+	float3 projectedPosition = _projectedPositions[vid].xyz;
+	float d = CheckIfPosIsInsideOfMesh(projectedPosition, vid);
+	UseSkinning(vid, projectedPosition, d);
+}
+#pragma kernel SurfacePushSkinningBlends
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SurfacePushSkinningBlends(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	uint vid = id.x;
+	float3 projectedPosition = _projectedPositions[vid].xyz;
+	float d = CheckIfPosIsInsideOfMesh(projectedPosition, vid);
+	UseSkinningBlends(vid, projectedPosition, d);
+}
+
+float CheckIfPosIsInsideOfColliders(float3 projectedPosition)
+{
+	float lastDist = 9999999;
+	float3 surfacePos = 0;
+	float3 normal = float3(0, 1, 0);
+
+	for (uint i = 0; i < _numCollidableSpheres; i++)
+	{
+		float4 sphere = float4(_collidableSpheres[i].center, _collidableSpheres[i].radius + _collidableObjectsBias);
+		float3 n = normalize(projectedPosition - sphere.xyz);
+		float3 sPos = sphere.xyz + n * sphere.w;
+		float dist = distance(sPos.xyz, projectedPosition);
+		if (dist < lastDist)
+		{
+			lastDist = dist;
+			surfacePos = sPos;
+			normal = n;
+		}
+	}
+
+	for (uint j = 0; j < _numCollidableSDFs; j++) {
+
+		CollidableSDFStruct sdf = _collidableSDFs[j];
+		float3 center = sdf.center;
+		float4 extent = sdf.extent;
+		float4 rotation = sdf.rotation;
+		uint sdfType = sdf.sdfType;
+
+		float3 p = projectedPosition - center;
+		p = RotateInverse(rotation, p);
+
+		float4 parameters = float4(extent.xyz * 2 + _collidableObjectsBias, _collidableObjectsBias);
+		float3 n = calcNormal(p, parameters, sdfType);
+		float dist = sdFunc(p, parameters, sdfType);
+		float absDist = abs(dist);
+		n = Rotate(rotation, n);
+
+		if (absDist < lastDist)
+		{
+			lastDist = absDist;
+			surfacePos = projectedPosition - n * dist;
+			normal = n;
+		}
+
+	}
+
+	surfacePos = surfacePos - normal * _surfaceOffset;
+	return max(0, dot(normal, surfacePos - projectedPosition));
+}
+
+#pragma kernel SurfacePushColliders
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SurfacePushColliders(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	uint vid = id.x;
+	float3 projectedPosition = _projectedPositions[vid].xyz;
+	float d = CheckIfPosIsInsideOfColliders(projectedPosition);
+	_projectedPositions[vid].xyz = lerp(projectedPosition, _positions[vid].xyz, saturate(d * _surfacePush));//normal * d * 10;
+}
+#pragma kernel SurfacePushCollidersDQS
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SurfacePushCollidersDQS(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	uint vid = id.x;
+	float3 projectedPosition = _projectedPositions[vid].xyz;
+	float d = CheckIfPosIsInsideOfColliders(projectedPosition);
+	UseDQS(vid, projectedPosition, d);
+}
+#pragma kernel SurfacePushCollidersSkinning
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SurfacePushCollidersSkinning(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	uint vid = id.x;
+	float3 projectedPosition = _projectedPositions[vid].xyz;
+	float d = CheckIfPosIsInsideOfColliders(projectedPosition);
+	UseSkinning(vid, projectedPosition, d);
+}
+#pragma kernel SurfacePushCollidersSkinningBlends
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SurfacePushCollidersSkinningBlends(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	uint vid = id.x;
+	float3 projectedPosition = _projectedPositions[vid].xyz;
+	float d = CheckIfPosIsInsideOfColliders(projectedPosition);
+	UseSkinningBlends(vid, projectedPosition, d);
+}
+
+
+
+
+
+
+#pragma kernel TransferDuplicateVertexData
+
+uint _duplicateVerticesCount;
+StructuredBuffer<uint2> _duplicateVerticesBuffer;
+
+[numthreads(8, 1, 1)]
+void TransferDuplicateVertexData(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _duplicateVerticesCount) return;
+	uint2 duplicates = _duplicateVerticesBuffer[id.x];
+	_positions[duplicates.y] = _positions[duplicates.x];
+}
+
+
+//#pragma kernel ReadBackVertexID
+//
+////float4 _gridScale;
+//
+//[numthreads(512, 1, 1)] // TODO: play around with numthread size
+//void ReadBackVertexID(uint3 id : SV_DispatchThreadID)
+//{
+//	uint pid = id.x;
+//	float4 pKey = particlekeys[pid];
+//	uint vid = uint(pKey.w - 1);
+//
+//	particlekeys[pid] = pKey;// float4((pKey.xyz - _gridScale.xyz) * _gridScale.w + _gridScale.xyz, pKey.w); // _gridScale.w gets inversed in C# code
+//
+//	if (pKey.w > 0) {
+//		mapParticlesToKeys[vid] = pid;
+//	}
+//}
+
+
+#pragma kernel UpdateWorldTransform
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void UpdateWorldTransform(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+
+	float4x4 matInvTrans = _localToWorldMatrix;
+	matInvTrans._14 = 0;
+	matInvTrans._24 = 0;
+	matInvTrans._34 = 0;
+	//matInvTrans._44 = 1;
+	_positions[id.x] = mul(_localToWorldMatrix, float4(_positions[id.x], 1)).xyz;
+	float4 vel = _velocities[id.x];
+	_velocities[id.x] = float4(mul(matInvTrans, float4(vel.xyz, 1)).xyz, vel.w);
+}
+
+#pragma kernel UpdateInverseWorldTransform
+
+float4 _delta;
+//StructuredBuffer<uint> mapVertsBackBuffer;
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void UpdateInverseWorldTransform(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+
+	float4x4 matInvTrans = _worldToLocalMatrix;
+	matInvTrans._14 = 0;
+	matInvTrans._24 = 0;
+	matInvTrans._34 = 0;
+	//matInvTrans._44 = 1;
+	_positions[id.x] = mul(_worldToLocalMatrix, float4(_positions[id.x] - _delta.xyz, 1)).xyz;
+
+	float4 vel = _velocities[id.x];
+	_velocities[id.x] = float4(mul(matInvTrans, float4(vel.xyz, 1)).xyz, vel.w);
+
+}
+
+#pragma kernel CSNormals
+
+uint _maxVerts;
+RWStructuredBuffer<float3> _normalsBuffer;
+
+[numthreads(256, 1, 1)]
+void CSNormals(uint3 id : SV_DispatchThreadID)
+{
+	uint n = id.x;
+	if (n >= _maxVerts) return;
+
+	float3 norm = float3(0, 0, 0);
+	uint2 info = _connectionInfoBuffer[n];
+	uint start = info.x;
+	uint end = info.y - 1;
+
+	for (uint c = start; c < end; c += 2) {
+		float3 a = _positions[_connectedVertsBuffer[c]].xyz - _positions[n].xyz;
+		float3 b = _positions[_connectedVertsBuffer[c + 1]].xyz - _positions[n].xyz;
+		norm += cross(a, b);
+	}
+	_normalsBuffer[n] = normalize(norm);
+}
+
+
+#pragma kernel SkinningHD
+
+float4x4 _worldToLocalMatrixHD;
+StructuredBuffer<float3> _startVertexBuffer;
+StructuredBuffer<float4x4> _bonesStartMatrixBuffer;
+struct Blends
+{
+	float4 bones;
+	float4 weights;
+};
+StructuredBuffer<Blends> _vertexBlendsBuffer;
+StructuredBuffer<uint2> _connectionInfoTetBuffer;
+StructuredBuffer<uint> _connectedVertsTetBuffer;
+RWStructuredBuffer<float3> _vertexBufferHD;
+
+uint _indexOffset;
+
+float4 worldPosSkinning(uint index, float3 vertexPos)
+{
+	const uint indexOffset = _indexOffset;
+
+	float4x4 final;
+	final[0] = float4(0, 0, 0, 0);
+	final[1] = float4(0, 0, 0, 0);
+	final[2] = float4(0, 0, 0, 0);
+	final[3] = float4(0, 0, 0, 0);
+	[unroll(4)]
+	for (int n = 0; n < 4; n++) {
+		uint num = uint(_vertexBlendsBuffer[index].bones[n]);
+
+		uint start = _connectionInfoTetBuffer[num].x;
+		uint end = _connectionInfoTetBuffer[num].y - 1;
+		float3 normal = float3(0, 0, 0);
+
+		float3 pos0 = mul(_localToWorldMatrix, float4(_positions[indexOffset + num].xyz, 1)).xyz;
+		for (uint j = start; j < end; j += 2) {
+			uint indexA = _connectedVertsTetBuffer[j];
+			uint indexB = _connectedVertsTetBuffer[j + 1];
+			float3 a = mul(_localToWorldMatrix, float4(_positions[indexOffset + indexA].xyz, 1)).xyz * 100 - pos0 * 100;
+			float3 b = mul(_localToWorldMatrix, float4(_positions[indexOffset + indexB].xyz, 1)).xyz * 100 - pos0 * 100;
+			normal += cross(a, b);
+		}
+		uint index0 = _connectedVertsTetBuffer[start];
+		float3 right = normalize(mul(_localToWorldMatrix, float4(_positions[indexOffset + index0].xyz, 1)).xyz * 100 - pos0 * 100);
+		normal = normalize(normal);
+		right = normalize(cross(normal, right));
+		float3 up = normalize(cross(right, normal));
+
+		float4x4 result;
+		result[0] = float4(right.x, up.x, normal.x, pos0.x);
+		result[1] = float4(right.y, up.y, normal.y, pos0.y);
+		result[2] = float4(right.z, up.z, normal.z, pos0.z);
+		result[3] = float4(0, 0, 0, 1);
+
+		final += _vertexBlendsBuffer[index].weights[n] * mul(result, _bonesStartMatrixBuffer[num]);
+	}
+	return mul(_worldToLocalMatrixHD, mul(final, float4(vertexPos.xyz, 1)));//mul (final, float4(vertexPos.xyz,1));//
+}
+
+[numthreads(256, 1, 1)]
+void SkinningHD(uint3 id : SV_DispatchThreadID)
+{
+	uint index = id.x;
+	if (index >= _maxVerts) return;
+
+	float3 vertexPos = _startVertexBuffer[index];
+	float4 worldPos = worldPosSkinning(index, vertexPos);
+	_vertexBufferHD[index].xyz = worldPos.xyz;
+}
+
+
+//#pragma kernel BlendWithSkinningCloth
+//
+//[numthreads(128, 1, 1)] // TODO: play around with numthread size
+//void BlendWithSkinningCloth(uint3 id : SV_DispatchThreadID)
+//{
+//	if (id.x >= _numParticles) return;
+//
+//	uint2 skinned_tex_uv;
+//
+//	skinned_tex_uv.x = id.x % _skinned_tex_width;
+//	skinned_tex_uv.y = id.x / _skinned_tex_width;
+//
+//	float4 data_1 = _skinned_data_1[skinned_tex_uv];
+//	//float4 data_2 = tex2Dlod(skinned_data_2, float4(skinned_tex_uv, 0, 0));
+//
+////#ifdef _TANGENT_TO_WORLD
+////	float2 data_3 = tex2Dlod(skinned_data_3, float4(skinned_tex_uv, 0, 0)).xy;
+////#endif
+////
+////	v.vertex.xyz = data_1.xyz;
+////	v.vertex.w = 1;
+////
+////	v.normal.x = data_1.w;
+////	v.normal.yz = data_2.xy;
+////
+////#ifdef _TANGENT_TO_WORLD
+////	v.tangent.xy = data_2.zw;
+////	v.tangent.zw = data_3.xy;
+////#endif
+//
+//	_positions[id.x] = data_1.xyz;
+//}
+
+#pragma kernel CalcCubeCenter
+
+#define BLOCKSIZE 512
+
+//RWStructuredBuffer<float4> _gridCenterBuffer;
+RWTexture2D<float4> _gridCenterBuffer;
+RWStructuredBuffer<uint4> _deltaPosAsIntX;
+uint2 texIndex(uint index)
+{
+	const uint vSize = 4;
+	return uint2(index % vSize, index / vSize);
+}
+
+void AtomicAddDeltaX(uint indexIntoDeltaPos, float newDeltaVal, uint axis)
+{
+	uint i_val = asuint(newDeltaVal);
+	uint tmp0 = 0;
+	uint tmp1;
+
+	[allow_uav_condition]
+	while (true)
+		//for(uint i = 0u; i < 16u; i++)
+	{
+		InterlockedCompareExchange(_deltaPosAsIntX[indexIntoDeltaPos][axis], tmp0, i_val, tmp1);
+
+		if (tmp1 == tmp0) {
+			break;
+		}
+
+		tmp0 = tmp1;
+		i_val = asuint(newDeltaVal + asfloat(tmp1));
+	}
+}
+
+void AtomicMinDeltaX(int indexIntoDeltaPos, float newDeltaVal, int axis)
+{
+	uint i_val = asuint(newDeltaVal);
+	InterlockedMin(_deltaPosAsIntX[indexIntoDeltaPos][axis], i_val);
+}
+
+void AtomicMaxDeltaX(int indexIntoDeltaPos, float newDeltaVal, int axis)
+{
+	uint i_val = asuint(newDeltaVal);
+	InterlockedMax(_deltaPosAsIntX[indexIntoDeltaPos][axis], i_val);
+}
+
+[numthreads(BLOCKSIZE, 1, 1)]
+void CalcCubeCenter(uint3 id : SV_DispatchThreadID, uint3 threadIdx : SV_GroupThreadID, uint3 groupIdx : SV_GroupID, uint tid : SV_GroupIndex)
+{
+	if (id.x >= _numParticles) return;
+
+	float3 deltaPos0 = _positions[id.x].xyz;
+	AtomicAddDeltaX(0, deltaPos0.x, 0);
+	AtomicAddDeltaX(0, deltaPos0.y, 1);
+	AtomicAddDeltaX(0, deltaPos0.z, 2);
+	InterlockedAdd(_deltaPosAsIntX[0].w, 1);
+
+	AtomicMinDeltaX(1, deltaPos0.x, 0);
+	AtomicMinDeltaX(1, deltaPos0.y, 1);
+	AtomicMinDeltaX(1, deltaPos0.z, 2);
+	_deltaPosAsIntX[1].w = 1;
+
+	AtomicMaxDeltaX(2, deltaPos0.x, 0);
+	AtomicMaxDeltaX(2, deltaPos0.y, 1);
+	AtomicMaxDeltaX(2, deltaPos0.z, 2);
+	_deltaPosAsIntX[2].w = 1;
+
+}
+
+#pragma kernel CalcCubeCenter2
+[numthreads(3, 1, 1)]
+void CalcCubeCenter2(uint3 id : SV_DispatchThreadID, uint3 threadIdx : SV_GroupThreadID, uint3 groupIdx : SV_GroupID, uint tid : SV_GroupIndex)
+{
+	int index = id.x;
+
+	float3 deltaP = float3(0, 0, 0);
+
+	if (_deltaPosAsIntX[index].w > 0) {
+		deltaP.x = asfloat(_deltaPosAsIntX[index].x);
+		deltaP.y = asfloat(_deltaPosAsIntX[index].y);
+		deltaP.z = asfloat(_deltaPosAsIntX[index].z);
+		deltaP /= float(_deltaPosAsIntX[index].w);
+	}
+
+	_gridCenterBuffer[texIndex(index)] = float4(deltaP, 1);
+
+	_deltaPosAsIntX[index] = uint4(0, 0, 0, 0);
+}
+
+#pragma kernel CalcCubeCenterFast
+
+uint _dispatchDim_x;
+groupshared float4 gdata[BLOCKSIZE];
+//groupshared float4 minData[BLOCKSIZE];
+//groupshared float4 maxData[BLOCKSIZE];
+
+[numthreads(BLOCKSIZE, 1, 1)]
+void CalcCubeCenterFast(uint3 threadIdx : SV_GroupThreadID, uint3 groupIdx : SV_GroupID, uint tid : SV_GroupIndex)
+{
+	////calc center by adding positions and dividing them by nSize
+	//uint i = groupIdx.x * (BLOCKSIZE * 2) + tid;
+	//uint dispatchSize = BLOCKSIZE * 2 * _dispatchDim_x;
+	//gdata[tid] = 0;
+	//minData[tid] = asfloat(2139095039);
+	//maxData[tid] = -asfloat(2139095039);
+	//do {
+	//	gdata[tid] += float4(_positions[i].xyz, 1) + float4(_positions[i + BLOCKSIZE].xyz, 1);
+	//	minData[tid] = min(minData[tid], min(float4(_positions[i].xyz, 1), float4(_positions[i + BLOCKSIZE].xyz, 1)));
+	//	maxData[tid] = max(maxData[tid], max(float4(_positions[i].xyz, 1), float4(_positions[i + BLOCKSIZE].xyz, 1)));
+	//	i += dispatchSize;
+	//} while (i < _numParticles);
+	//GroupMemoryBarrierWithGroupSync();
+	//if (BLOCKSIZE >= 512) { if (tid < 256) { gdata[tid] += gdata[tid + 256]; minData[tid] = min(minData[tid], minData[tid + 256]); maxData[tid] = max(maxData[tid], maxData[tid + 256]); } GroupMemoryBarrierWithGroupSync(); }
+	//if (BLOCKSIZE >= 256) { if (tid < 128) { gdata[tid] += gdata[tid + 128]; minData[tid] = min(minData[tid], minData[tid + 128]); maxData[tid] = max(maxData[tid], maxData[tid + 128]); } GroupMemoryBarrierWithGroupSync(); }
+	//if (BLOCKSIZE >= 128) { if (tid < 64) { gdata[tid] += gdata[tid + 64]; minData[tid] = min(minData[tid], minData[tid + 64]); maxData[tid] = max(maxData[tid], maxData[tid + 64]); } GroupMemoryBarrierWithGroupSync(); }
+	//if (tid < 32) {
+	//	if (BLOCKSIZE >= 64) { gdata[tid] += gdata[tid + 32]; minData[tid] = min(minData[tid], minData[tid + 32]); maxData[tid] = max(maxData[tid], maxData[tid + 32]);}
+	//	if (BLOCKSIZE >= 32) { gdata[tid] += gdata[tid + 16]; minData[tid] = min(minData[tid], minData[tid + 16]); maxData[tid] = max(maxData[tid], maxData[tid + 16]);}
+	//	if (BLOCKSIZE >= 16) { gdata[tid] += gdata[tid + 8]; minData[tid] = min(minData[tid], minData[tid + 8]); maxData[tid] = max(maxData[tid], maxData[tid + 8]);}
+	//	if (BLOCKSIZE >= 8) { gdata[tid] += gdata[tid + 4]; minData[tid] = min(minData[tid], minData[tid + 4]); maxData[tid] = max(maxData[tid], maxData[tid + 4]);}
+	//	if (BLOCKSIZE >= 4) { gdata[tid] += gdata[tid + 2]; minData[tid] = min(minData[tid], minData[tid + 2]); maxData[tid] = max(maxData[tid], maxData[tid + 2]);}
+	//	if (BLOCKSIZE >= 2) { gdata[tid] += gdata[tid + 1]; minData[tid] = min(minData[tid], minData[tid + 1]); maxData[tid] = max(maxData[tid], maxData[tid + 1]);}
+	//}
+	//if (tid == 0) {
+	//	_gridCenterBuffer[groupIdx.x] = gdata[0];
+	//	_gridCenterBuffer[groupIdx.x + 1] = minData[0];
+	//	_gridCenterBuffer[groupIdx.x + 2] = maxData[0];
+	//}
+
+	//calc center by adding positions and dividing them by nSize
+	uint i = groupIdx.x * (BLOCKSIZE * 2) + tid;
+	uint dispatchSize = BLOCKSIZE * 2 * _dispatchDim_x;
+	gdata[tid] = 0;
+
+	do {
+		gdata[tid] += float4(_positions[i].xyz, 1) + float4(_positions[i + BLOCKSIZE].xyz, 1);
+		i += dispatchSize;
+	} while (i < _numParticles);
+
+	GroupMemoryBarrierWithGroupSync();
+
+	if (BLOCKSIZE >= 512) { if (tid < 256) { gdata[tid] += gdata[tid + 256]; } GroupMemoryBarrierWithGroupSync(); }
+	if (BLOCKSIZE >= 256) { if (tid < 128) { gdata[tid] += gdata[tid + 128]; } GroupMemoryBarrierWithGroupSync(); }
+	if (BLOCKSIZE >= 128) { if (tid < 64) { gdata[tid] += gdata[tid + 64]; } GroupMemoryBarrierWithGroupSync(); }
+	if (tid < 32) {
+		if (BLOCKSIZE >= 64) gdata[tid] += gdata[tid + 32];
+		if (BLOCKSIZE >= 32) gdata[tid] += gdata[tid + 16];
+		if (BLOCKSIZE >= 16) gdata[tid] += gdata[tid + 8];
+		if (BLOCKSIZE >= 8) gdata[tid] += gdata[tid + 4];
+		if (BLOCKSIZE >= 4) gdata[tid] += gdata[tid + 2];
+		if (BLOCKSIZE >= 2) gdata[tid] += gdata[tid + 1];
+	}
+
+	if (tid == 0) {
+		_gridCenterBuffer[texIndex(groupIdx.x)] = gdata[0];
+	}
+}
+
+
+
+#pragma kernel BlendGarmentOrigin
+
+float _blendGarment;
+float _pushVertsByNormals;
+StructuredBuffer<float3> _baseVertices;
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void BlendGarmentOrigin(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+	float3 normal = _normalsBuffer[id.x];
+	_projectedPositions[id.x].xyz = lerp(_projectedPositions[id.x].xyz, mul(_localToWorldMatrix, float4(_baseVertices[id.x], 1)).xyz, _blendGarment) + normal * _pushVertsByNormals * 0.01f;
+}
+
+#pragma kernel CopyTexToBuffer
+
+RWStructuredBuffer<float4> _gridCenterBufferCopy;
+
+[numthreads(1, 1, 1)]
+void CopyTexToBuffer(uint3 id : SV_DispatchThreadID)
+{
+	_gridCenterBufferCopy[id.x] = _gridCenterBuffer[texIndex(id.x)];
+}
+
+
+
+// A simple reduction tree kernel where each work group reduces a set // of elements to a single value in local memory and writes the
+// resultant value to global memory.
+
+#pragma kernel ComputeCenterOfMass
+RWStructuredBuffer<float4> _centerMassBuffer;
+
+//[numthreads(WORK_GROUP_SIZE, 1, 1)]
+//void ComputeCenterOfMassX(uint3 id : SV_DispatchThreadID, uint3 threadId : SV_GroupThreadID, uint3 groupId : SV_GroupID, uint tid : SV_GroupIndex)
+//{
+//	if (id.x >= _numParticles) return;
+//
+//	float mass = _invMass;
+//	float3 centerMassPosition = _positions[id.x].xyz * mass;
+//	float3 centerMassVelocity = _velocities[id.x].xyz * mass;
+//
+//	AtomicAddDeltaX(0, centerMassPosition.x, 0);
+//	AtomicAddDeltaX(0, centerMassPosition.y, 1);
+//	AtomicAddDeltaX(0, centerMassPosition.z, 2);
+//	AtomicAddDeltaX(0, mass, 3);
+//
+//	AtomicAddDeltaX(1, centerMassVelocity.x, 0);
+//	AtomicAddDeltaX(1, centerMassVelocity.y, 1);
+//	AtomicAddDeltaX(1, centerMassVelocity.z, 2);
+//
+//	//uint localId = threadId.x;// get_local_id(0);
+//	//uint globalId = id.x;// get_global_id(0);
+//	//uint gId = groupId.x;// get_group_id(0);
+//	//uint wgSize = WORK_GROUP_SIZE;// get_local_size(0);
+//
+//	//groupData0[localId] = (globalId < _numParticles) ? float4(centerMassPosition, mass) : 0;
+//	//groupData1[localId] = (globalId < _numParticles) ? float4(centerMassVelocity, mass) : 0;
+//
+//	//GroupMemoryBarrierWithGroupSync();
+//
+//	//for (int offset = wgSize; offset > 0; offset >>= 1)
+//	//{
+//	//	if (localId < offset && localId + offset < wgSize)
+//	//	{
+//	//		groupData0[localId] += groupData0[localId + offset];
+//	//		groupData1[localId] += groupData1[localId + offset];
+//	//	}
+//	//	GroupMemoryBarrierWithGroupSync();
+//	//}
+//	//GroupMemoryBarrierWithGroupSync();
+//
+//	//if (tid == 0) {
+//	//	_centerMassBuffer[groupId.x] = groupData0[0];
+//	//	_centerMassBuffer[groupId.x + 1] = groupData1[0];
+//	//}
+//
+//	//uint i = groupId.x * (WORK_GROUP_SIZE * 2) + tid;
+//	//uint dispatchSize = WORK_GROUP_SIZE * 2 * _dispatchDim_x;
+//	//groupData0[tid] = 0;
+//	//groupData1[tid] = 0;
+//
+//	//do {
+//	//	groupData0[tid] += float4(_positions[i].xyz * mass, mass) + float4(_positions[i + WORK_GROUP_SIZE].xyz * mass, mass);
+//	//	groupData1[tid] += float4(_velocities[i].xyz * mass, mass) + float4(_velocities[i + WORK_GROUP_SIZE].xyz * mass, mass);
+//	//	i += dispatchSize;
+//	//} while (i < _numParticles);
+//
+//	//GroupMemoryBarrierWithGroupSync();
+//
+//	//if (WORK_GROUP_SIZE >= 128) { if (tid < 64) { groupData0[tid] += groupData0[tid + 64]; } GroupMemoryBarrierWithGroupSync(); }
+//	//if (tid < 32) {
+//	//	if (WORK_GROUP_SIZE >= 64) groupData0[tid] += groupData0[tid + 32];
+//	//	if (WORK_GROUP_SIZE >= 32) groupData0[tid] += groupData0[tid + 16];
+//	//	if (WORK_GROUP_SIZE >= 16) groupData0[tid] += groupData0[tid + 8];
+//	//	if (WORK_GROUP_SIZE >= 8) groupData0[tid] += groupData0[tid + 4];
+//	//	if (WORK_GROUP_SIZE >= 4) groupData0[tid] += groupData0[tid + 2];
+//	//	if (WORK_GROUP_SIZE >= 2) groupData0[tid] += groupData0[tid + 1];
+//	//}
+//	//if (WORK_GROUP_SIZE >= 128) { if (tid < 64) { groupData1[tid] += groupData1[tid + 64]; } GroupMemoryBarrierWithGroupSync(); }
+//	//if (tid < 32) {
+//	//	if (WORK_GROUP_SIZE >= 64) groupData1[tid] += groupData1[tid + 32];
+//	//	if (WORK_GROUP_SIZE >= 32) groupData1[tid] += groupData1[tid + 16];
+//	//	if (WORK_GROUP_SIZE >= 16) groupData1[tid] += groupData1[tid + 8];
+//	//	if (WORK_GROUP_SIZE >= 8) groupData1[tid] += groupData1[tid + 4];
+//	//	if (WORK_GROUP_SIZE >= 4) groupData1[tid] += groupData1[tid + 2];
+//	//	if (WORK_GROUP_SIZE >= 2) groupData1[tid] += groupData1[tid + 1];
+//	//}
+//	//if (tid == 0) {
+//	//	_centerMassBuffer[groupId.x] = groupData0[0];
+//	//	_centerMassBuffer[groupId.x + 1] = groupData1[0];
+//	//}
+//
+//}
+
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void ComputeCenterOfMass(uint3 id : SV_DispatchThreadID, uint GI : SV_GroupIndex)
+{
+	float mass = _invMass;
+	uint idx = id.x;
+	bool inRange = idx < _numParticles;
+
+	groupData0[GI] = inRange ? float4(_positions[idx].xyz * mass, mass) : 0;
+	groupData1[GI] = inRange ? float4(_velocities[idx].xyz * mass, mass) : 0;
+	GroupMemoryBarrierWithGroupSync();
+
+	[unroll(WORK_GROUP_SIZE)]
+	for (uint s = 1; s < WORK_GROUP_SIZE; s *= 2)  // stride: 1, 2, 4, 8, 16, 32, 64, 128
+	{
+		int index = 2 * s * GI;
+
+		if (index < WORK_GROUP_SIZE) {
+			groupData0[index] += groupData0[index + s];
+			groupData1[index] += groupData1[index + s];
+		}
+		GroupMemoryBarrierWithGroupSync();
+	}
+
+	//if (WORK_GROUP_SIZE >= 256)
+	//{
+	//	if (GI < 128) {
+	//		groupData0[GI] += groupData0[GI + 128];
+	//		groupData1[GI] += groupData1[GI + 128];
+	//	}
+	//	GroupMemoryBarrierWithGroupSync();
+	//}
+	//// AMD - 64 / NVIDIA - 32
+	//if (GI < 64)
+	//{
+	//	if (WORK_GROUP_SIZE >= 64) { groupData0[GI] += groupData0[GI + 32]; groupData1[GI] += groupData1[GI + 32]; }
+	//	if (WORK_GROUP_SIZE >= 32) { groupData0[GI] += groupData0[GI + 16];  groupData1[GI] += groupData1[GI + 16]; }
+	//	if (WORK_GROUP_SIZE >= 16) { groupData0[GI] += groupData0[GI + 8]; groupData1[GI] += groupData1[GI + 8]; }
+	//	if (WORK_GROUP_SIZE >= 8) { groupData0[GI] += groupData0[GI + 4]; groupData1[GI] += groupData1[GI + 4]; }
+	//	if (WORK_GROUP_SIZE >= 4) { groupData0[GI] += groupData0[GI + 2]; groupData1[GI] += groupData1[GI + 2]; }
+	//	if (WORK_GROUP_SIZE >= 2) { groupData0[GI] += groupData0[GI + 1]; groupData1[GI] += groupData1[GI + 1]; }
+	//}
+
+	if (GI == 0)
+	{
+		_centerMassBuffer[0] = groupData0[0];
+		_centerMassBuffer[1] = groupData1[0];
+	}
+}
+
+//float _massSum;
+
+#pragma kernel FinishCenterOfMass
+[numthreads(1, 1, 1)]
+void FinishCenterOfMass(uint3 id : SV_DispatchThreadID)
+{
+	float massSum = max(epsilon, _centerMassBuffer[0].w);
+	_centerMassBuffer[0].xyz /= massSum;
+	_centerMassBuffer[1].xyz /= massSum;
+
+	//int index = id.x;
+	//float3 deltaP = float3(0, 0, 0);
+	//if (_deltaPosAsIntX[0].w > 0) {
+	//	deltaP.x = asfloat(_deltaPosAsIntX[index].x);
+	//	deltaP.y = asfloat(_deltaPosAsIntX[index].y);
+	//	deltaP.z = asfloat(_deltaPosAsIntX[index].z);
+	//	deltaP /= asfloat(_deltaPosAsIntX[0].w);
+	//}
+	//_centerMassBuffer[index].xyz = deltaP;
+	//_deltaPosAsIntX[index] = uint4(0, 0, 0, 0);
+}
+
+#pragma kernel SumAllMassAndMatrix
+
+//float4x4 ScaleMatrixByFloat(float4x4 m, float f)
+//{
+//	float4x4 result = 0;
+//	for (uint i = 0u; i < 4u; i++)
+//	{
+//		for (uint n = 0u; n < 4u; n++)
+//		{
+//			result[i][n] = m[i][n] * f;
+//		}
+//	}
+//	return result;
+//}
+//
+//float4x4 AddMatrices(float4x4 lhs, float4x4 rhs)
+//{
+//	float4x4 result = 0;
+//	for (uint i = 0u; i < 4u; i++)
+//	{
+//		for (uint n = 0u; n < 4u; n++)
+//		{
+//			result[i][n] = lhs[i][n] + rhs[i][n];
+//		}
+//	}
+//	return result;
+//}
+
+//[numthreads(WORK_GROUP_SIZE, 1, 1)]
+//void SumAllMassAndMatrixX(uint3 id : SV_DispatchThreadID, uint3 threadId : SV_GroupThreadID, uint3 groupId : SV_GroupID, uint tid : SV_GroupIndex)
+//{
+//	//if (id.x >= _numParticles) return;
+//
+//	float mass = _invMass;
+//
+//	 // r is position - center of mass
+//	float3 r = _positions[id.x].xyz - _centerMassBuffer[0].xyz + epsilon;
+//	float3 L = cross(r, mass * _velocities[id.x].xyz);
+//	//_centerMassBuffer[2].xyz += L;
+//	AtomicAddDeltaX(2, L.x, 0);
+//	AtomicAddDeltaX(2, L.y, 1);
+//	AtomicAddDeltaX(2, L.z, 2);
+//
+//	float4x4 rs = 0;
+//	rs[0][1] = -r[2];
+//	rs[0][2] = r[1];
+//	rs[1][0] = r[2];
+//	rs[1][2] = -r[0];
+//	rs[2][0] = -r[1];
+//	rs[2][1] = r[0];
+//	rs[3][3] = 1;
+//	float4x4 temp = ScaleMatrixByFloat(mul(rs, transpose(rs)), mass);
+//
+//
+//	//float4x4 I = 0;
+//	//I[0] = float4(asfloat(_deltaPosAsIntX[3].x), asfloat(_deltaPosAsIntX[3].y), asfloat(_deltaPosAsIntX[3].z), asfloat(_deltaPosAsIntX[3].w));//_centerMassBuffer[3];
+//	//I[1] = float4(asfloat(_deltaPosAsIntX[4].x), asfloat(_deltaPosAsIntX[4].y), asfloat(_deltaPosAsIntX[4].z), asfloat(_deltaPosAsIntX[4].w));//_centerMassBuffer[4];
+//	//I[2] = asfloat(_deltaPosAsIntX[5]);//_centerMassBuffer[5];
+//	//I[3] = asfloat(_deltaPosAsIntX[6]);//_centerMassBuffer[6];
+//
+//	//I = AddMatrices(I, temp);
+//
+//	//_centerMassBuffer[3] = I[0];
+//	AtomicAddDeltaX(3, temp[0].x, 0);
+//	AtomicAddDeltaX(3, temp[0].y, 1);
+//	AtomicAddDeltaX(3, temp[0].z, 2);
+//	AtomicAddDeltaX(3, temp[0].w, 3);
+//
+//	//_centerMassBuffer[4] = I[1];
+//	AtomicAddDeltaX(4, temp[1].x, 0);
+//	AtomicAddDeltaX(4, temp[1].y, 1);
+//	AtomicAddDeltaX(4, temp[1].z, 2);
+//	AtomicAddDeltaX(4, temp[1].w, 3);
+//
+//	//_centerMassBuffer[5] = I[2];
+//	AtomicAddDeltaX(5, temp[2].x, 0);
+//	AtomicAddDeltaX(5, temp[2].y, 1);
+//	AtomicAddDeltaX(5, temp[2].z, 2);
+//	AtomicAddDeltaX(5, temp[2].w, 3);
+//
+//	//_centerMassBuffer[6] = I[3];
+//	AtomicAddDeltaX(6, temp[3].x, 0);
+//	AtomicAddDeltaX(6, temp[3].y, 1);
+//	AtomicAddDeltaX(6, temp[3].z, 2);
+//	AtomicAddDeltaX(6, temp[3].w, 3);
+//
+//	//uint localId = threadId.x;// get_local_id(0);
+//	//uint globalId = id.x;// get_global_id(0);
+//	//uint gId = groupId.x;// get_group_id(0);
+//	//uint wgSize = WORK_GROUP_SIZE;// get_local_size(0);
+//
+//	////bool inRange = globalId < _numParticles;
+//
+//	//groupData0[localId] = (globalId < _numParticles) ? float4(L, 0) : 0;
+//	//groupData1[localId] = (globalId < _numParticles) ? temp[0] : 0;
+//	//groupData2[localId] = (globalId < _numParticles) ? temp[1] : 0;
+//	//groupData3[localId] = (globalId < _numParticles) ? temp[2] : 0;
+//	//groupData4[localId] = (globalId < _numParticles) ? temp[3] : 0;
+//
+//	//GroupMemoryBarrierWithGroupSync();
+//
+//	//for (int offset = wgSize; offset > 0; offset >>= 1)
+//	//{
+//	//	if (localId < offset && localId + offset < wgSize)
+//	//	{
+//	//		groupData0[localId] += groupData0[localId + offset];
+//	//		groupData1[localId] += groupData1[localId + offset];
+//	//		groupData2[localId] += groupData2[localId + offset];
+//	//		groupData3[localId] += groupData3[localId + offset];
+//	//		groupData4[localId] += groupData4[localId + offset];
+//	//	}
+//	//	GroupMemoryBarrierWithGroupSync();
+//	//}
+//	//GroupMemoryBarrierWithGroupSync();
+//
+//	//if (tid == 0) {
+//	//	_centerMassBuffer[groupId.x + 2] = groupData0[0];
+//	//	_centerMassBuffer[groupId.x + 3] = groupData1[0];
+//	//	_centerMassBuffer[groupId.x + 4] = groupData2[0];
+//	//	_centerMassBuffer[groupId.x + 5] = groupData3[0];
+//	//	_centerMassBuffer[groupId.x + 6] = groupData4[0];
+//	//}
+//
+//	//uint i = groupId.x * (WORK_GROUP_SIZE * 2) + tid;
+//	//uint dispatchSize = WORK_GROUP_SIZE * 2 * _dispatchDim_x;
+//
+//	//float3 centerMassPos = _centerMassBuffer[0].xyz;
+//
+//	////  r is position - center of mass
+//	////float3 L = cross(_positions[id.x].xyz - _centerMassBuffer[0].xyz + epsilon, mass * _velocities[id.x].xyz);
+//	////_centerMassBuffer[2].xyz += L;
+//	////AtomicAddDeltaX(2, L.x, 0);
+//	////AtomicAddDeltaX(2, L.y, 1);
+//	////AtomicAddDeltaX(2, L.z, 2);
+//
+//	//// rs = [ 0      -r.z     r.y  ]
+//	////        r.z     0      -r.x
+//	////       -r.y     r.x     0
+//	//float4x4 rs = 0;
+//
+//	//groupData0[tid] = 0;
+//	//groupData1[tid] = 0;
+//	//groupData2[tid] = 0;
+//	//groupData3[tid] = 0;
+//	//groupData4[tid] = 0;
+//
+//	//do {
+//	//	float3 r1 = _positions[i].xyz - centerMassPos + epsilon;
+//	//	float3 r2 = _positions[i + WORK_GROUP_SIZE].xyz - centerMassPos + epsilon;
+//
+//	//	rs = 0;
+//	//	rs[0][1] = -r1[2];
+//	//	rs[0][2] = r1[1];
+//	//	rs[1][0] = r1[2];
+//	//	rs[1][2] = -r1[0];
+//	//	rs[2][0] = -r1[1];
+//	//	rs[2][1] = r1[0];
+//	//	rs[3][3] = 1;
+//	//	float4x4 temp1 = ScaleMatrixByFloat(mul(rs, transpose(rs)), mass);
+//
+//	//	rs = 0;
+//	//	rs[0][1] = -r2[2];
+//	//	rs[0][2] = r2[1];
+//	//	rs[1][0] = r2[2];
+//	//	rs[1][2] = -r2[0];
+//	//	rs[2][0] = -r2[1];
+//	//	rs[2][1] = r2[0];
+//	//	rs[3][3] = 1;
+//	//	float4x4 temp2 = ScaleMatrixByFloat(mul(rs, transpose(rs)), mass);
+//
+//	//	groupData0[tid] += float4(cross(r1, mass * _velocities[i].xyz), 0) + float4(cross(r2, mass * _velocities[i + WORK_GROUP_SIZE].xyz), 0);
+//	//	groupData1[tid] += temp1[0] + temp2[0];
+//	//	groupData2[tid] += temp1[1] + temp2[1];
+//	//	groupData3[tid] += temp1[2] + temp2[2];
+//	//	groupData4[tid] += temp1[3] + temp2[3];
+//	//	i += dispatchSize;
+//	//} while (i < _numParticles);
+//
+//	//GroupMemoryBarrierWithGroupSync();
+//
+//	//if (WORK_GROUP_SIZE >= 128) { if (tid < 64) { groupData0[tid] += groupData0[tid + 64]; } GroupMemoryBarrierWithGroupSync(); }
+//	//if (tid < 32) {
+//	//	if (WORK_GROUP_SIZE >= 64) groupData0[tid] += groupData0[tid + 32];
+//	//	if (WORK_GROUP_SIZE >= 32) groupData0[tid] += groupData0[tid + 16];
+//	//	if (WORK_GROUP_SIZE >= 16) groupData0[tid] += groupData0[tid + 8];
+//	//	if (WORK_GROUP_SIZE >= 8) groupData0[tid] += groupData0[tid + 4];
+//	//	if (WORK_GROUP_SIZE >= 4) groupData0[tid] += groupData0[tid + 2];
+//	//	if (WORK_GROUP_SIZE >= 2) groupData0[tid] += groupData0[tid + 1];
+//	//}
+//	//if (WORK_GROUP_SIZE >= 128) { if (tid < 64) { groupData1[tid] += groupData1[tid + 64]; } GroupMemoryBarrierWithGroupSync(); }
+//	//if (tid < 32) {
+//	//	if (WORK_GROUP_SIZE >= 64) groupData1[tid] += groupData1[tid + 32];
+//	//	if (WORK_GROUP_SIZE >= 32) groupData1[tid] += groupData1[tid + 16];
+//	//	if (WORK_GROUP_SIZE >= 16) groupData1[tid] += groupData1[tid + 8];
+//	//	if (WORK_GROUP_SIZE >= 8) groupData1[tid] += groupData1[tid + 4];
+//	//	if (WORK_GROUP_SIZE >= 4) groupData1[tid] += groupData1[tid + 2];
+//	//	if (WORK_GROUP_SIZE >= 2) groupData1[tid] += groupData1[tid + 1];
+//	//}
+//	//if (WORK_GROUP_SIZE >= 128) { if (tid < 64) { groupData2[tid] += groupData2[tid + 64]; } GroupMemoryBarrierWithGroupSync(); }
+//	//if (tid < 32) {
+//	//	if (WORK_GROUP_SIZE >= 64) groupData2[tid] += groupData2[tid + 32];
+//	//	if (WORK_GROUP_SIZE >= 32) groupData2[tid] += groupData2[tid + 16];
+//	//	if (WORK_GROUP_SIZE >= 16) groupData2[tid] += groupData2[tid + 8];
+//	//	if (WORK_GROUP_SIZE >= 8) groupData2[tid] += groupData2[tid + 4];
+//	//	if (WORK_GROUP_SIZE >= 4) groupData2[tid] += groupData2[tid + 2];
+//	//	if (WORK_GROUP_SIZE >= 2) groupData2[tid] += groupData2[tid + 1];
+//	//}
+//	//if (WORK_GROUP_SIZE >= 128) { if (tid < 64) { groupData3[tid] += groupData3[tid + 64]; } GroupMemoryBarrierWithGroupSync(); }
+//	//if (tid < 32) {
+//	//	if (WORK_GROUP_SIZE >= 64) groupData3[tid] += groupData3[tid + 32];
+//	//	if (WORK_GROUP_SIZE >= 32) groupData3[tid] += groupData3[tid + 16];
+//	//	if (WORK_GROUP_SIZE >= 16) groupData3[tid] += groupData3[tid + 8];
+//	//	if (WORK_GROUP_SIZE >= 8) groupData3[tid] += groupData3[tid + 4];
+//	//	if (WORK_GROUP_SIZE >= 4) groupData3[tid] += groupData3[tid + 2];
+//	//	if (WORK_GROUP_SIZE >= 2) groupData3[tid] += groupData3[tid + 1];
+//	//}
+//	//if (WORK_GROUP_SIZE >= 128) { if (tid < 64) { groupData4[tid] += groupData4[tid + 64]; } GroupMemoryBarrierWithGroupSync(); }
+//	//if (tid < 32) {
+//	//	if (WORK_GROUP_SIZE >= 64) groupData4[tid] += groupData4[tid + 32];
+//	//	if (WORK_GROUP_SIZE >= 32) groupData4[tid] += groupData4[tid + 16];
+//	//	if (WORK_GROUP_SIZE >= 16) groupData4[tid] += groupData4[tid + 8];
+//	//	if (WORK_GROUP_SIZE >= 8) groupData4[tid] += groupData4[tid + 4];
+//	//	if (WORK_GROUP_SIZE >= 4) groupData4[tid] += groupData4[tid + 2];
+//	//	if (WORK_GROUP_SIZE >= 2) groupData4[tid] += groupData4[tid + 1];
+//	//}
+//
+//	//if (tid == 0) {
+//	//	_centerMassBuffer[groupId.x + 2] = groupData0[0];
+//	//	_centerMassBuffer[groupId.x + 3] = groupData1[0];
+//	//	_centerMassBuffer[groupId.x + 4] = groupData2[0];
+//	//	_centerMassBuffer[groupId.x + 5] = groupData3[0];
+//	//	_centerMassBuffer[groupId.x + 6] = groupData4[0];
+//	//}
+//
+//}
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void SumAllMassAndMatrix(uint3 id : SV_DispatchThreadID, uint GI : SV_GroupIndex)
+{
+	float mass = _invMass;
+	uint idx = id.x;
+	bool inRange = idx < _numParticles;
+
+	float3 centerMassPos = _centerMassBuffer[0].xyz;
+	float3 r = _positions[idx].xyz - centerMassPos;
+
+	float4x4 rs = 0;
+	rs[0][1] = -r[2];
+	rs[0][2] = r[1];
+	rs[1][0] = r[2];
+	rs[1][2] = -r[0];
+	rs[2][0] = -r[1];
+	rs[2][1] = r[0];
+	rs[3][3] = 1;
+	float4x4 temp = mul(rs, transpose(rs)) * mass;
+
+	groupData0[GI] = inRange ? float4(cross(r, mass * _velocities[idx].xyz), 0) : 0;
+	groupData1[GI] = inRange ? temp[0] : 0;
+	groupData2[GI] = inRange ? temp[1] : 0;
+	groupData3[GI] = inRange ? temp[2] : 0;
+	groupData4[GI] = inRange ? temp[3] : 0;
+	GroupMemoryBarrierWithGroupSync();
+
+	[unroll(WORK_GROUP_SIZE)]
+	for (uint s = 1; s < WORK_GROUP_SIZE; s *= 2)  // stride: 1, 2, 4, 8, 16, 32, 64, 128
+	{
+		int index = 2 * s * GI;
+
+		if (index < WORK_GROUP_SIZE) {
+			groupData0[index] += groupData0[index + s];
+			groupData1[index] += groupData1[index + s];
+			groupData2[index] += groupData2[index + s];
+			groupData3[index] += groupData3[index + s];
+			groupData4[index] += groupData4[index + s];
+		}
+		GroupMemoryBarrierWithGroupSync();
+	}
+
+	//if (WORK_GROUP_SIZE >= 256)
+	//{
+	//	if (GI < 128) {
+	//		groupData0[GI] += groupData0[GI + 128];
+	//		groupData1[GI] += groupData1[GI + 128];
+	//		groupData2[GI] += groupData2[GI + 128];
+	//		groupData3[GI] += groupData3[GI + 128];
+	//		groupData4[GI] += groupData4[GI + 128];
+	//	}
+	//	GroupMemoryBarrierWithGroupSync();
+	//}
+	//// AMD - 64 / NVIDIA - 32
+	//if (GI < 64)
+	//{
+	//	if (WORK_GROUP_SIZE >= 64) {
+	//		groupData0[GI] += groupData0[GI + 32];
+	//		groupData1[GI] += groupData1[GI + 32];
+	//		groupData2[GI] += groupData2[GI + 32];
+	//		groupData3[GI] += groupData3[GI + 32];
+	//		groupData4[GI] += groupData4[GI + 32];
+	//	}
+	//	if (WORK_GROUP_SIZE >= 32) {
+	//		groupData0[GI] += groupData0[GI + 16];
+	//		groupData1[GI] += groupData1[GI + 16];
+	//		groupData2[GI] += groupData2[GI + 16];
+	//		groupData3[GI] += groupData3[GI + 16];
+	//		groupData4[GI] += groupData4[GI + 16];
+	//	}
+	//	if (WORK_GROUP_SIZE >= 16) {
+	//		groupData0[GI] += groupData0[GI + 8];
+	//		groupData1[GI] += groupData1[GI + 8];
+	//		groupData2[GI] += groupData2[GI + 8];
+	//		groupData3[GI] += groupData3[GI + 8];
+	//		groupData4[GI] += groupData4[GI + 8];
+	//	}
+	//	if (WORK_GROUP_SIZE >= 8) {
+	//		groupData0[GI] += groupData0[GI + 4];
+	//		groupData1[GI] += groupData1[GI + 4];
+	//		groupData2[GI] += groupData2[GI + 4];
+	//		groupData3[GI] += groupData3[GI + 4];
+	//		groupData4[GI] += groupData4[GI + 4];
+	//	}
+	//	if (WORK_GROUP_SIZE >= 4) {
+	//		groupData0[GI] += groupData0[GI + 2];
+	//		groupData1[GI] += groupData1[GI + 2];
+	//		groupData2[GI] += groupData2[GI + 2];
+	//		groupData3[GI] += groupData3[GI + 2];
+	//		groupData4[GI] += groupData4[GI + 2];
+	//	}
+	//	if (WORK_GROUP_SIZE >= 2) {
+	//		groupData0[GI] += groupData0[GI + 1];
+	//		groupData1[GI] += groupData1[GI + 1];
+	//		groupData2[GI] += groupData2[GI + 1];
+	//		groupData3[GI] += groupData3[GI + 1];
+	//		groupData4[GI] += groupData4[GI + 1];
+	//	}
+	//}
+
+	if (GI == 0)
+	{
+		_centerMassBuffer[2] = groupData0[0];
+		_centerMassBuffer[3] = groupData1[0];
+		_centerMassBuffer[4] = groupData2[0];
+		_centerMassBuffer[5] = groupData3[0];
+		_centerMassBuffer[6] = groupData4[0];
+	}
+}
+
+#pragma kernel FinishMatrixCalc
+
+float4x4 inverse(float4x4 input)
+{
+#define minor(a,b,c) determinant(float3x3(input.a, input.b, input.c))
+	//determinant(float3x3(input._22_23_23, input._32_33_34, input._42_43_44))
+
+	float4x4 cofactors = float4x4(
+		minor(_22_23_24, _32_33_34, _42_43_44),
+		-minor(_21_23_24, _31_33_34, _41_43_44),
+		minor(_21_22_24, _31_32_34, _41_42_44),
+		-minor(_21_22_23, _31_32_33, _41_42_43),
+
+		-minor(_12_13_14, _32_33_34, _42_43_44),
+		minor(_11_13_14, _31_33_34, _41_43_44),
+		-minor(_11_12_14, _31_32_34, _41_42_44),
+		minor(_11_12_13, _31_32_33, _41_42_43),
+
+		minor(_12_13_14, _22_23_24, _42_43_44),
+		-minor(_11_13_14, _21_23_24, _41_43_44),
+		minor(_11_12_14, _21_22_24, _41_42_44),
+		-minor(_11_12_13, _21_22_23, _41_42_43),
+
+		-minor(_12_13_14, _22_23_24, _32_33_34),
+		minor(_11_13_14, _21_23_24, _31_33_34),
+		-minor(_11_12_14, _21_22_24, _31_32_34),
+		minor(_11_12_13, _21_22_23, _31_32_33)
+		);
+#undef minor
+	return transpose(cofactors) / determinant(input);
+}
+
+//#define IDENTITY_MATRIX float4x4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+
+float4x4 inverse2(float4x4 m) {
+	float n11 = m[0][0], n12 = m[1][0], n13 = m[2][0], n14 = m[3][0];
+	float n21 = m[0][1], n22 = m[1][1], n23 = m[2][1], n24 = m[3][1];
+	float n31 = m[0][2], n32 = m[1][2], n33 = m[2][2], n34 = m[3][2];
+	float n41 = m[0][3], n42 = m[1][3], n43 = m[2][3], n44 = m[3][3];
+
+	float t11 = n23 * n34 * n42 - n24 * n33 * n42 + n24 * n32 * n43 - n22 * n34 * n43 - n23 * n32 * n44 + n22 * n33 * n44;
+	float t12 = n14 * n33 * n42 - n13 * n34 * n42 - n14 * n32 * n43 + n12 * n34 * n43 + n13 * n32 * n44 - n12 * n33 * n44;
+	float t13 = n13 * n24 * n42 - n14 * n23 * n42 + n14 * n22 * n43 - n12 * n24 * n43 - n13 * n22 * n44 + n12 * n23 * n44;
+	float t14 = n14 * n23 * n32 - n13 * n24 * n32 - n14 * n22 * n33 + n12 * n24 * n33 + n13 * n22 * n34 - n12 * n23 * n34;
+
+	float det = n11 * t11 + n21 * t12 + n31 * t13 + n41 * t14;
+	float idet = 1.0f / det;
+
+	float4x4 ret;
+
+	ret[0][0] = t11 * idet;
+	ret[0][1] = (n24 * n33 * n41 - n23 * n34 * n41 - n24 * n31 * n43 + n21 * n34 * n43 + n23 * n31 * n44 - n21 * n33 * n44) * idet;
+	ret[0][2] = (n22 * n34 * n41 - n24 * n32 * n41 + n24 * n31 * n42 - n21 * n34 * n42 - n22 * n31 * n44 + n21 * n32 * n44) * idet;
+	ret[0][3] = (n23 * n32 * n41 - n22 * n33 * n41 - n23 * n31 * n42 + n21 * n33 * n42 + n22 * n31 * n43 - n21 * n32 * n43) * idet;
+
+	ret[1][0] = t12 * idet;
+	ret[1][1] = (n13 * n34 * n41 - n14 * n33 * n41 + n14 * n31 * n43 - n11 * n34 * n43 - n13 * n31 * n44 + n11 * n33 * n44) * idet;
+	ret[1][2] = (n14 * n32 * n41 - n12 * n34 * n41 - n14 * n31 * n42 + n11 * n34 * n42 + n12 * n31 * n44 - n11 * n32 * n44) * idet;
+	ret[1][3] = (n12 * n33 * n41 - n13 * n32 * n41 + n13 * n31 * n42 - n11 * n33 * n42 - n12 * n31 * n43 + n11 * n32 * n43) * idet;
+
+	ret[2][0] = t13 * idet;
+	ret[2][1] = (n14 * n23 * n41 - n13 * n24 * n41 - n14 * n21 * n43 + n11 * n24 * n43 + n13 * n21 * n44 - n11 * n23 * n44) * idet;
+	ret[2][2] = (n12 * n24 * n41 - n14 * n22 * n41 + n14 * n21 * n42 - n11 * n24 * n42 - n12 * n21 * n44 + n11 * n22 * n44) * idet;
+	ret[2][3] = (n13 * n22 * n41 - n12 * n23 * n41 - n13 * n21 * n42 + n11 * n23 * n42 + n12 * n21 * n43 - n11 * n22 * n43) * idet;
+
+	ret[3][0] = t14 * idet;
+	ret[3][1] = (n13 * n24 * n31 - n14 * n23 * n31 + n14 * n21 * n33 - n11 * n24 * n33 - n13 * n21 * n34 + n11 * n23 * n34) * idet;
+	ret[3][2] = (n14 * n22 * n31 - n12 * n24 * n31 - n14 * n21 * n32 + n11 * n24 * n32 + n12 * n21 * n34 - n11 * n22 * n34) * idet;
+	ret[3][3] = (n12 * n23 * n31 - n13 * n22 * n31 + n13 * n21 * n32 - n11 * n23 * n32 - n12 * n21 * n33 + n11 * n22 * n33) * idet;
+
+	return ret;
+}
+
+[numthreads(1, 1, 1)]
+void FinishMatrixCalc(uint3 id : SV_DispatchThreadID)
+{
+	float3 L = _centerMassBuffer[2].xyz;
+	//L.x = asfloat(_deltaPosAsIntX[2].x);
+	//L.y = asfloat(_deltaPosAsIntX[2].y);
+	//L.z = asfloat(_deltaPosAsIntX[2].z);
+	//_deltaPosAsIntX[2] = uint4(0, 0, 0, 0);
+
+	float4x4 I = 0;
+	I[0] = _centerMassBuffer[3];
+	I[1] = _centerMassBuffer[4];
+	I[2] = _centerMassBuffer[5];
+	I[3] = _centerMassBuffer[6];
+	//I[0] = float4(asfloat(_deltaPosAsIntX[3].x), asfloat(_deltaPosAsIntX[3].y), asfloat(_deltaPosAsIntX[3].z), asfloat(_deltaPosAsIntX[3].w));//_centerMassBuffer[3];
+	//I[1] = float4(asfloat(_deltaPosAsIntX[4].x), asfloat(_deltaPosAsIntX[4].y), asfloat(_deltaPosAsIntX[4].z), asfloat(_deltaPosAsIntX[4].w));//_centerMassBuffer[4];
+	//I[2] = float4(asfloat(_deltaPosAsIntX[5].x), asfloat(_deltaPosAsIntX[5].y), asfloat(_deltaPosAsIntX[5].z), asfloat(_deltaPosAsIntX[5].w));//_centerMassBuffer[5];
+	//I[3] = float4(asfloat(_deltaPosAsIntX[6].x), asfloat(_deltaPosAsIntX[6].y), asfloat(_deltaPosAsIntX[6].z), asfloat(_deltaPosAsIntX[6].w));//_centerMassBuffer[6];
+	I[3][3] = 1;
+	//_deltaPosAsIntX[3] = uint4(0, 0, 0, 0);
+	//_deltaPosAsIntX[4] = uint4(0, 0, 0, 0);
+	//_deltaPosAsIntX[5] = uint4(0, 0, 0, 0);
+	//_deltaPosAsIntX[6] = uint4(0, 0, 0, 0);
+
+	float4x4 I_inv = inverse2(I);
+	_centerMassBuffer[7] = mul(I_inv, float4(L, 1));
+}
+
+#pragma kernel ApplyBackIntoVelocities
+float _dampingStiffness;
+
+[numthreads(WORK_GROUP_SIZE, 1, 1)]
+void ApplyBackIntoVelocities(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= _numParticles) return;
+
+	float3 w = _centerMassBuffer[7].xyz;
+	float3 r = _positions[id.x].xyz - _centerMassBuffer[0].xyz;
+	float3 dv = _centerMassBuffer[1].xyz + cross(w, r) - _velocities[id.x].xyz;
+	_velocities[id.x].xyz += clamp(_dampingStiffness * dv, -0.1, 0.1);
+}
+
+#pragma kernel ClearCenterOfMass
+[numthreads(1, 1, 1)]
+void ClearCenterOfMass(uint3 id : SV_DispatchThreadID)
+{
+	_centerMassBuffer[id.x] = 0;
+}

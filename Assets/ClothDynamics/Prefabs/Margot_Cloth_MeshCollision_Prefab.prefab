@@ -1,0 +1,262 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4484564553828612998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4484564553828612997}
+  - component: {fileID: 4484564553828613002}
+  m_Layer: 0
+  m_Name: Margot_Cloth_MeshCollision_Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4484564553828612997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484564553828612998}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0058258045, y: 1.292, z: -0.005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4484564553828613002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484564553828612998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9fad76b156b354b90623382e0c0cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _logo: {fileID: 2800000, guid: 96b2057b71a117b42b43efafb7f67d5f, type: 3}
+  _advancedMode: 0
+  _runSim: 1
+  _timestep: 0.004
+  _timeMultiplier: 1
+  _iterationNum: 4
+  _subSteps: 2
+  _bufferScale: 20
+  _updateBufferSize: 0
+  _gravity: {x: 0, y: -9.81, z: 0}
+  _wind: {fileID: 0}
+  _windIntensity: 1
+  _vertexMass: 1
+  _staticFriction: 0.9
+  _dynamicFriction: 0.1
+  _worldPositionImpact: 0.5
+  _worldRotationImpact: 0.5
+  _distanceCompressionStiffness: 0.5
+  _distanceStretchStiffness: 1
+  _bendingStiffness: 0
+  _deltaScale: 1
+  _clampDelta: 0.05
+  _pointConstraintType: 0
+  _pointConstraintCustomIndices: 
+  _enableMouseInteraction: 1
+  _deltaConstraintMul: 0.001
+  _getDepthPos:
+    _distLimit: 0.1
+    _debug: 0
+    _pointScale: 0.01
+    _unityDepthTextureCopy: {fileID: 0}
+  _dampingMethod: 1
+  _dampingVel: 0.999
+  _clampVel: 10
+  _dampingStiffness: 1
+  _usePreCache: 0
+  _preCacheFile: {fileID: 0}
+  _useCollisionFinder: 1
+  _useCustomVoxelCenter: 0
+  _customVoxelCenter: {fileID: 4484564553828612997}
+  _voxelCubeScale: 1.8
+  _voxelCubeSteps: 32
+  _meshObjects: []
+  _vertexScale: 0.5
+  _vertexNormalScale: 0.07
+  _useTriangleMesh: 1
+  _triangleScale: 0.5
+  _triangleNormalScale: 0.02
+  _autoSphereScale: 1.1
+  _secondClothScale: 1
+  _staticCollisionRadius: 0.005
+  _collisionFinder:
+    _gridCount: 64
+    _clothMaskValue: 0.001
+    _initWithGPU: 1
+    _numparticles: 31861
+    _renderDebugPoints: 0
+    _debugMesh: {fileID: 0}
+    _debugMat: {fileID: 0}
+    _debugVertexScale: 1
+    _debugObject: {fileID: 0}
+    _useDirectDispatch: 0
+    _unifiedSphereSize: 0
+  _gridOffset:
+    x: -0.023566445
+    y: 0.036887884
+    z: -0.104499996
+  _predictiveContact: 0
+  _useSelfCollision: 0
+  _selfCollisionScale: 1
+  _selfCollisionTriangles: 0
+  _useNeighbourCheck: 0
+  _useCollidableObjectsList: 1
+  _collidableObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _collidableObjectsBias: 0.005
+  _useDefaultSphereCollision: 1
+  _usePredictiveContactColliders: 0
+  _usePlaneScaleY: 0
+  _useClothSkinning: 1
+  _skinComponent: {fileID: 0}
+  _blendSkinning: 0.02
+  _minBlend: 0
+  _useSurfacePush: 1
+  _surfacePush: 80
+  _surfaceOffset: 0
+  _skinningForSurfacePush: 1
+  _forceSurfacePushColliders: 1
+  _useLOD: 0
+  _distLod: 8
+  _lodCurve: {fileID: 11400000, guid: 097d58063b9b4fc4493bfa85ba7d8d04, type: 2}
+  _cam: {fileID: 0}
+  _lodTimeStepAdd: 0.002
+  _meshProxy: {fileID: 0}
+  _useMeshProxy: 1
+  _weightsCurve: {fileID: 11400000, guid: 25b002a0136272c48a0c60375eb088ed, type: 2}
+  _weightsToleranceDistance: 0.05
+  _scaleWeighting: 10
+  _minRadius: 0.001
+  _skinPrefab: {fileID: 0}
+  _useFrustumClipping: 1
+  _camCullDist: 1
+  _useShadowCulling: 1
+  _cullingLights:
+  - {fileID: 0}
+  _updateTransformCenter: 0
+  _scaleBoundingBox: 0
+  _calcVoxelPosRoughly: 1
+  _useReadbackCenter: 1
+  _sewEdges: 1
+  _fixDoubles: 0
+  _vertexIdsToUvId: 2
+  _weldVertices: 0
+  _weldThreshold: 1e-10
+  _useReadbackVertices: 0
+  _readbackVertexEveryX: 10
+  _readbackVertexScale: 0.01
+  _useGarmentMesh: 1
+  _updateGarmentMesh: 1
+  _onlyAtStart: 1
+  _garmentSeamLength: 0.02
+  _blendGarment: 0.01
+  _pushVertsByNormals: 0
+  _showBoundingBox: 1
+  _debugBuffers: 0
+  _showWeldEdges: 0
+  _weldEdgeId: -1
+  _showBendingConstraints: 0
+  _debugBendingId: -1
+  _slowCPUWriteBack: 0
+  _debugMode: 0
+  _applyTransformAtExport: 0
