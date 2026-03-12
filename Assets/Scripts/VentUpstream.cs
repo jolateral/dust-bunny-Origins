@@ -3,8 +3,8 @@ using UnityEngine;
 public class VentUpstream : MonoBehaviour
 {
     [Header("Vent Force")]
-    public float upwardSpeed = 15f;
-    public float maxUpwardSpeed = 20f;
+    public float upwardSpeed = 30f;
+    public float maxUpwardSpeed = 35f;
 
     private void OnTriggerStay(Collider other)
     {
