@@ -642,7 +642,7 @@ public class DustBunnyController : MonoBehaviour
         rb.linearDamping = rollDrag;
         rb.useGravity = false;
 
-        Vector3 dashDir = GetCameraRelativeWorldDir(moveInput);
+        Vector3 dashDir = gameObject.transform.forward;
         if (dashDir.sqrMagnitude < 0.01f)
         {
             dashDir = cameraTransform ? cameraTransform.forward : transform.forward;
