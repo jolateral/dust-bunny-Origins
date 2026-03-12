@@ -72,6 +72,13 @@ public class CameraFocusTrigger : MonoBehaviour
         // --- 1. ABSOLUTE PLAYER FREEZE ---
         if (bunnyController != null) 
         {
+            Animator anim = player.GetComponent<Animator>();
+            if (anim != null)
+            {
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isRolling", false);
+                anim.SetBool("isGliding", false);
+            }
             // Disable the controller so no input is processed
             bunnyController.enabled = false; 
         }

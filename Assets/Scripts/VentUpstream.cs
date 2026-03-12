@@ -3,7 +3,8 @@ using UnityEngine;
 public class VentUpstream : MonoBehaviour
 {
     [Header("Vent Force")]
-    public float upwardForce = 20f;
+    public float upwardSpeed = 15f;
+    public float maxUpwardSpeed = 20f;
 
     private void OnTriggerStay(Collider other)
     {
@@ -13,6 +14,12 @@ public class VentUpstream : MonoBehaviour
         Rigidbody rb = player.GetComponent<Rigidbody>();
         if (rb == null) return;
 
-        rb.AddForce(Vector3.up * upwardForce, ForceMode.Acceleration);
+        Vector3 velocity = rb.linearVelocity;
+
+        if (velocity.y < maxUpwardSpeed)
+        {
+            velocity.y = upwardSpeed;
+            rb.linearVelocity = velocity;
+        }
     }
 }
