@@ -37,6 +37,8 @@ public class DiaryItem : MonoBehaviour
     [Tooltip("The full-screen image shown when the diary is unlocked.")]
     public Sprite diarySprite;
 
+    public GameObject diaryLock;
+
     [Tooltip("Optional text shown inside the diary (leave empty for image-only).")]
     [TextArea(5, 15)]
     public string diaryText = "";
@@ -124,6 +126,11 @@ public class DiaryItem : MonoBehaviour
     private void UnlockDiary()
     {
         hasBeenUnlocked = true;
+
+        if (diaryLock != null)
+        {
+            diaryLock.SetActive(false);
+        }
 
         Debug.Log($"[DiaryItem] Diary unlocked with key '{keyID}'!");
 
