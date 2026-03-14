@@ -5,60 +5,68 @@
 			<ChildrenList>
 				<Folder Name="Music" ID="{D2117966-DE89-45CC-AC00-41F4303E6C32}" ShortID="593875970">
 					<ChildrenList>
-						<Event Name="Play_mus_zones" ID="{177723F1-67E6-48F6-BA16-0BD415C65DFF}">
+						<Folder Name="mus_startmenu" ID="{AEE7C5DC-3ECE-4A99-8276-A7018FFBB491}" ShortID="192474971">
 							<ChildrenList>
-								<Action Name="" ID="{9CB88991-A7EA-4A25-9B9F-761C30D7EC34}" ShortID="836818518">
-									<PropertyList>
-										<Property Name="FadeInCurve" Type="int16" Value="5"/>
-										<Property Name="FadeTime" Type="Real64" Value="5"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
+								<Event Name="Play_mus_startmenu" ID="{D0555063-D533-431D-B9DC-F0F2C2141B22}">
+									<ChildrenList>
+										<Action Name="" ID="{D89FDB71-C877-4021-AD14-0A7195F09BCD}" ShortID="172593421">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="mus_startmenu" ID="{8FE0D694-1B18-43EA-93D5-167657415D78}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Stop_mus_startmenu" ID="{5BA8937F-F6CC-4653-BCE0-A1BA034F910F}">
+									<ChildrenList>
+										<Action Name="" ID="{67E8E334-FD18-4B61-8DF7-618AC03FCD4D}" ShortID="477069106">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="mus_startmenu" ID="{8FE0D694-1B18-43EA-93D5-167657415D78}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
-						</Event>
-						<Event Name="Play_mus_startmenu" ID="{D0555063-D533-431D-B9DC-F0F2C2141B22}">
+						</Folder>
+						<Folder Name="mus_zones" ID="{EEFDF587-CE19-49AC-B2C3-F072B3FF417A}" ShortID="698506546">
 							<ChildrenList>
-								<Action Name="" ID="{D89FDB71-C877-4021-AD14-0A7195F09BCD}" ShortID="172593421">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="mus_startmenu" ID="{8FE0D694-1B18-43EA-93D5-167657415D78}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
+								<Event Name="Stop_mus_zones" ID="{2CCCE983-5898-454B-A0A8-0638B5DCA2C0}">
+									<ChildrenList>
+										<Action Name="" ID="{A0EDBC5D-F168-484C-B49E-D33461048F21}" ShortID="789731460">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_mus_zones" ID="{177723F1-67E6-48F6-BA16-0BD415C65DFF}">
+									<ChildrenList>
+										<Action Name="" ID="{9CB88991-A7EA-4A25-9B9F-761C30D7EC34}" ShortID="836818518">
+											<PropertyList>
+												<Property Name="FadeInCurve" Type="int16" Value="5"/>
+												<Property Name="FadeTime" Type="Real64" Value="5"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
-						</Event>
-						<Event Name="Stop_mus_startmenu" ID="{5BA8937F-F6CC-4653-BCE0-A1BA034F910F}">
-							<ChildrenList>
-								<Action Name="" ID="{67E8E334-FD18-4B61-8DF7-618AC03FCD4D}" ShortID="477069106">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="2"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="mus_startmenu" ID="{8FE0D694-1B18-43EA-93D5-167657415D78}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Stop_mus_zones" ID="{2CCCE983-5898-454B-A0A8-0638B5DCA2C0}">
-							<ChildrenList>
-								<Action Name="" ID="{A0EDBC5D-F168-484C-B49E-D33461048F21}" ShortID="789731460">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="2"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
+						</Folder>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambience" ID="{A9D14555-D6E7-4107-8050-20701AA3B253}" ShortID="442510119">
@@ -92,6 +100,43 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Folder Name="amb_home" ID="{3B5307C1-02AB-4F70-AF2F-5BB27951EDC6}" ShortID="349767268">
+							<ChildrenList>
+								<Event Name="Play_amb_footstep_barefoot" ID="{F058F040-32EA-4AB2-8F61-C89A42FC8297}">
+									<ChildrenList>
+										<Action Name="" ID="{5188A9D3-4563-428A-84D5-ED6A78346361}" ShortID="7397819">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="amb_footstep_barefoot" ID="{2AC5EEFF-360D-4A0D-A5C6-0C00CD85E38F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_amb_footstep_slipper" ID="{69C15AD8-E2D1-4E38-A401-1F488533745A}">
+									<ChildrenList>
+										<Action Name="" ID="{E58C9F11-F994-4049-98CC-5705EB178F0C}" ShortID="622075711">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="amb_footstep_slipper" ID="{455DF3F6-5BAD-4308-AEF2-C4047AA2EFB6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_amb_cat" ID="{A0A62334-96D5-485B-97A4-A801A076FD84}">
+									<ChildrenList>
+										<Action Name="" ID="{B9C29BB1-D25C-4EE4-9197-04D64A7FF32E}" ShortID="729615403">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="amb_cat" ID="{8A76D6E2-DDFC-48AA-BDD8-9F8823E8A328}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="SFX" ID="{68608009-2510-4F87-9EC5-3C2AE2BA196E}" ShortID="605905316">
@@ -119,6 +164,9 @@
 								<Event Name="Play_sfx_bunnyroll_nl" ID="{4C2207F0-968C-4C87-928A-D17FD8804D4B}">
 									<ChildrenList>
 										<Action Name="" ID="{37AF2913-E442-41D6-B418-094075D9BB40}" ShortID="594190843">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="0.2"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_bunnyroll_nl" ID="{846DE2E5-47D2-43A8-8B0A-68E631122D89}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
@@ -184,6 +232,9 @@
 								<Event Name="Play_sfx_bunnyjump_nl" ID="{5EC6DAF1-1A0E-4EB8-B5A8-E248B2629610}">
 									<ChildrenList>
 										<Action Name="" ID="{D78023CC-0AC6-44E2-BF61-EDC72D826DAD}" ShortID="155594781">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="0.2"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_bunnyjump_nl" ID="{95C77888-9E0C-42C8-BC7B-3AADB38C53D7}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
@@ -193,7 +244,7 @@
 										<Action Name="" ID="{83644403-BE71-442E-86E5-131DA41BD433}" ShortID="631834201">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnysqueak_nl" ID="{B2A4FB79-D9C6-4227-B3E4-5ABE6F560016}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunny_squeaktwice_nl" ID="{88ECC9C8-74EF-4BC5-819F-B178066A9368}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

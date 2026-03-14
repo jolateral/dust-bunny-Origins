@@ -14,6 +14,9 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID EXIT_UI = 1041028614U;
+        static const AkUniqueID PLAY_AMB_CAT = 1467608791U;
+        static const AkUniqueID PLAY_AMB_FOOTSTEP_BAREFOOT = 1437669270U;
+        static const AkUniqueID PLAY_AMB_FOOTSTEP_SLIPPER = 2859770665U;
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
         static const AkUniqueID PLAY_MUS_ZONES = 3793537147U;
