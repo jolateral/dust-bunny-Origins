@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{4157EE79-BB32-68C6-15A9-1A8A333AC180}",
+    "Hash": "{151BA39D-E219-0591-2CD4-8C86DBCA2110}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -136,20 +136,6 @@
       ]
      },
      {
-      "Id": "2907122923",
-      "Name": "grounded",
-      "ObjectPath": "\\States\\Default Work Unit\\grounded",
-      "GUID": "{3D061369-8D7C-4386-B100-6BA504503FC7}",
-      "States": [
-       {
-        "Id": "748895195",
-        "Name": "None",
-        "ObjectPath": "\\States\\Default Work Unit\\grounded\\None",
-        "GUID": "{D328E45F-CF43-461A-A10F-6ECD59D4AC2A}"
-       }
-      ]
-     },
-     {
       "Id": "4071417932",
       "Name": "player_state",
       "ObjectPath": "\\States\\Default Work Unit\\player_state",
@@ -184,18 +170,22 @@
     ],
     "SwitchGroups": [
      {
-      "Id": "2907122923",
-      "Name": "grounded",
-      "ObjectPath": "\\Switches\\Default Work Unit\\grounded",
-      "GUID": "{1B78D9AD-0460-435A-B6EC-E913EE9ADA24}",
-      "GameParameterRef": {
-       "Id": "2907122923"
-      },
-      "Switches": []
+      "Id": "722740280",
+      "Name": "bunny_step",
+      "ObjectPath": "\\Switches\\Default Work Unit\\bunny_step",
+      "GUID": "{830EEABE-C130-4394-A1CE-64433352A995}",
+      "Switches": [
+       {
+        "Id": "3128490829",
+        "Name": "not_grounded",
+        "ObjectPath": "\\Switches\\Default Work Unit\\bunny_step\\not_grounded",
+        "GUID": "{7E24DDB9-E313-441E-92AC-C24A22A3C6F5}"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{B10CDE8C-EAEB-4105-87EC-3B745E59CFF6}"
+  "FileHash": "{D95B4116-7686-0982-C82B-DD6A9FD8CE86}"
  }
 }

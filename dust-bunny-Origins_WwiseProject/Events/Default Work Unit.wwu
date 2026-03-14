@@ -45,11 +45,25 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Stop_mus_zones" ID="{2CCCE983-5898-454B-A0A8-0638B5DCA2C0}">
+							<ChildrenList>
+								<Action Name="" ID="{A0EDBC5D-F168-484C-B49E-D33461048F21}" ShortID="789731460">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambience" ID="{A9D14555-D6E7-4107-8050-20701AA3B253}" ShortID="442510119">
 					<ChildrenList>
-						<Event Name="Play_amb_room2_lp" ID="{A6DD2F9D-6089-41DB-9661-FF11E5776CCC}">
+						<Event Name="Play_amb_room_lp" ID="{A6DD2F9D-6089-41DB-9661-FF11E5776CCC}">
 							<ChildrenList>
 								<Action Name="" ID="{DB033450-CD37-4AE8-8242-CD3C40391254}" ShortID="555971023">
 									<PropertyList>
@@ -58,76 +72,21 @@
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="amb_roomhigh_lp" ID="{3348ED4F-E176-4D06-89D4-EA278943C9AE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+											<ObjectRef Name="amb_room_high_lp" ID="{C095C3B2-75D5-4A19-86CB-959A00FEF138}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{57B6F67D-BC65-43C9-AC69-22202B5BFAAB}" ShortID="267106427">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="amb_roomlow_lp" ID="{CC6D7BA8-9421-4216-8A34-015D0CB211AA}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+											<ObjectRef Name="amb_room_low_lp" ID="{DEEA0A29-2186-4905-B4E1-0876B0879987}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
 								<Action Name="" ID="{38A44469-3F79-4887-83CF-6ACB1AF0877A}" ShortID="704257437">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="amb_roommid_lp" ID="{7191708D-FC2F-4F7D-B9E3-2EB2028DED07}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_amb_room_lp" ID="{B163F1EF-D8D4-486D-9A15-43A35A25B846}">
-							<ChildrenList>
-								<Action Name="" ID="{00AC9324-EAD8-4EEA-819E-FE6118208C8D}" ShortID="17875382">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="amb_room_lp" ID="{C38118C3-3FA7-4D55-992A-190B15DF1AE6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_sfx_footstep_heavy_nl" ID="{15395BE9-D52A-49A8-AD99-9222FDFB453C}">
-							<ChildrenList>
-								<Action Name="" ID="{DE026A59-20E1-4228-832C-4F9F3955383A}" ShortID="548921372">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="sfx_bunnystep_heavy_nl" ID="{B43594D4-E651-42C0-AA96-ECB9374E6980}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_amb_roomhigh_lp" ID="{084FB8E8-176B-48E0-B206-673C146B1ECA}">
-							<ChildrenList>
-								<Action Name="" ID="{B3F85BC3-6343-439F-930B-13D751AAE42C}" ShortID="1006501302">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="amb_roomhigh_lp" ID="{3348ED4F-E176-4D06-89D4-EA278943C9AE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_amb_roommid_lp" ID="{8FBAB565-AC50-403A-95EC-0C838682B719}">
-							<ChildrenList>
-								<Action Name="" ID="{572A6326-9BB8-425B-8FDE-1D9A42BC289C}" ShortID="975578628">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="amb_roommid_lp" ID="{7191708D-FC2F-4F7D-B9E3-2EB2028DED07}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_amb_roomlow_lp" ID="{34839E89-CA7D-4353-B48B-0A8FB34C1E5F}">
-							<ChildrenList>
-								<Action Name="" ID="{FA906801-A7FE-4B90-B8F2-7E1522CC5A77}" ShortID="323973817">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="amb_roomlow_lp" ID="{CC6D7BA8-9421-4216-8A34-015D0CB211AA}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+											<ObjectRef Name="amb_room_mid_lp" ID="{E8F5C097-A071-4D30-95B3-F989D846C37E}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -139,19 +98,19 @@
 					<ChildrenList>
 						<Folder Name="SFX_Bunny" ID="{C46DABE7-4C63-47AA-BD51-9EBDA4E6447F}" ShortID="548556306">
 							<ChildrenList>
-								<Event Name="Play_sfx_bunnymove" ID="{65250275-E123-4B20-A2E8-BE8BDD243055}">
+								<Event Name="Play_sfx_bunnyhop" ID="{65250275-E123-4B20-A2E8-BE8BDD243055}">
 									<ChildrenList>
 										<Action Name="" ID="{D6CBF947-0518-4C27-A324-E7C5022C95BC}" ShortID="588019834">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnymove_nl" ID="{7E6B9FEE-2826-46E2-8540-24F27A4332DE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunnyswish_nl" ID="{7E6B9FEE-2826-46E2-8540-24F27A4332DE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
 										<Action Name="" ID="{08C9F42D-C949-4AA6-BD05-E1D207572F76}" ShortID="187406566">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnystep_grounded" ID="{BFA7F14E-4E1D-4B07-9646-B274CDA547B1}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunnystep_nl" ID="{297C3B5D-3B0F-4542-BD55-FF5CE0346AC5}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -209,7 +168,7 @@
 										<Action Name="" ID="{C3622D32-DD87-4AAB-A6C1-922C09DE26FC}" ShortID="822829229">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnystep_grounded" ID="{BFA7F14E-4E1D-4B07-9646-B274CDA547B1}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunnystep_ground_nl" ID="{28152B07-6626-4EE4-902B-458974EBCB76}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -241,7 +200,7 @@
 										<Action Name="" ID="{3E42588F-65B9-47C4-9B8F-D8163DDDDEB4}" ShortID="476065155">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnystep_grounded" ID="{BFA7F14E-4E1D-4B07-9646-B274CDA547B1}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunnystep_ground_nl" ID="{28152B07-6626-4EE4-902B-458974EBCB76}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

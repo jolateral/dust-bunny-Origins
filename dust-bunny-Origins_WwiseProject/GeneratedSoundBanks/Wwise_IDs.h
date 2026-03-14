@@ -14,24 +14,19 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID EXIT_UI = 1041028614U;
-        static const AkUniqueID PLAY_AMB_ROOM2_LP = 2291298689U;
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
-        static const AkUniqueID PLAY_AMB_ROOMHIGH_LP = 122448171U;
-        static const AkUniqueID PLAY_AMB_ROOMLOW_LP = 3704798373U;
-        static const AkUniqueID PLAY_AMB_ROOMMID_LP = 3437152325U;
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
         static const AkUniqueID PLAY_MUS_ZONES = 3793537147U;
         static const AkUniqueID PLAY_SFX_BRIDGE_CREAK_NL = 3975145325U;
         static const AkUniqueID PLAY_SFX_BRIDGE_LAND_NL = 92681520U;
         static const AkUniqueID PLAY_SFX_BUNNYABSORB_NL = 1567933058U;
+        static const AkUniqueID PLAY_SFX_BUNNYHOP = 3966847515U;
         static const AkUniqueID PLAY_SFX_BUNNYIMPACT_NL = 4038925685U;
         static const AkUniqueID PLAY_SFX_BUNNYJUMP_NL = 674581991U;
         static const AkUniqueID PLAY_SFX_BUNNYLAND_NL = 2787500338U;
-        static const AkUniqueID PLAY_SFX_BUNNYMOVE = 1920786589U;
         static const AkUniqueID PLAY_SFX_BUNNYROLL_NL = 4212669292U;
         static const AkUniqueID PLAY_SFX_CAR_MOVE_NL = 4207159517U;
         static const AkUniqueID PLAY_SFX_ENDSEQ = 1833036738U;
-        static const AkUniqueID PLAY_SFX_FOOTSTEP_HEAVY_NL = 1631605133U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_001 = 1142362393U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_002 = 1142362394U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_003 = 1142362395U;
@@ -40,20 +35,11 @@ namespace AK
         static const AkUniqueID PLAY_SFX_UI_SELECT_NL = 4289076888U;
         static const AkUniqueID PLAY_SFX_WOODBLOCK_IMPACT_WOOD = 841695155U;
         static const AkUniqueID STOP_MUS_STARTMENU = 200855961U;
+        static const AkUniqueID STOP_MUS_ZONES = 75519133U;
     } // namespace EVENTS
 
     namespace STATES
     {
-        namespace GROUNDED
-        {
-            static const AkUniqueID GROUP = 2907122923U;
-
-            namespace STATE
-            {
-                static const AkUniqueID NONE = 748895195U;
-            } // namespace STATE
-        } // namespace GROUNDED
-
         namespace PLAYER_STATE
         {
             static const AkUniqueID GROUP = 4071417932U;
@@ -83,14 +69,15 @@ namespace AK
 
     namespace SWITCHES
     {
-        namespace GROUNDED
+        namespace BUNNY_STEP
         {
-            static const AkUniqueID GROUP = 2907122923U;
+            static const AkUniqueID GROUP = 722740280U;
 
             namespace SWITCH
             {
+                static const AkUniqueID NOT_GROUNDED = 3128490829U;
             } // namespace SWITCH
-        } // namespace GROUNDED
+        } // namespace BUNNY_STEP
 
     } // namespace SWITCHES
 

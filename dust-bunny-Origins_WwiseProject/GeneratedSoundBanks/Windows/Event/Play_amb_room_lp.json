@@ -8,21 +8,39 @@
    {
     "Id": "3112684807",
     "Type": "Event",
-    "GUID": "{B163F1EF-D8D4-486D-9A15-43A35A25B846}",
+    "GUID": "{A6DD2F9D-6089-41DB-9661-FF11E5776CCC}",
     "Language": "SFX",
-    "Hash": "{254CD1ED-207D-12A6-D723-A47A2531763F}",
+    "Hash": "{FB4EC531-499D-194B-AB97-C72335B6D081}",
     "ObjectPath": "Play_amb_room_lp",
     "ShortName": "Play_amb_room_lp",
     "Path": "Event/Play_amb_room_lp.bnk",
     "Media": [
      {
-      "Id": "393114943",
+      "Id": "350166953",
       "Language": "SFX",
-      "Streaming": "true",
+      "Streaming": "false",
       "Location": "Loose",
-      "ShortName": "amb_room_lp.wav",
-      "Path": "Media/393114943.wem",
-      "CachePath": "80/{80646BBD-63FD-8BEA-6893-B458A1A0C1C8}.wem"
+      "ShortName": "amb_room_high_lp.wav",
+      "Path": "Media/350166953.wem",
+      "CachePath": "DB/{DB1D93A6-02CF-F5B4-5E23-171F064F56EE}.wem"
+     },
+     {
+      "Id": "690718666",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "amb_room_mid_lp.wav",
+      "Path": "Media/690718666.wem",
+      "CachePath": "65/{65F78DAB-FA99-D976-7A3D-763547FB10E5}.wem"
+     },
+     {
+      "Id": "1062626285",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "amb_room_low_lp.wav",
+      "Path": "Media/1062626285.wem",
+      "CachePath": "23/{239B77F5-51BE-CD5A-BB44-E68909728690}.wem"
      }
     ],
     "Events": [
@@ -30,17 +48,25 @@
       "Id": "3112684807",
       "Name": "Play_amb_room_lp",
       "ObjectPath": "\\Events\\Default Work Unit\\Ambience\\Play_amb_room_lp",
-      "GUID": "{B163F1EF-D8D4-486D-9A15-43A35A25B846}",
-      "DurationType": "Infinite",
+      "GUID": "{A6DD2F9D-6089-41DB-9661-FF11E5776CCC}",
+      "DurationType": "OneShot",
+      "DurationMin": "298.40216",
+      "DurationMax": "298.40216",
       "MediaRefs": [
        {
-        "Id": "393114943"
+        "Id": "350166953"
+       },
+       {
+        "Id": "690718666"
+       },
+       {
+        "Id": "1062626285"
        }
       ]
      }
     ]
    }
   ],
-  "FileHash": "{AC4DCEEB-B8A8-1CBA-5F82-BBC0A6BB2BC3}"
+  "FileHash": "{94A12032-21F6-3C44-D4BC-81C0785A434F}"
  }
 }
