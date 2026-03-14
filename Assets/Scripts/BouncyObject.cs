@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections;
 
 public class BouncyObject : MonoBehaviour
 {
     [Header("Settings")]
     public float bounceForce = 25f;
+    public float bounceDuration = 0.12f; // longer duration = softer launch
 
     [SerializeField] private bool bookshelfStapler = false;
 
@@ -16,19 +18,16 @@ public class BouncyObject : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // Only show "stapler isn't working" hint when touching bookshelf stapler without diary; no auto-bounce
         if (collision.gameObject.CompareTag("Player") && bookshelfStapler && DiaryUIManager.Instance != null && !DiaryUIManager.Instance.diaryShown)
         {
             MemoryUIManager.Instance.ShowMemory("This stapler isn't working...Maybe I need to view the diary first.", Color.red);
         }
     }
 
-    /// <summary>
-    /// Called when the player presses jump while standing on this object. Returns true if a bounce was applied (player should not do normal jump).
-    /// </summary>
     public bool TryBounce(Rigidbody playerRb)
     {
         if (playerRb == null) return false;
+
         if (bookshelfStapler)
         {
             if (DiaryUIManager.Instance == null || !DiaryUIManager.Instance.diaryShown)
@@ -38,19 +37,28 @@ public class BouncyObject : MonoBehaviour
                 return false;
             }
         }
-        DoBounce(playerRb);
+
+        StartCoroutine(DoBounceSmooth(playerRb));
         return true;
     }
 
-    void DoBounce(Rigidbody rb)
+    IEnumerator DoBounceSmooth(Rigidbody rb)
     {
         Vector3 velocity = rb.linearVelocity;
         velocity.y = 0f;
         rb.linearVelocity = velocity;
-        // Scale impulse by mass so bounce height is consistent (matches player's jump scaling)
-        rb.AddForce(Vector3.up * (bounceForce * rb.mass), ForceMode.Impulse);
+
+        float elapsed = 0f;
+        float totalForce = bounceForce * rb.mass;
 
         if (animator != null)
             animator.SetTrigger("bounce");
+
+        while (elapsed < bounceDuration)
+        {
+            rb.AddForce(Vector3.up * (totalForce / bounceDuration), ForceMode.Force);
+            elapsed += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

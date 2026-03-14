@@ -27,6 +27,14 @@ public class AbsorbMechanic : MonoBehaviour
     [Tooltip("Player must be this many times bigger than the target to absorb it.")]
     public float sizeTolerance = 1.1f;
 
+    // NEW: Smooth Growth Settings
+    [Header("--- Smooth Growth Effects ---")]
+    [Tooltip("Particle system to play when growing (Optional).")]
+    public ParticleSystem growthParticles;
+    
+    [Tooltip("How long the Mario-style smooth growth takes.")]
+    public float smoothGrowthDuration = 0.4f;
+
     [Header("Visual Settings (Orbital)")]
     [Tooltip("How much the item shrinks after being absorbed (e.g., 0.05 makes it a tiny floating speck).")]
     public float absorbedItemScaleMultiplier = 0.05f;
@@ -79,6 +87,10 @@ public class AbsorbMechanic : MonoBehaviour
 
     public AK.Wwise.Event bunnyAbsorbSfx;
 
+    // NEW: Private variables for smooth growth tracking
+    private Vector3 currentTargetScale;
+    private Coroutine growthCoroutine;
+
     // -----------------------------------------------------------------------
     // Unity Messages
     // -----------------------------------------------------------------------
@@ -88,6 +100,9 @@ public class AbsorbMechanic : MonoBehaviour
         // Assume fairly uniform scaling; track a baseline so we don't shrink below it.
         startingScaleMagnitude = transform.localScale.magnitude;
         playerCollider = GetComponent<Collider>();
+
+        // NEW: Initialize the target scale to current scale
+        currentTargetScale = transform.localScale;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -135,7 +150,11 @@ public class AbsorbMechanic : MonoBehaviour
                 float actualGrowthFactor = growthFactor * fleeing.growthMultiplier;
                 Debug.Log($"Absorbed fleeing item! Bonus growth: {actualGrowthFactor} (x{fleeing.growthMultiplier})");
 
-                transform.localScale += Vector3.one * actualGrowthFactor;
+                // [ORIGINAL CODE COMMENTED OUT TO ALLOW SMOOTH GROWTH]
+                // transform.localScale += Vector3.one * actualGrowthFactor;
+                
+                // NEW: Call the smooth growth function
+                TriggerSmoothGrowth(actualGrowthFactor);
 
                 if (fleeing != null) fleeing.enabled = false;
 
@@ -208,8 +227,12 @@ public class AbsorbMechanic : MonoBehaviour
             if (floater != null)
                 floater.StartFloating(this.transform);
 
-            // Grow bunny and play sound
-            transform.localScale += Vector3.one * growthFactor;
+            // [ORIGINAL CODE COMMENTED OUT TO ALLOW SMOOTH GROWTH]
+            // transform.localScale += Vector3.one * growthFactor;
+            
+            // NEW: Call the smooth growth function
+            TriggerSmoothGrowth(growthFactor);
+
             if (bunnyAbsorbSfx != null) bunnyAbsorbSfx.Post(gameObject);
             ObjectiveUI.Instance.SetObjective();
             return;
@@ -246,8 +269,11 @@ public class AbsorbMechanic : MonoBehaviour
             droppableOriginalScales[item] = originalScale;
         }
 
-        // Grow the bunny
-        transform.localScale += Vector3.one * growthFactor;
+        // [ORIGINAL CODE COMMENTED OUT TO ALLOW SMOOTH GROWTH]
+        // transform.localScale += Vector3.one * growthFactor;
+
+        // NEW: Call the smooth growth function
+        TriggerSmoothGrowth(growthFactor);
 
         // Play absorb sound
         if (bunnyAbsorbSfx != null) bunnyAbsorbSfx.Post(gameObject);
@@ -370,6 +396,9 @@ public class AbsorbMechanic : MonoBehaviour
         }
 
         transform.localScale = scale;
+
+        // NEW: Sync the currentTargetScale so future growth starts from the correct spilled size
+        currentTargetScale = scale;
     }
 
     private IEnumerator ReenableCollisionLater(Collider itemCollider)
@@ -380,6 +409,59 @@ public class AbsorbMechanic : MonoBehaviour
         {
             Physics.IgnoreCollision(playerCollider, itemCollider, false);
         }
+    }
+
+    // =======================================================================
+    // NEW: SMOOTH GROWTH COROUTINE & LOGIC (Mario Mushroom Effect)
+    // =======================================================================
+
+    /// <summary>
+    /// Updates the target scale and restarts the smooth scaling coroutine.
+    /// Also fires the particle system if assigned.
+    /// </summary>
+    private void TriggerSmoothGrowth(float addedGrowth)
+    {
+        currentTargetScale += Vector3.one * addedGrowth;
+
+        // Play particles if assigned
+        if (growthParticles != null)
+        {
+            growthParticles.Play();
+        }
+
+        // Restart the scaling coroutine to interpolate to the new target
+        if (growthCoroutine != null)
+        {
+            StopCoroutine(growthCoroutine);
+        }
+        growthCoroutine = StartCoroutine(SmoothScaleRoutine());
+    }
+
+    /// <summary>
+    /// Coroutine that smoothly scales the bunny using an Ease-Out-Back formula,
+    /// creating a bouncy "Mario Mushroom" effect.
+    /// </summary>
+    private IEnumerator SmoothScaleRoutine()
+    {
+        Vector3 startScale = transform.localScale;
+        float elapsed = 0f;
+
+        while (elapsed < smoothGrowthDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / smoothGrowthDuration;
+
+            // Classic Ease-Out-Back math formula for bouncy overshoot
+            float c1 = 1.70158f;
+            float c3 = c1 + 1f;
+            float ease = 1f + c3 * Mathf.Pow(t - 1f, 3f) + c1 * Mathf.Pow(t - 1f, 2f);
+
+            transform.localScale = Vector3.LerpUnclamped(startScale, currentTargetScale, ease);
+            yield return null;
+        }
+
+        // Ensure we end exactly on the target scale
+        transform.localScale = currentTargetScale;
     }
 }
 
