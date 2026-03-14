@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{CEB69242-4776-4648-B8D6-E82352A732BA}" SchemaVersion="133">
 	<SoundcasterSessions>
-		<WorkUnit Name="Default Work Unit" ID="{CEB69242-4776-4648-B8D6-E82352A732BA}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{CEB69242-4776-4648-B8D6-E82352A732BA}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="test" ID="{C45F2EF5-42BF-4BA7-A924-406E10EA1AEF}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="Play_amb_footstep_barefoot" ID="{F058F040-32EA-4AB2-8F61-C89A42FC8297}" WorkUnitID="{2749E195-0FDE-4342-93C9-73FC3FCD0DAB}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+							<Position X="0" Y="1"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_amb_footstep_slipper" ID="{69C15AD8-E2D1-4E38-A401-1F488533745A}" WorkUnitID="{2749E195-0FDE-4342-93C9-73FC3FCD0DAB}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_amb_cat" ID="{A0A62334-96D5-485B-97A4-A801A076FD84}" WorkUnitID="{2749E195-0FDE-4342-93C9-73FC3FCD0DAB}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Play_amb_room_lp" ID="{A6DD2F9D-6089-41DB-9661-FF11E5776CCC}" WorkUnitID="{2749E195-0FDE-4342-93C9-73FC3FCD0DAB}"/>
+							<Position X="3" Y="0"/>
+						</Module>
+					</ModuleList>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundcasterSessions>
 </WwiseDocument>
