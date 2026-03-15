@@ -140,7 +140,7 @@ public class DustBunnyController : MonoBehaviour
     void Update()
     {
         distToGround = playerCollider.bounds.extents.y;
-        isGrounded = CheckGrounded();
+        isGrounded = CheckGroundedStrict();
 
         if (isGrounded)
             lastGroundedTime = Time.time;
@@ -321,7 +321,7 @@ public class DustBunnyController : MonoBehaviour
         if (isRolling) return;
         if (Time.time < lastJumpTime + jumpCooldown) return;
 
-        bool groundedNow = CheckGrounded();
+        bool groundedNow = CheckGroundedStrict();
         bool canCoyoteJump = Time.time <= lastGroundedTime + coyoteTime;
 
         if (groundedNow)
@@ -674,7 +674,7 @@ public class DustBunnyController : MonoBehaviour
 
         Vector3 checkPos = new Vector3(
             bounds.center.x,
-            bounds.min.y + 0.05f,
+            bounds.min.y + 0.01f,
             bounds.center.z
         );
 
