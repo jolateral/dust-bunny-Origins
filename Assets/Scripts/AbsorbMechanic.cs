@@ -65,6 +65,17 @@ public class AbsorbMechanic : MonoBehaviour
     [Tooltip("Upward strength of the force applied to spilled items.")]
     public float spillUpwardForce = 2f;
 
+    [Tooltip("Spilled items are scaled to this fraction of their original size so the player can always re-absorb them.")]
+    [Range(0.3f, 0.95f)]
+    public float spilledItemScaleFactor = 0.7f;
+
+    [Header("Minimum Size Recovery")]
+    [Tooltip("When at or near minimum size with nothing to absorb, passively regrow at this rate per second.")]
+    public float minSizeRecoveryRate = 0.01f;
+
+    [Tooltip("Recovery kicks in when current scale magnitude is within this ratio of the starting minimum (e.g. 1.05 = within 5%).")]
+    public float recoveryThresholdRatio = 1.15f;
+
     // -----------------------------------------------------------------------
     // Private Fields
     // -----------------------------------------------------------------------
@@ -97,12 +108,22 @@ public class AbsorbMechanic : MonoBehaviour
 
     void Start()
     {
-        // Assume fairly uniform scaling; track a baseline so we don't shrink below it.
         startingScaleMagnitude = transform.localScale.magnitude;
         playerCollider = GetComponent<Collider>();
-
-        // NEW: Initialize the target scale to current scale
         currentTargetScale = transform.localScale;
+    }
+
+    void Update()
+    {
+        // Safety-net recovery: if the bunny is near minimum size and has nothing
+        // left to absorb, passively regrow so the player is never permanently stuck.
+        if (droppableItems.Count == 0 &&
+            transform.localScale.magnitude < startingScaleMagnitude * recoveryThresholdRatio)
+        {
+            float recovery = minSizeRecoveryRate * Time.deltaTime;
+            transform.localScale += Vector3.one * recovery;
+            currentTargetScale = transform.localScale;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -327,10 +348,11 @@ public class AbsorbMechanic : MonoBehaviour
             if (item == null)
                 continue;
 
-            // Restore the size the item had out in the world before absorption.
+            // Restore a reduced version of the item's original size so the player
+            // can always re-absorb it after shrinking from the spill.
             if (droppableOriginalScales.TryGetValue(item, out Vector3 originalScale))
             {
-                item.transform.localScale = originalScale;
+                item.transform.localScale = originalScale * spilledItemScaleFactor;
                 droppableOriginalScales.Remove(item);
             }
 
