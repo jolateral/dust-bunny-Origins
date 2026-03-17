@@ -9,6 +9,9 @@ public class BouncyObject : MonoBehaviour
 
     [SerializeField] private bool bookshelfStapler = false;
 
+    public AK.Wwise.Event staplerWindup;
+    public AK.Wwise.Event staplerRelease;
+
     private Animator animator;
 
     void Awake()
@@ -18,6 +21,8 @@ public class BouncyObject : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        staplerWindup.Post(gameObject);
+
         if (collision.gameObject.CompareTag("Player") && bookshelfStapler && DiaryUIManager.Instance != null && !DiaryUIManager.Instance.diaryShown)
         {
             MemoryUIManager.Instance.ShowMemory("This stapler isn't working...Maybe I need to view the diary first.", Color.red);
@@ -44,6 +49,8 @@ public class BouncyObject : MonoBehaviour
 
     IEnumerator DoBounceSmooth(Rigidbody rb)
     {
+        staplerRelease.Post(gameObject);
+
         Vector3 velocity = rb.linearVelocity;
         velocity.y = 0f;
         rb.linearVelocity = velocity;

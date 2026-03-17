@@ -229,6 +229,10 @@ MonoBehaviour:
   movementDirection: {x: 1, y: 0, z: 0}
   speed: 0.7
   distance: 12
+  carMove:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c3d587757d7d9498dc9e4338a256fc, type: 2}
 --- !u!54 &5059922
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24890,6 +24894,10 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0, z: 1}
   speed: 0.7
   distance: 10
+  carMove:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c3d587757d7d9498dc9e4338a256fc, type: 2}
 --- !u!64 &719389170
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33582,6 +33590,10 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0, z: -1}
   speed: 0.7
   distance: 10
+  carMove:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1c3d587757d7d9498dc9e4338a256fc, type: 2}
 --- !u!65 &1104082436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67652,6 +67664,10 @@ PrefabInstance:
       propertyPath: bridgeCollider
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5591210589020132880, guid: 80b84e9938b279842a587e87aa1b90ce, type: 3}
+      propertyPath: bridgeCreakSfx.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e3bc4b114ecf8949b76abe4a8da320f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -177,6 +177,8 @@ public class AbsorbMechanic : MonoBehaviour
                 // NEW: Call the smooth growth function
                 TriggerSmoothGrowth(actualGrowthFactor);
 
+                bunnyAbsorbSfx.Post(gameObject);
+
                 if (fleeing != null) fleeing.enabled = false;
 
                 // Hide renderers before destroying (avoids visual pop)

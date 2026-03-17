@@ -38,6 +38,10 @@ public class DustBunnyController : MonoBehaviour
     public float glideMoveToLaunchDuration = 0.35f;
     [SerializeField] private float glideYawExtra = -90f;
 
+    [Header("--- Glide SFX ---")]
+    public AK.Wwise.Event bunnyGlideStart;
+    public AK.Wwise.Event bunnyGlideStop;
+
     [Header("--- Visual Facing ---")]
     public float facingYawOffset = 0f;
     [SerializeField] private Transform cameraTransform;
@@ -527,10 +531,14 @@ public class DustBunnyController : MonoBehaviour
 
         if (_animator) _animator.SetBool("isRunning", false);
         SetGlidingAnimator(true);
+
+        bunnyGlideStart.Post(gameObject);
     }
 
     void EndGliding()
     {
+        bunnyGlideStop.Post(gameObject);
+
         isGliding = false;
         rb.useGravity = true;
         SetGlidingAnimator(false);

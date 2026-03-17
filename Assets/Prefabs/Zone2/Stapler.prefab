@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 212f54434fe3f654dbcb8fcae76a33ef, type: 3}
       propertyPath: m_Name
-      value: Stapler (1)
+      value: Stapler
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -96,7 +96,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BouncyObject
   bounceForce: 1
+  bounceDuration: 0.12
   bookshelfStapler: 0
+  staplerWindup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2f0def0239b0fee43b7ca4b4235ac07f, type: 2}
+  staplerRelease:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 02ff7fcbc30de2e4ca5a0fe267577f16, type: 2}
 --- !u!95 &7319322842313358634
 Animator:
   serializedVersion: 7
