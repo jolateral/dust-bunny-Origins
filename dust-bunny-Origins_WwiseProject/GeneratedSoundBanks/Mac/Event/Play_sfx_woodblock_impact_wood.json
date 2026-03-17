@@ -10,11 +10,20 @@
     "Type": "Event",
     "GUID": "{4EF5F896-7125-4BD7-AF0A-7C5231C6459C}",
     "Language": "SFX",
-    "Hash": "{42C04CCD-8241-73D8-A23D-A8CDD016B95D}",
+    "Hash": "{CC9FD8EA-8E0B-F3CA-CFED-19219C9E3C5A}",
     "ObjectPath": "Play_sfx_woodblock_impact_wood",
     "ShortName": "Play_sfx_woodblock_impact_wood",
     "Path": "Event/Play_sfx_woodblock_impact_wood.bnk",
     "Media": [
+     {
+      "Id": "49096181",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-005.wav",
+      "Path": "Media/49096181.wem",
+      "CachePath": "A7/{A7BAFD7C-B405-80D6-D2C4-F9D3822E4F25}.wem"
+     },
      {
       "Id": "116306658",
       "Language": "SFX",
@@ -25,13 +34,31 @@
       "CachePath": "4B/{4B8DF1FE-2AE1-D03F-F8EC-649F50278183}.wem"
      },
      {
+      "Id": "170703789",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-003.wav",
+      "Path": "Media/170703789.wem",
+      "CachePath": "DE/{DE27F211-70FA-E7EA-A2C0-EBAB58B8724F}.wem"
+     },
+     {
+      "Id": "171753782",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-002.wav",
+      "Path": "Media/171753782.wem",
+      "CachePath": "C2/{C2646192-CD5E-13CE-6416-C9C73757AEF6}.wem"
+     },
+     {
       "Id": "255263469",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Loose",
       "ShortName": "sfx_woodblock_impact_nl_006.wav",
       "Path": "Media/255263469.wem",
-      "CachePath": "1F/{1F5C6B52-B53F-F586-F366-01051D4CCAD3}.wem"
+      "CachePath": "34/{34E3F5D5-36F5-27B7-6002-445052576350}.wem"
      },
      {
       "Id": "497527183",
@@ -49,7 +76,7 @@
       "Location": "Loose",
       "ShortName": "Weapons, Blunt, Block Stick With Shield Front, Wood SND70773 S04.wav",
       "Path": "Media/497917481.wem",
-      "CachePath": "BB/{BB0A4F34-2724-CC1C-0F8D-256FA78AAF01}.wem"
+      "CachePath": "13/{134216FB-AC1D-C36F-A41F-18FC75D9191E}.wem"
      },
      {
       "Id": "591245122",
@@ -59,6 +86,15 @@
       "ShortName": "sfx_woodblock_impact_nl_004.wav",
       "Path": "Media/591245122.wem",
       "CachePath": "72/{72BEFB1D-3982-2D7C-8B17-D83FE941EBF8}.wem"
+     },
+     {
+      "Id": "735479010",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-006.wav",
+      "Path": "Media/735479010.wem",
+      "CachePath": "15/{159616C5-EBBC-A8EA-892B-BE477743762B}.wem"
      },
      {
       "Id": "776614564",
@@ -79,6 +115,15 @@
       "CachePath": "67/{67F34CAB-F2A1-BF6D-751C-B4BC9388281A}.wem"
      },
      {
+      "Id": "912027613",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-004.wav",
+      "Path": "Media/912027613.wem",
+      "CachePath": "84/{848E18A4-FFB8-00CC-99B6-E227DCFF4C3A}.wem"
+     },
+     {
       "Id": "971705040",
       "Language": "SFX",
       "Streaming": "false",
@@ -95,6 +140,15 @@
       "ShortName": "sfx_woodblock_impact_nl_001.wav",
       "Path": "Media/995469233.wem",
       "CachePath": "CF/{CFF806E3-6345-1EB5-F9FB-C0B4764A1DC8}.wem"
+     },
+     {
+      "Id": "1067593930",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-001.wav",
+      "Path": "Media/1067593930.wem",
+      "CachePath": "58/{5849C2C1-AA30-9827-2F68-5DE9CCB54B1B}.wem"
      }
     ],
     "Plugins": {
@@ -117,11 +171,20 @@
       "GUID": "{4EF5F896-7125-4BD7-AF0A-7C5231C6459C}",
       "MaxAttenuation": "50",
       "DurationType": "OneShot",
-      "DurationMin": "0.12019092",
-      "DurationMax": "1.2965723",
+      "DurationMin": "0.7229272",
+      "DurationMax": "2.0798519",
       "MediaRefs": [
        {
+        "Id": "49096181"
+       },
+       {
         "Id": "116306658"
+       },
+       {
+        "Id": "170703789"
+       },
+       {
+        "Id": "171753782"
        },
        {
         "Id": "255263469"
@@ -136,16 +199,25 @@
         "Id": "591245122"
        },
        {
+        "Id": "735479010"
+       },
+       {
         "Id": "776614564"
        },
        {
         "Id": "787643204"
        },
        {
+        "Id": "912027613"
+       },
+       {
         "Id": "971705040"
        },
        {
         "Id": "995469233"
+       },
+       {
+        "Id": "1067593930"
        }
       ],
       "PluginRefs": {
@@ -167,6 +239,6 @@
     ]
    }
   ],
-  "FileHash": "{6F9C76C9-B09D-9834-8E91-24966399EB40}"
+  "FileHash": "{B2518FFB-4F57-A91D-DEC5-A9EFC1CE0A17}"
  }
 }

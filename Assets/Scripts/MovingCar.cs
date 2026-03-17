@@ -10,8 +10,12 @@ public class MovingCar : MonoBehaviour
     private Vector3 startPos;
     private float phaseOffset; // Random offset so cars aren't in sync
 
+    public AK.Wwise.Event carMove;
+
     void Start()
     {
+        carMove.Post(gameObject);
+
         startPos = transform.position;
         phaseOffset = Random.Range(0f, 1f); // Random phase so each car is at a different point in the cycle
     }
