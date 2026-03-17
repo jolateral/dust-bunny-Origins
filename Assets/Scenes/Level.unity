@@ -297,6 +297,8 @@ GameObject:
   m_Component:
   - component: {fileID: 12821490}
   - component: {fileID: 12821491}
+  - component: {fileID: 12821493}
+  - component: {fileID: 12821492}
   m_Layer: 0
   m_Name: DogBarking
   m_TagString: Untagged
@@ -338,6 +340,43 @@ MonoBehaviour:
   minDelay: 5
   maxDelay: 20
   playChance: 0.8
+--- !u!114 &12821492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12821489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
+  m_Collider: {fileID: 0}
+--- !u!114 &12821493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12821489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e021e4d64cccd3478083e0e42485605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &13224012
 GameObject:
   m_ObjectHideFlags: 0
@@ -4423,6 +4462,7 @@ GameObject:
   - component: {fileID: 127438368}
   - component: {fileID: 127438370}
   - component: {fileID: 127438369}
+  - component: {fileID: 127438371}
   m_Layer: 0
   m_Name: Human_Barefoot
   m_TagString: Untagged
@@ -4492,11 +4532,24 @@ MonoBehaviour:
   isStaticObject: 0
   usePositionOffsetData: 0
   m_positionOffsetData:
-    KeepMe: 0
+    KeepMe: 1
     positionOffset: {x: 0, y: 0, z: 0}
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &127438371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127438367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
+  m_Collider: {fileID: 0}
 --- !u!1001 &128734507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4893,6 +4946,7 @@ GameObject:
   - component: {fileID: 149342151}
   - component: {fileID: 149342153}
   - component: {fileID: 149342152}
+  - component: {fileID: 149342154}
   m_Layer: 0
   m_Name: Human_Slippers
   m_TagString: Untagged
@@ -4962,11 +5016,24 @@ MonoBehaviour:
   isStaticObject: 0
   usePositionOffsetData: 0
   m_positionOffsetData:
-    KeepMe: 0
+    KeepMe: 1
     positionOffset: {x: 0, y: 0, z: 0}
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &149342154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149342150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
+  m_Collider: {fileID: 0}
 --- !u!1001 &151719096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7434,6 +7501,8 @@ Transform:
   - {fileID: 1388062900}
   - {fileID: 1941420673}
   - {fileID: 1090622520}
+  - {fileID: 1765136975}
+  - {fileID: 304249099}
   m_Father: {fileID: 1387954840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &235861775
@@ -9309,6 +9378,84 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1545864922453447421, guid: 4ead942c9059643c1ae97662cfc5b8aa, type: 3}
   m_PrefabInstance: {fileID: 736669178}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &304249098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 304249099}
+  - component: {fileID: 304249101}
+  - component: {fileID: 304249100}
+  m_Layer: 0
+  m_Name: GlideMusicTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &304249099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304249098}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 68.9, y: 139.9, z: 250.6}
+  m_LocalScale: {x: 60, y: 80, z: 6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 233695320}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &304249100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304249098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7a482e861e9b241bf741345c77da50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
+  triggerList: f7f422d6
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8c23082e039cad84c9691f37743b5b2b, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 
+--- !u!65 &304249101
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304249098}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &304499403 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: f0f2148b9e2303a4592e5161fa1e6532, type: 3}
@@ -13671,8 +13818,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 25
-      minScalar: 5
+      scalar: 45
+      minScalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -21073,7 +21220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomPortal
   triggerList: f7e1664c
   useOtherObject: 0
-  initialState: 0
+  initialState: 1
   closePortalTriggerList: 
   rooms:
   - {fileID: 1042788587}
@@ -22444,6 +22591,7 @@ GameObject:
   - component: {fileID: 580948291}
   - component: {fileID: 580948293}
   - component: {fileID: 580948292}
+  - component: {fileID: 580948294}
   m_Layer: 0
   m_Name: DogBarking
   m_TagString: Untagged
@@ -22504,11 +22652,24 @@ MonoBehaviour:
   isStaticObject: 0
   usePositionOffsetData: 0
   m_positionOffsetData:
-    KeepMe: 0
+    KeepMe: 1
     positionOffset: {x: 0, y: 0, z: 0}
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &580948294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580948290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
+  m_Collider: {fileID: 0}
 --- !u!1001 &582001371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32633,7 +32794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0cb6976a347914e9734cb27c46cb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioZoneAssistant
-  drawGizmo: 0
+  drawGizmo: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!65 &1042788589
 BoxCollider:
@@ -33718,7 +33879,6 @@ GameObject:
   - component: {fileID: 1090622520}
   - component: {fileID: 1090622522}
   - component: {fileID: 1090622521}
-  - component: {fileID: 1090622523}
   m_Layer: 0
   m_Name: Zone2toZone3
   m_TagString: Untagged
@@ -33734,9 +33894,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090622519}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 68.9, y: 139.9, z: 250.6}
-  m_LocalScale: {x: 60, y: 80, z: 6}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 68.899994, y: 80, z: 125}
+  m_LocalScale: {x: 313, y: 200, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 233695320}
@@ -33755,7 +33915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomPortal
   triggerList: f7e1664c
   useOtherObject: 0
-  initialState: 0
+  initialState: 1
   closePortalTriggerList: 
   rooms:
   - {fileID: 747882390}
@@ -33771,10 +33931,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 511
+    m_Bits: 1
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -33782,30 +33942,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1090622523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090622519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc7a482e861e9b241bf741345c77da50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
-  triggerList: f7e1664c
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 8c23082e039cad84c9691f37743b5b2b, type: 2}
-  valueIdInternal: 0
-  groupIdInternal: 0
-  valueGuidInternal: 
-  groupGuidInternal: 
 --- !u!4 &1096173103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8829212879488931246, guid: 1924d6215e36a3142bb7787c22611977, type: 3}
@@ -34555,7 +34691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomPortal
   triggerList: f7e1664c
   useOtherObject: 0
-  initialState: 0
+  initialState: 1
   closePortalTriggerList: 
   rooms:
   - {fileID: 223783456}
@@ -40777,10 +40913,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomPortal
   triggerList: f7e1664c
   useOtherObject: 0
-  initialState: 0
+  initialState: 1
   closePortalTriggerList: 
   rooms:
-  - {fileID: 0}
+  - {fileID: 1217014389}
   - {fileID: 747882390}
   isStatic: 0
 --- !u!65 &1388062902
@@ -45605,6 +45741,7 @@ GameObject:
   - component: {fileID: 1538681485}
   - component: {fileID: 1538681484}
   - component: {fileID: 1538681483}
+  - component: {fileID: 1538681487}
   m_Layer: 0
   m_Name: Camerafocustrigger
   m_TagString: Untagged
@@ -45723,6 +45860,30 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538681481}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1538681487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538681481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7a482e861e9b241bf741345c77da50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
+  triggerList: d1bbb3b5
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 68b43986556a4e64ca211b09c0d213b7, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 
 --- !u!1 &1539078709
 GameObject:
   m_ObjectHideFlags: 0
@@ -53966,6 +54127,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1655614084}
   - component: {fileID: 1655614085}
+  - component: {fileID: 1655614087}
+  - component: {fileID: 1655614086}
   m_Layer: 0
   m_Name: CarPassing
   m_TagString: Untagged
@@ -54007,6 +54170,43 @@ MonoBehaviour:
   minDelay: 5
   maxDelay: 20
   playChance: 0.8
+--- !u!114 &1655614086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655614083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
+  m_Collider: {fileID: 0}
+--- !u!114 &1655614087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655614083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e021e4d64cccd3478083e0e42485605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1656249106
 GameObject:
   m_ObjectHideFlags: 0
@@ -56934,6 +57134,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3665638032557424501, guid: 6a48ecba9e9261c4494cb46f74fb2100, type: 3}
   m_PrefabInstance: {fileID: 2503197808845947809}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1765136974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1765136975}
+  - component: {fileID: 1765136977}
+  - component: {fileID: 1765136976}
+  m_Layer: 0
+  m_Name: Zone1toZone3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1765136975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765136974}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 68.899994, y: 10, z: 10.7}
+  m_LocalScale: {x: 80, y: 20, z: 6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 233695320}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1765136976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765136974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ce6901587996a41bd790f55fee9b47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomPortal
+  triggerList: f7e1664c
+  useOtherObject: 0
+  initialState: 1
+  closePortalTriggerList: 
+  rooms:
+  - {fileID: 1381379374}
+  - {fileID: 1042788587}
+  isStatic: 0
+--- !u!65 &1765136977
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765136974}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1770764893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62993,6 +63267,7 @@ GameObject:
   - component: {fileID: 2021436970}
   - component: {fileID: 2021436972}
   - component: {fileID: 2021436971}
+  - component: {fileID: 2021436973}
   m_Layer: 0
   m_Name: Cat
   m_TagString: Untagged
@@ -63062,11 +63337,24 @@ MonoBehaviour:
   isStaticObject: 0
   usePositionOffsetData: 0
   m_positionOffsetData:
-    KeepMe: 0
+    KeepMe: 1
     positionOffset: {x: 0, y: 0, z: 0}
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &2021436973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021436969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
+  m_Collider: {fileID: 0}
 --- !u!1 &2024019732
 GameObject:
   m_ObjectHideFlags: 0
@@ -63573,12 +63861,55 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1574632818}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2035049438}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2035049437}
   m_SourcePrefab: {fileID: 100100000, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
 --- !u!4 &2035049436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2e4fc36b0cb4ce46a754394a56b94c7, type: 3}
   m_PrefabInstance: {fileID: 2035049435}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2035049437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574632816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
+  m_Collider: {fileID: 0}
+--- !u!114 &2035049438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574632816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e021e4d64cccd3478083e0e42485605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 1
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!4 &2037523454 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2232541937933278849, guid: 9cbe238f36a0e4d4aa26f620dcaec836, type: 3}
@@ -64599,6 +64930,7 @@ GameObject:
   - component: {fileID: 2075219564}
   - component: {fileID: 2075219566}
   - component: {fileID: 2075219565}
+  - component: {fileID: 2075219567}
   m_Layer: 0
   m_Name: CarPassing
   m_TagString: Untagged
@@ -64659,11 +64991,24 @@ MonoBehaviour:
   isStaticObject: 0
   usePositionOffsetData: 0
   m_positionOffsetData:
-    KeepMe: 0
+    KeepMe: 1
     positionOffset: {x: 0, y: 0, z: 0}
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &2075219567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075219563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
+  m_Collider: {fileID: 0}
 --- !u!4 &2081592418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9161190719340141602, guid: a824a28a5a99bb24f822f2930ed1df20, type: 3}
@@ -67487,6 +67832,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9019359134335546980, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6240603875237622667}
+    - targetCorrespondingSourceObject: {fileID: 9019359134335546980, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6240603875237622669}
   m_SourcePrefab: {fileID: 100100000, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
 --- !u!33 &3307600436186259089
 MeshFilter:
@@ -68702,7 +69050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f1abff4722745488e32dbc98b00e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkEvent
-  triggerList: f7e1664c
+  triggerList: ae8d9d44
   useOtherObject: 0
   actionOnEventType: 0
   curveInterpolation: 4
@@ -68734,15 +69082,28 @@ MonoBehaviour:
   m_listeners:
     initialListenerList: []
     useDefaultListeners: 1
-  isEnvironmentAware: 1
+  isEnvironmentAware: 0
   isStaticObject: 0
   usePositionOffsetData: 0
   m_positionOffsetData:
-    KeepMe: 0
+    KeepMe: 1
     positionOffset: {x: 0, y: 0, z: 0}
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &6240603875237622669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109217549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
+  m_Collider: {fileID: 0}
 --- !u!1001 &6272470258093917328
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -90,6 +90,9 @@ public class CameraFocusTrigger : MonoBehaviour
             bunnyRb.isKinematic = true; 
         }
 
+        // Lower sound volume/kill movement sounds
+        AkUnitySoundEngine.SetState("player_state", "pause");
+
         // --- 2. DISABLE CAMERA CONTROLS ---
         if (tpCamera != null) tpCamera.enabled = false;
         if (cinemachineBrain != null) cinemachineBrain.enabled = false;
@@ -148,5 +151,8 @@ public class CameraFocusTrigger : MonoBehaviour
             // Re-enable input and movement
             bunnyController.enabled = true; 
         }
+
+        // Resume normal sound
+        AkUnitySoundEngine.SetState("player_state", "None");
     }
 }
