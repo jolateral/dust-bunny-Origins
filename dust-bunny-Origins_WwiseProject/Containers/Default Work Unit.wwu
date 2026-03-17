@@ -9,9 +9,10 @@
 							<ChildrenList>
 								<Sound Name="amb_room_low_lp" ID="{DEEA0A29-2186-4905-B4E1-0876B0879987}" ShortID="267054883">
 									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-12</Value>
+												<Value>-18</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -108,6 +109,7 @@
 								</Sound>
 								<Sound Name="amb_room_high_lp" ID="{C095C3B2-75D5-4A19-86CB-959A00FEF138}" ShortID="386230351">
 									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>-3</Value>
@@ -171,6 +173,7 @@
 								</Sound>
 								<Sound Name="amb_room_mid_lp" ID="{E8F5C097-A071-4D30-95B3-F989D846C37E}" ShortID="96923828">
 									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
 												<Value>-3</Value>
@@ -3698,26 +3701,6 @@
 																</Reference>
 															</ReferenceList>
 														</MusicPlaylistItem>
-														<MusicPlaylistItem Name="" ID="{43D83F7C-5152-4E8C-B7CA-2FF21750F464}" ShortID="238821575">
-															<PropertyList>
-																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Segment">
-																	<ObjectRef Name="mus_4-4_130bpm_zone2_01" ID="{9EAD50A9-6D89-403B-BF13-C5B4BD7E0E98}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-																</Reference>
-															</ReferenceList>
-														</MusicPlaylistItem>
-														<MusicPlaylistItem Name="" ID="{42CC6E02-A164-4F85-9AF2-559EBA43D08F}" ShortID="860121355">
-															<PropertyList>
-																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Segment">
-																	<ObjectRef Name="mus_4-4_130bpm_zone2_02" ID="{55D14DDC-818E-4751-A2E0-D4CE91E6F02C}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-																</Reference>
-															</ReferenceList>
-														</MusicPlaylistItem>
 														<MusicPlaylistItem Name="" ID="{EEB5A526-DA39-4D6D-A1BD-FAB63CD33349}" ShortID="696104684">
 															<PropertyList>
 																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
@@ -3789,14 +3772,14 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Celesta" ID="{E21A8CD6-9AFF-40CA-8122-236259ABAF3B}" ShortID="909637597">
+												<MusicTrack Name="mus_4-4_130bpm_zone2_Celesta" ID="{8AB4EC5C-ACED-47FF-AB8B-BE92DDF3CD2C}" ShortID="356765298">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
 														</Reference>
 														<Reference Name="TransitionRoot">
 															<Custom>
-																<MusicTransition Name="Root" ID="{97226FDD-A720-4B00-A43B-2569CCEABF70}">
+																<MusicTransition Name="Root" ID="{B5B6E287-1D07-4013-BFB3-5E86E67EF528}">
 																	<PropertyList>
 																		<Property Name="IsFolder" Type="bool" Value="True"/>
 																	</PropertyList>
@@ -3806,7 +3789,7 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celesta" ID="{BAAFA1C6-B543-48CA-A688-81F0488FA2A5}">
+														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celesta" ID="{9835A1EA-599E-4DC6-825A-7CFAE008A14F}">
 															<Language>SFX</Language>
 															<AudioFile>mus_4-4_130bpm_zone2_Celesta.wav</AudioFile>
 															<MediaIDList>
@@ -3816,17 +3799,16 @@
 													</ChildrenList>
 													<ObjectLists>
 														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{F9CC0253-FF81-4406-BC08-E7864B49C346}">
+															<MusicTrackSequence Name="" ID="{075CB0B9-4233-46CB-857D-107E6BE8629E}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Celesta" ID="{F2257E51-FEC6-4D36-9B51-DFF44E3695E6}">
+																		<MusicClip Name="mus_4-4_130bpm_zone2_Celesta" ID="{AA097097-6904-4917-8847-E734DE20383E}">
 																			<PropertyList>
 																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
 																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23976.9071399579"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celesta" ID="{BAAFA1C6-B543-48CA-A688-81F0488FA2A5}"/>
+																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celesta" ID="{9835A1EA-599E-4DC6-825A-7CFAE008A14F}"/>
 																		</MusicClip>
 																	</ObjectList>
 																</ObjectLists>
@@ -3834,14 +3816,14 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{C9768632-8176-4570-9114-3B165CE1F284}" ShortID="1054104268">
+												<MusicTrack Name="mus_4-4_130bpm_zone2_Celesta_1" ID="{B5FB1201-1C09-4DAC-B53D-5D41CA5DCBAA}" ShortID="170219665">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
 														</Reference>
 														<Reference Name="TransitionRoot">
 															<Custom>
-																<MusicTransition Name="Root" ID="{772436C7-1F95-4AA2-AB7F-6E74C21C19C7}">
+																<MusicTransition Name="Root" ID="{634B9340-BA49-4FDA-9E38-0E3659074904}">
 																	<PropertyList>
 																		<Property Name="IsFolder" Type="bool" Value="True"/>
 																	</PropertyList>
@@ -3851,27 +3833,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{A503C758-B8B3-450D-BA22-0E2C6AB8FF6D}">
+														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celesta_1" ID="{BF2A242B-88C6-477C-9DEB-856302D2532A}">
 															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Celesta_2.wav</AudioFile>
+															<AudioFile>mus_4-4_130bpm_zone2_Celesta_1.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="189695148"/>
+																<MediaID ID="195679803"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ObjectLists>
 														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{3E6B4BF4-7A33-4395-A853-3418551E0877}">
+															<MusicTrackSequence Name="" ID="{656B7A58-DF98-4AF5-BFE7-DFADDEE2449F}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{54C25A10-CBC9-4675-9665-5F4ABAB9B408}">
+																		<MusicClip Name="mus_4-4_130bpm_zone2_Celesta_1" ID="{7A0EA55C-F729-406B-B8CA-D1F562D3F990}">
 																			<PropertyList>
 																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
 																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23343.8534860976"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{A503C758-B8B3-450D-BA22-0E2C6AB8FF6D}"/>
+																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celesta_1" ID="{BF2A242B-88C6-477C-9DEB-856302D2532A}"/>
 																		</MusicClip>
 																	</ObjectList>
 																</ObjectLists>
@@ -3879,14 +3860,14 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{94522436-BAF2-4897-AAF6-72ADEA6CC546}" ShortID="723768069">
+												<MusicTrack Name="mus_4-4_130bpm_zone2_Celli" ID="{88771CA7-48BE-4215-8EAF-2D27087FA219}" ShortID="275945583">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
 														</Reference>
 														<Reference Name="TransitionRoot">
 															<Custom>
-																<MusicTransition Name="Root" ID="{28C4058B-1F8C-4953-A01C-43108830F235}">
+																<MusicTransition Name="Root" ID="{3B885077-2AAB-4F65-A6D4-CF9ABBA6C3DC}">
 																	<PropertyList>
 																		<Property Name="IsFolder" Type="bool" Value="True"/>
 																	</PropertyList>
@@ -3896,71 +3877,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{4E369CDC-4BA3-42C1-820C-AAD238FDB2AE}">
+														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celli" ID="{C5BA4183-E28D-454B-BA32-C53BF7DA92B3}">
 															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Labs Soft Piano_1.wav</AudioFile>
+															<AudioFile>mus_4-4_130bpm_zone2_Celli.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="356122688"/>
+																<MediaID ID="528247978"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ObjectLists>
 														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{063B2C87-5C21-4086-9458-5D34A99B4CD2}">
+															<MusicTrackSequence Name="" ID="{19480B21-753A-4B37-BBDD-B55041C73BED}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{7B24E889-5634-462F-9042-7CD2DE13D7F5}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23185.5900726325"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{4E369CDC-4BA3-42C1-820C-AAD238FDB2AE}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{B1725A62-083F-479E-B725-3CAE544803DF}" ShortID="237794491">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{631E743D-3353-48ED-A242-31D75378A389}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{D88F6279-C4FB-4B02-9950-26CDF828EA44}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Pizz Bass_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="104026761"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{FEAC7BFD-6000-4577-A48E-9BEB2463B36F}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{35DFEB84-32E4-4A5E-B0CE-1E82D6A3CF25}">
+																		<MusicClip Name="mus_4-4_130bpm_zone2_Celli" ID="{B5FA3F21-86DF-43D4-B763-EFC70432BB34}">
 																			<PropertyList>
 																				<Property Name="EndTrimOffset" Type="Real64" Value="31406.3333333333"/>
 																				<Property Name="FadeInMode" Type="int16" Value="0"/>
 																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{D88F6279-C4FB-4B02-9950-26CDF828EA44}"/>
+																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celli" ID="{C5BA4183-E28D-454B-BA32-C53BF7DA92B3}"/>
 																		</MusicClip>
 																	</ObjectList>
 																</ObjectLists>
@@ -3968,14 +3904,14 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{86EFBB30-C471-4AB6-A99C-651E4C18212A}" ShortID="581645536">
+												<MusicTrack Name="mus_4-4_130bpm_zone2_Labs Soft Piano" ID="{5A97A7DD-6480-4AEC-851B-399545628B4F}" ShortID="252122588">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
 														</Reference>
 														<Reference Name="TransitionRoot">
 															<Custom>
-																<MusicTransition Name="Root" ID="{1F16EEDD-5089-46D0-83E8-76EF55855A5C}">
+																<MusicTransition Name="Root" ID="{85174BBA-FF16-4A5F-80B8-538E55D5B7F1}">
 																	<PropertyList>
 																		<Property Name="IsFolder" Type="bool" Value="True"/>
 																	</PropertyList>
@@ -3985,7 +3921,95 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{89257B77-3BB8-4D48-A6B3-4950A8AB0D37}">
+														<AudioFileSource Name="mus_4-4_130bpm_zone2_Labs Soft Piano" ID="{63DB8434-78F7-4B57-9CF4-6C9C77441ED8}">
+															<Language>SFX</Language>
+															<AudioFile>mus_4-4_130bpm_zone2_Labs Soft Piano.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="786712288"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<MusicTrackSequence Name="" ID="{AA82D152-3729-4224-97D8-E0B827301AEE}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<MusicClip Name="mus_4-4_130bpm_zone2_Labs Soft Piano" ID="{22C5EE96-F27D-4776-9D1D-A61D59E4F1F3}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Labs Soft Piano" ID="{63DB8434-78F7-4B57-9CF4-6C9C77441ED8}"/>
+																		</MusicClip>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="mus_4-4_130bpm_zone2_Pizz Bass" ID="{34BD3BD2-CABF-420A-A57D-CF96FDC9008C}" ShortID="87327528">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{979C514F-3B2B-48D2-ADE6-3AAD62863B45}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="mus_4-4_130bpm_zone2_Pizz Bass" ID="{F984EA1F-E16D-4CE1-A93D-6D89305D55F1}">
+															<Language>SFX</Language>
+															<AudioFile>mus_4-4_130bpm_zone2_Pizz Bass.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="84052132"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<MusicTrackSequence Name="" ID="{31B3446D-361D-4AE0-92AE-CF419565D13F}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<MusicClip Name="mus_4-4_130bpm_zone2_Pizz Bass" ID="{BBE70B8D-0AD3-4306-BD55-22BFF2F4D6B1}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="30723.6666666667"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Pizz Bass" ID="{F984EA1F-E16D-4CE1-A93D-6D89305D55F1}"/>
+																		</MusicClip>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+												<MusicTrack Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{0B4A7203-5DC6-4FF7-8399-50CE376BED13}" ShortID="986162549">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{A04364ED-7A0B-4481-9814-F53F32B27910}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{C83F0EE2-7ACC-4AB6-89F5-ED4441FC7485}">
 															<Language>SFX</Language>
 															<AudioFile>mus_4-4_130bpm_zone2_Soft Touch Piano.wav</AudioFile>
 															<MediaIDList>
@@ -3995,17 +4019,16 @@
 													</ChildrenList>
 													<ObjectLists>
 														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{8B8A0933-8ACA-404E-9396-2AE034129492}">
+															<MusicTrackSequence Name="" ID="{E2E3D9B0-A47C-4A80-B6C3-E46ED509B4B7}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{5C929435-E235-48DD-A87F-BAAD9457D4D9}">
+																		<MusicClip Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{2DD51183-BA63-45BD-A282-FE3FFB1A5656}">
 																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="31406.3333333333"/>
 																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23660.3803130277"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{89257B77-3BB8-4D48-A6B3-4950A8AB0D37}"/>
+																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{C83F0EE2-7ACC-4AB6-89F5-ED4441FC7485}"/>
 																		</MusicClip>
 																	</ObjectList>
 																</ObjectLists>
@@ -4013,14 +4036,14 @@
 														</ObjectList>
 													</ObjectLists>
 												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{CC6EC987-0845-4F5D-A8CE-6FA52F22B25B}" ShortID="311594078">
+												<MusicTrack Name="mus_4-4_130bpm_zone2_Soft Touch Piano_1" ID="{3E475939-A761-48E2-8DC3-FCE2C01EADD9}" ShortID="550511790">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
 														</Reference>
 														<Reference Name="TransitionRoot">
 															<Custom>
-																<MusicTransition Name="Root" ID="{859CA028-7996-47F5-BA59-A166D0E9B21B}">
+																<MusicTransition Name="Root" ID="{F56BFA5B-5283-4FD4-A26E-BECCC8AEAE00}">
 																	<PropertyList>
 																		<Property Name="IsFolder" Type="bool" Value="True"/>
 																	</PropertyList>
@@ -4030,26 +4053,26 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{FF9F1417-DCC8-4343-9A94-8A6D64FCC5F6}">
+														<AudioFileSource Name="mus_4-4_130bpm_zone2_Soft Touch Piano_1" ID="{EDA2052E-915A-4B9C-9055-60EA066FB7B5}">
 															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Soft Touch Piano_2.wav</AudioFile>
+															<AudioFile>mus_4-4_130bpm_zone2_Soft Touch Piano_1.wav</AudioFile>
 															<MediaIDList>
-																<MediaID ID="866248834"/>
+																<MediaID ID="644346143"/>
 															</MediaIDList>
 														</AudioFileSource>
 													</ChildrenList>
 													<ObjectLists>
 														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{4B73CC52-70EC-421B-BBCC-17DAFB908061}">
+															<MusicTrackSequence Name="" ID="{F3761A73-0ADD-4F70-B17F-09DB8E125849}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{99876842-AECF-43C5-842C-445D0156E431}">
+																		<MusicClip Name="mus_4-4_130bpm_zone2_Soft Touch Piano_1" ID="{8E2D5D13-1613-4D43-8913-C741851C6119}">
 																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="32771.6666666667"/>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
 																				<Property Name="FadeInMode" Type="int16" Value="0"/>
 																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{FF9F1417-DCC8-4343-9A94-8A6D64FCC5F6}"/>
+																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Soft Touch Piano_1" ID="{EDA2052E-915A-4B9C-9055-60EA066FB7B5}"/>
 																		</MusicClip>
 																	</ObjectList>
 																</ObjectLists>
@@ -4135,1063 +4158,6 @@
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
 															<Property Name="TimeMs" Type="Real64" Value="6000"/>
-														</PropertyList>
-													</MusicCue>
-												</ObjectList>
-											</ObjectLists>
-										</MusicSegment>
-										<MusicSegment Name="mus_4-4_130bpm_zone2_01" ID="{9EAD50A9-6D89-403B-BF13-C5B4BD7E0E98}" ShortID="895111405">
-											<PropertyList>
-												<Property Name="EndPosition" Type="Real64" Value="198402.089707687"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{23D02D4C-0FF6-4A09-9972-A129B6C259D1}" ShortID="568578727">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{7AC584BA-B527-4A11-A7CF-5569D6489C07}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{7434D4F5-E464-47D0-9B2F-CF556D090623}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Celesta_2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="189695148"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{6B39B1DE-5B1A-4992-BB84-843D27BBEAFA}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{95D2665A-2828-4296-AA50-70EA6D2770BE}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="32000"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{7434D4F5-E464-47D0-9B2F-CF556D090623}"/>
-																			<PropertyCurveList>
-																				<PropertyCurve PropertyName="Highpass">
-																					<Curve Name="" ID="{46305B7C-4ECA-4E20-B00F-2580AD9B5CF1}">
-																						<PropertyList>
-																							<Property Name="Flags" Type="int32" Value="1"/>
-																						</PropertyList>
-																						<PointList>
-																							<Point>
-																								<XPos>0</XPos>
-																								<YPos>0</YPos>
-																								<Flags>5</Flags>
-																							</Point>
-																							<Point>
-																								<XPos>32</XPos>
-																								<YPos>0</YPos>
-																								<Flags>37</Flags>
-																							</Point>
-																						</PointList>
-																					</Curve>
-																				</PropertyCurve>
-																				<PropertyCurve PropertyName="Lowpass">
-																					<Curve Name="" ID="{48F163F8-372C-45A7-B664-853CA5B3BDEE}">
-																						<PropertyList>
-																							<Property Name="Flags" Type="int32" Value="1"/>
-																						</PropertyList>
-																						<PointList>
-																							<Point>
-																								<XPos>0</XPos>
-																								<YPos>0</YPos>
-																								<Flags>5</Flags>
-																							</Point>
-																							<Point>
-																								<XPos>32</XPos>
-																								<YPos>0</YPos>
-																								<Flags>37</Flags>
-																							</Point>
-																						</PointList>
-																					</Curve>
-																				</PropertyCurve>
-																				<PropertyCurve PropertyName="Volume">
-																					<Curve Name="" ID="{5B2725A3-C2F9-41C0-AF7D-EEA736919356}">
-																						<PropertyList>
-																							<Property Name="Flags" Type="int32" Value="3"/>
-																						</PropertyList>
-																						<PointList>
-																							<Point>
-																								<XPos>0</XPos>
-																								<YPos>0</YPos>
-																								<Flags>5</Flags>
-																							</Point>
-																							<Point>
-																								<XPos>32</XPos>
-																								<YPos>0</YPos>
-																								<Flags>37</Flags>
-																							</Point>
-																						</PointList>
-																					</Curve>
-																				</PropertyCurve>
-																			</PropertyCurveList>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Celli_1" ID="{598DC45E-2939-4C5D-98F3-DEF484454FEA}" ShortID="920364697">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{CC9997DB-0A44-4491-A2A2-82CC02EF868E}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celli_1" ID="{AB2CF2BF-CC2A-4845-842F-F61F2E1F9E4C}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Celli_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="1057158897"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{01B2CEFB-49A2-41B7-B956-18866C708B83}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Celli_1" ID="{0FF4035E-A972-4AA6-94FB-366B1B03EBF1}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="31406.3333333333"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celli_1" ID="{AB2CF2BF-CC2A-4845-842F-F61F2E1F9E4C}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{86053AC3-91F6-4EC6-BAD1-0BC532C32D9B}" ShortID="496586565">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{E728053E-88B8-4AE9-BA84-E996F2D9188A}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{167CC90F-28A0-41A2-A402-1E4797B8DC4A}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Labs Soft Piano_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="356122688"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{745D6039-52DA-4279-9B67-589C74BC04CB}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{B7F28FDE-CA82-4402-A86A-DB5C62A42551}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="32000"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{167CC90F-28A0-41A2-A402-1E4797B8DC4A}"/>
-																			<PropertyCurveList>
-																				<PropertyCurve PropertyName="Highpass">
-																					<Curve Name="" ID="{82091AFB-9453-477F-8761-3FEF5D39883A}">
-																						<PropertyList>
-																							<Property Name="Flags" Type="int32" Value="1"/>
-																						</PropertyList>
-																						<PointList>
-																							<Point>
-																								<XPos>0</XPos>
-																								<YPos>0</YPos>
-																								<Flags>5</Flags>
-																							</Point>
-																							<Point>
-																								<XPos>32</XPos>
-																								<YPos>0</YPos>
-																								<Flags>37</Flags>
-																							</Point>
-																						</PointList>
-																					</Curve>
-																				</PropertyCurve>
-																				<PropertyCurve PropertyName="Lowpass">
-																					<Curve Name="" ID="{BF6849E6-9D44-48BA-88F2-441D5DFC42A5}">
-																						<PropertyList>
-																							<Property Name="Flags" Type="int32" Value="1"/>
-																						</PropertyList>
-																						<PointList>
-																							<Point>
-																								<XPos>0</XPos>
-																								<YPos>0</YPos>
-																								<Flags>5</Flags>
-																							</Point>
-																							<Point>
-																								<XPos>32</XPos>
-																								<YPos>0</YPos>
-																								<Flags>37</Flags>
-																							</Point>
-																						</PointList>
-																					</Curve>
-																				</PropertyCurve>
-																				<PropertyCurve PropertyName="Volume">
-																					<Curve Name="" ID="{E42E8515-1077-4F77-A07C-4CA59BB806A7}">
-																						<PropertyList>
-																							<Property Name="Flags" Type="int32" Value="3"/>
-																						</PropertyList>
-																						<PointList>
-																							<Point>
-																								<XPos>0</XPos>
-																								<YPos>0</YPos>
-																								<Flags>5</Flags>
-																							</Point>
-																							<Point>
-																								<XPos>32</XPos>
-																								<YPos>0</YPos>
-																								<Flags>37</Flags>
-																							</Point>
-																						</PointList>
-																					</Curve>
-																				</PropertyCurve>
-																			</PropertyCurveList>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{EEAB9A9C-5E97-4EF6-80AC-4459E4EE1F61}" ShortID="690782396">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{8C38173E-33B5-4EF0-A469-EDB0FFE5E274}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{616BF06C-2597-4A79-8D44-D6CF9A80BB2B}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Pizz Bass_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="104026761"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{D1127A12-AD98-4D41-B88C-EF9F4AB8F177}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{6633DA54-4FDE-413A-BED1-23DCF345EC48}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="31406.3333333333"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{616BF06C-2597-4A79-8D44-D6CF9A80BB2B}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{B8296EE3-9F6C-4E8B-8CC2-C59D4D916FE2}" ShortID="612009842">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{1914CC66-1F4A-4248-B684-8D1DCE235803}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{883DBF6C-A111-4E6D-8D60-5AC6DABC7E0A}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Soft Touch Piano_2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="866248834"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{41EA7E50-0DFC-4F1C-9BF6-80E9ED4BC583}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{5EA88078-B2EF-465D-8333-2F4E3320129B}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="32771.6666666667"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{883DBF6C-A111-4E6D-8D60-5AC6DABC7E0A}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-											</ChildrenList>
-											<ObjectLists>
-												<ObjectList Name="Cues">
-													<MusicCue Name="Entry Cue" ID="{B290FCFA-8534-42B2-AC9F-CD650CAB34DF}"/>
-													<MusicCue Name="Exit Cue" ID="{DF3111C5-9B21-4D24-B94E-53F5354B2BA3}">
-														<PropertyList>
-															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="32000"/>
-														</PropertyList>
-													</MusicCue>
-												</ObjectList>
-											</ObjectLists>
-										</MusicSegment>
-										<MusicSegment Name="mus_4-4_130bpm_zone2_02" ID="{55D14DDC-818E-4751-A2E0-D4CE91E6F02C}" ShortID="918073308">
-											<PropertyList>
-												<Property Name="EndPosition" Type="Real64" Value="198402.089707687"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Celesta" ID="{17507C01-7F28-4499-BB63-38A151E49C13}" ShortID="1052202770">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{04BDEE6D-AB25-4AC3-967F-22C2EF195D6F}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celesta" ID="{B6DE9C7A-219F-455C-9D72-FD02042976B1}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Celesta.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="406939055"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{62BA7625-75BA-45AF-B237-A306565C5919}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Celesta" ID="{79EBD37D-8A08-4385-BAF1-5B419025931D}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23976.9071399579"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celesta" ID="{B6DE9C7A-219F-455C-9D72-FD02042976B1}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{4127888E-F0EE-4DC3-9958-102200343EB1}" ShortID="1020167201">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{0E1C8BD4-7D57-4A3D-A6BC-46371036553A}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{23BEC904-D7E0-4301-829F-F7FEB675D280}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Celesta_2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="189695148"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{80197612-9E53-413F-B1CE-1E95A737AE13}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{ABA5F9ED-F663-476B-A7E8-0A8E9F6A0216}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23343.8534860976"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{23BEC904-D7E0-4301-829F-F7FEB675D280}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{A275C885-2CD8-401C-9FBC-ADB957B2E7A0}" ShortID="47883629">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{86460CC7-73E5-4D89-ADE2-BAE7EF8525FA}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{8669E2C1-E464-4360-99D8-527A0AD35693}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Labs Soft Piano_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="356122688"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{10E8BA6E-2D3C-4958-9C76-888D3D7CD5C5}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{C55ABBA5-DE28-491B-AE57-D8EB34B08681}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23185.5900726325"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{8669E2C1-E464-4360-99D8-527A0AD35693}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{4CB724E1-436B-41DA-8923-9F8AAD049F6B}" ShortID="974724516">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{DAB1177B-E1D9-488A-8A68-8B2BB78CE23C}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{D0546F9F-7204-4F69-8C80-E8CD4AC9ADE3}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Pizz Bass_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="104026761"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{ADA3EE3D-6733-41F5-A224-4BDF883D49A2}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{C504150F-7242-49E7-BDCC-39D67DF2FF58}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="31406.3333333333"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{D0546F9F-7204-4F69-8C80-E8CD4AC9ADE3}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{F84831A0-6E59-4AB3-8B7D-EAE41D4B1C66}" ShortID="1054169206">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{EDD2F39F-061D-4983-B700-AFD9D54CC9E2}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{23F754FC-48B1-47FC-953C-19A6316F7B74}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Soft Touch Piano.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="974247639"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{0A39A0DE-7B48-4BF3-8E7A-F92A413AB978}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{9F176E2B-C3EF-42F0-979A-C74C209578BA}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23660.3803130277"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{23F754FC-48B1-47FC-953C-19A6316F7B74}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{53D32871-63D1-4B39-82F5-3E00DD587308}" ShortID="62546279">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{E0533DD2-FCA6-434D-8A1C-5470C1D8378A}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{D1769AAC-FE3A-40D2-84C0-C7682EA9F71E}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Soft Touch Piano_2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="866248834"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{E26C51B8-18F9-4F54-9598-D913561A16EB}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{5D909ACE-E118-4BC5-AF15-BD0AED88414E}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="32771.6666666667"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{D1769AAC-FE3A-40D2-84C0-C7682EA9F71E}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-											</ChildrenList>
-											<ObjectLists>
-												<ObjectList Name="Cues">
-													<MusicCue Name="Entry Cue" ID="{5A719F32-EF9D-4273-8A58-43EC519A19C7}"/>
-													<MusicCue Name="Exit Cue" ID="{C3387321-9912-4EF1-8071-CAC290DE0F81}">
-														<PropertyList>
-															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="58725.471590101"/>
-														</PropertyList>
-													</MusicCue>
-												</ObjectList>
-											</ObjectLists>
-										</MusicSegment>
-										<MusicSegment Name="mus_4-4_130bpm_zone2_03" ID="{1659C1C8-168F-4A06-B66E-AE65EBC2D21C}" ShortID="490541763">
-											<PropertyList>
-												<Property Name="EndPosition" Type="Real64" Value="198402.089707687"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Celesta" ID="{FFB15100-CF28-4322-AE57-D896B416F528}" ShortID="785868427">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{A9E128F7-A439-42D2-B811-C4112D3005C5}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celesta" ID="{4838C429-7AB7-4DEE-82D5-73E0CD4AAA9A}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Celesta.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="406939055"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{F112C58F-EDE3-4017-9655-4EEA8ECE8FD7}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Celesta" ID="{D8C7172D-E2C1-404C-B4CE-6AE43F91FF25}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23976.9071399579"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celesta" ID="{4838C429-7AB7-4DEE-82D5-73E0CD4AAA9A}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{53882911-452C-4A2A-BF53-03C0318BF7A6}" ShortID="636869552">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{F785AAC6-A709-4DA9-9323-D6DB7340F2BE}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{01CF2312-9C51-4EE6-80CC-EEE8494AA7AE}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Celesta_2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="189695148"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{BFA5479C-E2A0-4ED9-B2ED-8C5B2D10E269}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{31F68DA9-699A-4B9B-9CE9-C366085A8A11}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23343.8534860976"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celesta_2" ID="{01CF2312-9C51-4EE6-80CC-EEE8494AA7AE}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{59D7FE29-2C16-444B-A7BC-C72A591F5B26}" ShortID="220719278">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{57187E5A-E575-41F6-9A9A-B17817B7ADB5}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{6D99935A-1E5C-4401-BD7B-665D4FF2BC7D}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Labs Soft Piano_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="356122688"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{7EC843E0-8CF8-44E5-8CFF-7EAD8567AAFD}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{50503902-ABA2-4780-9FDA-2EA989F53FCB}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23185.5900726325"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Labs Soft Piano_1" ID="{6D99935A-1E5C-4401-BD7B-665D4FF2BC7D}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{CE0C70F8-C351-44D1-8F1A-467EDEAC163F}" ShortID="746150796">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{2F65D123-8395-468F-832F-4119FD67FB3E}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{A229BE96-FA3A-49DA-8AFB-FA2A5BADA39C}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Pizz Bass_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="104026761"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{6818A481-804C-4882-8768-1729E37F2CC6}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{C6E98079-06AD-4884-A523-0F9C3E1C95AD}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="31406.3333333333"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Pizz Bass_1" ID="{A229BE96-FA3A-49DA-8AFB-FA2A5BADA39C}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{7F3D8367-3572-4905-BF68-B1A263AD8327}" ShortID="681991547">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{3459BF19-DB08-4B53-994D-410F5B5A5F3B}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{89F5481B-E4D4-4A4D-BE0C-9FAF8F8A4EE3}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Soft Touch Piano.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="974247639"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{7C618BF2-C4E9-4021-827C-1274606F4C9D}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{CB9F3196-3B62-4947-8419-8CAC40CD77E8}">
-																			<PropertyList>
-																				<Property Name="BeginTrimOffset" Type="Real64" Value="5.45696821063757E-12"/>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="58713"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="23660.3803130277"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
-																				<Property Name="PlayAt" Type="Real64" Value="-3.63797880709171E-12"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Soft Touch Piano" ID="{89F5481B-E4D4-4A4D-BE0C-9FAF8F8A4EE3}"/>
-																			<PropertyCurveList>
-																				<PropertyCurve PropertyName="Highpass">
-																					<Curve Name="" ID="{5E4DDCF1-32A2-41CF-A49F-3EF44D1D4802}">
-																						<PropertyList>
-																							<Property Name="Flags" Type="int32" Value="1"/>
-																						</PropertyList>
-																						<PointList>
-																							<Point>
-																								<XPos>0</XPos>
-																								<YPos>0</YPos>
-																								<Flags>5</Flags>
-																							</Point>
-																							<Point>
-																								<XPos>58.713</XPos>
-																								<YPos>0</YPos>
-																								<Flags>37</Flags>
-																							</Point>
-																						</PointList>
-																					</Curve>
-																				</PropertyCurve>
-																				<PropertyCurve PropertyName="Lowpass">
-																					<Curve Name="" ID="{02AA6B7F-4377-4346-AFBC-2451C995F566}">
-																						<PropertyList>
-																							<Property Name="Flags" Type="int32" Value="1"/>
-																						</PropertyList>
-																						<PointList>
-																							<Point>
-																								<XPos>0</XPos>
-																								<YPos>0</YPos>
-																								<Flags>5</Flags>
-																							</Point>
-																							<Point>
-																								<XPos>58.713</XPos>
-																								<YPos>0</YPos>
-																								<Flags>37</Flags>
-																							</Point>
-																						</PointList>
-																					</Curve>
-																				</PropertyCurve>
-																				<PropertyCurve PropertyName="Volume">
-																					<Curve Name="" ID="{92C5CAFF-E71A-4DDA-A957-6A021F80521C}">
-																						<PropertyList>
-																							<Property Name="Flags" Type="int32" Value="3"/>
-																						</PropertyList>
-																						<PointList>
-																							<Point>
-																								<XPos>0</XPos>
-																								<YPos>0</YPos>
-																								<Flags>5</Flags>
-																							</Point>
-																							<Point>
-																								<XPos>58.713</XPos>
-																								<YPos>0</YPos>
-																								<Flags>37</Flags>
-																							</Point>
-																						</PointList>
-																					</Curve>
-																				</PropertyCurve>
-																			</PropertyCurveList>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{BA2E8F79-F4C0-40F6-A5D8-56FC9CA99D8D}" ShortID="214583199">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{E65FEC93-176C-4B19-A971-2AF7B08EE4B7}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{86B9FB4C-780C-4351-84E2-0FBA7E7ABC03}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Soft Touch Piano_2.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="866248834"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{7FFB17C6-FF33-45B9-8400-B2635F851526}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{CB87170F-3FB4-4154-8578-5071B0C6E277}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="32771.6666666667"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Soft Touch Piano_2" ID="{86B9FB4C-780C-4351-84E2-0FBA7E7ABC03}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-												<MusicTrack Name="mus_4-4_130bpm_zone2_Celli_1" ID="{06F37AA7-2C70-4A7C-B9E2-84AF3933B275}" ShortID="348065049">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{EEE8724C-3FEC-4BDA-AB18-B309D7BCF071}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="mus_4-4_130bpm_zone2_Celli_1" ID="{94E94954-222E-41E6-850F-A4A642FFBD15}">
-															<Language>SFX</Language>
-															<AudioFile>mus_4-4_130bpm_zone2_Celli_1.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="1057158897"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{327FA206-AC6D-47EE-8A0D-BB03C2335351}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="mus_4-4_130bpm_zone2_Celli_1" ID="{5259BCEB-FC09-4EE8-A0B6-7B6978BAC3F4}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="31406.3333333333"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="mus_4-4_130bpm_zone2_Celli_1" ID="{94E94954-222E-41E6-850F-A4A642FFBD15}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-											</ChildrenList>
-											<ObjectLists>
-												<ObjectList Name="Cues">
-													<MusicCue Name="Entry Cue" ID="{8C783332-E6C5-43BC-AF25-6927FAFBF153}"/>
-													<MusicCue Name="Exit Cue" ID="{C37DCD82-B811-4C38-8599-1FDBCFF83EDF}">
-														<PropertyList>
-															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="58725.471590101"/>
 														</PropertyList>
 													</MusicCue>
 												</ObjectList>
@@ -9158,9 +8124,6 @@
 														</Property>
 														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 														<Property Name="Volume" Type="Real64">
-															<ValueList>
-																<Value>-6</Value>
-															</ValueList>
 															<ModifierList>
 																<ModifierInfo>
 																	<Modifier Name="" ID="{09810E23-48D5-42D3-990F-BCD240FFA523}">
@@ -9478,6 +8441,9 @@
 																	</ModifierList>
 																</Property>
 																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>1.5</Value>
+																	</ValueList>
 																	<ModifierList>
 																		<ModifierInfo>
 																			<Modifier Name="" ID="{751F7612-1A22-45D8-AB15-E6BA55D4AF8B}">
@@ -9920,7 +8886,7 @@
 																</Property>
 																<Property Name="Volume" Type="Real64">
 																	<ValueList>
-																		<Value>1.5</Value>
+																		<Value>3</Value>
 																	</ValueList>
 																	<ModifierList>
 																		<ModifierInfo>
