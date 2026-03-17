@@ -25157,9 +25157,9 @@ MonoBehaviour:
     _useDirectDispatch: 0
     _unifiedSphereSize: 0
   _gridOffset:
-    x: -123.48215
-    y: 70.83929
-    z: 48.12499
+    x: -124.33887
+    y: 74.956055
+    z: 48.500977
   _predictiveContact: 0
   _useSelfCollision: 0
   _selfCollisionScale: 1
@@ -28998,9 +28998,9 @@ MonoBehaviour:
     _useDirectDispatch: 0
     _unifiedSphereSize: 0
   _gridOffset:
-    x: -182.98215
-    y: 70.83929
-    z: 48.12499
+    x: -184.30371
+    y: 74.956055
+    z: 48.500977
   _predictiveContact: 0
   _useSelfCollision: 0
   _selfCollisionScale: 1
@@ -68434,8 +68434,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8200064232114196244, guid: 1924d6215e36a3142bb7787c22611977, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5567196565918510990}
   m_SourcePrefab: {fileID: 100100000, guid: 1924d6215e36a3142bb7787c22611977, type: 3}
+--- !u!1 &5567196565918510989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8200064232114196244, guid: 1924d6215e36a3142bb7787c22611977, type: 3}
+  m_PrefabInstance: {fileID: 5567196565918510988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5567196565918510990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5567196565918510989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37dc1fa6e3336034c9b9089b01d0bb78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialTriggerCollision
+  displayMode: 0
+  tutorialText: Need more height? Jump on a stapler.
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  tutorialImage: {fileID: 0}
+  oneTimeOnly: 1
+  showDelay: 0.5
+  hideOnExit: 1
 --- !u!1001 &5688344999271667418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70162,11 +70189,39 @@ PrefabInstance:
       value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents:
+    - {fileID: 5113042228518684096, guid: 714f449ad31ca964e9eba0ef46fe8073, type: 3}
     - {fileID: 70419177505159997, guid: 714f449ad31ca964e9eba0ef46fe8073, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7029481248411945550, guid: 714f449ad31ca964e9eba0ef46fe8073, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8747855510664609514}
   m_SourcePrefab: {fileID: 100100000, guid: 714f449ad31ca964e9eba0ef46fe8073, type: 3}
+--- !u!1 &8747855510664609513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7029481248411945550, guid: 714f449ad31ca964e9eba0ef46fe8073, type: 3}
+  m_PrefabInstance: {fileID: 8747855510664609512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8747855510664609514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8747855510664609513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37dc1fa6e3336034c9b9089b01d0bb78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialTriggerCollision
+  displayMode: 0
+  tutorialText: A key... to open the diary?
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  tutorialImage: {fileID: 0}
+  oneTimeOnly: 1
+  showDelay: 0.5
+  hideOnExit: 0
 --- !u!1001 &8932642537651125775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70715,7 +70770,8 @@ PrefabInstance:
       propertyPath: triggerDistance
       value: 30.2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9181476640235642287, guid: 45490305711e97248a0bb7ac85f6331d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
