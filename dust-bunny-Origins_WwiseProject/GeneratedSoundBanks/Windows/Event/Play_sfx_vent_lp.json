@@ -1,0 +1,59 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "1128772546",
+    "Type": "Event",
+    "GUID": "{BC1B0DAE-823B-41BF-AE00-A54C540EC082}",
+    "Language": "SFX",
+    "Hash": "{EB132EC9-F08A-3DCE-53CE-BCA1F7BD8C03}",
+    "ObjectPath": "Play_sfx_vent_lp",
+    "ShortName": "Play_sfx_vent_lp",
+    "Path": "Event/Play_sfx_vent_lp.bnk",
+    "Media": [
+     {
+      "Id": "171831609",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_vent_high_lp.wav",
+      "Path": "Media/171831609.wem",
+      "CachePath": "7D/{7D50298D-0F85-F724-5F32-4684F19DB5A4}.wem"
+     },
+     {
+      "Id": "1049650110",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_vent_low_lp.wav",
+      "Path": "Media/1049650110.wem",
+      "CachePath": "67/{67889D03-C950-3ED4-2194-21C7135587FE}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "1128772546",
+      "Name": "Play_sfx_vent_lp",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\SFX_Interactable\\Play_sfx_vent_lp",
+      "GUID": "{BC1B0DAE-823B-41BF-AE00-A54C540EC082}",
+      "MaxAttenuation": "50",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "171831609"
+       },
+       {
+        "Id": "1049650110"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{8328A761-2A81-0134-C222-1F3E8E639881}"
+ }
+}

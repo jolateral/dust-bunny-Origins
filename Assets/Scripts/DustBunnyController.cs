@@ -38,10 +38,6 @@ public class DustBunnyController : MonoBehaviour
     public float glideMoveToLaunchDuration = 0.35f;
     [SerializeField] private float glideYawExtra = -90f;
 
-    [Header("--- Glide SFX ---")]
-    public AK.Wwise.Event bunnyGlideStart;
-    public AK.Wwise.Event bunnyGlideStop;
-
     [Header("--- Visual Facing ---")]
     public float facingYawOffset = 0f;
     [SerializeField] private Transform cameraTransform;
@@ -93,6 +89,12 @@ public class DustBunnyController : MonoBehaviour
     public float carVerticalBoost = 3f;
     public int carMaxItemsLost = 3;
     public float hitStunDuration = 0.4f; // Duration player loses control after being hit
+
+    [Header("--- SFX ---")]
+    public AK.Wwise.Event bunnyJumpSfx;
+    public AK.Wwise.Event bunnyGlideStart;
+    public AK.Wwise.Event bunnyGlideStop;
+    public AK.Wwise.Event carImpactSfx;
     
     // NEW: Camera shake settings upon getting hit
     [Tooltip("Duration of the camera shake when hit by a car.")]
@@ -148,9 +150,6 @@ public class DustBunnyController : MonoBehaviour
 
         if (isGrounded)
             lastGroundedTime = Time.time;
-
-        if (!isGrounded) AkUnitySoundEngine.SetRTPCValue("grounded", 1, gameObject);
-        else AkUnitySoundEngine.SetRTPCValue("grounded", 0, gameObject);
 
         if (isGliding)
         {
@@ -257,6 +256,8 @@ public class DustBunnyController : MonoBehaviour
         // Apply an impulse that pushes the bunny away and pops it slightly upward.
         rb.linearVelocity = Vector3.zero;
         Vector3 impulse = knockDir * carKnockbackForce + Vector3.up * carVerticalBoost;
+
+        carImpactSfx.Post(gameObject);
         
         // Use Impulse with mass considered for better feel at different sizes
         rb.AddForce(impulse * rb.mass, ForceMode.Impulse);
@@ -486,6 +487,8 @@ public class DustBunnyController : MonoBehaviour
 
     void PerformJump()
     {
+        bunnyJumpSfx.Post(gameObject);
+
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * (jumpForce * ScaleFactor * rb.mass), ForceMode.Impulse);
     }

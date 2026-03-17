@@ -78,6 +78,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 52469388f545c0e48b6490ed8a2e97da, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4791352189183636828}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 52469388f545c0e48b6490ed8a2e97da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5332324802736356809}
   m_SourcePrefab: {fileID: 100100000, guid: 52469388f545c0e48b6490ed8a2e97da, type: 3}
 --- !u!1 &1071480207565449404 stripped
 GameObject:
@@ -123,3 +126,20 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-5332324802736356809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071480207565449404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d992539241f1ea34e9e2157695b9c2d9, type: 2}
+  debug: 0

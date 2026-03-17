@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 11a078ea28d4fed49ba9387b5e97a9fb, type: 3}
       propertyPath: m_Name
-      value: hairpin 1
+      value: hairpin
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 11a078ea28d4fed49ba9387b5e97a9fb, type: 3}
       propertyPath: m_TagString
@@ -105,6 +105,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 11a078ea28d4fed49ba9387b5e97a9fb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4366497821474293239}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 11a078ea28d4fed49ba9387b5e97a9fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7551277885084464302}
   m_SourcePrefab: {fileID: 100100000, guid: 11a078ea28d4fed49ba9387b5e97a9fb, type: 3}
 --- !u!1 &4151126477854198035 stripped
 GameObject:
@@ -150,3 +153,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.671316, y: 0.37144893, z: 0.34995264}
   m_Center: {x: -0.032810032, y: 1.0557835, z: 0.022650775}
+--- !u!114 &7551277885084464302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4151126477854198035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 69484e7c7038a79428797944a1a441dd, type: 2}
+  debug: 0

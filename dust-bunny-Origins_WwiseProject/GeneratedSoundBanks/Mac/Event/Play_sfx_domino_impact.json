@@ -1,0 +1,159 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "3743694823",
+    "Type": "Event",
+    "GUID": "{BD1D53E2-12E0-4F40-B602-E2679E3AEBD4}",
+    "Language": "SFX",
+    "Hash": "{66789476-3821-CF3F-03FE-A2050825A8AE}",
+    "ObjectPath": "Play_sfx_domino_impact",
+    "ShortName": "Play_sfx_domino_impact",
+    "Path": "Event/Play_sfx_domino_impact.bnk",
+    "Media": [
+     {
+      "Id": "453127954",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-002.wav",
+      "Path": "Media/453127954.wem",
+      "CachePath": "E7/{E78A606F-0FE8-CF1B-1CE9-EF66B3026CFB}.wem"
+     },
+     {
+      "Id": "497527183",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "Weapons, Blunt, Block Stick With Shield Front, Wood SND70773 S03.wav",
+      "Path": "Media/497527183.wem",
+      "CachePath": "74/{743F40D3-E292-EC3B-87EC-CBC60E9567A2}.wem"
+     },
+     {
+      "Id": "497917481",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "Weapons, Blunt, Block Stick With Shield Front, Wood SND70773 S04.wav",
+      "Path": "Media/497917481.wem",
+      "CachePath": "A0/{A00D8847-FE2A-4BA9-1F8C-D122A874BFDE}.wem"
+     },
+     {
+      "Id": "515106079",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-004.wav",
+      "Path": "Media/515106079.wem",
+      "CachePath": "13/{13801FE9-8FDE-4D2C-93C7-4A297CCFE841}.wem"
+     },
+     {
+      "Id": "560663167",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-001.wav",
+      "Path": "Media/560663167.wem",
+      "CachePath": "39/{39744A85-A804-983D-AB3A-D38C3018EC70}.wem"
+     },
+     {
+      "Id": "640430743",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-005.wav",
+      "Path": "Media/640430743.wem",
+      "CachePath": "D6/{D65E4EE2-407E-A2ED-C532-7B2F47695399}.wem"
+     },
+     {
+      "Id": "971705040",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "Weapons, Blunt, Block Stick With Shield Front, Wood SND70773 S02.wav",
+      "Path": "Media/971705040.wem",
+      "CachePath": "8F/{8F7FD966-5355-98CE-9EA5-A3AEABFD58AB}.wem"
+     },
+     {
+      "Id": "1018932805",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_woodblock_heavy_fast_nl-003.wav",
+      "Path": "Media/1018932805.wem",
+      "CachePath": "44/{446D47B3-5A71-E03A-0EDA-ECD936CED911}.wem"
+     }
+    ],
+    "Plugins": {
+     "Custom": [
+      {
+       "Id": "546514878",
+       "Name": "Parametric EQ (Custom)",
+       "ObjectPath": "\\Containers\\Default Work Unit\\SFX\\SFX_Object\\sfx_domino_impact\\sfx_woodblock_impact_heavy_nl\\[Effect Slot [0]: (Parametric EQ)]\\Parametric EQ (Custom)",
+       "GUID": "{C3A012B8-33A0-42D7-AA75-910FAEF08290}",
+       "LibName": "Wwise Parametric EQ",
+       "LibId": "6881283"
+      }
+     ]
+    },
+    "Events": [
+     {
+      "Id": "3743694823",
+      "Name": "Play_sfx_domino_impact",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\SFX_Object\\Play_sfx_domino_impact",
+      "GUID": "{BD1D53E2-12E0-4F40-B602-E2679E3AEBD4}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.4493163",
+      "DurationMax": "2.747341",
+      "MediaRefs": [
+       {
+        "Id": "453127954"
+       },
+       {
+        "Id": "497527183"
+       },
+       {
+        "Id": "497917481"
+       },
+       {
+        "Id": "515106079"
+       },
+       {
+        "Id": "560663167"
+       },
+       {
+        "Id": "640430743"
+       },
+       {
+        "Id": "971705040"
+       },
+       {
+        "Id": "1018932805"
+       }
+      ],
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "546514878"
+        }
+       ]
+      }
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "3519441192",
+      "Name": "velocity",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\velocity",
+      "GUID": "{00E52E05-195E-4593-9251-C1504F30131D}"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{A7B858F4-6888-D533-2B20-7596344B634A}"
+ }
+}

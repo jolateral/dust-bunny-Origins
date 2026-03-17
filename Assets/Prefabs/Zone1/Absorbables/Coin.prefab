@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5444437632274826071}
   - component: {fileID: 7225961551042074355}
   - component: {fileID: -5246896779289431777}
+  - component: {fileID: 7283653108941354242}
   m_Layer: 0
   m_Name: Coin
   m_TagString: StickyObject
@@ -150,3 +151,20 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &7283653108941354242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4699332163990360038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 955ddaa645836d64490610f10d854f42, type: 2}
+  debug: 0

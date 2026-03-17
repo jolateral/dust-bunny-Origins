@@ -262,7 +262,7 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_gliding_lp" ID="{B4D222A4-4AC0-46F3-8E4C-206DDA6E20F0}">
+								<Event Name="Play_sfx_bunny_gliding_lp" ID="{B4D222A4-4AC0-46F3-8E4C-206DDA6E20F0}">
 									<ChildrenList>
 										<Action Name="" ID="{C0CA37B3-C6A0-4B2D-905D-B021A1804E00}" ShortID="523344127">
 											<ReferenceList>
@@ -275,7 +275,23 @@
 											<PropertyList>
 												<Property Name="Delay" Type="Real64" Value="0.7"/>
 												<Property Name="FadeInCurve" Type="int16" Value="6"/>
-												<Property Name="FadeTime" Type="Real64" Value="3"/>
+												<Property Name="FadeTime" Type="Real64" Value="2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_bunny_gliding_lp" ID="{89356517-8BCC-4A55-94D0-4A65C89E880C}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Stop_sfx_bunny_gliding_lp" ID="{1A811F11-5721-4E2F-B20D-D43368DCEDE2}">
+									<ChildrenList>
+										<Action Name="" ID="{19D3582B-28B8-470E-99FC-2BE156DC4CA0}" ShortID="67215620">
+											<PropertyList>
+												<Property Name="ActionType" Type="int16" Value="2"/>
+												<Property Name="FadeOutCurve" Type="int16" Value="2"/>
+												<Property Name="FadeTime" Type="Real64" Value="2"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
@@ -295,6 +311,17 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_woodblock_impact_wood" ID="{F3362309-56D1-4057-A204-7B70CA7224AE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_domino_impact" ID="{BD1D53E2-12E0-4F40-B602-E2679E3AEBD4}">
+									<ChildrenList>
+										<Action Name="" ID="{9691B38D-4EB6-4C41-B4D0-5EA062DD7579}" ShortID="798915355">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_domino_impact" ID="{1E104FA0-F2E3-4E60-B2AC-502767A02E87}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -398,9 +425,16 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_vent_low_lp" ID="{3BCDC7F7-A607-422F-BC13-CE1AD72713C3}">
+								<Event Name="Play_sfx_vent_lp" ID="{BC1B0DAE-823B-41BF-AE00-A54C540EC082}">
 									<ChildrenList>
-										<Action Name="" ID="{36CF8D36-8460-4823-B95A-02DBEDC6B6C8}" ShortID="850819737">
+										<Action Name="" ID="{D096B340-1895-4C12-A78C-DC297CD3DF4B}" ShortID="188917847">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_vent_high_lp" ID="{A40258F8-E93D-4707-9B5B-80074E8748F9}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{1BDFE92C-E53C-4BFD-8E51-B0B5796C0E4E}" ShortID="1045304942">
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_vent_low_lp" ID="{8E233FE9-51BE-4CE3-8CAE-C79A2EACE6A3}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
@@ -409,12 +443,12 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_vent_high_lp" ID="{BC1B0DAE-823B-41BF-AE00-A54C540EC082}">
+								<Event Name="Play_sfx_car_impact_nl" ID="{BCDBCAC8-4668-4CBF-B965-858CB03D74A1}">
 									<ChildrenList>
-										<Action Name="" ID="{D096B340-1895-4C12-A78C-DC297CD3DF4B}" ShortID="188917847">
+										<Action Name="" ID="{E68D366E-6F2F-4A6D-B7DE-18019010CD6B}" ShortID="455024052">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_vent_high_lp" ID="{A40258F8-E93D-4707-9B5B-80074E8748F9}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_car_impact_nl" ID="{34020603-A616-4945-95DC-49DAC9D2D9F7}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -580,6 +614,17 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_coin_absorb_nl" ID="{3F4B7D68-52AD-48C6-A4F0-EB2B8D8CBD50}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_lego_absorb_nl" ID="{B4763BFD-061B-4BC3-BC68-B1CE415F6DC0}">
+									<ChildrenList>
+										<Action Name="" ID="{332ADF9A-3779-40A4-BF24-CC157E4494D4}" ShortID="277921353">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_lego_absorb_nl" ID="{CED5396D-F171-44C5-BD14-BD7E35869046}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

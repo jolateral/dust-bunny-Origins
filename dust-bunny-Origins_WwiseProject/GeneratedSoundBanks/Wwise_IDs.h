@@ -21,17 +21,21 @@ namespace AK
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
         static const AkUniqueID PLAY_MUS_ZONES = 3793537147U;
         static const AkUniqueID PLAY_SFX_BRIDGE_CREAK_NL = 3975145325U;
+        static const AkUniqueID PLAY_SFX_BUNNY_GLIDING_LP = 3621260004U;
         static const AkUniqueID PLAY_SFX_BUNNYABSORB_NL = 1567933058U;
         static const AkUniqueID PLAY_SFX_BUNNYHOP = 3966847515U;
         static const AkUniqueID PLAY_SFX_BUNNYIMPACT_NL = 4038925685U;
         static const AkUniqueID PLAY_SFX_BUNNYJUMP_NL = 674581991U;
         static const AkUniqueID PLAY_SFX_BUNNYLAND_NL = 2787500338U;
         static const AkUniqueID PLAY_SFX_BUNNYROLL_NL = 4212669292U;
+        static const AkUniqueID PLAY_SFX_CAR_IMPACT_NL = 2032188842U;
         static const AkUniqueID PLAY_SFX_CAR_MOVE_NL = 4207159517U;
         static const AkUniqueID PLAY_SFX_COIN_ABSORB_NL = 4259653120U;
+        static const AkUniqueID PLAY_SFX_DOMINO_IMPACT = 3743694823U;
         static const AkUniqueID PLAY_SFX_ENDSEQ = 1833036738U;
         static const AkUniqueID PLAY_SFX_ERASER_ABSORB_NL = 1495456639U;
         static const AkUniqueID PLAY_SFX_HAIRPIN_ABSORB_NL = 2555693410U;
+        static const AkUniqueID PLAY_SFX_LEGO_ABSORB_NL = 3199315176U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_001 = 1142362393U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_002 = 1142362394U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_003 = 1142362395U;
@@ -40,11 +44,11 @@ namespace AK
         static const AkUniqueID PLAY_SFX_STAPLER_RELEASE_NL = 2050082196U;
         static const AkUniqueID PLAY_SFX_STAPLER_WINDUP_NL = 166426674U;
         static const AkUniqueID PLAY_SFX_UI_SELECT_NL = 4289076888U;
-        static const AkUniqueID PLAY_SFX_VENT_HIGH_LP = 3109287217U;
-        static const AkUniqueID PLAY_SFX_VENT_LOW_LP = 624403955U;
+        static const AkUniqueID PLAY_SFX_VENT_LP = 1128772546U;
         static const AkUniqueID PLAY_SFX_WOODBLOCK_IMPACT_WOOD = 841695155U;
         static const AkUniqueID STOP_MUS_STARTMENU = 200855961U;
         static const AkUniqueID STOP_MUS_ZONES = 75519133U;
+        static const AkUniqueID STOP_SFX_BUNNY_GLIDING_LP = 3668857278U;
     } // namespace EVENTS
 
     namespace STATES

@@ -46,6 +46,9 @@ public class ArtKitUIManager : MonoBehaviour
     [Tooltip("Drag the Player GameObject here, or leave empty to auto-find.")]
     public DustBunnyController playerController;
 
+    [Header("SFX")]
+    public AK.Wwise.Event uiNext;
+
 
     private bool isArtKitShowing = false;
     private bool waitingForInput = false;
@@ -90,6 +93,8 @@ public class ArtKitUIManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton1))
             {
+                uiNext.Post(gameObject);
+
                 StartCoroutine(HideArtKit());
             }
         }
