@@ -78,6 +78,7 @@ namespace AK
             {
                 static const AkUniqueID GLIDE = 2968795556U;
                 static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID PAUSE = 3092587493U;
                 static const AkUniqueID ZONE1 = 831766780U;
                 static const AkUniqueID ZONE2 = 831766783U;
             } // namespace STATE

@@ -244,8 +244,18 @@
 												<ModifierInfo>
 													<Modifier Name="" ID="{D8D36596-68AE-485E-9A05-5B971F81DA92}">
 														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
 															<Property Name="Max" Type="Real64" Value="5"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Lowpass" Type="int16">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{50F5DD1C-8472-4B61-800F-3BB384C1AC20}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -281,6 +291,9 @@
 											</ModifierList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{5185D4D7-DA3C-4473-994F-76FA3362782D}">
@@ -487,7 +500,11 @@
 								<RandomSequenceContainer Name="amb_footstep_slipper" ID="{455DF3F6-5BAD-4308-AEF2-C4047AA2EFB6}" ShortID="1072985543">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
 										<Property Name="Pitch" Type="int32">
 											<ModifierList>
 												<ModifierInfo>
@@ -517,6 +534,9 @@
 											</ModifierList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{8C657A02-9980-4B7A-8473-B741BE9AF90C}">
@@ -2197,6 +2217,11 @@
 								<RandomSequenceContainer Name="amb_footstep_barefoot" ID="{2AC5EEFF-360D-4A0D-A5C6-0C00CD85E38F}" ShortID="538752033">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
 										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
@@ -2208,6 +2233,22 @@
 															<Property Name="Enabled" Type="bool" Value="True"/>
 															<Property Name="Max" Type="Real64" Value="30"/>
 															<Property Name="Min" Type="Real64" Value="-5"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{C727C5D6-B84E-461E-B1A9-EB42B50DF1AC}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+															<Property Name="Min" Type="Real64" Value="-3"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -3011,6 +3052,47 @@
 								<RandomSequenceContainer Name="amb_plates" ID="{6846160F-6B2E-4B4C-A38C-2870F4289437}" ShortID="384118516">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="InitialDelay" Type="Real64">
+											<ValueList>
+												<Value>10</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{378F3B03-6855-4BA6-955B-90B6F0E52740}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="30"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
+										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
+										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="30">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{E04AD5DC-73C5-4D13-A262-9CFF51D236FB}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="120"/>
+															<Property Name="Min" Type="Real64" Value="-10"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -3099,6 +3181,27 @@
 								<RandomSequenceContainer Name="amb_carpass" ID="{478C8834-742F-49D3-840F-4655277C652A}" ShortID="935350242">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-9</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{DE69C308-317A-4D4F-B96D-568580974275}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+															<Property Name="Min" Type="Real64" Value="-3"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -3271,6 +3374,18 @@
 								<RandomSequenceContainer Name="amb_dogbarking" ID="{81F9B715-DD7D-46BB-A502-D9F61D67C5E6}" ShortID="819780455">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="InitialDelay" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{9EDA1FA2-1386-424E-B8D4-D7094177D938}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
 										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
 										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64">
@@ -3284,6 +3399,11 @@
 													</Modifier>
 												</ModifierInfo>
 											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-9</Value>
+											</ValueList>
 										</Property>
 									</PropertyList>
 									<ReferenceList>
@@ -11343,6 +11463,7 @@
 								<RandomSequenceContainer Name="sfx_car_move_nl" ID="{0CEE900A-01F0-4341-94DB-55BC51F3DBC7}" ShortID="499577367">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="AttenuationDistanceScaling" Type="Real32" Value="0.5"/>
 										<Property Name="InitialDelay" Type="Real64">
 											<ModifierList>
 												<ModifierInfo>
@@ -11477,6 +11598,7 @@
 								<RandomSequenceContainer Name="sfx_car_impact_nl" ID="{34020603-A616-4945-95DC-49DAC9D2D9F7}" ShortID="393911395">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="AttenuationDistanceScaling" Type="Real32" Value="0.5"/>
 										<Property Name="Lowpass" Type="int16">
 											<ValueList>
 												<Value>50</Value>
@@ -12014,7 +12136,7 @@
 										<Sound Name="sfx_vent_high_lp" ID="{A40258F8-E93D-4707-9B5B-80074E8748F9}" ShortID="602190625">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="2"/>
-												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="0.5"/>
+												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="0.25"/>
 												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 											</PropertyList>
 											<ReferenceList>
@@ -12044,6 +12166,7 @@
 										<Sound Name="sfx_vent_low_lp" ID="{8E233FE9-51BE-4CE3-8CAE-C79A2EACE6A3}" ShortID="306325736">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="0.5"/>
 												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 											</PropertyList>
 											<ReferenceList>
