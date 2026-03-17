@@ -41,6 +41,8 @@
 										<Action Name="" ID="{A0EDBC5D-F168-484C-B49E-D33461048F21}" ShortID="789731460">
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="2"/>
+												<Property Name="FadeOutCurve" Type="int16" Value="6"/>
+												<Property Name="FadeTime" Type="Real64" Value="5"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
@@ -356,17 +358,6 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_endseq" ID="{2DEAEBE3-AE4A-491D-A440-8AA823017137}">
-									<ChildrenList>
-										<Action Name="" ID="{1F2C8548-DDB4-477C-84AE-457F06340D16}" ShortID="280935228">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_endseq" ID="{1C8C1EA8-AE25-43A9-910B-4A0FAA9D28CD}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="SFX_Interactable" ID="{AAA33352-07BA-4E0D-9BB5-2D46C874DF85}" ShortID="228838436">
@@ -449,6 +440,13 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_car_impact_nl" ID="{34020603-A616-4945-95DC-49DAC9D2D9F7}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{E1C75A6E-86C6-4C6E-8741-0A2321EB4273}" ShortID="865543862">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_bunnysqueak_nl" ID="{B2A4FB79-D9C6-4227-B3E4-5ABE6F560016}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -632,6 +630,17 @@
 								</Event>
 							</ChildrenList>
 						</Folder>
+						<Event Name="Play_sfx_endseq" ID="{2DEAEBE3-AE4A-491D-A440-8AA823017137}">
+							<ChildrenList>
+								<Action Name="" ID="{1F2C8548-DDB4-477C-84AE-457F06340D16}" ShortID="280935228">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_endseq" ID="{F8F65FA4-6D01-44D3-A7E6-DAB9E5B50646}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

@@ -55,6 +55,9 @@ public class DiaryUIManager : MonoBehaviour
     [Tooltip("Drag the Player GameObject here, or leave empty to auto-find.")]
     public DustBunnyController playerController;
 
+    [Header("SFX")]
+    public AK.Wwise.Event uiSelect;
+
     public bool diaryShown = false;
 
     // -----------------------------------------------------------------------
@@ -132,6 +135,8 @@ public class DiaryUIManager : MonoBehaviour
 
     private IEnumerator DisplayDiary(string text, Sprite sprite)
     {
+        AkUnitySoundEngine.SetState("player_state", "memory");
+
         isDiaryShowing = true;
         waitingForInput = false;
 
@@ -181,6 +186,8 @@ public class DiaryUIManager : MonoBehaviour
 
     private IEnumerator HideDiary()
     {
+        AkUnitySoundEngine.SetState("player_state", "None");
+
         waitingForInput = false;
 
         yield return StartCoroutine(FadeGroup(diaryPanelGroup, 1f, 0f));

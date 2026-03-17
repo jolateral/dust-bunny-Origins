@@ -332,7 +332,7 @@ MonoBehaviour:
   uiSelect:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 722cac8d9d4cd26419589b6745b62c7a, type: 2}
 --- !u!4 &13224014
 Transform:
   m_ObjectHideFlags: 0
@@ -6055,7 +6055,7 @@ MonoBehaviour:
   uiSelect:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 722cac8d9d4cd26419589b6745b62c7a, type: 2}
   labelMove: {fileID: 0}
   labelLook: {fileID: 0}
   labelJump: {fileID: 0}
@@ -33270,6 +33270,7 @@ GameObject:
   - component: {fileID: 1090622520}
   - component: {fileID: 1090622522}
   - component: {fileID: 1090622521}
+  - component: {fileID: 1090622523}
   m_Layer: 0
   m_Name: Zone2toZone3
   m_TagString: Untagged
@@ -33333,6 +33334,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1090622523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090622519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7a482e861e9b241bf741345c77da50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8c23082e039cad84c9691f37743b5b2b, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 
 --- !u!4 &1096173103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8829212879488931246, guid: 1924d6215e36a3142bb7787c22611977, type: 3}
@@ -37912,6 +37937,10 @@ MonoBehaviour:
   fadeSpeed: 3
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
   playerController: {fileID: 4722782708405615013}
+  uiSelect:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 722cac8d9d4cd26419589b6745b62c7a, type: 2}
   diaryShown: 0
 --- !u!4 &1283922200
 Transform:
@@ -38530,6 +38559,10 @@ MonoBehaviour:
   endingScene: EndSeq
   delayBeforeFade: 2
   fadeDuration: 2
+  stopMusic:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a2f4273f86e8ff54f9c1dd6b754a1c18, type: 2}
 --- !u!4 &1303572878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8644576159005171825, guid: 0cd794a12ca2b484aaec5f3a06aea308, type: 3}
@@ -60449,6 +60482,10 @@ MonoBehaviour:
   fadeSpeed: 3
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
   playerController: {fileID: 4722782708405615013}
+  uiNext:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 722cac8d9d4cd26419589b6745b62c7a, type: 2}
 --- !u!1 &1919206366
 GameObject:
   m_ObjectHideFlags: 0
@@ -69552,6 +69589,10 @@ PrefabInstance:
     - target: {fileID: 7789068174382308802, guid: 45490305711e97248a0bb7ac85f6331d, type: 3}
       propertyPath: m_Name
       value: Trophy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181476640235642287, guid: 45490305711e97248a0bb7ac85f6331d, type: 3}
+      propertyPath: triggerDistance
+      value: 30.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

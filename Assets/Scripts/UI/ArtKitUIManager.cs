@@ -122,6 +122,8 @@ public class ArtKitUIManager : MonoBehaviour
 
     private IEnumerator DisplayArtKit(string text, Sprite sprite)
     {
+        AkUnitySoundEngine.SetState("player_state", "memory");
+
         isArtKitShowing = true;
         waitingForInput = false;
 
@@ -180,6 +182,8 @@ public class ArtKitUIManager : MonoBehaviour
 
     private IEnumerator HideArtKit()
     {
+        AkUnitySoundEngine.SetState("player_state", "None");
+
         waitingForInput = false;
 
         yield return StartCoroutine(FadeGroup(artKitPanelGroup, 1f, 0f));

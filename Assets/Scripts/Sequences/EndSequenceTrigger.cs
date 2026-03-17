@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Rendering;
 
 public class EndSequenceTrigger : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class EndSequenceTrigger : MonoBehaviour
     [Header("Timing")]
     public float delayBeforeFade = 2f;
     public float fadeDuration = 2f;
+
+    public AK.Wwise.Event stopMusic;
 
     private bool triggered = false;
 
@@ -27,6 +30,8 @@ public class EndSequenceTrigger : MonoBehaviour
     {
         // Wait before fading
         yield return new WaitForSeconds(delayBeforeFade);
+
+        stopMusic.Post(gameObject);
 
         // Fade to ending scene
         FadeSequenceManager.Instance.FadeToScene(endingScene, fadeDuration);
