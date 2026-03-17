@@ -10,7 +10,7 @@
     "Type": "Event",
     "GUID": "{69C15AD8-E2D1-4E38-A401-1F488533745A}",
     "Language": "SFX",
-    "Hash": "{CCEAA447-A678-392D-AD49-10C4B654B439}",
+    "Hash": "{FA09F941-6D05-4017-AB94-8A06E2F73677}",
     "ObjectPath": "Play_amb_footstep_slipper",
     "ShortName": "Play_amb_footstep_slipper",
     "Path": "Event/Play_amb_footstep_slipper.bnk",
@@ -544,8 +544,10 @@
       "Name": "Play_amb_footstep_slipper",
       "ObjectPath": "\\Events\\Default Work Unit\\Ambience\\amb_home\\Play_amb_footstep_slipper",
       "GUID": "{69C15AD8-E2D1-4E38-A401-1F488533745A}",
-      "MaxAttenuation": "100",
-      "DurationType": "Infinite",
+      "MaxAttenuation": "1000",
+      "DurationType": "OneShot",
+      "DurationMin": "1.2714791",
+      "DurationMax": "8.48148",
       "MediaRefs": [
        {
         "Id": "269533"
@@ -726,6 +728,6 @@
     ]
    }
   ],
-  "FileHash": "{9B29A859-55CB-F0B7-856F-DEEB0E583F73}"
+  "FileHash": "{107FD202-6BBE-00BA-A2CA-FB61FF3ECD1C}"
  }
 }

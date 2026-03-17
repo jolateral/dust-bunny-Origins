@@ -136,6 +136,43 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_amb_plates" ID="{A5759016-753E-4D5C-9A10-90BB71F27AFD}">
+									<ChildrenList>
+										<Action Name="" ID="{44F3B192-D83F-46CA-83B6-0E8C8E4CDB60}" ShortID="529228565">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="amb_plates" ID="{6846160F-6B2E-4B4C-A38C-2870F4289437}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="amb_outdoor" ID="{29600920-B028-4BF0-8DB9-7B2E77AA999B}" ShortID="321095970">
+							<ChildrenList>
+								<Event Name="Play_amb_carpass" ID="{42D0ABE0-4A2F-463D-901C-8F58E0BBBC11}">
+									<ChildrenList>
+										<Action Name="" ID="{6643B55B-F49B-4801-BD06-9497CA60F6A9}" ShortID="130283472">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="amb_carpass" ID="{478C8834-742F-49D3-840F-4655277C652A}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_amb_dogbarking" ID="{B4C144A6-F3C3-46F8-8522-9AC804843BAC}">
+									<ChildrenList>
+										<Action Name="" ID="{F14B5AD3-2A54-4600-88FE-BDE390E67AD5}" ShortID="974133879">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="amb_dogbarking" ID="{81F9B715-DD7D-46BB-A502-D9F61D67C5E6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
@@ -636,6 +673,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="sfx_endseq" ID="{F8F65FA4-6D01-44D3-A7E6-DAB9E5B50646}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_SFX_Human" ID="{A9AD46D0-BEDD-484A-BEF6-43EE137EDFE2}">
+							<ChildrenList>
+								<Action Name="" ID="{EC265F3E-2CE2-4B3A-9A83-23AB316F776A}" ShortID="727965910">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX_Human" ID="{13F0F7D6-6B06-44E6-AB26-B6FAFC886500}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

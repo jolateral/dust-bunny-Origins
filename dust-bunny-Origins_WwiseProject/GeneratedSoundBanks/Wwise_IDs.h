@@ -14,9 +14,12 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID EXIT_UI = 1041028614U;
+        static const AkUniqueID PLAY_AMB_CARPASS = 3752085218U;
         static const AkUniqueID PLAY_AMB_CAT = 1467608791U;
+        static const AkUniqueID PLAY_AMB_DOGBARKING = 2159867889U;
         static const AkUniqueID PLAY_AMB_FOOTSTEP_BAREFOOT = 1437669270U;
         static const AkUniqueID PLAY_AMB_FOOTSTEP_SLIPPER = 2859770665U;
+        static const AkUniqueID PLAY_AMB_PLATES = 3831521374U;
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
         static const AkUniqueID PLAY_MUS_ZONES = 3793537147U;
@@ -35,6 +38,7 @@ namespace AK
         static const AkUniqueID PLAY_SFX_ENDSEQ = 1833036738U;
         static const AkUniqueID PLAY_SFX_ERASER_ABSORB_NL = 1495456639U;
         static const AkUniqueID PLAY_SFX_HAIRPIN_ABSORB_NL = 2555693410U;
+        static const AkUniqueID PLAY_SFX_HUMAN = 3957740849U;
         static const AkUniqueID PLAY_SFX_LEGO_ABSORB_NL = 3199315176U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_001 = 1142362393U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_002 = 1142362394U;

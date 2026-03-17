@@ -10,7 +10,7 @@
     "Type": "Event",
     "GUID": "{A0A62334-96D5-485B-97A4-A801A076FD84}",
     "Language": "SFX",
-    "Hash": "{D22FF5CA-C65F-A4CD-B77D-B1156C66ABE7}",
+    "Hash": "{7742A693-4A8B-42D2-418D-DFCCB8D69CD6}",
     "ObjectPath": "Play_amb_cat",
     "ShortName": "Play_amb_cat",
     "Path": "Event/Play_amb_cat.bnk",
@@ -94,8 +94,10 @@
       "Name": "Play_amb_cat",
       "ObjectPath": "\\Events\\Default Work Unit\\Ambience\\amb_home\\Play_amb_cat",
       "GUID": "{A0A62334-96D5-485B-97A4-A801A076FD84}",
-      "MaxAttenuation": "100",
-      "DurationType": "Infinite",
+      "MaxAttenuation": "1000",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3476065",
+      "DurationMax": "9.379652",
       "MediaRefs": [
        {
         "Id": "114972520"
@@ -126,6 +128,6 @@
     ]
    }
   ],
-  "FileHash": "{90330AFA-6A01-ADBA-310A-1D2345A6D58B}"
+  "FileHash": "{588570C0-C214-CA53-ADA2-91F872787406}"
  }
 }

@@ -11,7 +11,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-6</Value>
+												<Value>-12</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -87,7 +87,7 @@
 																		<XPos>0</XPos>
 																		<YPos>0</YPos>
 																		<Flags>5</Flags>
-																		<SegmentShape>Log1</SegmentShape>
+																		<SegmentShape>Log3</SegmentShape>
 																	</Point>
 																	<Point>
 																		<XPos>10</XPos>
@@ -107,6 +107,13 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="amb_room_high_lp" ID="{C095C3B2-75D5-4A19-86CB-959A00FEF138}" ShortID="386230351">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -163,6 +170,13 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="amb_room_mid_lp" ID="{E8F5C097-A071-4D30-95B3-F989D846C37E}" ShortID="96923828">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -266,7 +280,6 @@
 												</ModifierInfo>
 											</ModifierList>
 										</Property>
-										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 										<Property Name="Volume" Type="Real64">
 											<ModifierList>
 												<ModifierInfo>
@@ -503,7 +516,6 @@
 												</ModifierInfo>
 											</ModifierList>
 										</Property>
-										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 										<Property Name="Volume" Type="Real64">
 											<ModifierList>
 												<ModifierInfo>
@@ -2185,7 +2197,6 @@
 								<RandomSequenceContainer Name="amb_footstep_barefoot" ID="{2AC5EEFF-360D-4A0D-A5C6-0C00CD85E38F}" ShortID="538752033">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
 										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
@@ -2202,7 +2213,6 @@
 												</ModifierInfo>
 											</ModifierList>
 										</Property>
-										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -2998,6 +3008,90 @@
 										</RandomSequenceContainer>
 									</ChildrenList>
 								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="amb_plates" ID="{6846160F-6B2E-4B4C-A38C-2870F4289437}" ShortID="384118516">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="sfx_plates_nl-001" ID="{9019E3EA-F8EA-4748-BAD3-D23FA547D3CB}" ShortID="802252570">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_plates_nl-001" ID="{D46CE7BF-0A19-4012-ABE0-4B4A7AAA3D86}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_plates_nl-001.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="735504034"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_plates_nl-001" ID="{D46CE7BF-0A19-4012-ABE0-4B4A7AAA3D86}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_plates_nl-002" ID="{2DDCDE96-4CB8-4819-B708-258DD75B43A2}" ShortID="656465796">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_plates_nl-002" ID="{F86BCBB3-746F-491B-9BAA-64056C0E0008}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_plates_nl-002.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1030490183"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_plates_nl-002" ID="{F86BCBB3-746F-491B-9BAA-64056C0E0008}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_plates_nl-003" ID="{F617BAAD-99E2-4154-8133-A8A3B091929C}" ShortID="929247249">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_plates_nl-003" ID="{F1FDDCB6-4300-460B-B172-7455C9749A5C}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_plates_nl-003.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="433743437"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_plates_nl-003" ID="{F1FDDCB6-4300-460B-B172-7455C9749A5C}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="amb_outdoor" ID="{DFFF6EEE-4863-4A69-A193-15B256C2B885}" ShortID="947991246">
@@ -3170,6 +3264,236 @@
 											</ChildrenList>
 											<ActiveSourceList>
 												<ActiveSource Name="sfx_carpass_nl-007" ID="{69EC06B7-02B0-4335-A99C-6E94C305E4EE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="amb_dogbarking" ID="{81F9B715-DD7D-46BB-A502-D9F61D67C5E6}" ShortID="819780455">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
+										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{DEB26F82-FAC4-49C0-BB60-B7C86F3FD1CB}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="60"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="sfx_dog_barking_nl-001" ID="{F0B55721-C2A7-44BD-8A77-E7D29DDFA1B5}" ShortID="913837583">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_dog_barking_nl-001" ID="{19643137-B3CB-4F23-872D-12F0B12663A1}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_dog_barking_nl-001.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1018977508"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_dog_barking_nl-001" ID="{19643137-B3CB-4F23-872D-12F0B12663A1}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_dog_barking_nl-002" ID="{B5CFCCE4-28F1-40F4-95CA-E7F47A6FEAD3}" ShortID="567816001">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_dog_barking_nl-002" ID="{98908505-36F5-458D-8447-50F6C368D146}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_dog_barking_nl-002.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="463064375"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_dog_barking_nl-002" ID="{98908505-36F5-458D-8447-50F6C368D146}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_dog_barking_nl-003" ID="{9FF22FB9-2884-469A-8275-F940FB77D8B4}" ShortID="784062935">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_dog_barking_nl-003" ID="{06751AC9-6A59-464A-B9EF-9EA11A0BE892}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_dog_barking_nl-003.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="858650195"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_dog_barking_nl-003" ID="{06751AC9-6A59-464A-B9EF-9EA11A0BE892}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_dog_barking_nl-004" ID="{43E3886A-862A-4A4A-9F7B-973D770320DE}" ShortID="1067212208">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_dog_barking_nl-004" ID="{07F14DA9-DE64-4920-9CEF-07163EFF5AD8}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_dog_barking_nl-004.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="961856993"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_dog_barking_nl-004" ID="{07F14DA9-DE64-4920-9CEF-07163EFF5AD8}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_dog_barking_nl-005" ID="{C81E42D9-4162-47ED-A840-9E8A23AC9CB6}" ShortID="256905880">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_dog_barking_nl-005" ID="{2F94DC15-8E93-4267-B52E-3531A345697A}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_dog_barking_nl-005.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="542947465"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_dog_barking_nl-005" ID="{2F94DC15-8E93-4267-B52E-3531A345697A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_dog_barking_nl-006" ID="{1BA423F5-9889-47A5-86A0-36BDAB3C3BAC}" ShortID="155037775">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_dog_barking_nl-006" ID="{F0CA3786-1878-4C5F-A4CF-E3C4CCA47816}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_dog_barking_nl-006.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="268803430"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_dog_barking_nl-006" ID="{F0CA3786-1878-4C5F-A4CF-E3C4CCA47816}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_dog_barking_nl-007" ID="{CAF81297-CFFE-464D-B813-B4FD3791275E}" ShortID="427334788">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_dog_barking_nl-007" ID="{2CE864D0-2BC8-49D8-861D-4B3B02F3C91E}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_dog_barking_nl-007.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="123282015"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_dog_barking_nl-007" ID="{2CE864D0-2BC8-49D8-861D-4B3B02F3C91E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_dog_barking_nl-008" ID="{69B9AB4F-EA24-4265-8E84-3849CE71BF8E}" ShortID="184944534">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_dog_barking_nl-008" ID="{6651BADC-FE26-4E7B-AC9F-F760281AA8C8}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_dog_barking_nl-008.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="990891936"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_dog_barking_nl-008" ID="{6651BADC-FE26-4E7B-AC9F-F760281AA8C8}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_dog_barking_nl-009" ID="{2ED4EB46-EC36-471D-B075-C2947F670A30}" ShortID="93706520">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_dog_barking_nl-009" ID="{8AB7E350-D3C3-45B0-9D50-BB4BA5AA2182}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_dog_barking_nl-009.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="741825280"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_dog_barking_nl-009" ID="{8AB7E350-D3C3-45B0-9D50-BB4BA5AA2182}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -8878,8 +9202,7 @@
 																			<Modifier Name="" ID="{751F7612-1A22-45D8-AB15-E6BA55D4AF8B}">
 																				<PropertyList>
 																					<Property Name="Enabled" Type="bool" Value="True"/>
-																					<Property Name="Max" Type="Real64" Value="1.5"/>
-																					<Property Name="Min" Type="Real64" Value="-1.5"/>
+																					<Property Name="Max" Type="Real64" Value="3"/>
 																				</PropertyList>
 																			</Modifier>
 																		</ModifierInfo>
@@ -9323,8 +9646,7 @@
 																			<Modifier Name="" ID="{46CF26A8-AD13-46E1-8D88-5C7C2EA4EE58}">
 																				<PropertyList>
 																					<Property Name="Enabled" Type="bool" Value="True"/>
-																					<Property Name="Max" Type="Real64" Value="1.5"/>
-																					<Property Name="Min" Type="Real64" Value="-1.5"/>
+																					<Property Name="Max" Type="Real64" Value="3"/>
 																				</PropertyList>
 																			</Modifier>
 																		</ModifierInfo>
@@ -10186,12 +10508,44 @@
 																		<PointList>
 																			<Point>
 																				<XPos>0</XPos>
-																				<YPos>80</YPos>
+																				<YPos>50</YPos>
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
 																				<XPos>10</XPos>
-																				<YPos>100</YPos>
+																				<YPos>50</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</Custom>
+															</Reference>
+														</ReferenceList>
+													</RTPC>
+													<RTPC Name="" ID="{0BFFB8EB-1BE2-4668-8A39-16E37AE8F38D}" ShortID="406021743">
+														<PropertyList>
+															<Property Name="PropertyName" Type="string" Value="Volume"/>
+														</PropertyList>
+														<ReferenceList>
+															<Reference Name="ControlInput">
+																<ObjectRef Name="bunny_size" ID="{6749505B-A3CA-4BC2-B69F-EE8891A95801}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
+															</Reference>
+															<Reference Name="Curve">
+																<Custom>
+																	<Curve Name="" ID="{1393817C-644F-4D01-804C-09A5FAA24557}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="3"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>-11.12605</YPos>
+																				<Flags>5</Flags>
+																				<SegmentShape>Log3</SegmentShape>
+																			</Point>
+																			<Point>
+																				<XPos>10</XPos>
+																				<YPos>3</YPos>
 																				<Flags>37</Flags>
 																			</Point>
 																		</PointList>
@@ -10325,7 +10679,7 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<Sound Name="sfx_bunny_roll_nl_001" ID="{A43C5283-C5F0-44D1-BA45-ADF66A8BC432}" ShortID="1018595903">
+														<Sound Name="sfx_bunny_roll_nl-001" ID="{A43C5283-C5F0-44D1-BA45-ADF66A8BC432}" ShortID="1018595903">
 															<PropertyList>
 																<Property Name="Pitch" Type="int32">
 																	<ModifierList>
@@ -10375,7 +10729,7 @@
 																<ActiveSource Name="sfx_bunnyabsorb_nl_001" ID="{667B1D00-C79D-4B3E-8C10-F28F79289515}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="sfx_bunnyabsorb_nl_001" ID="{D2B8807D-BED1-4EB8-861F-2BEAF1CA04F0}" ShortID="1072698344">
+														<Sound Name="sfx_bunny_roll_nl-002" ID="{D2B8807D-BED1-4EB8-861F-2BEAF1CA04F0}" ShortID="1072698344">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -10397,7 +10751,7 @@
 																<ActiveSource Name="sfx_bunnyabsorb_nl_001" ID="{AA31F017-644A-46B2-851C-8C04A9BB9D80}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
-														<Sound Name="sfx_bunnyabsorb_nl_002" ID="{6427E2AB-8C6D-4B3A-B304-B570117E3D99}" ShortID="542966162">
+														<Sound Name="sfx_bunny_roll_nl-003" ID="{6427E2AB-8C6D-4B3A-B304-B570117E3D99}" ShortID="542966162">
 															<ReferenceList>
 																<Reference Name="Conversion">
 																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -13157,7 +13511,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-5</Value>
+												<Value>-6</Value>
 											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
@@ -13433,6 +13787,162 @@
 								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
+						<RandomSequenceContainer Name="SFX_Human" ID="{13F0F7D6-6B06-44E6-AB26-B6FAFC886500}" ShortID="806812863">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-500</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>6</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="sfx_bunnyfootstep_heavy_nl_001" ID="{8046E7C3-DAB9-4EF2-BAC1-714241F12588}" ShortID="144396342">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_bunnyfootstep_heavy_nl_001" ID="{4268340B-2D1D-471B-9276-A33060933226}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_bunnyfootstep_heavy_nl_001.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="256008365"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_bunnyfootstep_heavy_nl_001" ID="{4268340B-2D1D-471B-9276-A33060933226}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_bunnyfootstep_heavy_nl_002" ID="{50AF4679-1952-4F7B-B8F8-209195FFC18C}" ShortID="631557414">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_bunnyfootstep_heavy_nl_002" ID="{2824D756-A70D-4702-A3BC-6885321A65ED}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_bunnyfootstep_heavy_nl_002.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1015949661"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_bunnyfootstep_heavy_nl_002" ID="{2824D756-A70D-4702-A3BC-6885321A65ED}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_bunnyfootstep_heavy_nl_003" ID="{4510D5BD-466F-4C5A-B116-5FE388C48A3F}" ShortID="684740956">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_bunnyfootstep_heavy_nl_003" ID="{5682F91B-C36A-41D3-94E7-2F64AB1AC551}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_bunnyfootstep_heavy_nl_003.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="406961147"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_bunnyfootstep_heavy_nl_003" ID="{5682F91B-C36A-41D3-94E7-2F64AB1AC551}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_bunnyfootstep_heavy_nl_004" ID="{58997E51-B03B-4033-A984-F83AE73CF3C5}" ShortID="136742892">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_bunnyfootstep_heavy_nl_004" ID="{6DDD792B-77A9-4A7C-BF7C-3DACD265F6B2}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_bunnyfootstep_heavy_nl_004.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="336604885"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_bunnyfootstep_heavy_nl_004" ID="{6DDD792B-77A9-4A7C-BF7C-3DACD265F6B2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_bunnyfootstep_heavy_nl_005" ID="{1E445095-2371-435A-A913-A53E2C7555A2}" ShortID="53338584">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_bunnyfootstep_heavy_nl_005" ID="{0C59385E-81B7-48BC-8346-3DCC089C313B}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_bunnyfootstep_heavy_nl_005.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1026277791"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_bunnyfootstep_heavy_nl_005" ID="{0C59385E-81B7-48BC-8346-3DCC089C313B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_bunnyfootstep_heavy_nl_006" ID="{7A6E675D-CFAD-48F8-9A15-5D71B4A3E210}" ShortID="627553041">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_bunnyfootstep_heavy_nl_006" ID="{E9BA6946-E813-43F7-BD22-69704F9856C6}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_bunnyfootstep_heavy_nl_006.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="310737837"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_bunnyfootstep_heavy_nl_006" ID="{E9BA6946-E813-43F7-BD22-69704F9856C6}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
