@@ -171,6 +171,7 @@ public class PaperUIManager : MonoBehaviour
         {
             instructionImage.color = Color.white;
             instructionImage.gameObject.SetActive(true);
+            StartCoroutine(BlinkInstructionImage());
         }
     }
 
@@ -246,6 +247,7 @@ public class PaperUIManager : MonoBehaviour
         {
             instructionImage.color = Color.white;
             instructionImage.gameObject.SetActive(true);
+            StartCoroutine(BlinkInstructionImage());
         }
     }
 
@@ -320,6 +322,40 @@ public class PaperUIManager : MonoBehaviour
 
         if (ObjectiveUI.Instance != null)
             ObjectiveUI.Instance.ShowAfterPaper();
+    }
+
+    private IEnumerator BlinkInstructionImage()
+    {
+        if (instructionImage == null) yield break;
+
+        while (waitingForInput)
+        {
+            for (float t = 0; t < 1f; t += Time.deltaTime * 2f)
+            {
+                if (!waitingForInput) yield break;
+
+                Color c = instructionImage.color;
+                c.a = Mathf.Lerp(1f, 0.3f, t);
+                instructionImage.color = c;
+
+                yield return null;
+            }
+
+            for (float t = 0; t < 1f; t += Time.deltaTime * 2f)
+            {
+                if (!waitingForInput) yield break;
+
+                Color c = instructionImage.color;
+                c.a = Mathf.Lerp(0.3f, 1f, t);
+                instructionImage.color = c;
+
+                yield return null;
+            }
+        }
+
+        Color final = instructionImage.color;
+        final.a = 1f;
+        instructionImage.color = final;
     }
 
     public bool IsPaperShowing() => isPaperShowing;
