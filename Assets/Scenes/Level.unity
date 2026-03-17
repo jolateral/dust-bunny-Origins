@@ -33090,7 +33090,7 @@ RectTransform:
   m_GameObject: {fileID: 1054427579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1179465115}
@@ -33099,10 +33099,10 @@ RectTransform:
   m_Father: {fileID: 624317589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1054427581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41168,10 +41168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialTriggerCollision
   displayMode: 0
-  tutorialText: 'Absorb smaller dust balls and objects by moving into them.
-
-    Absorbing
-    objects makes you grow.'
+  tutorialText: Grow by absorbing smaller dust balls and objects by moving into them.
   textColor: {r: 1, g: 1, b: 1, a: 1}
   tutorialImage: {fileID: 0}
   oneTimeOnly: 1
@@ -61221,18 +61218,18 @@ RectTransform:
   m_GameObject: {fileID: 1906898936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1863075447}
   - {fileID: 84940652}
   m_Father: {fileID: 624317589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -180}
-  m_SizeDelta: {x: 1600, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!4 &1916198522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3661447547232687017, guid: a17c3e1a11c8a85499454cf913491dea, type: 3}
