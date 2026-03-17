@@ -262,6 +262,29 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_sfx_gliding_lp" ID="{B4D222A4-4AC0-46F3-8E4C-206DDA6E20F0}">
+									<ChildrenList>
+										<Action Name="" ID="{C0CA37B3-C6A0-4B2D-905D-B021A1804E00}" ShortID="523344127">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_bunny_glidelaunch_nl" ID="{5911F44E-161B-4AAD-BDDD-E8BFD06ECC1A}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{63634373-0CF8-4A19-B934-84678118560A}" ShortID="930480466">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="0.7"/>
+												<Property Name="FadeInCurve" Type="int16" Value="6"/>
+												<Property Name="FadeTime" Type="Real64" Value="3"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_bunny_gliding_lp" ID="{89356517-8BCC-4A55-94D0-4A65C89E880C}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="SFX_Object" ID="{C428B6A6-0A65-4BC0-90FC-BB5BEAF39DD8}" ShortID="180135807">

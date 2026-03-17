@@ -8991,6 +8991,40 @@
 														</GroupingBehaviorList>
 													</GroupingInfo>
 												</SwitchContainer>
+												<Sound Name="sfx_bunny_gliding_lp" ID="{89356517-8BCC-4A55-94D0-4A65C89E880C}" ShortID="100985175">
+													<PropertyList>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>-300</Value>
+															</ValueList>
+														</Property>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-6</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_gliding_lp" ID="{5E99EA96-C576-44DA-AE95-EF466FEDF1DB}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_gliding_lp.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1025353145"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_gliding_lp" ID="{5E99EA96-C576-44DA-AE95-EF466FEDF1DB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
 										</Folder>
 										<RandomSequenceContainer Name="sfx_bunnyabsorb_nl" ID="{930C810D-881F-402B-BB78-3A1283EBAD8B}" ShortID="68744057">
@@ -9855,6 +9889,28 @@
 														</Sound>
 													</ChildrenList>
 												</RandomSequenceContainer>
+												<Sound Name="sfx_bunny_glidelaunch_nl" ID="{5911F44E-161B-4AAD-BDDD-E8BFD06ECC1A}" ShortID="855902844">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_bunny_glidelaunch_nl" ID="{F271D9E8-C544-4822-898D-893D92DF5946}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_bunny_glidelaunch_nl.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="912382787"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_bunny_glidelaunch_nl" ID="{F271D9E8-C544-4822-898D-893D92DF5946}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
 										</Folder>
 									</ChildrenList>
