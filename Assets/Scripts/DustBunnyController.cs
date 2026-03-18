@@ -36,10 +36,8 @@ public class DustBunnyController : MonoBehaviour
     public float glideMassDrainPerSecond = 0.02f;
     public float minGlideScaleRatio = 0.1f;
     public float glideMoveToLaunchDuration = 0.35f;
-    [SerializeField] private float glideYawExtra = -90f;
 
     [Header("--- Visual Facing ---")]
-    public float facingYawOffset = 0f;
     [SerializeField] private Transform cameraTransform;
 
     [Header("--- Debug & Status ---")]
@@ -146,10 +144,7 @@ public class DustBunnyController : MonoBehaviour
     void Update()
     {
         distToGround = playerCollider.bounds.extents.y;
-        isGrounded = CheckGroundedStrict();
-
-        if (isGrounded)
-            lastGroundedTime = Time.time;
+        UpdateGroundedState();
 
         if (isGliding)
         {
@@ -157,6 +152,7 @@ public class DustBunnyController : MonoBehaviour
             {
                 _animator.SetBool("isRunning", false);
                 _animator.SetBool("isRolling", false);
+                _animator.SetBool("isGrounded", false);
             }
 
             float timeGliding = Time.time - glideStartTime;
@@ -418,7 +414,7 @@ public class DustBunnyController : MonoBehaviour
 
         dir.Normalize();
         float baseYaw = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-        return baseYaw - 90f + 180f + facingYawOffset;
+        return baseYaw - 90f;
     }
 
     Vector3 GetCameraRelativeWorldDir(Vector2 input)
@@ -491,6 +487,10 @@ public class DustBunnyController : MonoBehaviour
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * (jumpForce * ScaleFactor * rb.mass), ForceMode.Impulse);
+
+        isGrounded = false;
+        if (_animator)
+            _animator.SetBool("isGrounded", false);
     }
 
     void StartGliding()
@@ -504,27 +504,33 @@ public class DustBunnyController : MonoBehaviour
         if (currentGlideSpot != null)
         {
             Vector3 spotDir = currentGlideSpot.GetLaunchDirection();
-            if (spotDir.sqrMagnitude > 0.01f) launchDir = spotDir;
+            if (spotDir.sqrMagnitude > 0.01f)
+                launchDir = spotDir;
         }
 
+        // If no launch spot direction, glide forward in the direction the body is actually facing
         if (launchDir.sqrMagnitude < 0.01f)
-            launchDir = cameraTransform ? cameraTransform.forward : transform.forward;
+            launchDir = transform.right;
 
         launchDir.y = 0f;
-        if (launchDir.sqrMagnitude < 0.01f) launchDir = transform.forward;
+        if (launchDir.sqrMagnitude < 0.01f)
+            launchDir = transform.right;
+
         launchDir.Normalize();
 
         Vector3 faceDir = GetCameraRelativeWorldDir(moveInput);
+
+        // If there is no input, keep facing the body's actual forward direction
         if (faceDir.sqrMagnitude < 0.01f)
         {
-            faceDir = cameraTransform ? cameraTransform.forward : transform.forward;
+            faceDir = transform.right;
             faceDir.y = 0f;
         }
 
         if (faceDir.sqrMagnitude > 0.01f)
         {
             faceDir.Normalize();
-            float yaw = ComputeYawFromWorldDir(faceDir) + glideYawExtra;
+            float yaw = ComputeYawFromWorldDir(faceDir);
             transform.rotation = Quaternion.Euler(0f, yaw, 0f);
             lastTargetYaw = yaw;
         }
@@ -545,6 +551,7 @@ public class DustBunnyController : MonoBehaviour
         isGliding = false;
         rb.useGravity = true;
         SetGlidingAnimator(false);
+        UpdateGroundedState();
     }
 
     void SetGlidingAnimator(bool value)
@@ -576,8 +583,8 @@ public class DustBunnyController : MonoBehaviour
         Quaternion startRot = transform.rotation;
         Vector3 endPos = launchPoint.position;
 
-        Vector3 launchDir = (currentGlideSpot != null) ? currentGlideSpot.GetLaunchDirection() : transform.forward;
-        if (launchDir.sqrMagnitude < 0.01f) launchDir = transform.forward;
+        Vector3 launchDir = (currentGlideSpot != null) ? currentGlideSpot.GetLaunchDirection() : transform.right;
+        if (launchDir.sqrMagnitude < 0.01f) launchDir = transform.right;
         launchDir.Normalize();
 
         Vector3 flat = new Vector3(launchDir.x, 0f, launchDir.z);
@@ -624,8 +631,7 @@ public class DustBunnyController : MonoBehaviour
             velocity.x = worldDir.x * (glideHorizontalSpeed * ScaleFactor);
             velocity.z = worldDir.z * (glideHorizontalSpeed * ScaleFactor);
 
-            float extraYaw = (Time.time - glideStartTime > 0.35f) ? glideYawExtra : 0f;
-            float targetYaw = ComputeYawFromWorldDir(worldDir) + extraYaw;
+            float targetYaw = ComputeYawFromWorldDir(worldDir);
             float yaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetYaw, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, yaw, 0f);
             lastTargetYaw = yaw;
@@ -653,20 +659,22 @@ public class DustBunnyController : MonoBehaviour
         rb.linearDamping = rollDrag;
         rb.useGravity = false;
 
-        Vector3 dashDir = gameObject.transform.forward;
+        Vector3 dashDir = GetCameraRelativeWorldDir(moveInput);
+
+        // If no movement input, dash in the direction the body is actually facing
         if (dashDir.sqrMagnitude < 0.01f)
         {
-            dashDir = cameraTransform ? cameraTransform.forward : transform.forward;
-            dashDir.y = 0f;
+            dashDir = transform.right; // using right because of model orientation
         }
-        if (dashDir.sqrMagnitude < 0.01f) dashDir = transform.forward;
+
+        dashDir.y = 0f;
         dashDir.Normalize();
 
         float yaw = ComputeYawFromWorldDir(dashDir);
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
         lastTargetYaw = yaw;
 
-        rb.linearVelocity = Vector3.zero;
+        rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
         rb.AddForce(dashDir * (dashForce * ScaleFactor), ForceMode.VelocityChange);
 
         yield return new WaitForSeconds(dashDuration);
@@ -675,26 +683,6 @@ public class DustBunnyController : MonoBehaviour
         if (_animator) _animator.SetBool("isRolling", false);
         rb.linearDamping = defaultDrag;
         rb.useGravity = true;
-    }
-
-    bool CheckGrounded()
-    {
-        if (playerCollider == null) return false;
-
-        Bounds bounds = playerCollider.bounds;
-
-        Vector3 checkPos = new Vector3(
-            bounds.center.x,
-            bounds.min.y + 0.01f,
-            bounds.center.z
-        );
-
-        return Physics.CheckSphere(
-            checkPos,
-            groundCheckRadius,
-            groundLayers,
-            QueryTriggerInteraction.Ignore
-        );
     }
 
     bool TryGetGroundHit(out RaycastHit hit)
@@ -744,5 +732,16 @@ public class DustBunnyController : MonoBehaviour
             groundLayers,
             QueryTriggerInteraction.Ignore
         );
+    }
+
+    void UpdateGroundedState()
+    {
+        isGrounded = CheckGroundedStrict();
+
+        if (isGrounded)
+            lastGroundedTime = Time.time;
+
+        if (_animator)
+            _animator.SetBool("isGrounded", isGrounded);
     }
 }
