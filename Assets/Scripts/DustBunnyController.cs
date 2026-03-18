@@ -144,10 +144,7 @@ public class DustBunnyController : MonoBehaviour
     void Update()
     {
         distToGround = playerCollider.bounds.extents.y;
-        isGrounded = CheckGroundedStrict();
-
-        if (isGrounded)
-            lastGroundedTime = Time.time;
+        UpdateGroundedState();
 
         if (isGliding)
         {
@@ -155,6 +152,7 @@ public class DustBunnyController : MonoBehaviour
             {
                 _animator.SetBool("isRunning", false);
                 _animator.SetBool("isRolling", false);
+                _animator.SetBool("isGrounded", false);
             }
 
             float timeGliding = Time.time - glideStartTime;
@@ -489,6 +487,10 @@ public class DustBunnyController : MonoBehaviour
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * (jumpForce * ScaleFactor * rb.mass), ForceMode.Impulse);
+
+        isGrounded = false;
+        if (_animator)
+            _animator.SetBool("isGrounded", false);
     }
 
     void StartGliding()
@@ -549,6 +551,7 @@ public class DustBunnyController : MonoBehaviour
         isGliding = false;
         rb.useGravity = true;
         SetGlidingAnimator(false);
+        UpdateGroundedState();
     }
 
     void SetGlidingAnimator(bool value)
@@ -628,8 +631,7 @@ public class DustBunnyController : MonoBehaviour
             velocity.x = worldDir.x * (glideHorizontalSpeed * ScaleFactor);
             velocity.z = worldDir.z * (glideHorizontalSpeed * ScaleFactor);
 
-            float extraYaw = Time.time - glideStartTime;
-            float targetYaw = ComputeYawFromWorldDir(worldDir) + extraYaw;
+            float targetYaw = ComputeYawFromWorldDir(worldDir);
             float yaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetYaw, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, yaw, 0f);
             lastTargetYaw = yaw;
@@ -730,5 +732,16 @@ public class DustBunnyController : MonoBehaviour
             groundLayers,
             QueryTriggerInteraction.Ignore
         );
+    }
+
+    void UpdateGroundedState()
+    {
+        isGrounded = CheckGroundedStrict();
+
+        if (isGrounded)
+            lastGroundedTime = Time.time;
+
+        if (_animator)
+            _animator.SetBool("isGrounded", isGrounded);
     }
 }
