@@ -55,6 +55,11 @@ public class DustBunnyController : MonoBehaviour
     [SerializeField] private float strictGroundCheckDistance = 0.12f;
     [SerializeField] private float glideGroundIgnoreTime = 0.15f;
 
+    [Header("--- Push Settings ---")]
+    [SerializeField] private string movableTag = "Movable";
+    private int movableContacts = 0;
+    private bool isPushing;
+
     private Rigidbody rb;
     private Collider playerCollider;
 
@@ -145,6 +150,7 @@ public class DustBunnyController : MonoBehaviour
     {
         distToGround = playerCollider.bounds.extents.y;
         UpdateGroundedState();
+        UpdatePushState();
 
         if (isGliding)
         {
@@ -153,12 +159,11 @@ public class DustBunnyController : MonoBehaviour
                 _animator.SetBool("isRunning", false);
                 _animator.SetBool("isRolling", false);
                 _animator.SetBool("isGrounded", false);
+                _animator.SetBool("isPushing", false);
             }
 
             float timeGliding = Time.time - glideStartTime;
 
-            // Ignore ground checks briefly right after glide starts,
-            // otherwise the bunny can instantly "land" from the same platform/ledge.
             bool canCheckLanding = timeGliding > glideGroundIgnoreTime;
             bool reallyLanded = canCheckLanding && CheckGroundedStrict();
 
@@ -215,11 +220,41 @@ public class DustBunnyController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         HandleCarHit(collision.collider);
+
+        if (collision.collider.CompareTag(movableTag))
+        {
+            movableContacts++;
+            UpdatePushState();
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag(movableTag))
+        {
+            movableContacts = Mathf.Max(0, movableContacts - 1);
+            UpdatePushState();
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         HandleCarHit(other);
+
+        if (other.CompareTag(movableTag))
+        {
+            movableContacts++;
+            UpdatePushState();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(movableTag))
+        {
+            movableContacts = Mathf.Max(0, movableContacts - 1);
+            UpdatePushState();
+        }
     }
 
     void HandleCarHit(Collider other)
@@ -447,7 +482,11 @@ public class DustBunnyController : MonoBehaviour
         if (moveInput.sqrMagnitude < deadzone * deadzone)
         {
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
-            if (_animator) _animator.SetBool("isRunning", false);
+            if (_animator)
+            {
+                _animator.SetBool("isRunning", false);
+                _animator.SetBool("isPushing", false);
+            }
             return;
         }
 
@@ -465,7 +504,19 @@ public class DustBunnyController : MonoBehaviour
         vel.y = rb.linearVelocity.y;
         rb.linearVelocity = vel;
 
-        if (_animator) _animator.SetBool("isRunning", true);
+        if (_animator)
+        {
+            UpdatePushState();
+
+            bool shouldRun =
+                isGrounded &&
+                !isPushing &&
+                !isRolling &&
+                !isGliding &&
+                !isHit;
+
+            _animator.SetBool("isRunning", shouldRun);
+        }
     }
 
     void ApplyBetterGravity()
@@ -490,7 +541,11 @@ public class DustBunnyController : MonoBehaviour
 
         isGrounded = false;
         if (_animator)
+        {
             _animator.SetBool("isGrounded", false);
+            _animator.SetBool("isPushing", false);
+            _animator.SetBool("isRunning", false);
+        }
     }
 
     void StartGliding()
@@ -538,7 +593,12 @@ public class DustBunnyController : MonoBehaviour
         float launchMagnitude = glideLaunchSpeed * ScaleFactor;
         rb.linearVelocity = launchDir * launchMagnitude;
 
-        if (_animator) _animator.SetBool("isRunning", false);
+        if (_animator)
+        {
+            _animator.SetBool("isRunning", false);
+            _animator.SetBool("isGrounded", false);
+            _animator.SetBool("isPushing", false);
+        }
         SetGlidingAnimator(true);
 
         bunnyGlideStart.Post(gameObject);
@@ -653,7 +713,11 @@ public class DustBunnyController : MonoBehaviour
     IEnumerator PerformDash()
     {
         isRolling = true;
-        if (_animator) _animator.SetBool("isRolling", true);
+        if (_animator)
+        {
+            _animator.SetBool("isRolling", true);
+            _animator.SetBool("isPushing", false);
+        }
         lastDashTime = Time.time;
 
         rb.linearDamping = rollDrag;
@@ -743,5 +807,20 @@ public class DustBunnyController : MonoBehaviour
 
         if (_animator)
             _animator.SetBool("isGrounded", isGrounded);
+    }
+    void UpdatePushState()
+    {
+        bool hasMoveInput = moveInput.sqrMagnitude > 0.15f * 0.15f;
+
+        isPushing =
+            movableContacts > 0 &&
+            hasMoveInput &&
+            isGrounded &&
+            !isRolling &&
+            !isGliding &&
+            !isHit;
+
+        if (_animator)
+            _animator.SetBool("isPushing", isPushing);
     }
 }
