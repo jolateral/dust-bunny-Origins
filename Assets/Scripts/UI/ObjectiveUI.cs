@@ -1,36 +1,37 @@
+// =============================================================================
+// ObjectiveUI.cs
+// -----------------------------------------------------------------------------
+// Manages the fragment progress panel in the top-right corner.
+//
+// CHANGES FROM ORIGINAL:
+//   - Added public ResetState() method so FadeSequenceManager can reset it
+//     when the Level scene reloads.
+//   - ResetState() clears hasCollectedAny and hides the panel so the objective
+//     UI starts fresh every time the level is entered.
+// =============================================================================
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-/// <summary>
-/// ObjectiveUI.cs
-///
-/// Manages the fragment progress panel in the top-right corner.
-///
-/// BEHAVIOUR:
-/// - Starts completely hidden (panel GameObject disabled, alpha 0)
-/// - Fades IN after the player dismisses the paper UI (ShowAfterPaper)
-/// - Hides INSTANTLY when the paper UI opens (HideForPaper)
-/// - Auto-fades out after all pieces are collected
-/// </summary>
 public class ObjectiveUI : MonoBehaviour
 {
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Singleton
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     public static ObjectiveUI Instance;
 
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Inspector References
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     [Header("Panel References")]
     [Tooltip("The RectTransform of the Panel child.")]
     public RectTransform panel;
 
-    [Tooltip("The CanvasGroup on the Panel — used for fading. Add a CanvasGroup component to Panel if missing.")]
+    [Tooltip("The CanvasGroup on the Panel — used for fading.")]
     public CanvasGroup panelCanvasGroup;
 
     [Tooltip("The FragmentProgressUI component on the Panel.")]
@@ -47,24 +48,24 @@ public class ObjectiveUI : MonoBehaviour
     [Header("Objective Text")]
     public GameObject objectiveText;
 
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Private State
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     private bool isVisible = false;
     private bool hasCollectedAny = false;
     private Coroutine fadeRoutine;
     private Coroutine hideRoutine;
 
-    // -----------------------------------------------------------------------
-    // Unity Messages
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // Unity Lifecycle
+    // -------------------------------------------------------------------------
 
     void Awake()
     {
         Instance = this;
 
-        // Auto-grab CanvasGroup from Panel if not assigned
+        // Auto-grab CanvasGroup from Panel if not assigned.
         if (panelCanvasGroup == null && panel != null)
         {
             panelCanvasGroup = panel.GetComponent<CanvasGroup>();
@@ -72,7 +73,7 @@ public class ObjectiveUI : MonoBehaviour
                 panelCanvasGroup = panel.gameObject.AddComponent<CanvasGroup>();
         }
 
-        // Start fully hidden and disabled
+        // Start fully hidden and disabled.
         if (panelCanvasGroup != null)
         {
             panelCanvasGroup.alpha = 0f;
@@ -99,9 +100,56 @@ public class ObjectiveUI : MonoBehaviour
             toggleObjectiveAction.action.performed -= OnToggleObjective;
     }
 
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // Public Reset — called by FadeSequenceManager on scene reload
+    // -------------------------------------------------------------------------
+
+    /// <summary>
+    /// Resets the objective UI back to its initial hidden state.
+    /// Called automatically by FadeSequenceManager when the Level scene loads.
+    /// Clears hasCollectedAny so the first-fragment logic fires correctly again.
+    /// </summary>
+    public void ResetState()
+    {
+        // Stop any in-progress fades.
+        if (fadeRoutine != null)
+        {
+            StopCoroutine(fadeRoutine);
+            fadeRoutine = null;
+        }
+        if (hideRoutine != null)
+        {
+            StopCoroutine(hideRoutine);
+            hideRoutine = null;
+        }
+
+        // Reset state flags.
+        isVisible = false;
+        hasCollectedAny = false;
+
+        // Hide the panel immediately.
+        if (panelCanvasGroup != null)
+        {
+            panelCanvasGroup.alpha = 0f;
+            panelCanvasGroup.blocksRaycasts = false;
+            panelCanvasGroup.interactable = false;
+        }
+
+        if (panel != null)
+            panel.gameObject.SetActive(false);
+
+        // Re-show the objective text since no fragments have been collected yet.
+        if (objectiveText != null)
+            objectiveText.SetActive(true);
+
+        // Clear the fragment progress display so it doesn't show stale data.
+        if (fragmentProgressUI != null)
+            fragmentProgressUI.ResetAll();
+    }
+
+    // -------------------------------------------------------------------------
     // Input
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     private void OnToggleObjective(InputAction.CallbackContext ctx)
     {
@@ -109,9 +157,9 @@ public class ObjectiveUI : MonoBehaviour
             Toggle();
     }
 
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Public API
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     public void Toggle()
     {
@@ -124,7 +172,6 @@ public class ObjectiveUI : MonoBehaviour
     {
         if (!hasCollectedAny) return;
 
-        // Enable the GameObject BEFORE fading so the CanvasGroup is active
         if (panel != null)
             panel.gameObject.SetActive(true);
 
@@ -145,7 +192,7 @@ public class ObjectiveUI : MonoBehaviour
 
     /// <summary>
     /// Called by PaperUIManager the instant paper opens.
-    /// Hides the panel immediately with no animation so it never overlaps the paper view.
+    /// Hides the panel immediately with no animation.
     /// </summary>
     public void HideForPaper()
     {
@@ -186,8 +233,7 @@ public class ObjectiveUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when a fragment is collected.
-    /// Syncs all fragment image data silently — panel stays hidden until ShowAfterPaper().
+    /// Called when a fragment is collected. Syncs all fragment image data.
     /// </summary>
     public void SetObjective()
     {
@@ -197,7 +243,6 @@ public class ObjectiveUI : MonoBehaviour
 
         if (paperData == null) return;
 
-        // FIRST fragment collected
         if (!hasCollectedAny)
         {
             hasCollectedAny = true;
@@ -221,7 +266,6 @@ public class ObjectiveUI : MonoBehaviour
 
     /// <summary>
     /// Reveal a single fragment image by index.
-    /// Updates data immediately — panel stays hidden until ShowAfterPaper().
     /// </summary>
     public void RevealFragment(int pieceIndex, int total)
     {
@@ -237,9 +281,9 @@ public class ObjectiveUI : MonoBehaviour
             fragmentProgressUI.RevealFragment(pieceIndex, total);
     }
 
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Private Helpers
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     private IEnumerator FadeTo(float targetAlpha)
     {
