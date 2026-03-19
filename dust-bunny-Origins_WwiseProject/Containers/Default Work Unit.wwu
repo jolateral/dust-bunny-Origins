@@ -6,7 +6,14 @@
 				<Folder Name="Ambience" ID="{37E99510-673A-460E-9AA4-491FFC286DD2}" ShortID="976845964">
 					<ChildrenList>
 						<PropertyContainer Name="amb_home" ID="{547BEFB0-3F23-4D35-93E2-38CABE61B2F7}" ShortID="576884964">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+							</PropertyList>
 							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 								</Reference>
@@ -33,11 +40,7 @@
 												</ModifierInfo>
 											</ModifierList>
 										</Property>
-										<Property Name="Lowpass" Type="int16">
-											<ValueList>
-												<Value>20</Value>
-											</ValueList>
-										</Property>
+										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
 										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="30">
@@ -54,11 +57,6 @@
 											</ModifierList>
 										</Property>
 										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
-										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
@@ -155,13 +153,12 @@
 											</ModifierList>
 										</Property>
 										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
-													<Modifier Name="" ID="{50F5DD1C-8472-4B61-800F-3BB384C1AC20}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-														</PropertyList>
-													</Modifier>
+													<Modifier Name="" ID="{50F5DD1C-8472-4B61-800F-3BB384C1AC20}"/>
 												</ModifierInfo>
 											</ModifierList>
 										</Property>
@@ -195,9 +192,6 @@
 											</ModifierList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{5185D4D7-DA3C-4473-994F-76FA3362782D}">
@@ -404,11 +398,6 @@
 								<RandomSequenceContainer Name="amb_footstep_barefoot" ID="{2AC5EEFF-360D-4A0D-A5C6-0C00CD85E38F}" ShortID="538752033">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="Lowpass" Type="int16">
-											<ValueList>
-												<Value>20</Value>
-											</ValueList>
-										</Property>
 										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
@@ -426,9 +415,6 @@
 											</ModifierList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{C727C5D6-B84E-461E-B1A9-EB42B50DF1AC}">
@@ -1239,11 +1225,6 @@
 								<RandomSequenceContainer Name="amb_footstep_slipper" ID="{455DF3F6-5BAD-4308-AEF2-C4047AA2EFB6}" ShortID="1072985543">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="Lowpass" Type="int16">
-											<ValueList>
-												<Value>20</Value>
-											</ValueList>
-										</Property>
 										<Property Name="Pitch" Type="int32">
 											<ModifierList>
 												<ModifierInfo>
@@ -1273,9 +1254,6 @@
 											</ModifierList>
 										</Property>
 										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{8C657A02-9980-4B7A-8473-B741BE9AF90C}">
@@ -2992,7 +2970,14 @@
 							</StateInfo>
 						</PropertyContainer>
 						<PropertyContainer Name="amb_outdoor" ID="{7C374E1B-E276-4F52-AE7D-6219C4F19746}" ShortID="195821625">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+							</PropertyList>
 							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+								</Reference>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 								</Reference>
@@ -3011,7 +2996,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-9</Value>
+												<Value>-12</Value>
 											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
@@ -3480,6 +3465,14 @@
 							</StateInfo>
 						</PropertyContainer>
 						<PropertyContainer Name="amb_room" ID="{C72E6DC6-A3DC-467E-A943-044FF1A2E86F}" ShortID="130102094">
+							<PropertyList>
+								<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-96</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -3658,6 +3651,14 @@
 				<Folder Name="Music" ID="{B7199324-C1CE-40DC-9680-31A421B037E4}" ShortID="410597850">
 					<ChildrenList>
 						<MusicSwitchContainer Name="mus_game" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" ShortID="1040651890">
+							<PropertyList>
+								<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-96</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -10068,7 +10069,7 @@
 														</Property>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>6</Value>
+																<Value>3</Value>
 															</ValueList>
 															<ModifierList>
 																<ModifierInfo>
@@ -10076,7 +10077,6 @@
 																		<PropertyList>
 																			<Property Name="Enabled" Type="bool" Value="True"/>
 																			<Property Name="Max" Type="Real64" Value="3"/>
-																			<Property Name="Min" Type="Real64" Value="-3"/>
 																		</PropertyList>
 																	</Modifier>
 																</ModifierInfo>
@@ -10125,6 +10125,11 @@
 															</ReferenceList>
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_squeak_nl-002" ID="{BAEDA361-811D-45E5-B470-2F439DA6512D}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.0375609759715837"/>
+																		<Property Name="LoopBegin" Type="Real64" Value="0"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_squeak_nl-002.wav</AudioFile>
 																	<MediaIDList>

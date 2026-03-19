@@ -34,9 +34,9 @@
 								</Event>
 							</ChildrenList>
 						</Folder>
-						<Folder Name="mus_zones" ID="{EEFDF587-CE19-49AC-B2C3-F072B3FF417A}" ShortID="698506546">
+						<Folder Name="mus_game" ID="{EEFDF587-CE19-49AC-B2C3-F072B3FF417A}" ShortID="698506546">
 							<ChildrenList>
-								<Event Name="Stop_mus_zones" ID="{2CCCE983-5898-454B-A0A8-0638B5DCA2C0}">
+								<Event Name="Stop_mus_game" ID="{2CCCE983-5898-454B-A0A8-0638B5DCA2C0}">
 									<ChildrenList>
 										<Action Name="" ID="{A0EDBC5D-F168-484C-B49E-D33461048F21}" ShortID="789731460">
 											<PropertyList>
@@ -46,13 +46,13 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="mus_game" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_mus_zones" ID="{177723F1-67E6-48F6-BA16-0BD415C65DFF}">
+								<Event Name="Play_mus_game" ID="{177723F1-67E6-48F6-BA16-0BD415C65DFF}">
 									<ChildrenList>
 										<Action Name="" ID="{9CB88991-A7EA-4A25-9B9F-761C30D7EC34}" ShortID="836818518">
 											<PropertyList>
@@ -61,7 +61,7 @@
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="mus_game" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -181,7 +181,7 @@
 					<ChildrenList>
 						<Folder Name="SFX_Bunny" ID="{C46DABE7-4C63-47AA-BD51-9EBDA4E6447F}" ShortID="548556306">
 							<ChildrenList>
-								<Event Name="Play_sfx_bunnyhop" ID="{65250275-E123-4B20-A2E8-BE8BDD243055}">
+								<Event Name="Play_sfx_bunny_hop_nl" ID="{65250275-E123-4B20-A2E8-BE8BDD243055}">
 									<ChildrenList>
 										<Action Name="" ID="{D6CBF947-0518-4C27-A324-E7C5022C95BC}" ShortID="588019834">
 											<ReferenceList>
@@ -220,7 +220,7 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_bunnyabsorb_nl" ID="{04567B71-F058-41A7-9A59-F52923D2CD1A}">
+								<Event Name="Play_sfx_bunny_absorb_nl" ID="{04567B71-F058-41A7-9A59-F52923D2CD1A}">
 									<ChildrenList>
 										<Action Name="" ID="{A9A7DE6B-ECA0-48C5-B951-40AB95391854}" ShortID="586277506">
 											<ReferenceList>
@@ -231,7 +231,7 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_bunnyimpact_nl" ID="{6E3FFD76-3CF8-41F9-A64C-F33756E4CC12}">
+								<Event Name="Play_sfx_bunny_impact_nl" ID="{6E3FFD76-3CF8-41F9-A64C-F33756E4CC12}">
 									<ChildrenList>
 										<Action Name="" ID="{6C67A236-2812-4770-BF59-BA54CADDB284}" ShortID="539571564">
 											<ReferenceList>
@@ -242,7 +242,7 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_bunnyland_nl" ID="{1677DB8F-BD67-4A1E-AC43-0CED304D5B0B}">
+								<Event Name="Play_sfx_bunny_land_nl" ID="{1677DB8F-BD67-4A1E-AC43-0CED304D5B0B}">
 									<ChildrenList>
 										<Action Name="" ID="{11B5EEA7-EE90-48D3-B00E-88B0080A558B}" ShortID="576117501">
 											<ReferenceList>
@@ -260,7 +260,7 @@
 										</Action>
 										<Action Name="" ID="{41EBDC7C-CA0F-42C7-B868-04F97403610A}" ShortID="358790825">
 											<PropertyList>
-												<Property Name="Delay" Type="Real64" Value="0.3"/>
+												<Property Name="Delay" Type="Real64" Value="0.2"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
@@ -270,7 +270,7 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_bunnyjump_nl" ID="{5EC6DAF1-1A0E-4EB8-B5A8-E248B2629610}">
+								<Event Name="Play_sfx_bunny_jump_nl" ID="{5EC6DAF1-1A0E-4EB8-B5A8-E248B2629610}">
 									<ChildrenList>
 										<Action Name="" ID="{D78023CC-0AC6-44E2-BF61-EDC72D826DAD}" ShortID="155594781">
 											<PropertyList>
@@ -678,7 +678,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Play_SFX_Human" ID="{A9AD46D0-BEDD-484A-BEF6-43EE137EDFE2}">
+						<Event Name="Play_sfx_Human" ID="{A9AD46D0-BEDD-484A-BEF6-43EE137EDFE2}">
 							<ChildrenList>
 								<Action Name="" ID="{EC265F3E-2CE2-4B3A-9A83-23AB316F776A}" ShortID="727965910">
 									<ReferenceList>

@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{1596D3F1-7106-92A7-49C5-7E6051B6D0E3}",
+    "Hash": "{BCA88439-119B-A9E5-8802-6AF0D502D515}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -60,9 +60,21 @@
       "Name": "Main Audio Bus",
       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     },
+     {
+      "Id": "2255513057",
+      "Name": "New Audio Bus",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\New Audio Bus",
+      "GUID": "{D2E9ED77-2B1B-40DD-97CE-F963D568E0B2}"
      }
     ],
     "AuxBusses": [
+     {
+      "Id": "373392551",
+      "Name": "New_Auxiliary_Bus",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\New_Auxiliary_Bus",
+      "GUID": "{E17AF6BF-1107-4731-9A4C-56ECCE3994CA}"
+     },
      {
       "Id": "831766780",
       "Name": "Zone1",
@@ -90,6 +102,12 @@
     ],
     "GameParameters": [
      {
+      "Id": "292743055",
+      "Name": "object_mass",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\object_mass",
+      "GUID": "{843CEA6A-F3A1-4997-B4A0-48745C2CC6B1}"
+     },
+     {
       "Id": "404510017",
       "Name": "bunny_size",
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\bunny_size",
@@ -104,40 +122,34 @@
     ],
     "StateGroups": [
      {
-      "Id": "831766718",
-      "Name": "zones",
-      "ObjectPath": "\\States\\Default Work Unit\\zones",
+      "Id": "1940399660",
+      "Name": "mus_state",
+      "ObjectPath": "\\States\\Default Work Unit\\mus_state",
       "GUID": "{1D8ACA51-0E72-437B-96E4-13129807EB70}",
       "States": [
        {
         "Id": "748895195",
         "Name": "None",
-        "ObjectPath": "\\States\\Default Work Unit\\zones\\None",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_state\\None",
         "GUID": "{D6D77D91-BE32-43DB-BBCE-BE363B544DC2}"
        },
        {
         "Id": "831766780",
         "Name": "zone1",
-        "ObjectPath": "\\States\\Default Work Unit\\zones\\zone1",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_state\\zone1",
         "GUID": "{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"
        },
        {
         "Id": "831766783",
         "Name": "zone2",
-        "ObjectPath": "\\States\\Default Work Unit\\zones\\zone2",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_state\\zone2",
         "GUID": "{868A53EB-5726-4480-B033-2D9A57B417C1}"
        },
        {
         "Id": "2968795556",
         "Name": "glide",
-        "ObjectPath": "\\States\\Default Work Unit\\zones\\glide",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_state\\glide",
         "GUID": "{E2402114-3321-422E-977C-0D3BAC32F7EA}"
-       },
-       {
-        "Id": "3092587493",
-        "Name": "pause",
-        "ObjectPath": "\\States\\Default Work Unit\\zones\\pause",
-        "GUID": "{998F7C00-09BB-419E-8F9C-86E678CDD49C}"
        }
       ]
      },
@@ -154,9 +166,9 @@
         "GUID": "{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"
        },
        {
-        "Id": "3092587493",
-        "Name": "pause",
-        "ObjectPath": "\\States\\Default Work Unit\\player_state\\pause",
+        "Id": "3232496108",
+        "Name": "pause_screen",
+        "ObjectPath": "\\States\\Default Work Unit\\player_state\\pause_screen",
         "GUID": "{158B7945-9B0D-4E95-9616-1D04A91E7535}"
        },
        {
@@ -192,6 +204,6 @@
     ]
    }
   ],
-  "FileHash": "{1BB4B1FF-B187-CCA6-2158-5A7A8CFC4E01}"
+  "FileHash": "{B087D335-A52C-C4C3-3DD7-DE7E95E37092}"
  }
 }

@@ -12,9 +12,6 @@
 					<ChildrenList>
 						<AuxBus Name="Zone2" ID="{C1D22865-FEF6-4F59-891F-D670A7DF784A}"/>
 						<AuxBus Name="Zone1" ID="{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}">
-							<PropertyList>
-								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
-							</PropertyList>
 							<ObjectLists>
 								<ObjectList Name="Effects">
 									<EffectSlot Name="" ID="{3DF6FEC7-197B-4110-9A32-7343F3D82CD4}" ShortID="376163736">
@@ -44,6 +41,8 @@
 								</ObjectList>
 							</ObjectLists>
 						</AuxBus>
+						<Bus Name="New Audio Bus" ID="{D2E9ED77-2B1B-40DD-97CE-F963D568E0B2}"/>
+						<AuxBus Name="New_Auxiliary_Bus" ID="{E17AF6BF-1107-4731-9A4C-56ECCE3994CA}"/>
 					</ChildrenList>
 				</Bus>
 			</ChildrenList>
