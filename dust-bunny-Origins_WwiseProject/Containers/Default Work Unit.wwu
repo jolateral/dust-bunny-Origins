@@ -5,18 +5,65 @@
 			<ChildrenList>
 				<Folder Name="Ambience" ID="{37E99510-673A-460E-9AA4-491FFC286DD2}" ShortID="976845964">
 					<ChildrenList>
-						<Folder Name="amb_room" ID="{FF284655-5CDD-41B1-ABB6-B87FD9F7F785}" ShortID="1054683366">
+						<PropertyContainer Name="amb_home" ID="{547BEFB0-3F23-4D35-93E2-38CABE61B2F7}" ShortID="576884964">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+								</Reference>
+							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="amb_room_low_lp" ID="{DEEA0A29-2186-4905-B4E1-0876B0879987}" ShortID="267054883">
+								<RandomSequenceContainer Name="amb_plates" ID="{6846160F-6B2E-4B4C-A38C-2870F4289437}" ShortID="384118516">
 									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="InitialDelay" Type="Real64">
+											<ValueList>
+												<Value>10</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{378F3B03-6855-4BA6-955B-90B6F0E52740}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="30"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
+										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
+										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="30">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{E04AD5DC-73C5-4D13-A262-9CFF51D236FB}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="120"/>
+															<Property Name="Min" Type="Real64" Value="-10"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-18</Value>
+												<Value>-6</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 										</Reference>
@@ -25,220 +72,74 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="amb_room_low_lp" ID="{8DCB2CE4-3863-4FD0-A068-147E30EBC92C}">
-											<Language>SFX</Language>
-											<AudioFile>amb_room_low_lp.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="1062626285"/>
-											</MediaIDList>
-										</AudioFileSource>
+										<Sound Name="sfx_plates_nl-001" ID="{9019E3EA-F8EA-4748-BAD3-D23FA547D3CB}" ShortID="802252570">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_plates_nl-001" ID="{D46CE7BF-0A19-4012-ABE0-4B4A7AAA3D86}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_plates_nl-001.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="735504034"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_plates_nl-001" ID="{D46CE7BF-0A19-4012-ABE0-4B4A7AAA3D86}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_plates_nl-002" ID="{2DDCDE96-4CB8-4819-B708-258DD75B43A2}" ShortID="656465796">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_plates_nl-002" ID="{F86BCBB3-746F-491B-9BAA-64056C0E0008}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_plates_nl-002.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1030490183"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_plates_nl-002" ID="{F86BCBB3-746F-491B-9BAA-64056C0E0008}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_plates_nl-003" ID="{F617BAAD-99E2-4154-8133-A8A3B091929C}" ShortID="929247249">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_plates_nl-003" ID="{F1FDDCB6-4300-460B-B172-7455C9749A5C}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_plates_nl-003.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="433743437"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_plates_nl-003" ID="{F1FDDCB6-4300-460B-B172-7455C9749A5C}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
-									<StateInfo>
-										<StateGroupList>
-											<StateGroupInfo>
-												<StateGroupRef Name="player_state" ID="{3F5075A1-FA7B-4885-B84E-40E19EF44046}"/>
-												<StateGroupInfo Name="" ID="{E97296BD-BA59-48D8-8FB8-7DF8F344835A}" ShortID="204539389"/>
-											</StateGroupInfo>
-										</StateGroupList>
-										<CustomStateList>
-											<CustomState>
-												<StateRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"/>
-												<CustomState Name="" ID="{B900336B-4CEC-45D8-9889-0C55075A3865}" ShortID="20489548">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64" Value="-12"/>
-													</PropertyList>
-												</CustomState>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="None" ID="{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"/>
-												<CustomState Name="" ID="{137D80D8-4906-415A-8021-72766B4A0C12}" ShortID="415951987"/>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="gliding" ID="{95554B9D-CF8C-4D94-99F5-25CB4A858898}"/>
-												<CustomState Name="" ID="{D4989D3C-2DBF-494B-87C0-5264C7C9C9C7}" ShortID="215206134"/>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
-												<CustomState Name="" ID="{916B7A6D-2D9B-41FA-BED3-1F98FF265232}" ShortID="289022546">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64" Value="-12"/>
-													</PropertyList>
-												</CustomState>
-											</CustomState>
-										</CustomStateList>
-									</StateInfo>
-									<ObjectLists>
-										<ObjectList Name="RTPC">
-											<RTPC Name="" ID="{D0EE19FC-A5B1-4FBE-9D2A-59A06E0814AB}" ShortID="847023148">
-												<PropertyList>
-													<Property Name="PropertyName" Type="string" Value="Volume"/>
-												</PropertyList>
-												<ReferenceList>
-													<Reference Name="ControlInput">
-														<ObjectRef Name="bunny_size" ID="{6749505B-A3CA-4BC2-B69F-EE8891A95801}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
-													</Reference>
-													<Reference Name="Curve">
-														<Custom>
-															<Curve Name="" ID="{8CD4925A-1B1E-4F03-BD09-F18BEE634739}">
-																<PropertyList>
-																	<Property Name="Flags" Type="int32" Value="3"/>
-																</PropertyList>
-																<PointList>
-																	<Point>
-																		<XPos>0</XPos>
-																		<YPos>0</YPos>
-																		<Flags>5</Flags>
-																		<SegmentShape>Log3</SegmentShape>
-																	</Point>
-																	<Point>
-																		<XPos>10</XPos>
-																		<YPos>-12</YPos>
-																		<Flags>37</Flags>
-																	</Point>
-																</PointList>
-															</Curve>
-														</Custom>
-													</Reference>
-												</ReferenceList>
-											</RTPC>
-										</ObjectList>
-									</ObjectLists>
-									<ActiveSourceList>
-										<ActiveSource Name="amb_room_low_lp" ID="{8DCB2CE4-3863-4FD0-A068-147E30EBC92C}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="amb_room_high_lp" ID="{C095C3B2-75D5-4A19-86CB-959A00FEF138}" ShortID="386230351">
-									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-3</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="amb_room_high_lp" ID="{09405CAD-C4A5-4EB2-A3A5-AA471AF870A5}">
-											<Language>SFX</Language>
-											<AudioFile>amb_room_high_lp.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="350166953"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<StateInfo>
-										<StateGroupList>
-											<StateGroupInfo>
-												<StateGroupRef Name="player_state" ID="{3F5075A1-FA7B-4885-B84E-40E19EF44046}"/>
-												<StateGroupInfo Name="" ID="{AA4CF4C7-2D8A-44A0-AAB1-85AD3F9C10BB}" ShortID="176476610"/>
-											</StateGroupInfo>
-										</StateGroupList>
-										<CustomStateList>
-											<CustomState>
-												<StateRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"/>
-												<CustomState Name="" ID="{E058E166-B513-457A-92DD-F82A92BDF921}" ShortID="679561844">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64" Value="-12"/>
-													</PropertyList>
-												</CustomState>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="None" ID="{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"/>
-												<CustomState Name="" ID="{34932CB9-1F02-4412-9976-F8D955EB146A}" ShortID="518464620"/>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="gliding" ID="{95554B9D-CF8C-4D94-99F5-25CB4A858898}"/>
-												<CustomState Name="" ID="{3CC32E25-21C6-486A-895E-7D3C4B646E04}" ShortID="893365422"/>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
-												<CustomState Name="" ID="{6697690E-654B-4409-9368-E6ADC0FB440E}" ShortID="974468076">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64" Value="-12"/>
-													</PropertyList>
-												</CustomState>
-											</CustomState>
-										</CustomStateList>
-									</StateInfo>
-									<ActiveSourceList>
-										<ActiveSource Name="amb_room_high_lp" ID="{09405CAD-C4A5-4EB2-A3A5-AA471AF870A5}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="amb_room_mid_lp" ID="{E8F5C097-A071-4D30-95B3-F989D846C37E}" ShortID="96923828">
-									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-3</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="amb_room_mid_lp" ID="{CE2F6DE0-8BAA-41DC-BF83-53CB6285444F}">
-											<Language>SFX</Language>
-											<AudioFile>amb_room_mid_lp.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="690718666"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<StateInfo>
-										<StateGroupList>
-											<StateGroupInfo>
-												<StateGroupRef Name="player_state" ID="{3F5075A1-FA7B-4885-B84E-40E19EF44046}"/>
-												<StateGroupInfo Name="" ID="{E89DBD5F-509A-4077-95BD-F1CDD4730919}" ShortID="81929229"/>
-											</StateGroupInfo>
-										</StateGroupList>
-										<CustomStateList>
-											<CustomState>
-												<StateRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"/>
-												<CustomState Name="" ID="{D8C7404C-C63E-4C21-BB83-2A993D193DB5}" ShortID="589558049">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64" Value="-12"/>
-													</PropertyList>
-												</CustomState>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="None" ID="{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"/>
-												<CustomState Name="" ID="{C83EB16D-4928-4A3A-A132-53188C2935B1}" ShortID="626861330"/>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="gliding" ID="{95554B9D-CF8C-4D94-99F5-25CB4A858898}"/>
-												<CustomState Name="" ID="{490B7D33-B6B3-4611-B910-258189FBE897}" ShortID="477053650"/>
-											</CustomState>
-											<CustomState>
-												<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
-												<CustomState Name="" ID="{11AB6AAF-FB78-44FD-B9EE-09955A456A13}" ShortID="74027174">
-													<PropertyList>
-														<Property Name="Volume" Type="Real64" Value="-12"/>
-													</PropertyList>
-												</CustomState>
-											</CustomState>
-										</CustomStateList>
-									</StateInfo>
-									<ActiveSourceList>
-										<ActiveSource Name="amb_room_mid_lp" ID="{CE2F6DE0-8BAA-41DC-BF83-53CB6285444F}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-							</ChildrenList>
-						</Folder>
-						<Folder Name="amb_home" ID="{336692EC-7783-4A3F-81B4-3A777EE16BDE}" ShortID="851406433">
-							<ChildrenList>
+								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="amb_cat" ID="{8A76D6E2-DDFC-48AA-BDD8-9F8823E8A328}" ShortID="42473220">
 									<PropertyList>
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
@@ -498,6 +399,841 @@
 												<ActiveSource Name="sfx_cat_running_nl-003" ID="{60818D7E-F5A7-4E8D-A190-84C77145755C}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="amb_footstep_barefoot" ID="{2AC5EEFF-360D-4A0D-A5C6-0C00CD85E38F}" ShortID="538752033">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
+										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
+										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="10">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{470F7A61-9181-48DA-8987-5BFE4C0EF574}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="30"/>
+															<Property Name="Min" Type="Real64" Value="-5"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{C727C5D6-B84E-461E-B1A9-EB42B50DF1AC}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+															<Property Name="Min" Type="Real64" Value="-3"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<RandomSequenceContainer Name="sfx_footstep_barefoot-001" ID="{D0F98A47-57FB-40E6-BABF-DC21C2050532}" ShortID="300758610">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{DBA247F2-AF9F-4D4D-A22A-EBFB66FA1538}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="200"/>
+																	<Property Name="Min" Type="Real64" Value="-200"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismInfiniteOrNumberOfLoops" Type="int16" Value="0"/>
+												<Property Name="PlayMechanismLoopCount" Type="int32" Value="1">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{124D9A38-0F01-4AA7-AA1B-F7E0293922A3}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="1.5"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.2">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{7372B7FB-C554-4792-8B05-12558B8B8573}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="0.1"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{DD84E96B-4C30-4B0C-AC46-A5A4F494D9AD}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																	<Property Name="Min" Type="Real64" Value="-3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-005" ID="{172D4F38-75F0-44A2-ADAE-8DC68038C603}" ShortID="881915502">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-005" ID="{75D72E5F-4491-42D4-8126-C370E9C02F59}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-005.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="945012819"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-005" ID="{75D72E5F-4491-42D4-8126-C370E9C02F59}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-004" ID="{35E1D480-52F0-4746-A852-3C97B0CE12EE}" ShortID="274559697">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-004" ID="{631B1E38-98FF-4241-A071-6451133B14A0}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-004.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="407602456"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-004" ID="{631B1E38-98FF-4241-A071-6451133B14A0}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-003" ID="{9B606EFB-4330-440D-8FF7-2837893713F4}" ShortID="930488449">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-003" ID="{FC7A83AC-3FC4-495C-9627-324A7D2D0BB4}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-003.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="364759839"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-003" ID="{FC7A83AC-3FC4-495C-9627-324A7D2D0BB4}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-002" ID="{42E10522-468B-43DD-9F29-DB221B3A8EAB}" ShortID="298341657">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-002" ID="{3FD89A1E-09A0-40B2-A664-09205104D664}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-002.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="130620619"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-002" ID="{3FD89A1E-09A0-40B2-A664-09205104D664}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-001" ID="{4C371874-D1E6-4888-A468-E5EDEE8D6919}" ShortID="754058115">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-001" ID="{8AAFE963-9385-476F-B6FE-EE94CD395DAB}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-001.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="917494001"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-001" ID="{8AAFE963-9385-476F-B6FE-EE94CD395DAB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="sfx_footstep_barefoot-002" ID="{916A9899-42D0-4A14-9E56-610C931A4EAC}" ShortID="556255324">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{3EFE0783-9948-4C05-82B2-C6BF47EE30F9}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="200"/>
+																	<Property Name="Min" Type="Real64" Value="-200"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.7">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{1A4B813A-343C-4F89-9A31-3216DA27125F}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="0.1"/>
+																	<Property Name="Min" Type="Real64" Value="-0.1"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{51861DF6-2755-43E5-A60E-7C010C8D35F1}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																	<Property Name="Min" Type="Real64" Value="-3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-008" ID="{3EDC7696-1070-489A-A47B-684F128D5DA5}" ShortID="188939796">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-008" ID="{1F91F6E5-87C7-494F-913F-43FCDA769F1B}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-008.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="652633520"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-008" ID="{1F91F6E5-87C7-494F-913F-43FCDA769F1B}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-009" ID="{13DE7168-2873-472E-808E-0A61BB27BD31}" ShortID="405253168">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-009" ID="{1535C1B4-7224-42EE-90D9-AF28EF202020}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-009.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="600568205"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-009" ID="{1535C1B4-7224-42EE-90D9-AF28EF202020}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-010" ID="{02370168-1F05-4816-9E37-F810D6A6884C}" ShortID="959341215">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-010" ID="{FEEC129C-D899-4D58-822A-1321F166F3CC}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-010.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="511121202"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-010" ID="{FEEC129C-D899-4D58-822A-1321F166F3CC}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-012" ID="{1C7856C1-6EEC-4364-9CBC-A34B0C4DB847}" ShortID="548336403">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-012" ID="{A4CE5CD1-D2C4-463B-9C37-DE4B32C8F44D}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-012.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="592872612"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-012" ID="{A4CE5CD1-D2C4-463B-9C37-DE4B32C8F44D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-013" ID="{71F5C70B-B84D-4CF1-A570-C125A19818E9}" ShortID="910417878">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-013" ID="{41440D4D-B23F-48B6-AC6C-DE4D6ED06809}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-013.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="372042329"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-013" ID="{41440D4D-B23F-48B6-AC6C-DE4D6ED06809}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-011" ID="{E0FC756C-DD93-4FA4-9099-629FC1A1B330}" ShortID="163385196">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-011" ID="{D906E9CC-60CC-43DE-A0C2-15658975352F}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-011.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="854197427"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-011" ID="{D906E9CC-60CC-43DE-A0C2-15658975352F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-007" ID="{13DE05D2-4C93-4F8F-AEC2-C6DB6D1DB35C}" ShortID="458849617">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-007" ID="{C7DB9765-0C09-4077-AB9A-346F27C96488}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-007.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="372078910"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-007" ID="{C7DB9765-0C09-4077-AB9A-346F27C96488}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-006" ID="{60B893EA-3211-4A38-9550-7CBFCEE80C8A}" ShortID="620437624">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-006" ID="{664BBF2C-67C3-4AAF-AE06-891C6DF91D69}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-006.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="73687703"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-006" ID="{664BBF2C-67C3-4AAF-AE06-891C6DF91D69}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="sfx_footstep_barefoot-003" ID="{B00CE9A1-4A0D-4077-97B0-B921BF758399}" ShortID="305513284">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{8256B3AD-2048-4AE7-9C98-783C04A5409E}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="200"/>
+																	<Property Name="Min" Type="Real64" Value="-200"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.8">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{E88BC77A-D4B0-400C-B6C9-ACC631FB0007}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="0.1"/>
+																	<Property Name="Min" Type="Real64" Value="-0.1"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{D8C19C7C-5737-4091-99CB-B1B883AAF86C}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																	<Property Name="Min" Type="Real64" Value="-3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-014" ID="{7ED5020F-0D96-4B2D-94D0-03E9B3E93D89}" ShortID="955210107">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-014" ID="{3CA30694-B682-432C-B767-657EA28E1167}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-014.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="919269042"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-014" ID="{3CA30694-B682-432C-B767-657EA28E1167}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-015" ID="{7293F4AB-616A-496A-8685-CC294CD393CD}" ShortID="985762972">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-015" ID="{CCE0E078-D9ED-4286-9BBD-C3D0E1EA0540}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-015.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="678129473"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-015" ID="{CCE0E078-D9ED-4286-9BBD-C3D0E1EA0540}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-016" ID="{CA1B288C-8B9D-435E-907F-FE1C1906E9AE}" ShortID="292823454">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-016" ID="{E93346F5-57E1-48A3-B341-31493C55870D}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-016.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="117573775"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-016" ID="{E93346F5-57E1-48A3-B341-31493C55870D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-017" ID="{5A83B2C9-6D96-40AC-806E-C68764172FCD}" ShortID="681816543">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-017" ID="{4E0E6945-BD6D-4DD4-B31C-B59FD7285F22}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-017.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="571715671"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-017" ID="{4E0E6945-BD6D-4DD4-B31C-B59FD7285F22}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="sfx_footstep_barefoot-004" ID="{38C117B4-BBCB-4FA3-94FD-40603783BBD9}" ShortID="760843992">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{3052572A-1B0F-40F6-A75C-58B0A147804D}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="300"/>
+																	<Property Name="Min" Type="Real64" Value="-300"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
+												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.5">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{B302BD74-D6F7-43F1-9649-F814F647EBA6}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+												<Property Name="Volume" Type="Real64">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{2D19C6EE-4BAD-4AFA-B58C-682CA5AA50C9}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="3"/>
+																	<Property Name="Min" Type="Real64" Value="-3"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-018" ID="{12E67DA3-E4D2-4117-9BD2-BAEEE05A8D7B}" ShortID="50104812">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-018" ID="{2973A320-9130-4493-B3B8-2839CE762B48}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-018.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="96297279"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-018" ID="{2973A320-9130-4493-B3B8-2839CE762B48}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-019" ID="{8A94917D-AD18-4630-BD03-009750540347}" ShortID="84066558">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-019" ID="{E8C4E3EC-82B0-4031-9726-407A3AD39B27}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-019.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="174033060"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-019" ID="{E8C4E3EC-82B0-4031-9726-407A3AD39B27}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-025" ID="{E8A60AA3-CCD2-4761-88F7-83F9CE908571}" ShortID="888917810">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-025" ID="{A6B9C867-FA7E-483A-A349-77CC45FA088A}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-025.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="209965715"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-025" ID="{A6B9C867-FA7E-483A-A349-77CC45FA088A}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-024" ID="{F45B6554-FB83-4229-9A3E-2CB3DE70B0B7}" ShortID="622020981">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-024" ID="{F182D977-C9AD-4BCC-B777-1C0FA303D171}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-024.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="312584685"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-024" ID="{F182D977-C9AD-4BCC-B777-1C0FA303D171}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-023" ID="{069B46E2-FA45-4740-A731-8C9BC7846E23}" ShortID="87236174">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-023" ID="{D4502536-C219-4CE9-9B96-9C12F271954C}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-023.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="940546199"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-023" ID="{D4502536-C219-4CE9-9B96-9C12F271954C}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-020" ID="{55F5A904-2306-487D-8C15-A214DED010F8}" ShortID="970072950">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-020" ID="{A96F2CF7-04DA-4112-AD12-A0C9CB03CCFE}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-020.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="94667237"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-020" ID="{A96F2CF7-04DA-4112-AD12-A0C9CB03CCFE}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-022" ID="{5D2D23C9-CBBE-40B6-9BA3-7735772D79BE}" ShortID="373286184">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-022" ID="{BBEA5508-9868-4611-A4E7-DD659E588712}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-022.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="940753587"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-022" ID="{BBEA5508-9868-4611-A4E7-DD659E588712}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_human_footstep_barefoot_fast_nl-021" ID="{DB682A4A-E12B-443A-A07C-E1BEB73DA6E6}" ShortID="256089736">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-021" ID="{E88CD1D5-36FC-4A48-9B9D-5DB4F7BC6A0E}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_human_footstep_barefoot_fast_nl-021.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="971958020"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-021" ID="{E88CD1D5-36FC-4A48-9B9D-5DB4F7BC6A0E}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="amb_footstep_slipper" ID="{455DF3F6-5BAD-4308-AEF2-C4047AA2EFB6}" ShortID="1072985543">
@@ -2217,969 +2953,53 @@
 										</RandomSequenceContainer>
 									</ChildrenList>
 								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="amb_footstep_barefoot" ID="{2AC5EEFF-360D-4A0D-A5C6-0C00CD85E38F}" ShortID="538752033">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="Lowpass" Type="int16">
-											<ValueList>
-												<Value>20</Value>
-											</ValueList>
-										</Property>
-										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
-										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="10">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{470F7A61-9181-48DA-8987-5BFE4C0EF574}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="30"/>
-															<Property Name="Min" Type="Real64" Value="-5"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{C727C5D6-B84E-461E-B1A9-EB42B50DF1AC}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="3"/>
-															<Property Name="Min" Type="Real64" Value="-3"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<RandomSequenceContainer Name="sfx_footstep_barefoot-001" ID="{D0F98A47-57FB-40E6-BABF-DC21C2050532}" ShortID="300758610">
-											<PropertyList>
-												<Property Name="Pitch" Type="int32">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{DBA247F2-AF9F-4D4D-A22A-EBFB66FA1538}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="200"/>
-																	<Property Name="Min" Type="Real64" Value="-200"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="PlayMechanismInfiniteOrNumberOfLoops" Type="int16" Value="0"/>
-												<Property Name="PlayMechanismLoopCount" Type="int32" Value="1">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{124D9A38-0F01-4AA7-AA1B-F7E0293922A3}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="1.5"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
-												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.2">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{7372B7FB-C554-4792-8B05-12558B8B8573}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="0.1"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-												<Property Name="Volume" Type="Real64">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{DD84E96B-4C30-4B0C-AC46-A5A4F494D9AD}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="3"/>
-																	<Property Name="Min" Type="Real64" Value="-3"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-005" ID="{172D4F38-75F0-44A2-ADAE-8DC68038C603}" ShortID="881915502">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-005" ID="{75D72E5F-4491-42D4-8126-C370E9C02F59}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-005.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="945012819"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-005" ID="{75D72E5F-4491-42D4-8126-C370E9C02F59}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-004" ID="{35E1D480-52F0-4746-A852-3C97B0CE12EE}" ShortID="274559697">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-004" ID="{631B1E38-98FF-4241-A071-6451133B14A0}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-004.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="407602456"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-004" ID="{631B1E38-98FF-4241-A071-6451133B14A0}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-003" ID="{9B606EFB-4330-440D-8FF7-2837893713F4}" ShortID="930488449">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-003" ID="{FC7A83AC-3FC4-495C-9627-324A7D2D0BB4}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-003.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="364759839"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-003" ID="{FC7A83AC-3FC4-495C-9627-324A7D2D0BB4}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-002" ID="{42E10522-468B-43DD-9F29-DB221B3A8EAB}" ShortID="298341657">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-002" ID="{3FD89A1E-09A0-40B2-A664-09205104D664}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-002.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="130620619"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-002" ID="{3FD89A1E-09A0-40B2-A664-09205104D664}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-001" ID="{4C371874-D1E6-4888-A468-E5EDEE8D6919}" ShortID="754058115">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-001" ID="{8AAFE963-9385-476F-B6FE-EE94CD395DAB}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-001.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="917494001"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-001" ID="{8AAFE963-9385-476F-B6FE-EE94CD395DAB}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-										</RandomSequenceContainer>
-										<RandomSequenceContainer Name="sfx_footstep_barefoot-002" ID="{916A9899-42D0-4A14-9E56-610C931A4EAC}" ShortID="556255324">
-											<PropertyList>
-												<Property Name="Pitch" Type="int32">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{3EFE0783-9948-4C05-82B2-C6BF47EE30F9}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="200"/>
-																	<Property Name="Min" Type="Real64" Value="-200"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
-												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.7">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{1A4B813A-343C-4F89-9A31-3216DA27125F}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="0.1"/>
-																	<Property Name="Min" Type="Real64" Value="-0.1"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-												<Property Name="Volume" Type="Real64">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{51861DF6-2755-43E5-A60E-7C010C8D35F1}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="3"/>
-																	<Property Name="Min" Type="Real64" Value="-3"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-008" ID="{3EDC7696-1070-489A-A47B-684F128D5DA5}" ShortID="188939796">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-008" ID="{1F91F6E5-87C7-494F-913F-43FCDA769F1B}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-008.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="652633520"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-008" ID="{1F91F6E5-87C7-494F-913F-43FCDA769F1B}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-009" ID="{13DE7168-2873-472E-808E-0A61BB27BD31}" ShortID="405253168">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-009" ID="{1535C1B4-7224-42EE-90D9-AF28EF202020}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-009.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="600568205"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-009" ID="{1535C1B4-7224-42EE-90D9-AF28EF202020}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-010" ID="{02370168-1F05-4816-9E37-F810D6A6884C}" ShortID="959341215">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-010" ID="{FEEC129C-D899-4D58-822A-1321F166F3CC}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-010.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="511121202"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-010" ID="{FEEC129C-D899-4D58-822A-1321F166F3CC}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-012" ID="{1C7856C1-6EEC-4364-9CBC-A34B0C4DB847}" ShortID="548336403">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-012" ID="{A4CE5CD1-D2C4-463B-9C37-DE4B32C8F44D}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-012.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="592872612"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-012" ID="{A4CE5CD1-D2C4-463B-9C37-DE4B32C8F44D}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-013" ID="{71F5C70B-B84D-4CF1-A570-C125A19818E9}" ShortID="910417878">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-013" ID="{41440D4D-B23F-48B6-AC6C-DE4D6ED06809}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-013.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="372042329"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-013" ID="{41440D4D-B23F-48B6-AC6C-DE4D6ED06809}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-011" ID="{E0FC756C-DD93-4FA4-9099-629FC1A1B330}" ShortID="163385196">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-011" ID="{D906E9CC-60CC-43DE-A0C2-15658975352F}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-011.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="854197427"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-011" ID="{D906E9CC-60CC-43DE-A0C2-15658975352F}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-007" ID="{13DE05D2-4C93-4F8F-AEC2-C6DB6D1DB35C}" ShortID="458849617">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-007" ID="{C7DB9765-0C09-4077-AB9A-346F27C96488}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-007.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="372078910"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-007" ID="{C7DB9765-0C09-4077-AB9A-346F27C96488}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-006" ID="{60B893EA-3211-4A38-9550-7CBFCEE80C8A}" ShortID="620437624">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-006" ID="{664BBF2C-67C3-4AAF-AE06-891C6DF91D69}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-006.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="73687703"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-006" ID="{664BBF2C-67C3-4AAF-AE06-891C6DF91D69}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-										</RandomSequenceContainer>
-										<RandomSequenceContainer Name="sfx_footstep_barefoot-003" ID="{B00CE9A1-4A0D-4077-97B0-B921BF758399}" ShortID="305513284">
-											<PropertyList>
-												<Property Name="Pitch" Type="int32">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{8256B3AD-2048-4AE7-9C98-783C04A5409E}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="200"/>
-																	<Property Name="Min" Type="Real64" Value="-200"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
-												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.8">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{E88BC77A-D4B0-400C-B6C9-ACC631FB0007}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="0.1"/>
-																	<Property Name="Min" Type="Real64" Value="-0.1"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-												<Property Name="Volume" Type="Real64">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{D8C19C7C-5737-4091-99CB-B1B883AAF86C}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="3"/>
-																	<Property Name="Min" Type="Real64" Value="-3"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-014" ID="{7ED5020F-0D96-4B2D-94D0-03E9B3E93D89}" ShortID="955210107">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-014" ID="{3CA30694-B682-432C-B767-657EA28E1167}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-014.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="919269042"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-014" ID="{3CA30694-B682-432C-B767-657EA28E1167}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-015" ID="{7293F4AB-616A-496A-8685-CC294CD393CD}" ShortID="985762972">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-015" ID="{CCE0E078-D9ED-4286-9BBD-C3D0E1EA0540}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-015.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="678129473"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-015" ID="{CCE0E078-D9ED-4286-9BBD-C3D0E1EA0540}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-016" ID="{CA1B288C-8B9D-435E-907F-FE1C1906E9AE}" ShortID="292823454">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-016" ID="{E93346F5-57E1-48A3-B341-31493C55870D}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-016.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="117573775"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-016" ID="{E93346F5-57E1-48A3-B341-31493C55870D}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-017" ID="{5A83B2C9-6D96-40AC-806E-C68764172FCD}" ShortID="681816543">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-017" ID="{4E0E6945-BD6D-4DD4-B31C-B59FD7285F22}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-017.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="571715671"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-017" ID="{4E0E6945-BD6D-4DD4-B31C-B59FD7285F22}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-										</RandomSequenceContainer>
-										<RandomSequenceContainer Name="sfx_footstep_barefoot-004" ID="{38C117B4-BBCB-4FA3-94FD-40603783BBD9}" ShortID="760843992">
-											<PropertyList>
-												<Property Name="Pitch" Type="int32">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{3052572A-1B0F-40F6-A75C-58B0A147804D}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="300"/>
-																	<Property Name="Min" Type="Real64" Value="-300"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-												<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
-												<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.5">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{B302BD74-D6F7-43F1-9649-F814F647EBA6}"/>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-												<Property Name="Volume" Type="Real64">
-													<ModifierList>
-														<ModifierInfo>
-															<Modifier Name="" ID="{2D19C6EE-4BAD-4AFA-B58C-682CA5AA50C9}">
-																<PropertyList>
-																	<Property Name="Enabled" Type="bool" Value="True"/>
-																	<Property Name="Max" Type="Real64" Value="3"/>
-																	<Property Name="Min" Type="Real64" Value="-3"/>
-																</PropertyList>
-															</Modifier>
-														</ModifierInfo>
-													</ModifierList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-018" ID="{12E67DA3-E4D2-4117-9BD2-BAEEE05A8D7B}" ShortID="50104812">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-018" ID="{2973A320-9130-4493-B3B8-2839CE762B48}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-018.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="96297279"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-018" ID="{2973A320-9130-4493-B3B8-2839CE762B48}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-019" ID="{8A94917D-AD18-4630-BD03-009750540347}" ShortID="84066558">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-019" ID="{E8C4E3EC-82B0-4031-9726-407A3AD39B27}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-019.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="174033060"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-019" ID="{E8C4E3EC-82B0-4031-9726-407A3AD39B27}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-025" ID="{E8A60AA3-CCD2-4761-88F7-83F9CE908571}" ShortID="888917810">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-025" ID="{A6B9C867-FA7E-483A-A349-77CC45FA088A}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-025.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="209965715"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-025" ID="{A6B9C867-FA7E-483A-A349-77CC45FA088A}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-024" ID="{F45B6554-FB83-4229-9A3E-2CB3DE70B0B7}" ShortID="622020981">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-024" ID="{F182D977-C9AD-4BCC-B777-1C0FA303D171}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-024.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="312584685"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-024" ID="{F182D977-C9AD-4BCC-B777-1C0FA303D171}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-023" ID="{069B46E2-FA45-4740-A731-8C9BC7846E23}" ShortID="87236174">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-023" ID="{D4502536-C219-4CE9-9B96-9C12F271954C}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-023.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="940546199"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-023" ID="{D4502536-C219-4CE9-9B96-9C12F271954C}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-020" ID="{55F5A904-2306-487D-8C15-A214DED010F8}" ShortID="970072950">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-020" ID="{A96F2CF7-04DA-4112-AD12-A0C9CB03CCFE}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-020.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="94667237"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-020" ID="{A96F2CF7-04DA-4112-AD12-A0C9CB03CCFE}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-022" ID="{5D2D23C9-CBBE-40B6-9BA3-7735772D79BE}" ShortID="373286184">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-022" ID="{BBEA5508-9868-4611-A4E7-DD659E588712}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-022.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="940753587"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-022" ID="{BBEA5508-9868-4611-A4E7-DD659E588712}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-												<Sound Name="sfx_human_footstep_barefoot_fast_nl-021" ID="{DB682A4A-E12B-443A-A07C-E1BEB73DA6E6}" ShortID="256089736">
-													<ReferenceList>
-														<Reference Name="Conversion">
-															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-														</Reference>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="sfx_human_footstep_barefoot_fast_nl-021" ID="{E88CD1D5-36FC-4A48-9B9D-5DB4F7BC6A0E}">
-															<Language>SFX</Language>
-															<AudioFile>sfx_human_footstep_barefoot_fast_nl-021.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="971958020"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ActiveSourceList>
-														<ActiveSource Name="sfx_human_footstep_barefoot_fast_nl-021" ID="{E88CD1D5-36FC-4A48-9B9D-5DB4F7BC6A0E}" Platform="Linked"/>
-													</ActiveSourceList>
-												</Sound>
-											</ChildrenList>
-										</RandomSequenceContainer>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="amb_plates" ID="{6846160F-6B2E-4B4C-A38C-2870F4289437}" ShortID="384118516">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="InitialDelay" Type="Real64">
-											<ValueList>
-												<Value>10</Value>
-											</ValueList>
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{378F3B03-6855-4BA6-955B-90B6F0E52740}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="30"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Lowpass" Type="int16">
-											<ValueList>
-												<Value>20</Value>
-											</ValueList>
-										</Property>
-										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
-										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="30">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{E04AD5DC-73C5-4D13-A262-9CFF51D236FB}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="120"/>
-															<Property Name="Min" Type="Real64" Value="-10"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="sfx_plates_nl-001" ID="{9019E3EA-F8EA-4748-BAD3-D23FA547D3CB}" ShortID="802252570">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_plates_nl-001" ID="{D46CE7BF-0A19-4012-ABE0-4B4A7AAA3D86}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_plates_nl-001.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="735504034"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_plates_nl-001" ID="{D46CE7BF-0A19-4012-ABE0-4B4A7AAA3D86}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_plates_nl-002" ID="{2DDCDE96-4CB8-4819-B708-258DD75B43A2}" ShortID="656465796">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_plates_nl-002" ID="{F86BCBB3-746F-491B-9BAA-64056C0E0008}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_plates_nl-002.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1030490183"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_plates_nl-002" ID="{F86BCBB3-746F-491B-9BAA-64056C0E0008}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_plates_nl-003" ID="{F617BAAD-99E2-4154-8133-A8A3B091929C}" ShortID="929247249">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_plates_nl-003" ID="{F1FDDCB6-4300-460B-B172-7455C9749A5C}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_plates_nl-003.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="433743437"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_plates_nl-003" ID="{F1FDDCB6-4300-460B-B172-7455C9749A5C}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
 							</ChildrenList>
-						</Folder>
-						<Folder Name="amb_outdoor" ID="{DFFF6EEE-4863-4A69-A193-15B256C2B885}" ShortID="947991246">
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="player_state" ID="{3F5075A1-FA7B-4885-B84E-40E19EF44046}"/>
+										<StateGroupInfo Name="" ID="{149D1887-E390-43EF-9AAA-5CE56B192279}" ShortID="703643279"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"/>
+										<CustomState Name="" ID="{89DFF80C-3AA8-4812-A4DC-94F016072CB7}" ShortID="266639129">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="50"/>
+												<Property Name="Volume" Type="Real64" Value="-12"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="None" ID="{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"/>
+										<CustomState Name="" ID="{617D799F-0F0C-45F1-8DCD-B8C3F29E46F2}" ShortID="215854329"/>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="gliding" ID="{95554B9D-CF8C-4D94-99F5-25CB4A858898}"/>
+										<CustomState Name="" ID="{2715F06E-A594-4B5E-976F-B8C0A1007440}" ShortID="1001903692"/>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+										<CustomState Name="" ID="{DF48B160-310B-4723-812A-FA06A33EBA29}" ShortID="142130340">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="50"/>
+												<Property Name="Volume" Type="Real64" Value="-12"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
+						</PropertyContainer>
+						<PropertyContainer Name="amb_outdoor" ID="{7C374E1B-E276-4F52-AE7D-6219C4F19746}" ShortID="195821625">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+								</Reference>
+							</ReferenceList>
 							<ChildrenList>
 								<RandomSequenceContainer Name="amb_carpass" ID="{478C8834-742F-49D3-840F-4655277C652A}" ShortID="935350242">
 									<PropertyList>
@@ -3622,12 +3442,222 @@
 									</ChildrenList>
 								</RandomSequenceContainer>
 							</ChildrenList>
-						</Folder>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="player_state" ID="{3F5075A1-FA7B-4885-B84E-40E19EF44046}"/>
+										<StateGroupInfo Name="" ID="{C531FBEA-F433-4773-BF5A-3BBAFE7865CE}" ShortID="14287519"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"/>
+										<CustomState Name="" ID="{B03BCD5D-DEF0-408C-8F72-BA2EE7DD9B22}" ShortID="196668119">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="50"/>
+												<Property Name="Volume" Type="Real64" Value="-12"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="None" ID="{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"/>
+										<CustomState Name="" ID="{2848BCBD-17F4-4E77-81BA-9668F51ECDFD}" ShortID="954533541"/>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="gliding" ID="{95554B9D-CF8C-4D94-99F5-25CB4A858898}"/>
+										<CustomState Name="" ID="{CAD80AF9-A434-430A-8798-BEEA065BCBDF}" ShortID="249590094"/>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+										<CustomState Name="" ID="{9693F4E6-BFB8-4EC4-AEFC-34B589FE7C57}" ShortID="384255714">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="50"/>
+												<Property Name="Volume" Type="Real64" Value="-12"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
+						</PropertyContainer>
+						<PropertyContainer Name="amb_room" ID="{C72E6DC6-A3DC-467E-A943-044FF1A2E86F}" ShortID="130102094">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="amb_room_low_lp" ID="{DEEA0A29-2186-4905-B4E1-0876B0879987}" ShortID="267054883">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-12</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="amb_room_low_lp" ID="{8DCB2CE4-3863-4FD0-A068-147E30EBC92C}">
+											<Language>SFX</Language>
+											<AudioFile>amb_room_low_lp.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="1062626285"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="RTPC">
+											<RTPC Name="" ID="{D0EE19FC-A5B1-4FBE-9D2A-59A06E0814AB}" ShortID="847023148">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Volume"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="bunny_size" ID="{6749505B-A3CA-4BC2-B69F-EE8891A95801}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{8CD4925A-1B1E-4F03-BD09-F18BEE634739}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>0</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Log3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>10</XPos>
+																		<YPos>-12</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</ObjectList>
+									</ObjectLists>
+									<ActiveSourceList>
+										<ActiveSource Name="amb_room_low_lp" ID="{8DCB2CE4-3863-4FD0-A068-147E30EBC92C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="amb_room_mid_lp" ID="{E8F5C097-A071-4D30-95B3-F989D846C37E}" ShortID="96923828">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="amb_room_mid_lp" ID="{CE2F6DE0-8BAA-41DC-BF83-53CB6285444F}">
+											<Language>SFX</Language>
+											<AudioFile>amb_room_mid_lp.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="690718666"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="amb_room_mid_lp" ID="{CE2F6DE0-8BAA-41DC-BF83-53CB6285444F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="amb_room_high_lp" ID="{C095C3B2-75D5-4A19-86CB-959A00FEF138}" ShortID="386230351">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="amb_room_high_lp" ID="{09405CAD-C4A5-4EB2-A3A5-AA471AF870A5}">
+											<Language>SFX</Language>
+											<AudioFile>amb_room_high_lp.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="350166953"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="amb_room_high_lp" ID="{09405CAD-C4A5-4EB2-A3A5-AA471AF870A5}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="player_state" ID="{3F5075A1-FA7B-4885-B84E-40E19EF44046}"/>
+										<StateGroupInfo Name="" ID="{417A5292-20F2-484F-A9C9-53DEA2E765F4}" ShortID="725346309"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"/>
+										<CustomState Name="" ID="{1A85B946-A4B3-4D3E-96FC-745D7345E845}" ShortID="976945944">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="30"/>
+												<Property Name="Volume" Type="Real64" Value="-12"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="None" ID="{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"/>
+										<CustomState Name="" ID="{A70FEEB7-D1F5-4710-B9E0-22019180C6A9}" ShortID="821866998"/>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="gliding" ID="{95554B9D-CF8C-4D94-99F5-25CB4A858898}"/>
+										<CustomState Name="" ID="{65DBD3FD-6992-42FF-B481-5D248CDA4B0D}" ShortID="309194718"/>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+										<CustomState Name="" ID="{4C63F65B-B438-41F4-9148-13112517EFAA}" ShortID="556609047">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16" Value="30"/>
+												<Property Name="Volume" Type="Real64" Value="-12"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
+						</PropertyContainer>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Music" ID="{B7199324-C1CE-40DC-9680-31A421B037E4}" ShortID="410597850">
 					<ChildrenList>
-						<MusicSwitchContainer Name="mus_zones" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" ShortID="1040651890">
+						<MusicSwitchContainer Name="mus_game" ID="{A9A890D0-F53E-4C9B-A2D5-F0AC08CE9E6F}" ShortID="1040651890">
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -4241,6 +4271,16 @@
 																</Reference>
 															</ReferenceList>
 														</MusicPlaylistItem>
+														<MusicPlaylistItem Name="" ID="{E39C7296-CA26-4BF6-BD7B-FA608806B4A9}" ShortID="645462914">
+															<PropertyList>
+																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Segment">
+																	<ObjectRef Name="pause" ID="{4E2F262E-7F1B-42CA-BD71-1C6B36C86541}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+																</Reference>
+															</ReferenceList>
+														</MusicPlaylistItem>
 													</ChildrenList>
 												</MusicPlaylistItem>
 											</Custom>
@@ -4287,7 +4327,7 @@
 									<ChildrenList>
 										<MusicSegment Name="mus_4-4_100bpm_zone1" ID="{E90ECC73-A07F-4A4C-BB42-47CE2DBE4C8E}" ShortID="372361305">
 											<PropertyList>
-												<Property Name="EndPosition" Type="Real64" Value="82639.2802102208"/>
+												<Property Name="EndPosition" Type="Real64" Value="42449.9233547766"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
@@ -6584,6 +6624,76 @@
 												</ObjectList>
 											</ObjectLists>
 										</MusicSegment>
+										<MusicSegment Name="pause" ID="{4E2F262E-7F1B-42CA-BD71-1C6B36C86541}" ShortID="73808554">
+											<PropertyList>
+												<Property Name="EndPosition" Type="Real64" Value="7765.19666269368"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<MusicTrack Name="pause" ID="{D7AFEB5C-30BB-4783-A70B-C3FC81AA87A5}" ShortID="717536615">
+													<ReferenceList>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+														<Reference Name="TransitionRoot">
+															<Custom>
+																<MusicTransition Name="Root" ID="{97D01C61-FC75-4B55-A284-209C4FF61FA3}">
+																	<PropertyList>
+																		<Property Name="IsFolder" Type="bool" Value="True"/>
+																	</PropertyList>
+																	<TransitionInfo/>
+																</MusicTransition>
+															</Custom>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="pause" ID="{DC48575B-A3E8-4432-B9DD-A8D46B07A162}">
+															<Language>SFX</Language>
+															<AudioFile>pause.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="72263303"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ObjectLists>
+														<ObjectList Name="Sequences">
+															<MusicTrackSequence Name="" ID="{8B077AE3-BA23-4420-BAA2-AD8EEC4D985A}">
+																<ObjectLists>
+																	<ObjectList Name="Clips">
+																		<MusicClip Name="pause" ID="{66CC2FEB-57CC-4127-855F-9D4CE72C97C1}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="6048.89583333333"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="pause" ID="{DC48575B-A3E8-4432-B9DD-A8D46B07A162}"/>
+																		</MusicClip>
+																	</ObjectList>
+																</ObjectLists>
+															</MusicTrackSequence>
+														</ObjectList>
+													</ObjectLists>
+												</MusicTrack>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Cues">
+													<MusicCue Name="Entry Cue" ID="{DCAE25F1-D732-4AB9-81F7-E47ACF258AFA}"/>
+													<MusicCue Name="Exit Cue" ID="{C41697E2-A7E4-4832-B288-78E14BF5E31B}">
+														<PropertyList>
+															<Property Name="CueType" Type="int16" Value="1"/>
+															<Property Name="TimeMs" Type="Real64" Value="5009.53516090584"/>
+														</PropertyList>
+													</MusicCue>
+												</ObjectList>
+											</ObjectLists>
+										</MusicSegment>
 									</ChildrenList>
 								</MusicPlaylistContainer>
 								<MusicPlaylistContainer Name="mus_glide" ID="{8340C786-D860-4CD7-AA35-6F1B367DD72F}" ShortID="740175623">
@@ -6619,16 +6729,6 @@
 															<ReferenceList>
 																<Reference Name="Segment">
 																	<ObjectRef Name="mus_4-4_150bpm_gliding" ID="{B4DD682B-582C-42C3-AEA2-EDE6221CB7E3}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-																</Reference>
-															</ReferenceList>
-														</MusicPlaylistItem>
-														<MusicPlaylistItem Name="" ID="{88D7FA55-894A-4002-BCE8-27082621085A}" ShortID="559447833">
-															<PropertyList>
-																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Segment">
-																	<ObjectRef Name="pause" ID="{4E2F262E-7F1B-42CA-BD71-1C6B36C86541}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 																</Reference>
 															</ReferenceList>
 														</MusicPlaylistItem>
@@ -7359,7 +7459,7 @@
 												</ObjectList>
 											</ObjectLists>
 										</MusicSegment>
-										<MusicSegment Name="pause" ID="{4E2F262E-7F1B-42CA-BD71-1C6B36C86541}" ShortID="73808554">
+										<MusicSegment Name="pause" ID="{4006C792-D8B4-463C-8D48-158836D8A631}" ShortID="1031707948">
 											<PropertyList>
 												<Property Name="EndPosition" Type="Real64" Value="7765.19666269368"/>
 											</PropertyList>
@@ -7372,14 +7472,14 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<MusicTrack Name="pause" ID="{D7AFEB5C-30BB-4783-A70B-C3FC81AA87A5}" ShortID="717536615">
+												<MusicTrack Name="pause" ID="{8624CE86-2732-4211-AFBE-F31C7A341B69}" ShortID="647466869">
 													<ReferenceList>
 														<Reference Name="OutputBus">
 															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
 														</Reference>
 														<Reference Name="TransitionRoot">
 															<Custom>
-																<MusicTransition Name="Root" ID="{97D01C61-FC75-4B55-A284-209C4FF61FA3}">
+																<MusicTransition Name="Root" ID="{0D55EA61-3A43-489A-BE52-6A949B1FE5C7}">
 																	<PropertyList>
 																		<Property Name="IsFolder" Type="bool" Value="True"/>
 																	</PropertyList>
@@ -7389,7 +7489,7 @@
 														</Reference>
 													</ReferenceList>
 													<ChildrenList>
-														<AudioFileSource Name="pause" ID="{DC48575B-A3E8-4432-B9DD-A8D46B07A162}">
+														<AudioFileSource Name="pause" ID="{0034D1C0-B544-46B0-92F0-F9EF6A868EAC}">
 															<Language>SFX</Language>
 															<AudioFile>pause.wav</AudioFile>
 															<MediaIDList>
@@ -7399,16 +7499,16 @@
 													</ChildrenList>
 													<ObjectLists>
 														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{8B077AE3-BA23-4420-BAA2-AD8EEC4D985A}">
+															<MusicTrackSequence Name="" ID="{742A8510-47CD-47BB-BFC2-48823F6F3795}">
 																<ObjectLists>
 																	<ObjectList Name="Clips">
-																		<MusicClip Name="pause" ID="{66CC2FEB-57CC-4127-855F-9D4CE72C97C1}">
+																		<MusicClip Name="pause" ID="{CB700B43-AC92-4B64-BCB6-C6C64DEDA24B}">
 																			<PropertyList>
 																				<Property Name="EndTrimOffset" Type="Real64" Value="6048.89583333333"/>
 																				<Property Name="FadeInMode" Type="int16" Value="0"/>
 																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																			</PropertyList>
-																			<AudioSourceRef Name="pause" ID="{DC48575B-A3E8-4432-B9DD-A8D46B07A162}"/>
+																			<AudioSourceRef Name="pause" ID="{0034D1C0-B544-46B0-92F0-F9EF6A868EAC}"/>
 																		</MusicClip>
 																	</ObjectList>
 																</ObjectLists>
@@ -7419,130 +7519,11 @@
 											</ChildrenList>
 											<ObjectLists>
 												<ObjectList Name="Cues">
-													<MusicCue Name="Entry Cue" ID="{DCAE25F1-D732-4AB9-81F7-E47ACF258AFA}"/>
-													<MusicCue Name="Exit Cue" ID="{C41697E2-A7E4-4832-B288-78E14BF5E31B}">
+													<MusicCue Name="Entry Cue" ID="{B5CF4B3C-A768-4C4C-8522-448D2C8A9A56}"/>
+													<MusicCue Name="Exit Cue" ID="{13BEEE37-CAED-4DE8-8267-72CCDF26C443}">
 														<PropertyList>
 															<Property Name="CueType" Type="int16" Value="1"/>
 															<Property Name="TimeMs" Type="Real64" Value="5009.53516090584"/>
-														</PropertyList>
-													</MusicCue>
-												</ObjectList>
-											</ObjectLists>
-										</MusicSegment>
-									</ChildrenList>
-								</MusicPlaylistContainer>
-								<MusicPlaylistContainer Name="mus_pause" ID="{A1812079-FA89-43F8-9F56-2A3404D7C7F5}" ShortID="241236670">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-										<Reference Name="PlaylistRoot">
-											<Custom>
-												<MusicPlaylistItem Name="" ID="{21C8196D-C235-4D79-A91B-B3622F9A62C5}" ShortID="289339497">
-													<PropertyList>
-														<Property Name="LoopCount" Type="int16" Value="0"/>
-													</PropertyList>
-													<ChildrenList>
-														<MusicPlaylistItem Name="" ID="{89F2990E-F782-4CFF-A958-97DD06EBDF22}" ShortID="314943731">
-															<PropertyList>
-																<Property Name="LoopCount" Type="int16" Value="0"/>
-																<Property Name="PlaylistItemType" Type="int16" Value="1"/>
-															</PropertyList>
-															<ReferenceList>
-																<Reference Name="Segment">
-																	<ObjectRef Name="pause" ID="{313B708F-A466-4000-BED2-29F94D8BFCC1}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-																</Reference>
-															</ReferenceList>
-														</MusicPlaylistItem>
-													</ChildrenList>
-												</MusicPlaylistItem>
-											</Custom>
-										</Reference>
-										<Reference Name="TransitionRoot">
-											<Custom>
-												<MusicTransition Name="Root" ID="{D5D7C664-5769-41BE-A5ED-DB3C0AF2EC01}">
-													<PropertyList>
-														<Property Name="IsFolder" Type="bool" Value="True"/>
-													</PropertyList>
-													<ChildrenList>
-														<MusicTransition Name="Transition" ID="{8E377A1F-8B8E-4298-B274-E3056F3A4BB7}">
-															<TransitionInfo/>
-														</MusicTransition>
-													</ChildrenList>
-													<TransitionInfo/>
-												</MusicTransition>
-											</Custom>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<MusicSegment Name="pause" ID="{313B708F-A466-4000-BED2-29F94D8BFCC1}" ShortID="229800833">
-											<PropertyList>
-												<Property Name="EndPosition" Type="Real64" Value="7765.19666269368"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<MusicTrack Name="pause" ID="{5AFA394C-1FAA-42B3-9EA2-8BD23FC7DE74}" ShortID="418263875">
-													<ReferenceList>
-														<Reference Name="OutputBus">
-															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-														</Reference>
-														<Reference Name="TransitionRoot">
-															<Custom>
-																<MusicTransition Name="Root" ID="{C0974B0B-4E10-42AD-960F-FD2D74126A44}">
-																	<PropertyList>
-																		<Property Name="IsFolder" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<TransitionInfo/>
-																</MusicTransition>
-															</Custom>
-														</Reference>
-													</ReferenceList>
-													<ChildrenList>
-														<AudioFileSource Name="pause" ID="{85C04F2E-1B38-48BB-BA92-0113AC5603E9}">
-															<Language>SFX</Language>
-															<AudioFile>pause.wav</AudioFile>
-															<MediaIDList>
-																<MediaID ID="72263303"/>
-															</MediaIDList>
-														</AudioFileSource>
-													</ChildrenList>
-													<ObjectLists>
-														<ObjectList Name="Sequences">
-															<MusicTrackSequence Name="" ID="{E59C7B79-7EF2-4026-91E5-99DA9E4C9567}">
-																<ObjectLists>
-																	<ObjectList Name="Clips">
-																		<MusicClip Name="pause" ID="{1F36358B-4A39-40B8-8E7C-C873D8B06CC4}">
-																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="6048.89583333333"/>
-																				<Property Name="FadeInMode" Type="int16" Value="0"/>
-																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																			</PropertyList>
-																			<AudioSourceRef Name="pause" ID="{85C04F2E-1B38-48BB-BA92-0113AC5603E9}"/>
-																		</MusicClip>
-																	</ObjectList>
-																</ObjectLists>
-															</MusicTrackSequence>
-														</ObjectList>
-													</ObjectLists>
-												</MusicTrack>
-											</ChildrenList>
-											<ObjectLists>
-												<ObjectList Name="Cues">
-													<MusicCue Name="Entry Cue" ID="{B573CE91-79C3-45F1-84F9-44448C363332}"/>
-													<MusicCue Name="Exit Cue" ID="{8841F14A-0597-43EF-AD76-0A8841E08953}">
-														<PropertyList>
-															<Property Name="CueType" Type="int16" Value="1"/>
-															<Property Name="TimeMs" Type="Real64" Value="6000"/>
 														</PropertyList>
 													</MusicCue>
 												</ObjectList>
@@ -7554,23 +7535,11 @@
 							<StateInfo>
 								<StateGroupList>
 									<StateGroupInfo>
-										<StateGroupRef Name="zones" ID="{1D8ACA51-0E72-437B-96E4-13129807EB70}"/>
-										<StateGroupInfo Name="" ID="{2C184C0E-C3E0-4AAE-9788-E43D26641B8C}" ShortID="535307914"/>
-									</StateGroupInfo>
-									<StateGroupInfo>
 										<StateGroupRef Name="player_state" ID="{3F5075A1-FA7B-4885-B84E-40E19EF44046}"/>
 										<StateGroupInfo Name="" ID="{7F6D8A27-3E75-4838-AFDD-21E1C95587CC}" ShortID="217134626"/>
 									</StateGroupInfo>
 								</StateGroupList>
 								<CustomStateList>
-									<CustomState>
-										<StateRef Name="pause" ID="{998F7C00-09BB-419E-8F9C-86E678CDD49C}"/>
-										<CustomState Name="" ID="{4F3BB88F-B9FD-438A-80D8-E709F7F2ED7D}" ShortID="749155957"/>
-									</CustomState>
-									<CustomState>
-										<StateRef Name="glide" ID="{E2402114-3321-422E-977C-0D3BAC32F7EA}"/>
-										<CustomState Name="" ID="{E53748D3-9CAD-432D-8DE3-2779542B3B0C}" ShortID="256994991"/>
-									</CustomState>
 									<CustomState>
 										<StateRef Name="memory" ID="{AC2A1C46-AD85-4360-A7FD-ECBB6D6E440F}"/>
 										<CustomState Name="" ID="{97D5A6D2-8409-4460-AF2B-CE9CA334E8B7}" ShortID="398049955">
@@ -7581,27 +7550,15 @@
 										</CustomState>
 									</CustomState>
 									<CustomState>
-										<StateRef Name="None" ID="{D6D77D91-BE32-43DB-BBCE-BE363B544DC2}"/>
-										<CustomState Name="" ID="{3B66E8E4-A42F-4088-8D3D-677F00938A71}" ShortID="851979594"/>
-									</CustomState>
-									<CustomState>
-										<StateRef Name="zone2" ID="{868A53EB-5726-4480-B033-2D9A57B417C1}"/>
-										<CustomState Name="" ID="{ACA1FA5A-26AD-42D5-BB56-55AD47F5F451}" ShortID="748150379"/>
-									</CustomState>
-									<CustomState>
 										<StateRef Name="None" ID="{D09DB6C1-A313-4799-9AC8-8E06B1F3BDA4}"/>
 										<CustomState Name="" ID="{E15A8322-E0D2-4BAD-A2E7-78D846DA56BA}" ShortID="648639061"/>
-									</CustomState>
-									<CustomState>
-										<StateRef Name="zone1" ID="{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"/>
-										<CustomState Name="" ID="{9CCA7CA3-402A-4684-BE5C-6C4467533DB5}" ShortID="770887105"/>
 									</CustomState>
 									<CustomState>
 										<StateRef Name="gliding" ID="{95554B9D-CF8C-4D94-99F5-25CB4A858898}"/>
 										<CustomState Name="" ID="{2A3BBC68-8D1A-4198-A03D-52FBB4499D1C}" ShortID="22147013"/>
 									</CustomState>
 									<CustomState>
-										<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+										<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
 										<CustomState Name="" ID="{06BF48F2-8810-4CA8-976A-79723E0CA2BF}" ShortID="159944853">
 											<PropertyList>
 												<Property Name="Lowpass" Type="int16" Value="30"/>
@@ -7616,7 +7573,7 @@
 									<PluginInnerObject Name="" ID="{74A2FC4A-2DCD-4CE3-9D5B-0CC354619F88}" PluginName="MusicArgumentsSlot" CompanyID="0" PluginID="89">
 										<ReferenceList>
 											<Reference Name="Argument">
-												<ObjectRef Name="zones" ID="{1D8ACA51-0E72-437B-96E4-13129807EB70}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
+												<ObjectRef Name="mus_state" ID="{1D8ACA51-0E72-437B-96E4-13129807EB70}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
 											</Reference>
 										</ReferenceList>
 									</PluginInnerObject>
@@ -7676,18 +7633,18 @@
 											</ObjectList>
 										</ObjectLists>
 									</MultiSwitchEntry>
-									<MultiSwitchEntry Name="" ID="{E7631B16-08E6-431C-B010-38175E4DE79E}">
+									<MultiSwitchEntry Name="" ID="{58A9583C-F115-4C81-91B1-D5E0DF94E90B}">
 										<ReferenceList>
 											<Reference Name="AudioNode">
-												<ObjectRef Name="mus_pause" ID="{A1812079-FA89-43F8-9F56-2A3404D7C7F5}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												<ObjectRef Name="mus_zone1" ID="{5D3270E5-0974-45E0-99C6-5D8909340175}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 											</Reference>
 										</ReferenceList>
 										<ObjectLists>
 											<ObjectList Name="EntryPath">
-												<PluginInnerObject Name="" ID="{ACF043B7-29BF-4287-8E5D-6374927DA7FE}" PluginName="EntryPathSlot" CompanyID="0" PluginID="88">
+												<PluginInnerObject Name="" ID="{E70412F6-5C4D-43B5-8BF1-931704786712}" PluginName="EntryPathSlot" CompanyID="0" PluginID="88">
 													<ReferenceList>
 														<Reference Name="EntryPathObject">
-															<ObjectRef Name="pause" ID="{998F7C00-09BB-419E-8F9C-86E678CDD49C}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
+															<ObjectRef Name="mus_state" ID="{1D8ACA51-0E72-437B-96E4-13129807EB70}" WorkUnitID="{1DD71A98-815D-4A62-B4D7-230C79020469}"/>
 														</Reference>
 													</ReferenceList>
 												</PluginInnerObject>
@@ -10384,7 +10341,7 @@
 												<CustomState Name="" ID="{F36961D8-AD8E-4847-B7F5-2B669193EC4A}" ShortID="477870501"/>
 											</CustomState>
 											<CustomState>
-												<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+												<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
 												<CustomState Name="" ID="{E92F1130-2423-48FF-8D8B-7F8813789928}" ShortID="590497115">
 													<PropertyList>
 														<Property Name="Volume" Type="Real64" Value="-200"/>
@@ -10523,7 +10480,7 @@
 												<CustomState Name="" ID="{65395B4B-88D7-43B9-89B2-F9566BC9C44E}" ShortID="76734366"/>
 											</CustomState>
 											<CustomState>
-												<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+												<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
 												<CustomState Name="" ID="{F26B3F35-FF3A-42C1-90C2-0759DB1C2AD8}" ShortID="256747448">
 													<PropertyList>
 														<Property Name="Volume" Type="Real64" Value="-200"/>
@@ -10646,7 +10603,7 @@
 												<CustomState Name="" ID="{03403535-6356-4033-93C2-26CF9B43308B}" ShortID="965466356"/>
 											</CustomState>
 											<CustomState>
-												<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+												<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
 												<CustomState Name="" ID="{7AEB28FD-0181-4A4A-A68A-5F1FBA60C728}" ShortID="459664516">
 													<PropertyList>
 														<Property Name="Volume" Type="Real64" Value="-200"/>
@@ -10710,7 +10667,7 @@
 												<CustomState Name="" ID="{A985836C-5853-4EA7-9841-3F064E26FE24}" ShortID="171598269"/>
 											</CustomState>
 											<CustomState>
-												<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+												<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
 												<CustomState Name="" ID="{7A6D2B27-3FDC-40CE-BA89-1A6F818FDAFA}" ShortID="456548554">
 													<PropertyList>
 														<Property Name="Volume" Type="Real64" Value="-200"/>
@@ -10778,7 +10735,7 @@
 												<CustomState Name="" ID="{CB4F0965-2821-466F-81E8-1344724886D2}" ShortID="255039975"/>
 											</CustomState>
 											<CustomState>
-												<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+												<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
 												<CustomState Name="" ID="{087B7B87-8CAE-44F8-8619-A0AC2F9AEBA1}" ShortID="455754226">
 													<PropertyList>
 														<Property Name="Volume" Type="Real64" Value="-200"/>
@@ -11988,7 +11945,7 @@
 												<CustomState Name="" ID="{778EF44E-0914-4258-9364-D6A4D0390D8B}" ShortID="425396316"/>
 											</CustomState>
 											<CustomState>
-												<StateRef Name="pause" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
+												<StateRef Name="pause_screen" ID="{158B7945-9B0D-4E95-9616-1D04A91E7535}"/>
 												<CustomState Name="" ID="{FC74DD40-87B8-40E2-BC84-4441A2B341C4}" ShortID="1013916207">
 													<PropertyList>
 														<Property Name="Volume" Type="Real64" Value="-200"/>
