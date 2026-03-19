@@ -1,3 +1,15 @@
+// =============================================================================
+// PaperUIManager.cs
+// -----------------------------------------------------------------------------
+// Manages the paper collectible UI overlays (single piece and multi piece).
+//
+// CHANGES FROM ORIGINAL:
+//   - ResetUI() made public and renamed to ResetState() so FadeSequenceManager
+//     can call it when the Level scene reloads.
+//   - ResetState() now also stops all coroutines and re-enables the player
+//     controller to prevent soft-locks if the scene reloads mid-paper-display.
+// =============================================================================
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -5,7 +17,15 @@ using System.Collections;
 
 public class PaperUIManager : MonoBehaviour
 {
+    // -------------------------------------------------------------------------
+    // Singleton
+    // -------------------------------------------------------------------------
+
     public static PaperUIManager Instance;
+
+    // -------------------------------------------------------------------------
+    // Inspector References
+    // -------------------------------------------------------------------------
 
     [Header("Single-Piece UI References")]
     public CanvasGroup backgroundGroup;
@@ -33,12 +53,20 @@ public class PaperUIManager : MonoBehaviour
     [Header("Audio")]
     public AK.Wwise.Event uiSelect;
 
+    // -------------------------------------------------------------------------
+    // Private State
+    // -------------------------------------------------------------------------
+
     private bool isPaperShowing = false;
     private bool waitingForInput = false;
     private bool isMultiPieceMode = false;
 
     private MultiPiecePaperData currentPaperData;
     public MultiPiecePaperData CurrentPaperData => currentPaperData;
+
+    // -------------------------------------------------------------------------
+    // Unity Lifecycle
+    // -------------------------------------------------------------------------
 
     void Awake()
     {
@@ -72,23 +100,57 @@ public class PaperUIManager : MonoBehaviour
 
     void Start()
     {
-        ResetUI();
+        ResetState();
     }
 
-    void ResetUI()
+    // -------------------------------------------------------------------------
+    // Public Reset — called by FadeSequenceManager on scene reload
+    // -------------------------------------------------------------------------
+
+    /// <summary>
+    /// Fully resets all UI state back to how it was at the start of the scene.
+    /// Called automatically by FadeSequenceManager when the Level scene loads.
+    /// Safe to call mid-display — stops coroutines and re-enables the player.
+    /// </summary>
+    public void ResetState()
     {
+        // Stop any running fade/blink coroutines so they don't fight the reset.
+        StopAllCoroutines();
+
+        // Reset all state flags.
         isPaperShowing = false;
         waitingForInput = false;
         isMultiPieceMode = false;
         currentPaperData = null;
 
-        if (backgroundGroup != null) backgroundGroup.alpha = 0;
-        if (singlePieceGroup != null) singlePieceGroup.alpha = 0;
-        if (multiPieceGroup != null) multiPieceGroup.alpha = 0;
+        // Hide all canvas groups immediately.
+        if (backgroundGroup != null)
+        {
+            backgroundGroup.alpha = 0;
+            backgroundGroup.blocksRaycasts = false;
+        }
+        if (singlePieceGroup != null)
+        {
+            singlePieceGroup.alpha = 0;
+            singlePieceGroup.blocksRaycasts = false;
+        }
+        if (multiPieceGroup != null)
+        {
+            multiPieceGroup.alpha = 0;
+            multiPieceGroup.blocksRaycasts = false;
+        }
 
         if (instructionImage != null)
             instructionImage.gameObject.SetActive(false);
+
+        // Re-enable the player controller in case the scene reloaded mid-display.
+        if (playerController != null)
+            playerController.enabled = true;
     }
+
+    // -------------------------------------------------------------------------
+    // Unity Update
+    // -------------------------------------------------------------------------
 
     void Update()
     {
@@ -101,7 +163,9 @@ public class PaperUIManager : MonoBehaviour
         }
     }
 
-    // SINGLE PIECE
+    // -------------------------------------------------------------------------
+    // Single Piece
+    // -------------------------------------------------------------------------
 
     public void ShowPaper(string text)
     {
@@ -175,7 +239,9 @@ public class PaperUIManager : MonoBehaviour
         }
     }
 
-    // MULTI PIECE
+    // -------------------------------------------------------------------------
+    // Multi Piece
+    // -------------------------------------------------------------------------
 
     public void ShowMultiPiecePaper(MultiPiecePaperData paperData, Sprite[] collectedSprites)
     {
@@ -283,7 +349,9 @@ public class PaperUIManager : MonoBehaviour
         }
     }
 
-    // SHARED
+    // -------------------------------------------------------------------------
+    // Shared
+    // -------------------------------------------------------------------------
 
     private IEnumerator HidePaper()
     {

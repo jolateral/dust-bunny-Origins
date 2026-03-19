@@ -1,30 +1,31 @@
+// =============================================================================
+// DiaryUIManager.cs
+// -----------------------------------------------------------------------------
+// Manages the full-screen diary overlay UI.
+//
+// CHANGES FROM ORIGINAL:
+//   - Added public ResetState() method so FadeSequenceManager can reset it
+//     when the Level scene reloads.
+//   - ResetState() stops all coroutines and re-enables the player controller
+//     to prevent soft-locks if the scene reloads mid-diary-display.
+// =============================================================================
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
-/// <summary>
-/// DiaryUIManager.cs
-/// 
-/// Manages the full-screen diary overlay UI.
-/// Works identically to PaperUIManager but is dedicated to the diary so the
-/// two systems don't conflict.
-/// 
-/// UPDATED:
-/// - InstructionText has been replaced with InstructionImage
-/// - The close prompt now uses a UI Image instead of TMP text
-/// </summary>
 public class DiaryUIManager : MonoBehaviour
 {
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Singleton
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     public static DiaryUIManager Instance;
 
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Inspector References
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     [Header("Background Overlay")]
     [Tooltip("CanvasGroup on the dark background panel that dims the rest of the screen.")]
@@ -37,7 +38,7 @@ public class DiaryUIManager : MonoBehaviour
     [Tooltip("The Image component that displays the diary sprite.")]
     public Image diaryImage;
 
-    [Tooltip("(Optional) TextMeshProUGUI for diary text shown over the image. Leave empty for image-only.")]
+    [Tooltip("(Optional) TextMeshProUGUI for diary text shown over the image.")]
     public TextMeshProUGUI diaryText;
 
     [Header("Instruction Image")]
@@ -48,7 +49,7 @@ public class DiaryUIManager : MonoBehaviour
     [Tooltip("How fast the diary fades in and out.")]
     public float fadeSpeed = 3f;
 
-    [Tooltip("Background overlay color (default black, semi-transparent).")]
+    [Tooltip("Background overlay color (default black).")]
     public Color backgroundColor = new Color(0f, 0f, 0f, 1f);
 
     [Header("Player Reference")]
@@ -58,18 +59,24 @@ public class DiaryUIManager : MonoBehaviour
     [Header("SFX")]
     public AK.Wwise.Event uiSelect;
 
+    // -------------------------------------------------------------------------
+    // Public State
+    // -------------------------------------------------------------------------
+
+    // Tracks whether the diary has been shown this session.
+    // Reset by ResetState() so it can be shown again on level reload.
     public bool diaryShown = false;
 
-    // -----------------------------------------------------------------------
-    // Runtime State
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // Private State
+    // -------------------------------------------------------------------------
 
     private bool isDiaryShowing = false;
     private bool waitingForInput = false;
 
-    // -----------------------------------------------------------------------
-    // Unity Messages
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // Unity Lifecycle
+    // -------------------------------------------------------------------------
 
     void Awake()
     {
@@ -108,9 +115,40 @@ public class DiaryUIManager : MonoBehaviour
         }
     }
 
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // Public Reset — called by FadeSequenceManager on scene reload
+    // -------------------------------------------------------------------------
+
+    /// <summary>
+    /// Fully resets all diary UI state back to its initial values.
+    /// Called automatically by FadeSequenceManager when the Level scene loads.
+    /// Safe to call mid-display — stops coroutines and re-enables the player.
+    /// </summary>
+    public void ResetState()
+    {
+        // Stop any running fade/blink coroutines.
+        StopAllCoroutines();
+
+        // Reset all state flags — including diaryShown so it can trigger again.
+        isDiaryShowing = false;
+        waitingForInput = false;
+        diaryShown = false;
+
+        // Hide all canvas groups immediately.
+        SetGroupAlpha(backgroundGroup, 0f, false);
+        SetGroupAlpha(diaryPanelGroup, 0f, false);
+
+        if (instructionImage != null)
+            instructionImage.gameObject.SetActive(false);
+
+        // Re-enable the player controller in case scene reloaded mid-display.
+        if (playerController != null)
+            playerController.enabled = true;
+    }
+
+    // -------------------------------------------------------------------------
     // Public API
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     public void ShowDiary(string text, Sprite sprite)
     {
@@ -129,9 +167,9 @@ public class DiaryUIManager : MonoBehaviour
 
     public bool IsDiaryShowing() => isDiaryShowing;
 
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Private Coroutines
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     private IEnumerator DisplayDiary(string text, Sprite sprite)
     {
@@ -208,9 +246,9 @@ public class DiaryUIManager : MonoBehaviour
         isDiaryShowing = false;
     }
 
-    // -----------------------------------------------------------------------
-    // Utility Coroutines
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // Utility
+    // -------------------------------------------------------------------------
 
     private IEnumerator FadeGroup(CanvasGroup group, float startAlpha, float endAlpha)
     {
@@ -235,9 +273,6 @@ public class DiaryUIManager : MonoBehaviour
         group.interactable = blocksRaycasts;
     }
 
-    /// <summary>
-    /// Pulses the instruction image alpha between full and 30%.
-    /// </summary>
     private IEnumerator BlinkInstructionImage()
     {
         if (instructionImage == null) yield break;

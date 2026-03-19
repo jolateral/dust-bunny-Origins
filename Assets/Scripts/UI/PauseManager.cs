@@ -184,4 +184,21 @@ public class PauseManager : MonoBehaviour
         if (pauseMenuUI != null)
             pauseMenuUI.Hide();
     }
+
+    /// <summary>
+    /// Resets the pause state when the Level scene reloads.
+    /// Called automatically by FadeSequenceManager.
+    /// Ensures the game isn't stuck paused if the scene reloaded while paused.
+    /// </summary>
+    public void ResetState()
+    {
+        IsPaused = false;
+
+        // Always restore time — critical if the player went to main menu while paused.
+        Time.timeScale = 1f;
+
+        // Hide the pause UI if it was open.
+        if (pauseMenuUI != null)
+            pauseMenuUI.Hide();
+    }
 }

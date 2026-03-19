@@ -157,8 +157,6 @@ public class DustBunnyController : MonoBehaviour
 
             float timeGliding = Time.time - glideStartTime;
 
-            // Ignore ground checks briefly right after glide starts,
-            // otherwise the bunny can instantly "land" from the same platform/ledge.
             bool canCheckLanding = timeGliding > glideGroundIgnoreTime;
             bool reallyLanded = canCheckLanding && CheckGroundedStrict();
 
@@ -447,7 +445,8 @@ public class DustBunnyController : MonoBehaviour
         if (moveInput.sqrMagnitude < deadzone * deadzone)
         {
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
-            if (_animator) _animator.SetBool("isRunning", false);
+            if (_animator)
+                _animator.SetBool("isRunning", false);
             return;
         }
 
@@ -465,7 +464,16 @@ public class DustBunnyController : MonoBehaviour
         vel.y = rb.linearVelocity.y;
         rb.linearVelocity = vel;
 
-        if (_animator) _animator.SetBool("isRunning", true);
+        if (_animator)
+        {
+            bool shouldRun =
+                isGrounded &&
+                !isRolling &&
+                !isGliding &&
+                !isHit;
+
+            _animator.SetBool("isRunning", shouldRun);
+        }
     }
 
     void ApplyBetterGravity()
@@ -490,7 +498,10 @@ public class DustBunnyController : MonoBehaviour
 
         isGrounded = false;
         if (_animator)
+        {
             _animator.SetBool("isGrounded", false);
+            _animator.SetBool("isRunning", false);
+        }
     }
 
     void StartGliding()
@@ -538,7 +549,11 @@ public class DustBunnyController : MonoBehaviour
         float launchMagnitude = glideLaunchSpeed * ScaleFactor;
         rb.linearVelocity = launchDir * launchMagnitude;
 
-        if (_animator) _animator.SetBool("isRunning", false);
+        if (_animator)
+        {
+            _animator.SetBool("isRunning", false);
+            _animator.SetBool("isGrounded", false);
+        }
         SetGlidingAnimator(true);
 
         bunnyGlideStart.Post(gameObject);
@@ -653,7 +668,10 @@ public class DustBunnyController : MonoBehaviour
     IEnumerator PerformDash()
     {
         isRolling = true;
-        if (_animator) _animator.SetBool("isRolling", true);
+        if (_animator)
+        {
+            _animator.SetBool("isRolling", true);
+        }
         lastDashTime = Time.time;
 
         rb.linearDamping = rollDrag;
