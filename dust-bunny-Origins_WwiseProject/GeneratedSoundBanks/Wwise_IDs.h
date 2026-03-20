@@ -21,16 +21,16 @@ namespace AK
         static const AkUniqueID PLAY_AMB_FOOTSTEP_SLIPPER = 2859770665U;
         static const AkUniqueID PLAY_AMB_PLATES = 3831521374U;
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
+        static const AkUniqueID PLAY_MUS_GAME = 3188041860U;
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
-        static const AkUniqueID PLAY_MUS_ZONES = 3793537147U;
         static const AkUniqueID PLAY_SFX_BRIDGE_CREAK_NL = 3975145325U;
+        static const AkUniqueID PLAY_SFX_BUNNY_ABSORB_NL = 3617904731U;
         static const AkUniqueID PLAY_SFX_BUNNY_GLIDING_LP = 3621260004U;
-        static const AkUniqueID PLAY_SFX_BUNNYABSORB_NL = 1567933058U;
-        static const AkUniqueID PLAY_SFX_BUNNYHOP = 3966847515U;
-        static const AkUniqueID PLAY_SFX_BUNNYIMPACT_NL = 4038925685U;
-        static const AkUniqueID PLAY_SFX_BUNNYJUMP_NL = 674581991U;
-        static const AkUniqueID PLAY_SFX_BUNNYLAND_NL = 2787500338U;
-        static const AkUniqueID PLAY_SFX_BUNNYROLL_NL = 4212669292U;
+        static const AkUniqueID PLAY_SFX_BUNNY_HOP_NL = 1094055167U;
+        static const AkUniqueID PLAY_SFX_BUNNY_IMPACT_NL = 3406827132U;
+        static const AkUniqueID PLAY_SFX_BUNNY_JUMP_NL = 1938447626U;
+        static const AkUniqueID PLAY_SFX_BUNNY_LAND_NL = 16499847U;
+        static const AkUniqueID PLAY_SFX_BUNNY_ROLL_NL = 2747268133U;
         static const AkUniqueID PLAY_SFX_CAR_IMPACT_NL = 2032188842U;
         static const AkUniqueID PLAY_SFX_CAR_MOVE_NL = 4207159517U;
         static const AkUniqueID PLAY_SFX_COIN_ABSORB_NL = 4259653120U;
@@ -50,13 +50,26 @@ namespace AK
         static const AkUniqueID PLAY_SFX_UI_SELECT_NL = 4289076888U;
         static const AkUniqueID PLAY_SFX_VENT_LP = 1128772546U;
         static const AkUniqueID PLAY_SFX_WOODBLOCK_IMPACT_WOOD = 841695155U;
+        static const AkUniqueID STOP_MUS_GAME = 700666702U;
         static const AkUniqueID STOP_MUS_STARTMENU = 200855961U;
-        static const AkUniqueID STOP_MUS_ZONES = 75519133U;
         static const AkUniqueID STOP_SFX_BUNNY_GLIDING_LP = 3668857278U;
     } // namespace EVENTS
 
     namespace STATES
     {
+        namespace MUS_STATE
+        {
+            static const AkUniqueID GROUP = 1940399660U;
+
+            namespace STATE
+            {
+                static const AkUniqueID GLIDE = 2968795556U;
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID ZONE1 = 831766780U;
+                static const AkUniqueID ZONE2 = 831766783U;
+            } // namespace STATE
+        } // namespace MUS_STATE
+
         namespace PLAYER_STATE
         {
             static const AkUniqueID GROUP = 4071417932U;
@@ -66,23 +79,9 @@ namespace AK
                 static const AkUniqueID GLIDING = 4176812997U;
                 static const AkUniqueID MEMORY = 3509424520U;
                 static const AkUniqueID NONE = 748895195U;
-                static const AkUniqueID PAUSE = 3092587493U;
+                static const AkUniqueID PAUSE_SCREEN = 3232496108U;
             } // namespace STATE
         } // namespace PLAYER_STATE
-
-        namespace ZONES
-        {
-            static const AkUniqueID GROUP = 831766718U;
-
-            namespace STATE
-            {
-                static const AkUniqueID GLIDE = 2968795556U;
-                static const AkUniqueID NONE = 748895195U;
-                static const AkUniqueID PAUSE = 3092587493U;
-                static const AkUniqueID ZONE1 = 831766780U;
-                static const AkUniqueID ZONE2 = 831766783U;
-            } // namespace STATE
-        } // namespace ZONES
 
     } // namespace STATES
 
@@ -103,6 +102,7 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID BUNNY_SIZE = 404510017U;
+        static const AkUniqueID OBJECT_MASS = 292743055U;
         static const AkUniqueID VELOCITY = 3519441192U;
     } // namespace GAME_PARAMETERS
 

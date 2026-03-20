@@ -13,31 +13,36 @@
 						<AuxBus Name="Zone2" ID="{C1D22865-FEF6-4F59-891F-D670A7DF784A}"/>
 						<AuxBus Name="Zone1" ID="{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}">
 							<PropertyList>
-								<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+								<Property Name="EnableDiffraction" Type="bool" Value="True"/>
+								<Property Name="ListenerRelativeRouting" Type="bool" Value="True"/>
 							</PropertyList>
 							<ObjectLists>
 								<ObjectList Name="Effects">
-									<EffectSlot Name="" ID="{3DF6FEC7-197B-4110-9A32-7343F3D82CD4}" ShortID="376163736">
-										<ReferenceList>
-											<Reference Name="Effect">
-												<Custom>
-													<Effect Name="Parametric EQ (Custom)" ID="{FE1D00E9-C7B6-46EC-8526-9387802B973E}" ShortID="97464601" PluginName="Wwise Parametric EQ" CompanyID="0" PluginID="105" PluginType="3">
-														<PropertyList>
-															<Property Name="FilterTypeBand1" Type="int32" Value="1"/>
-															<Property Name="FilterTypeBand3" Type="int32" Value="0"/>
-															<Property Name="FrequencyBand1" Type="Real32" Value="300"/>
-															<Property Name="FrequencyBand3" Type="Real32" Value="10000"/>
-															<Property Name="OnOffBand3" Type="bool" Value="True"/>
-														</PropertyList>
-													</Effect>
-												</Custom>
-											</Reference>
-										</ReferenceList>
-									</EffectSlot>
 									<EffectSlot Name="" ID="{9E408BD2-3BFB-42FB-8C91-56B84A65C4CC}" ShortID="601040442">
 										<ReferenceList>
 											<Reference Name="Effect" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
-												<ObjectRef Name="Hall_Large" ID="{6D154498-FF6D-4823-96FC-56841B70E079}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+												<ObjectRef Name="Room_Large" ID="{AD8EFAFC-7121-4D5F-BE4D-B13FBD6CEBAE}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+											</Reference>
+										</ReferenceList>
+									</EffectSlot>
+									<EffectSlot Name="" ID="{3DF6FEC7-197B-4110-9A32-7343F3D82CD4}" ShortID="376163736">
+										<ReferenceList>
+											<Reference Name="Effect">
+												<Custom CreatedFrom="{69479ACD-2C87-4007-B83E-55210A3B36B7}">
+													<Effect Name="Dual_Filters_Radio_Comm (Custom)" ID="{17DB577C-8C33-4432-9BF2-7B96A1574716}" ShortID="104838541" PluginName="Wwise Parametric EQ" CompanyID="0" PluginID="105" PluginType="3">
+														<PropertyList>
+															<Property Name="FilterTypeBand1" Type="int32" Value="1"/>
+															<Property Name="FilterTypeBand3" Type="int32" Value="0"/>
+															<Property Name="FrequencyBand1" Type="Real32" Value="600"/>
+															<Property Name="FrequencyBand2" Type="Real32" Value="3000"/>
+															<Property Name="FrequencyBand3" Type="Real32" Value="10000"/>
+															<Property Name="OnOffBand3" Type="bool" Value="True"/>
+															<Property Name="OutputLevel" Type="Real32" Value="-12"/>
+														</PropertyList>
+													</Effect>
+												</Custom>
 											</Reference>
 										</ReferenceList>
 									</EffectSlot>

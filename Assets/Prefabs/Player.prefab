@@ -1257,6 +1257,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AbsorbMechanic
   growthFactor: 0.05
   sizeTolerance: 1.2
+  growthParticles: {fileID: 0}
+  smoothGrowthDuration: 0.4
   absorbedItemScaleMultiplier: 0.3
   surfaceStickRadius: 0.5
   orbitSpeed: 45
@@ -1266,6 +1268,9 @@ MonoBehaviour:
   maxItemsLostOnHit: 3
   spillForce: 3
   spillUpwardForce: 2
+  spilledItemScaleFactor: 0.7
+  minSizeRecoveryRate: 0.01
+  recoveryThresholdRatio: 1.15
   bunnyAbsorbSfx:
     idInternal: 0
     valueGuidInternal: 
@@ -1301,19 +1306,32 @@ MonoBehaviour:
   glideMassDrainPerSecond: 0.02
   minGlideScaleRatio: 0.1
   glideMoveToLaunchDuration: 0.35
-  glideYawExtra: -90
-  facingYawOffset: 0
   cameraTransform: {fileID: 0}
   groundCheckOffset: 0.2
   glideLandTolerance: 0.02
   isRolling: 0
   isGrounded: 0
   isGliding: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  groundCheckRadius: 0.2
+  strictGroundCheckRadius: 0.08
+  strictGroundCheckDistance: 0.12
+  glideGroundIgnoreTime: 0.15
   _animator: {fileID: 8131565752979367215}
   carKnockbackForce: 6
   carVerticalBoost: 3
   carMaxItemsLost: 3
   hitStunDuration: 0.4
+  bunnyGlideStop:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 12fa9d0d2a2c3f64b8427852db3b3ec9, type: 2}
+  carImpactSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: fe1f3069d602b0d46a84c3ded92667e2, type: 2}
   hitShakeDuration: 0.3
   hitShakeBaseMagnitude: 1.5
 --- !u!95 &8131565752979367215
@@ -1464,6 +1482,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 6e035188c2f73d4418010946cf7077ae, type: 2}
+  bunnyGlideStart:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8d7c4fcdaa928b940b209d60dc28977e, type: 2}
   bunnyImpactSfx:
     idInternal: 0
     valueGuidInternal: 

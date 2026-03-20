@@ -91,7 +91,7 @@ public class CameraFocusTrigger : MonoBehaviour
         }
 
         // Lower sound volume/kill movement sounds
-        AkUnitySoundEngine.SetState("player_state", "pause");
+        AkUnitySoundEngine.SetState("player_state", "memory");
 
         // --- 2. DISABLE CAMERA CONTROLS ---
         if (tpCamera != null) tpCamera.enabled = false;
