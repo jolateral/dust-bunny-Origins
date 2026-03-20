@@ -57,7 +57,7 @@
 										<Action Name="" ID="{9CB88991-A7EA-4A25-9B9F-761C30D7EC34}" ShortID="836818518">
 											<PropertyList>
 												<Property Name="FadeInCurve" Type="int16" Value="5"/>
-												<Property Name="FadeTime" Type="Real64" Value="5"/>
+												<Property Name="FadeTime" Type="Real64" Value="3"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
@@ -75,39 +75,10 @@
 					<ChildrenList>
 						<Event Name="Play_amb_room_lp" ID="{A6DD2F9D-6089-41DB-9661-FF11E5776CCC}">
 							<ChildrenList>
-								<Action Name="" ID="{DB033450-CD37-4AE8-8242-CD3C40391254}" ShortID="555971023">
+								<Action Name="" ID="{D9A2483B-7978-4851-913B-F57536AC982A}" ShortID="23703903">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="amb_room_high_lp" ID="{C095C3B2-75D5-4A19-86CB-959A00FEF138}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{57B6F67D-BC65-43C9-AC69-22202B5BFAAB}" ShortID="267106427">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="amb_room_low_lp" ID="{DEEA0A29-2186-4905-B4E1-0876B0879987}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{38A44469-3F79-4887-83CF-6ACB1AF0877A}" ShortID="704257437">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="amb_room_mid_lp" ID="{E8F5C097-A071-4D30-95B3-F989D846C37E}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-								<Action Name="" ID="{E456BE11-CA04-4C46-98F0-21404E1F5888}" ShortID="127272951">
-									<PropertyList>
-										<Property Name="ActionType" Type="int16" Value="12"/>
-										<Property Name="Delay" Type="Real64" Value="5"/>
-										<Property Name="FadeInCurve" Type="int16" Value="2"/>
-										<Property Name="FadeTime" Type="Real64" Value="5"/>
-										<Property Name="Scope" Type="int16" Value="1"/>
-										<Property Name="Volume" Type="Real64" Value="-12"/>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="amb_room_low_lp" ID="{DEEA0A29-2186-4905-B4E1-0876B0879987}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+											<ObjectRef Name="amb_room_lp" ID="{0E9C1207-F156-49A2-B8C3-D9C4560B2EA3}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -187,6 +158,17 @@
 								</Event>
 							</ChildrenList>
 						</Folder>
+						<Event Name="Play_amb_outdoor_wind_lp" ID="{26CB7773-DB9D-471C-B9A9-80F731E1D6AE}">
+							<ChildrenList>
+								<Action Name="" ID="{704B28DC-F904-4FC7-86F9-E404EC7EDA48}" ShortID="440917639">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="amb_outdoor_wind_lp" ID="{5FAC2A12-E9EE-4FFC-89F6-54A064359738}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="SFX" ID="{68608009-2510-4F87-9EC5-3C2AE2BA196E}" ShortID="605905316">
@@ -256,7 +238,7 @@
 										<Action Name="" ID="{11B5EEA7-EE90-48D3-B00E-88B0080A558B}" ShortID="576117501">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunny_land_nl" ID="{B9124E6A-0340-4EEE-825C-1D6BFEA6DEFE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunny_jump_nl" ID="{B9124E6A-0340-4EEE-825C-1D6BFEA6DEFE}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -281,7 +263,7 @@
 										<Action Name="" ID="{D78023CC-0AC6-44E2-BF61-EDC72D826DAD}" ShortID="155594781">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunny_jump_nl" ID="{95C77888-9E0C-42C8-BC7B-3AADB38C53D7}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunny_land_nl" ID="{95C77888-9E0C-42C8-BC7B-3AADB38C53D7}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

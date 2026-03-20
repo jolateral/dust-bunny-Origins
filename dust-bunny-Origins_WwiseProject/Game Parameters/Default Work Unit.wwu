@@ -20,6 +20,24 @@
 						<Property Name="InitialValue" Type="Real64" Value="0"/>
 					</PropertyList>
 				</GameParameter>
+				<Folder Name="mix_parameters" ID="{0ADA96AF-1002-4543-A6F8-1F95A8C53DC2}" ShortID="754163588">
+					<ChildrenList>
+						<GameParameter Name="mus_vol" ID="{2B709999-E9F2-4C0A-9CF8-DAA1629EEFB8}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="-48"/>
+								<Property Name="Max" Type="Real64" Value="0"/>
+								<Property Name="Min" Type="Real64" Value="-48"/>
+							</PropertyList>
+						</GameParameter>
+						<GameParameter Name="bunny_vol" ID="{332495A7-9988-4C16-88C6-4E242F0DA427}">
+							<PropertyList>
+								<Property Name="InitialValue" Type="Real64" Value="-48"/>
+								<Property Name="Max" Type="Real64" Value="0"/>
+								<Property Name="Min" Type="Real64" Value="-48"/>
+							</PropertyList>
+						</GameParameter>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</GameParameters>

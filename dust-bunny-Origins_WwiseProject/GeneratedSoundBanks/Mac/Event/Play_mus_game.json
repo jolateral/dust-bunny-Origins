@@ -10,7 +10,7 @@
     "Type": "Event",
     "GUID": "{177723F1-67E6-48F6-BA16-0BD415C65DFF}",
     "Language": "SFX",
-    "Hash": "{5CE95BC7-891A-2122-11C6-2F57ACD3B8D9}",
+    "Hash": "{5AB5C099-CD2A-27DB-AD50-3BC21F7DFF7F}",
     "ObjectPath": "Play_mus_game",
     "ShortName": "Play_mus_game",
     "Path": "Event/Play_mus_game.bnk",
@@ -235,7 +235,7 @@
         "SwitchValue": {
          "GroupType": "State",
          "GroupId": "1940399660",
-         "Id": "831766780",
+         "Id": "1592645009",
          "GUID": "{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"
         },
         "MediaRefs": [
@@ -390,16 +390,22 @@
         "GUID": "{D6D77D91-BE32-43DB-BBCE-BE363B544DC2}"
        },
        {
-        "Id": "831766780",
-        "Name": "zone1",
-        "ObjectPath": "\\States\\Default Work Unit\\mus_state\\zone1",
-        "GUID": "{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"
-       },
-       {
         "Id": "831766783",
         "Name": "zone2",
         "ObjectPath": "\\States\\Default Work Unit\\mus_state\\zone2",
         "GUID": "{868A53EB-5726-4480-B033-2D9A57B417C1}"
+       },
+       {
+        "Id": "980633786",
+        "Name": "zone1_walls",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_state\\zone1_walls",
+        "GUID": "{7E5961B5-2B3B-4EF0-AB4D-AEFC46511C5D}"
+       },
+       {
+        "Id": "1592645009",
+        "Name": "zone1_start",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_state\\zone1_start",
+        "GUID": "{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"
        },
        {
         "Id": "2968795556",
@@ -412,6 +418,6 @@
     ]
    }
   ],
-  "FileHash": "{B6ED146F-2972-CC76-C96E-3EBCFA6F7484}"
+  "FileHash": "{ADE0C377-C46C-96B5-B622-22397A2D1A49}"
  }
 }

@@ -6,13 +6,14 @@
 				<StateGroup Name="mus_state" ID="{1D8ACA51-0E72-437B-96E4-13129807EB70}">
 					<ChildrenList>
 						<State Name="None" ID="{D6D77D91-BE32-43DB-BBCE-BE363B544DC2}"/>
-						<State Name="zone1" ID="{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"/>
+						<State Name="zone1_start" ID="{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"/>
 						<State Name="zone2" ID="{868A53EB-5726-4480-B033-2D9A57B417C1}"/>
 						<State Name="glide" ID="{E2402114-3321-422E-977C-0D3BAC32F7EA}"/>
+						<State Name="zone1_walls" ID="{7E5961B5-2B3B-4EF0-AB4D-AEFC46511C5D}"/>
 					</ChildrenList>
 					<TransitionList>
 						<Transition>
-							<StartState Name="zone1" ID="{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"/>
+							<StartState Name="zone1_start" ID="{C79A81F5-CEF4-48D2-A00D-5AF646EE9890}"/>
 							<EndState Name="zone2" ID="{868A53EB-5726-4480-B033-2D9A57B417C1}"/>
 							<Time>5</Time>
 							<IsShared>false</IsShared>

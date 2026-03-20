@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{6DFA112B-0C3A-4465-92E4-A4ACAF543171}" SchemaVersion="133">
 	<Effects>
-		<WorkUnit Name="Default Work Unit" ID="{6DFA112B-0C3A-4465-92E4-A4ACAF543171}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{6DFA112B-0C3A-4465-92E4-A4ACAF543171}" PersistMode="Standalone">
+			<ChildrenList>
+				<Effect Name="mus_meter" ID="{FB54688F-61A2-410A-8B9A-0A9A3C458278}" PluginName="Wwise Meter" CompanyID="0" PluginID="129" PluginType="3">
+					<PropertyList>
+						<Property Name="MeterMode" Type="int32" Value="1"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="GameParameter">
+							<ObjectRef Name="mus_vol" ID="{2B709999-E9F2-4C0A-9CF8-DAA1629EEFB8}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
+						</Reference>
+					</ReferenceList>
+				</Effect>
+			</ChildrenList>
+		</WorkUnit>
 	</Effects>
 </WwiseDocument>

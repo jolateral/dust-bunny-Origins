@@ -4,24 +4,32 @@ State Group	ID	Name			Wwise Object Path	Notes
 
 State	ID	Name	State Group			Notes
 	748895195	None	mus_state			
-	831766780	zone1	mus_state			
 	831766783	zone2	mus_state			
+	980633786	zone1_walls	mus_state			
+	1592645009	zone1_start	mus_state			
 	2968795556	glide	mus_state			
 	748895195	None	player_state			
 	3232496108	pause_screen	player_state			
 	3509424520	memory	player_state			
 	4176812997	gliding	player_state			
 
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	1307889788	mus_vol			\Default Work Unit\mix_parameters\mus_vol	
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
+	85412153	Ambience			\Default Work Unit\Main Audio Bus\Ambience	
+	393239870	SFX			\Default Work Unit\Main Audio Bus\SFX	
+	459670435	SFX_Ambient			\Default Work Unit\Main Audio Bus\SFX_Ambient	
 	2246998526	Main Audio Bus			\Default Work Unit\Main Audio Bus	
+	3991942870	Music			\Default Work Unit\Main Audio Bus\Music	
 
 Auxiliary Bus	ID	Name			Wwise Object Path	Notes
-	831766780	Zone1			\Default Work Unit\Main Audio Bus\Zone1	
-	831766783	Zone2			\Default Work Unit\Main Audio Bus\Zone2	
+	348963605	Reverb			\Default Work Unit\Main Audio Bus\Reverb	
 
 Effect plug-ins	ID	Name	Type				Notes
 	104838541	Dual_Filters_Radio_Comm (Custom)	Wwise Parametric EQ			
 	602546716	Room_Large	Wwise RoomVerb			
+	3368093128	mus_meter	Wwise Meter			
 
 Audio Devices	ID	Name	Type				Notes
 	2317455096	No_Output	No Output			

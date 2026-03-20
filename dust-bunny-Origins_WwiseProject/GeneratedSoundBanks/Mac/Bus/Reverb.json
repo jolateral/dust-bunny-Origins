@@ -1,0 +1,63 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "348963605",
+    "Type": "Bus",
+    "GUID": "{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}",
+    "Language": "SFX",
+    "Hash": "{0262D871-5942-F103-68D0-2284D7A95077}",
+    "ObjectPath": "Reverb",
+    "ShortName": "Reverb",
+    "Path": "Bus/Reverb.bnk",
+    "Plugins": {
+     "Custom": [
+      {
+       "Id": "104838541",
+       "Name": "Dual_Filters_Radio_Comm (Custom)",
+       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Reverb\\[Effect Slot [1]: (Parametric EQ)]\\Dual_Filters_Radio_Comm (Custom)",
+       "GUID": "{17DB577C-8C33-4432-9BF2-7B96A1574716}",
+       "LibName": "Wwise Parametric EQ",
+       "LibId": "6881283"
+      }
+     ],
+     "ShareSets": [
+      {
+       "Id": "602546716",
+       "Name": "Room_Large",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Rooms\\Room_Large",
+       "GUID": "{AD8EFAFC-7121-4D5F-BE4D-B13FBD6CEBAE}",
+       "LibName": "Wwise RoomVerb",
+       "LibId": "7733251"
+      }
+     ]
+    },
+    "AuxBusses": [
+     {
+      "Id": "348963605",
+      "Name": "Reverb",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Reverb",
+      "GUID": "{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}",
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "104838541"
+        }
+       ],
+       "ShareSets": [
+        {
+         "Id": "602546716"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ],
+  "FileHash": "{C0480111-990B-AD01-F27A-8F61A40143D5}"
+ }
+}
