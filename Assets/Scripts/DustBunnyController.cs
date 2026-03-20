@@ -88,9 +88,7 @@ public class DustBunnyController : MonoBehaviour
     public int carMaxItemsLost = 3;
     public float hitStunDuration = 0.4f; // Duration player loses control after being hit
 
-    [Header("--- SFX ---")]
-    public AK.Wwise.Event bunnyJumpSfx;
-    public AK.Wwise.Event bunnyGlideStart;
+    [Header("--- SFX Events ---")]
     public AK.Wwise.Event bunnyGlideStop;
     public AK.Wwise.Event carImpactSfx;
     
@@ -491,8 +489,6 @@ public class DustBunnyController : MonoBehaviour
 
     void PerformJump()
     {
-        bunnyJumpSfx.Post(gameObject);
-
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * (jumpForce * ScaleFactor * rb.mass), ForceMode.Impulse);
 
@@ -555,8 +551,6 @@ public class DustBunnyController : MonoBehaviour
             _animator.SetBool("isGrounded", false);
         }
         SetGlidingAnimator(true);
-
-        bunnyGlideStart.Post(gameObject);
     }
 
     void EndGliding()

@@ -76,9 +76,6 @@
 						<Event Name="Play_amb_room_lp" ID="{A6DD2F9D-6089-41DB-9661-FF11E5776CCC}">
 							<ChildrenList>
 								<Action Name="" ID="{DB033450-CD37-4AE8-8242-CD3C40391254}" ShortID="555971023">
-									<PropertyList>
-										<Property Name="FadeInCurve" Type="int16" Value="5"/>
-									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="amb_room_high_lp" ID="{C095C3B2-75D5-4A19-86CB-959A00FEF138}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
@@ -96,6 +93,21 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="amb_room_mid_lp" ID="{E8F5C097-A071-4D30-95B3-F989D846C37E}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{E456BE11-CA04-4C46-98F0-21404E1F5888}" ShortID="127272951">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="12"/>
+										<Property Name="Delay" Type="Real64" Value="5"/>
+										<Property Name="FadeInCurve" Type="int16" Value="2"/>
+										<Property Name="FadeTime" Type="Real64" Value="5"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+										<Property Name="Volume" Type="Real64" Value="-12"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="amb_room_low_lp" ID="{DEEA0A29-2186-4905-B4E1-0876B0879987}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -199,22 +211,19 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_bunnyroll_nl" ID="{4C2207F0-968C-4C87-928A-D17FD8804D4B}">
+								<Event Name="Play_sfx_bunny_roll_nl" ID="{4C2207F0-968C-4C87-928A-D17FD8804D4B}">
 									<ChildrenList>
 										<Action Name="" ID="{37AF2913-E442-41D6-B418-094075D9BB40}" ShortID="594190843">
-											<PropertyList>
-												<Property Name="Delay" Type="Real64" Value="0.2"/>
-											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnyroll_nl" ID="{846DE2E5-47D2-43A8-8B0A-68E631122D89}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunny_roll_nl" ID="{846DE2E5-47D2-43A8-8B0A-68E631122D89}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
 										<Action Name="" ID="{8790B49F-6D07-4A90-A6FB-01BB681C7F5A}" ShortID="1045256267">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnysqueak_nl" ID="{B2A4FB79-D9C6-4227-B3E4-5ABE6F560016}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunny_squeaktwice_nl" ID="{88ECC9C8-74EF-4BC5-819F-B178066A9368}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -259,12 +268,9 @@
 											</ReferenceList>
 										</Action>
 										<Action Name="" ID="{41EBDC7C-CA0F-42C7-B868-04F97403610A}" ShortID="358790825">
-											<PropertyList>
-												<Property Name="Delay" Type="Real64" Value="0.2"/>
-											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnysqueak_nl" ID="{B2A4FB79-D9C6-4227-B3E4-5ABE6F560016}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunny_squeak_nl" ID="{B2A4FB79-D9C6-4227-B3E4-5ABE6F560016}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -273,22 +279,16 @@
 								<Event Name="Play_sfx_bunny_jump_nl" ID="{5EC6DAF1-1A0E-4EB8-B5A8-E248B2629610}">
 									<ChildrenList>
 										<Action Name="" ID="{D78023CC-0AC6-44E2-BF61-EDC72D826DAD}" ShortID="155594781">
-											<PropertyList>
-												<Property Name="Delay" Type="Real64" Value="0.2"/>
-											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnyjump_nl" ID="{95C77888-9E0C-42C8-BC7B-3AADB38C53D7}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunny_jump_nl" ID="{95C77888-9E0C-42C8-BC7B-3AADB38C53D7}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
 										<Action Name="" ID="{83644403-BE71-442E-86E5-131DA41BD433}" ShortID="631834201">
-											<PropertyList>
-												<Property Name="Delay" Type="Real64" Value="0.2"/>
-											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunny_squeaktwice_nl" ID="{88ECC9C8-74EF-4BC5-819F-B178066A9368}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunny_squeak_nl" ID="{B2A4FB79-D9C6-4227-B3E4-5ABE6F560016}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -483,7 +483,7 @@
 										<Action Name="" ID="{E1C75A6E-86C6-4C6E-8741-0A2321EB4273}" ShortID="865543862">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_bunnysqueak_nl" ID="{B2A4FB79-D9C6-4227-B3E4-5ABE6F560016}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_bunny_squeak_nl" ID="{B2A4FB79-D9C6-4227-B3E4-5ABE6F560016}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

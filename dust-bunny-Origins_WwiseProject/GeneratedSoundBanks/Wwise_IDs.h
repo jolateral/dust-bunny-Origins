@@ -30,7 +30,7 @@ namespace AK
         static const AkUniqueID PLAY_SFX_BUNNY_IMPACT_NL = 3406827132U;
         static const AkUniqueID PLAY_SFX_BUNNY_JUMP_NL = 1938447626U;
         static const AkUniqueID PLAY_SFX_BUNNY_LAND_NL = 16499847U;
-        static const AkUniqueID PLAY_SFX_BUNNYROLL_NL = 4212669292U;
+        static const AkUniqueID PLAY_SFX_BUNNY_ROLL_NL = 2747268133U;
         static const AkUniqueID PLAY_SFX_CAR_IMPACT_NL = 2032188842U;
         static const AkUniqueID PLAY_SFX_CAR_MOVE_NL = 4207159517U;
         static const AkUniqueID PLAY_SFX_COIN_ABSORB_NL = 4259653120U;
@@ -109,12 +109,10 @@ namespace AK
     namespace BUSSES
     {
         static const AkUniqueID MAIN_AUDIO_BUS = 2246998526U;
-        static const AkUniqueID NEW_AUDIO_BUS = 2255513057U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES
     {
-        static const AkUniqueID NEW_AUXILIARY_BUS = 373392551U;
         static const AkUniqueID ZONE1 = 831766780U;
         static const AkUniqueID ZONE2 = 831766783U;
     } // namespace AUX_BUSSES

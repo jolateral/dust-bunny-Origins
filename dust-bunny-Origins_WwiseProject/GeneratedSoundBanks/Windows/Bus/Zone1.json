@@ -10,27 +10,27 @@
     "Type": "Bus",
     "GUID": "{0DA024ED-A6E5-4CCD-B6EB-DB87C644BA67}",
     "Language": "SFX",
-    "Hash": "{42F441B0-46D8-F907-AC2C-06757F2B6495}",
+    "Hash": "{964BE3FB-3EC1-1930-E5BD-0A66BC936860}",
     "ObjectPath": "Zone1",
     "ShortName": "Zone1",
     "Path": "Bus/Zone1.bnk",
     "Plugins": {
      "Custom": [
       {
-       "Id": "97464601",
-       "Name": "Parametric EQ (Custom)",
-       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Zone1\\[Effect Slot [0]: (Parametric EQ)]\\Parametric EQ (Custom)",
-       "GUID": "{FE1D00E9-C7B6-46EC-8526-9387802B973E}",
+       "Id": "104838541",
+       "Name": "Dual_Filters_Radio_Comm (Custom)",
+       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Zone1\\[Effect Slot [1]: (Parametric EQ)]\\Dual_Filters_Radio_Comm (Custom)",
+       "GUID": "{17DB577C-8C33-4432-9BF2-7B96A1574716}",
        "LibName": "Wwise Parametric EQ",
        "LibId": "6881283"
       }
      ],
      "ShareSets": [
       {
-       "Id": "2513915904",
-       "Name": "Hall_Large",
-       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Halls\\Hall_Large",
-       "GUID": "{6D154498-FF6D-4823-96FC-56841B70E079}",
+       "Id": "602546716",
+       "Name": "Room_Large",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Rooms\\Room_Large",
+       "GUID": "{AD8EFAFC-7121-4D5F-BE4D-B13FBD6CEBAE}",
        "LibName": "Wwise RoomVerb",
        "LibId": "7733251"
       }
@@ -45,12 +45,12 @@
       "PluginRefs": {
        "Custom": [
         {
-         "Id": "97464601"
+         "Id": "104838541"
         }
        ],
        "ShareSets": [
         {
-         "Id": "2513915904"
+         "Id": "602546716"
         }
        ]
       }
@@ -58,6 +58,6 @@
     ]
    }
   ],
-  "FileHash": "{D1766DB5-423E-3C78-8B97-05540F9120A5}"
+  "FileHash": "{0C5EA612-F86A-2D7F-43BD-C56F2FBBDEE2}"
  }
 }

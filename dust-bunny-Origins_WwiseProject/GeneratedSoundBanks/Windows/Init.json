@@ -10,27 +10,27 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{BCA88439-119B-A9E5-8802-6AF0D502D515}",
+    "Hash": "{08506ED2-3E21-5ECE-7116-9245AC297741}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
     "Plugins": {
      "Custom": [
       {
-       "Id": "97464601",
-       "Name": "Parametric EQ (Custom)",
-       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Zone1\\[Effect Slot [0]: (Parametric EQ)]\\Parametric EQ (Custom)",
-       "GUID": "{FE1D00E9-C7B6-46EC-8526-9387802B973E}",
+       "Id": "104838541",
+       "Name": "Dual_Filters_Radio_Comm (Custom)",
+       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Zone1\\[Effect Slot [1]: (Parametric EQ)]\\Dual_Filters_Radio_Comm (Custom)",
+       "GUID": "{17DB577C-8C33-4432-9BF2-7B96A1574716}",
        "LibName": "Wwise Parametric EQ",
        "LibId": "6881283"
       }
      ],
      "ShareSets": [
       {
-       "Id": "2513915904",
-       "Name": "Hall_Large",
-       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Halls\\Hall_Large",
-       "GUID": "{6D154498-FF6D-4823-96FC-56841B70E079}",
+       "Id": "602546716",
+       "Name": "Room_Large",
+       "ObjectPath": "\\Effects\\Factory Effects\\RoomVerb\\Rooms\\Room_Large",
+       "GUID": "{AD8EFAFC-7121-4D5F-BE4D-B13FBD6CEBAE}",
        "LibName": "Wwise RoomVerb",
        "LibId": "7733251"
       }
@@ -60,21 +60,9 @@
       "Name": "Main Audio Bus",
       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
-     },
-     {
-      "Id": "2255513057",
-      "Name": "New Audio Bus",
-      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\New Audio Bus",
-      "GUID": "{D2E9ED77-2B1B-40DD-97CE-F963D568E0B2}"
      }
     ],
     "AuxBusses": [
-     {
-      "Id": "373392551",
-      "Name": "New_Auxiliary_Bus",
-      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\New_Auxiliary_Bus",
-      "GUID": "{E17AF6BF-1107-4731-9A4C-56ECCE3994CA}"
-     },
      {
       "Id": "831766780",
       "Name": "Zone1",
@@ -83,12 +71,12 @@
       "PluginRefs": {
        "Custom": [
         {
-         "Id": "97464601"
+         "Id": "104838541"
         }
        ],
        "ShareSets": [
         {
-         "Id": "2513915904"
+         "Id": "602546716"
         }
        ]
       }
@@ -204,6 +192,6 @@
     ]
    }
   ],
-  "FileHash": "{B087D335-A52C-C4C3-3DD7-DE7E95E37092}"
+  "FileHash": "{A2CC1D8A-B073-2451-D32B-81E8C321FBD4}"
  }
 }
