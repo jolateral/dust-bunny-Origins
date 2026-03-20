@@ -451,10 +451,9 @@ GameObject:
   - component: {fileID: 15312992}
   - component: {fileID: 15312991}
   - component: {fileID: 15312990}
-  - component: {fileID: 15312989}
   m_Layer: 0
   m_Name: Zone2DeskRespawnCollider (3)
-  m_TagString: Untagged
+  m_TagString: OutOfBounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -469,24 +468,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 248.5, y: -14.559999, z: 1.2}
-  m_LocalScale: {x: 0.22931741, y: 43.989635, z: 121.294075}
+  m_LocalScale: {x: 8.395717, y: 43.989635, z: 121.294075}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1099307581}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &15312989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 15312987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad3b69de93dbd14d842f68ca60f2c54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnBarrier
-  teleportPosition: {x: -425.00452, y: 67.31601, z: -88.753235}
 --- !u!114 &15312990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19818,7 +19804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499579090}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38609114, y: 0.000000011387342, z: -0.000000004766114, w: 0.9224607}
+  m_LocalRotation: {x: 0.38596514, y: 2.492815e-10, z: -1.0429547e-10, w: 0.9225134}
   m_LocalPosition: {x: -35.690826, y: -13.349463, z: -10.842041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21732,6 +21718,118 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1545864922453447421, guid: 4ead942c9059643c1ae97662cfc5b8aa, type: 3}
   m_PrefabInstance: {fileID: 582001371}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &569101682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 569101683}
+  - component: {fileID: 569101686}
+  - component: {fileID: 569101685}
+  - component: {fileID: 569101687}
+  m_Layer: 0
+  m_Name: Cylinder (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &569101683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569101682}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.7808094, z: 0}
+  m_LocalScale: {x: 0.77903, y: 0.77903, z: 0.77903}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 673391902}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &569101685
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569101682}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 36038883a8c4c944e9a82dd4efeeda37, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &569101686
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569101682}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &569101687
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569101682}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000002, y: 2, z: 1.0000004}
+  m_Center: {x: 0.00000005960465, y: 0, z: -0.00000008940698}
 --- !u!1001 &573931788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21821,6 +21919,41 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfc6bc7903afe5c499373d3a77272e1c, type: 3}
+--- !u!1 &575346725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 575346726}
+  m_Layer: 0
+  m_Name: RoombaObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &575346726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575346725}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -193.93, y: 0, z: -203.1062}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1391423409}
+  - {fileID: 673391902}
+  - {fileID: 1156876117}
+  - {fileID: 1156149746}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &576311618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23076,10 +23209,9 @@ GameObject:
   - component: {fileID: 633406272}
   - component: {fileID: 633406271}
   - component: {fileID: 633406270}
-  - component: {fileID: 633406269}
   m_Layer: 0
   m_Name: Zone2DeskRespawnCollider (1)
-  m_TagString: Untagged
+  m_TagString: OutOfBounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23094,24 +23226,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 151.7, y: -13.7, z: 100.7}
-  m_LocalScale: {x: 0.22931741, y: 109.26793, z: 306.87787}
+  m_LocalScale: {x: 6.7832084, y: 109.26793, z: 306.87787}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1099307581}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
---- !u!114 &633406269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633406267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad3b69de93dbd14d842f68ca60f2c54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnBarrier
-  teleportPosition: {x: -425.00452, y: 67.31601, z: -88.753235}
 --- !u!114 &633406270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23708,6 +23827,168 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1701966350}
   m_SourcePrefab: {fileID: 100100000, guid: 623215f947e7d954ebe4518868c8b314, type: 3}
+--- !u!1 &673391901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 673391902}
+  - component: {fileID: 673391905}
+  - component: {fileID: 673391904}
+  - component: {fileID: 673391906}
+  - component: {fileID: 673391908}
+  - component: {fileID: 673391907}
+  m_Layer: 0
+  m_Name: Roomba
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &673391902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673391901}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.9978485, y: 2.0700002, z: 2.0097961}
+  m_LocalScale: {x: 24.55902, y: 0.7861594, z: 24.55902}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 569101683}
+  m_Father: {fileID: 575346726}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &673391904
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673391901}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 36038883a8c4c944e9a82dd4efeeda37, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &673391905
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673391901}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &673391906
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673391901}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 1.9999999, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &673391907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673391901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd059d058d965ec458151c6f93d2bf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoombaChase
+  player: {fileID: 799011739519290532}
+  respawnPoint: {fileID: 1391423409}
+  patrolPointA: {fileID: 1156876117}
+  patrolPointB: {fileID: 1156149746}
+  patrolStopDistance: 0.2
+  moveSpeed: 100
+  rotationSpeed: 8
+  stopDistance: 1.2
+--- !u!54 &673391908
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673391901}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &677802572
 GameObject:
   m_ObjectHideFlags: 0
@@ -24209,10 +24490,9 @@ GameObject:
   - component: {fileID: 704362559}
   - component: {fileID: 704362558}
   - component: {fileID: 704362557}
-  - component: {fileID: 704362556}
   m_Layer: 0
   m_Name: Zone2DeskRespawnCollider (2)
-  m_TagString: Untagged
+  m_TagString: OutOfBounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24227,24 +24507,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 119.31, y: -13.2, z: 9}
-  m_LocalScale: {x: 0.22931741, y: 143.23506, z: 159.99384}
+  m_LocalScale: {x: 5.821245, y: 143.23506, z: 159.99384}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1099307581}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &704362556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 704362554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad3b69de93dbd14d842f68ca60f2c54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnBarrier
-  teleportPosition: {x: -425.00452, y: 67.31601, z: -88.753235}
 --- !u!114 &704362557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26955,96 +27222,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1545864922453447421, guid: 4ead942c9059643c1ae97662cfc5b8aa, type: 3}
   m_PrefabInstance: {fileID: 1014671178}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &814632385
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 814632386}
-  - component: {fileID: 814632389}
-  - component: {fileID: 814632388}
-  m_Layer: 0
-  m_Name: Zone2DeskRespawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &814632386
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814632385}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -73.09, y: 52.33, z: 101.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1099307581}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &814632388
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814632385}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &814632389
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814632385}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &828860356 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 7306063e424057f428fea084cd6321cd, type: 3}
@@ -28885,10 +29062,9 @@ GameObject:
   - component: {fileID: 905390123}
   - component: {fileID: 905390122}
   - component: {fileID: 905390121}
-  - component: {fileID: 905390120}
   m_Layer: 0
   m_Name: Zone2BridgeRespawnCollider (1)
-  m_TagString: Untagged
+  m_TagString: OutOfBounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28903,24 +29079,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: -29.89, y: -14.7300005, z: 44.8}
-  m_LocalScale: {x: 0.22931741, y: 46.59898, z: 56.136208}
+  m_LocalScale: {x: 9.037229, y: 46.59898, z: 56.136208}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1099307581}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
---- !u!114 &905390120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 905390118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad3b69de93dbd14d842f68ca60f2c54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnBarrier
-  teleportPosition: {x: -422.59, y: 56.02601, z: -128.02}
 --- !u!114 &905390121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29417,10 +29580,9 @@ GameObject:
   - component: {fileID: 921852659}
   - component: {fileID: 921852658}
   - component: {fileID: 921852657}
-  - component: {fileID: 921852656}
   m_Layer: 0
   m_Name: Zone2BridgeRespawnCollider
-  m_TagString: Untagged
+  m_TagString: OutOfBounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29435,24 +29597,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: -42.2, y: -14.7300005, z: 81.5}
-  m_LocalScale: {x: 0.22931741, y: 26.07608, z: 101.48372}
+  m_LocalScale: {x: 8.803253, y: 26.07608, z: 101.48372}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1099307581}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
---- !u!114 &921852656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921852654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad3b69de93dbd14d842f68ca60f2c54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnBarrier
-  teleportPosition: {x: -422.59, y: 56.02601, z: -128.02}
 --- !u!114 &921852657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29587,10 +29736,9 @@ GameObject:
   - component: {fileID: 925282242}
   - component: {fileID: 925282241}
   - component: {fileID: 925282240}
-  - component: {fileID: 925282239}
   m_Layer: 0
   m_Name: Zone2BridgeRespawnCollider (2)
-  m_TagString: Untagged
+  m_TagString: OutOfBounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29605,24 +29753,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 19.47, y: -14.7300005, z: 44.8}
-  m_LocalScale: {x: 0.22931741, y: 46.59898, z: 56.136208}
+  m_LocalScale: {x: 9.059976, y: 46.59898, z: 56.136208}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1099307581}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
---- !u!114 &925282239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925282237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad3b69de93dbd14d842f68ca60f2c54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnBarrier
-  teleportPosition: {x: -422.59, y: 56.02601, z: -128.02}
 --- !u!114 &925282240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32229,7 +32364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076957463}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38609117, y: 0, z: 0, w: 0.9224606}
+  m_LocalRotation: {x: 0.38596508, y: 2.4448274e-10, z: -9.2825796e-11, w: 0.9225134}
   m_LocalPosition: {x: -35.690826, y: -12.9821825, z: -11.205139}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32835,11 +32970,9 @@ Transform:
   - {fileID: 704362555}
   - {fileID: 15312988}
   - {fileID: 1402831347}
-  - {fileID: 814632386}
   - {fileID: 921852655}
   - {fileID: 905390119}
   - {fileID: 925282238}
-  - {fileID: 1391423409}
   - {fileID: 144443043}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33925,6 +34058,68 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1156149745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1156149746}
+  m_Layer: 0
+  m_Name: RoombaPatrolB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1156149746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156149745}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -109.57001, y: 0, z: 169.9062}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 575346726}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1156876116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1156876117}
+  m_Layer: 0
+  m_Name: RoombaPatrolA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1156876117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156876116}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 575346726}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1165037321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39333,7 +39528,7 @@ GameObject:
   - component: {fileID: 1391423408}
   - component: {fileID: 1391423407}
   m_Layer: 0
-  m_Name: Zone2BridgeRespawnPoint
+  m_Name: Respawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39405,11 +39600,11 @@ Transform:
   m_GameObject: {fileID: 1391423405}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -70.675476, y: 41.04, z: 61.933228}
+  m_LocalPosition: {x: -239.51, y: 5.5760098, z: 26.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1099307581}
+  m_Father: {fileID: 575346726}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1396130943
 GameObject:
@@ -39556,10 +39751,9 @@ GameObject:
   - component: {fileID: 1402831351}
   - component: {fileID: 1402831350}
   - component: {fileID: 1402831349}
-  - component: {fileID: 1402831348}
   m_Layer: 0
   m_Name: Zone2DeskRespawnCollider (4)
-  m_TagString: Untagged
+  m_TagString: OutOfBounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39573,25 +39767,12 @@ Transform:
   m_GameObject: {fileID: 1402831346}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 207.3, y: -14.559999, z: -24.5}
-  m_LocalScale: {x: 0.22931741, y: 90.042625, z: 121.294075}
+  m_LocalPosition: {x: 207.3, y: -14.56, z: -24.5}
+  m_LocalScale: {x: 8.15367, y: 90.042625, z: 121.294075}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1099307581}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
---- !u!114 &1402831348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1402831346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad3b69de93dbd14d842f68ca60f2c54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnBarrier
-  teleportPosition: {x: -425.00452, y: 67.31601, z: -88.753235}
 --- !u!114 &1402831349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40182,10 +40363,9 @@ GameObject:
   - component: {fileID: 1416076518}
   - component: {fileID: 1416076517}
   - component: {fileID: 1416076516}
-  - component: {fileID: 1416076520}
   m_Layer: 0
   m_Name: Zone2DeskRespawnCollider
-  m_TagString: Untagged
+  m_TagString: OutOfBounds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40200,7 +40380,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 90.8, y: -13.1, z: 173}
-  m_LocalScale: {x: 0.22931741, y: 156.32863, z: 375.49423}
+  m_LocalScale: {x: 5.921058, y: 156.32863, z: 375.49423}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1099307581}
@@ -40295,19 +40475,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416076514}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1416076520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1416076514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad3b69de93dbd14d842f68ca60f2c54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnBarrier
-  teleportPosition: {x: -425.00452, y: 67.31601, z: -88.753235}
 --- !u!1001 &1419270067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57092,7 +57259,8 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 8052509b6e90d994d90a0eedf61cbe92, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5854726643437452825, guid: dfc6bc7903afe5c499373d3a77272e1c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -59045,7 +59213,8 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4f4f4979a0bdd5047b6b2d97a40b0b69, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5854726643437452825, guid: dfc6bc7903afe5c499373d3a77272e1c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -65055,7 +65224,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7378666741263697235, guid: 92946dbcee207b248917915a0394ff59, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -69763,3 +69933,4 @@ SceneRoots:
   - {fileID: 997537294}
   - {fileID: 1368237181}
   - {fileID: 48828267}
+  - {fileID: 575346726}

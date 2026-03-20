@@ -57,6 +57,7 @@ public class DustBunnyController : MonoBehaviour
 
     private Rigidbody rb;
     private Collider playerCollider;
+    public bool isOutOfBounds = false;
 
     private float turnSmoothVelocity;
     private float lastDashTime = -10f;
@@ -211,11 +212,29 @@ public class DustBunnyController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         HandleCarHit(collision.collider);
+
+        if (collision.collider.CompareTag("OutOfBounds"))
+            isOutOfBounds = true;
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag("OutOfBounds"))
+            isOutOfBounds = false;
     }
 
     void OnTriggerEnter(Collider other)
     {
         HandleCarHit(other);
+
+        if (other.CompareTag("OutOfBounds"))
+            isOutOfBounds = true;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("OutOfBounds"))
+            isOutOfBounds = false;
     }
 
     void HandleCarHit(Collider other)
