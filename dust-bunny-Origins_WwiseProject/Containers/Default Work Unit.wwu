@@ -9675,37 +9675,6 @@
 															</Reference>
 														</ReferenceList>
 													</RTPC>
-													<RTPC Name="" ID="{98863CB3-8B20-4C29-BD30-FFE3C04AD964}" ShortID="778691741">
-														<PropertyList>
-															<Property Name="PropertyName" Type="string" Value="Lowpass"/>
-														</PropertyList>
-														<ReferenceList>
-															<Reference Name="ControlInput">
-																<ObjectRef Name="velocity" ID="{00E52E05-195E-4593-9251-C1504F30131D}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
-															</Reference>
-															<Reference Name="Curve">
-																<Custom>
-																	<Curve Name="" ID="{C84B9FC4-09CF-454C-BF12-7DF827451417}">
-																		<PropertyList>
-																			<Property Name="Flags" Type="int32" Value="65537"/>
-																		</PropertyList>
-																		<PointList>
-																			<Point>
-																				<XPos>0</XPos>
-																				<YPos>50</YPos>
-																				<Flags>5</Flags>
-																			</Point>
-																			<Point>
-																				<XPos>10</XPos>
-																				<YPos>50</YPos>
-																				<Flags>37</Flags>
-																			</Point>
-																		</PointList>
-																	</Curve>
-																</Custom>
-															</Reference>
-														</ReferenceList>
-													</RTPC>
 													<RTPC Name="" ID="{0BFFB8EB-1BE2-4668-8A39-16E37AE8F38D}" ShortID="406021743">
 														<PropertyList>
 															<Property Name="PropertyName" Type="string" Value="Volume"/>
@@ -9730,6 +9699,37 @@
 																			<Point>
 																				<XPos>10</XPos>
 																				<YPos>3</YPos>
+																				<Flags>37</Flags>
+																			</Point>
+																		</PointList>
+																	</Curve>
+																</Custom>
+															</Reference>
+														</ReferenceList>
+													</RTPC>
+													<RTPC Name="" ID="{98863CB3-8B20-4C29-BD30-FFE3C04AD964}" ShortID="778691741">
+														<PropertyList>
+															<Property Name="PropertyName" Type="string" Value="Highpass"/>
+														</PropertyList>
+														<ReferenceList>
+															<Reference Name="ControlInput">
+																<ObjectRef Name="velocity" ID="{00E52E05-195E-4593-9251-C1504F30131D}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
+															</Reference>
+															<Reference Name="Curve">
+																<Custom>
+																	<Curve Name="" ID="{C84B9FC4-09CF-454C-BF12-7DF827451417}">
+																		<PropertyList>
+																			<Property Name="Flags" Type="int32" Value="65537"/>
+																		</PropertyList>
+																		<PointList>
+																			<Point>
+																				<XPos>0</XPos>
+																				<YPos>50</YPos>
+																				<Flags>5</Flags>
+																			</Point>
+																			<Point>
+																				<XPos>10</XPos>
+																				<YPos>0</YPos>
 																				<Flags>37</Flags>
 																			</Point>
 																		</PointList>
@@ -11881,6 +11881,11 @@
 													</ReferenceList>
 													<ChildrenList>
 														<AudioFileSource Name="sfx_woodblock_impact_nl_002" ID="{AAD1EE91-1935-43BA-B8E2-46E7EA09EE08}">
+															<PropertyList>
+																<Property Name="FadeInDuration" Type="Real64" Value="0.00593642358172513"/>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.0112479604706371"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
 															<Language>SFX</Language>
 															<AudioFile>sfx_woodblock_impact_nl_002.wav</AudioFile>
 															<MediaIDList>
@@ -12069,13 +12074,8 @@
 																<PointList>
 																	<Point>
 																		<XPos>0</XPos>
-																		<YPos>0</YPos>
+																		<YPos>35</YPos>
 																		<Flags>5</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>0.001</XPos>
-																		<YPos>60</YPos>
-																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>100</XPos>
@@ -12106,14 +12106,14 @@
 													<CrossfadingInfo>
 														<LeftEdgePos>0</LeftEdgePos>
 														<LeftFadingMode>Automatic</LeftFadingMode>
-														<RightEdgePos>4.34229261240812</RightEdgePos>
+														<RightEdgePos>3.62835499057576</RightEdgePos>
 														<RightFadingMode>Automatic</RightFadingMode>
 													</CrossfadingInfo>
 												</BlendTrackAssoc>
 												<BlendTrackAssoc>
 													<ItemRef Name="sfx_woodblock_impact_med_nl" ID="{614C9181-7AF7-4F59-B011-5521C119FEB1}"/>
 													<CrossfadingInfo>
-														<LeftEdgePos>1.76851851851851</LeftEdgePos>
+														<LeftEdgePos>2.98797250859106</LeftEdgePos>
 														<LeftFadingMode>Automatic</LeftFadingMode>
 														<RightEdgePos>7.40690740740741</RightEdgePos>
 														<RightFadingMode>Automatic</RightFadingMode>

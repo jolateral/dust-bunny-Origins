@@ -45742,7 +45742,6 @@ GameObject:
   - component: {fileID: 1538681485}
   - component: {fileID: 1538681484}
   - component: {fileID: 1538681483}
-  - component: {fileID: 1538681487}
   m_Layer: 0
   m_Name: Camerafocustrigger
   m_TagString: Untagged
@@ -45861,30 +45860,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538681481}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1538681487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538681481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc7a482e861e9b241bf741345c77da50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
-  triggerList: d1bbb3b5
-  useOtherObject: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 68b43986556a4e64ca211b09c0d213b7, type: 2}
-  valueIdInternal: 0
-  groupIdInternal: 0
-  valueGuidInternal: 
-  groupGuidInternal: 
 --- !u!1 &1539078709
 GameObject:
   m_ObjectHideFlags: 0
@@ -69879,6 +69854,14 @@ PrefabInstance:
       propertyPath: bridgeCreakSfx.WwiseObjectReference
       value: 
       objectReference: {fileID: 11400000, guid: 6e3bc4b114ecf8949b76abe4a8da320f, type: 2}
+    - target: {fileID: 8369428488773417259, guid: 80b84e9938b279842a587e87aa1b90ce, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 6f3a3ec7d09a4954cb95ff50b7c609c1, type: 2}
+    - target: {fileID: 8369428488773417259, guid: 80b84e9938b279842a587e87aa1b90ce, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
