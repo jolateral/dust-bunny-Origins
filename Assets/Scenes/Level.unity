@@ -10933,7 +10933,7 @@ Transform:
   m_GameObject: {fileID: 345891232}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -206.859, y: 111.71, z: 245.16}
+  m_LocalPosition: {x: -147.31, y: 111.71, z: 245.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12373,7 +12373,7 @@ Transform:
   m_GameObject: {fileID: 409587494}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.2883149, z: -0, w: 0.9575357}
-  m_LocalPosition: {x: -206.46, y: 111.83, z: 235.48}
+  m_LocalPosition: {x: -146.39, y: 111.83, z: 235.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13413,7 +13413,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.25
+      scalar: 0.4
       minScalar: 0.05
       maxCurve:
         serializedVersion: 2
@@ -26059,13 +26059,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748311722}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.015134435, y: 0.9810603, z: -0.085831694, w: -0.1729873}
+  m_LocalRotation: {x: -0.022665616, y: 0.9763826, z: -0.12854317, w: -0.17216249}
   m_LocalPosition: {x: -126.390015, y: 228.11, z: 736.66003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1470709700}
-  m_LocalEulerAnglesHint: {x: 10, y: 200, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 200, z: 0}
 --- !u!1 &749383641 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 936709706adf8b848935b7b0e8f93385, type: 3}
@@ -41840,7 +41840,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453312755}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 1
@@ -43443,7 +43443,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520199857}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 1
@@ -44106,8 +44106,8 @@ Transform:
   m_GameObject: {fileID: 1538681481}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -206.7, y: 122.66, z: 239.34244}
-  m_LocalScale: {x: 27.441597, y: 27.441597, z: 27.441597}
+  m_LocalPosition: {x: -146.2, y: 122.66, z: 239.34244}
+  m_LocalScale: {x: 14.933442, y: 27.441597, z: 27.441597}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 939058526}
@@ -44126,8 +44126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFocusTrigger
   cameraStandpoint: {fileID: 409587495}
   focusTarget: {fileID: 345891233}
-  transitionInTime: 1.5
-  holdTime: 2
+  transitionInTime: 1
+  holdTime: 1
   transitionOutTime: 1
   triggerOnlyOnce: 1
 --- !u!65 &1538681484
@@ -63289,7 +63289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFocusTrigger
   cameraStandpoint: {fileID: 924879627}
   focusTarget: {fileID: 447775380}
-  transitionInTime: 1.5
+  transitionInTime: 2
   holdTime: 2
   transitionOutTime: 1
   triggerOnlyOnce: 1
