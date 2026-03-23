@@ -512,8 +512,11 @@ public class DustBunnyController : MonoBehaviour
         rb.AddForce(Vector3.up * (jumpForce * ScaleFactor * rb.mass), ForceMode.Impulse);
 
         isGrounded = false;
+
         if (_animator)
         {
+            _animator.SetTrigger("jump");
+
             _animator.SetBool("isGrounded", false);
             _animator.SetBool("isRunning", false);
         }
@@ -774,5 +777,39 @@ public class DustBunnyController : MonoBehaviour
 
         if (_animator)
             _animator.SetBool("isGrounded", isGrounded);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Collider col = GetComponent<Collider>();
+        if (col == null) return;
+
+        Bounds bounds = col.bounds;
+
+        Vector3 origin = new Vector3(
+            bounds.center.x,
+            bounds.min.y + 0.02f,
+            bounds.center.z
+        );
+
+        Vector3 end = origin + Vector3.down * strictGroundCheckDistance;
+
+        Gizmos.color = CheckGroundedStrict() ? Color.green : Color.red;
+
+        // top sphere
+        Gizmos.DrawWireSphere(origin, strictGroundCheckRadius);
+
+        // bottom sphere
+        Gizmos.DrawWireSphere(end, strictGroundCheckRadius);
+
+        // connect sides so it looks like a spherecast
+        Gizmos.DrawLine(origin + Vector3.forward * strictGroundCheckRadius, end + Vector3.forward * strictGroundCheckRadius);
+        Gizmos.DrawLine(origin + Vector3.back * strictGroundCheckRadius, end + Vector3.back * strictGroundCheckRadius);
+        Gizmos.DrawLine(origin + Vector3.right * strictGroundCheckRadius, end + Vector3.right * strictGroundCheckRadius);
+        Gizmos.DrawLine(origin + Vector3.left * strictGroundCheckRadius, end + Vector3.left * strictGroundCheckRadius);
+
+        // center line
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(origin, end);
     }
 }

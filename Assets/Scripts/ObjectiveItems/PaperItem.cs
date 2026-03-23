@@ -125,8 +125,8 @@ public class PaperItem : MonoBehaviour
             return;
         }
         
-        // Mark this piece as collected
-        multiPieceData.CollectPiece(pieceIndex);
+        // Mark this piece as collected and store its sprite in shared runtime data
+        multiPieceData.CollectPiece(pieceIndex, paperSprite);
 
         if (ObjectiveUI.Instance != null)
         {
@@ -157,30 +157,8 @@ public class PaperItem : MonoBehaviour
     /// </summary>
     private Sprite[] GetCollectedPieceSprites()
     {
-        // Find all PaperItem objects that belong to this multi-piece paper
-        PaperItem[] allPaperItems = FindObjectsByType<PaperItem>(FindObjectsSortMode.None);
-        
-        // Create array to hold sprites (indexed by piece number)
-        Sprite[] sprites = new Sprite[multiPieceData.totalPieces];
-        
-        foreach (PaperItem item in allPaperItems)
-        {
-            // Skip if not part of this puzzle
-            if (item.multiPieceData != multiPieceData)
-                continue;
-            
-            // Skip if this piece hasn't been collected
-            if (!multiPieceData.IsPieceCollected(item.pieceIndex))
-                continue;
-            
-            // Add this piece's sprite to the array
-            if (item.pieceIndex >= 0 && item.pieceIndex < sprites.Length)
-            {
-                sprites[item.pieceIndex] = item.paperSprite;
-            }
-        }
-        
-        return sprites;
+        // Use shared puzzle runtime data so UI still works after world pieces are destroyed.
+        return multiPieceData.GetCollectedPieceSprites();
     }
     
     /// <summary>

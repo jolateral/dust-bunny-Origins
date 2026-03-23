@@ -45,6 +45,10 @@ public class AbsorbMechanic : MonoBehaviour
     [Tooltip("How fast the tiny items orbit around the bunny.")]
     public float orbitSpeed = 45f;
 
+    // NEW: Orbital Height Offset
+    [Tooltip("Adjust the vertical center of the orbit. Positive moves it up (e.g., to the head).")]
+    public float orbitHeightOffset = 0f;
+
     [Header("Absorb Constraint")]
     [Tooltip("Message shown when the player is too small to absorb something.")]
     public string tooBigMessage = "You're not quite big enough yet...";
@@ -221,6 +225,15 @@ public class AbsorbMechanic : MonoBehaviour
         {
             paper.OnAbsorbed();
             if (bunnyAbsorbSfx != null) bunnyAbsorbSfx.Post(gameObject);
+
+            // Paper fragments should disappear once collected, not orbit/glow on the bunny.
+            DisablePickupGlow(item);
+            HideItemRenderers(item);
+            item.SetActive(false);
+            Destroy(item);
+
+            TriggerSmoothGrowth(growthFactor);
+            return;
         }
 
         // ===================================================================
@@ -283,6 +296,7 @@ public class AbsorbMechanic : MonoBehaviour
         orbit.target = this.transform;
         orbit.radius = surfaceStickRadius;
         orbit.speed = orbitSpeed;
+        orbit.extraHeightOffset = orbitHeightOffset; // NEW: Pass the manual height offset to the orbit script
 
         // Track generic items so they can be spilled later on hit
         bool canDropLater = (paper == null && memory == null && key == null);
@@ -432,6 +446,34 @@ public class AbsorbMechanic : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Disables pickup highlight/glow components once an item is collected.
+    /// </summary>
+    private void DisablePickupGlow(GameObject item)
+    {
+        if (item == null) return;
+
+        Outline[] outlines = item.GetComponentsInChildren<Outline>(true);
+        foreach (Outline outline in outlines)
+        {
+            if (outline != null) outline.enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Hides all renderers for an item and its children.
+    /// </summary>
+    private void HideItemRenderers(GameObject item)
+    {
+        if (item == null) return;
+
+        Renderer[] renderers = item.GetComponentsInChildren<Renderer>(true);
+        foreach (Renderer r in renderers)
+        {
+            if (r != null) r.enabled = false;
+        }
+    }
+
     // =======================================================================
     // NEW: SMOOTH GROWTH COROUTINE & LOGIC (Mario Mushroom Effect)
     // =======================================================================
@@ -495,9 +537,32 @@ public class OrbitBehaviour : MonoBehaviour
     public float radius = 1f;
     public float speed = 45f;
     
+    // NEW: Manual offset for orbit height (set via AbsorbMechanic)
+    public float extraHeightOffset = 0f; 
+    
+    // NEW: Physics Wobble Settings for organic floating feedback
+    [Header("Physics Wobble")]
+    public float springStiffness = 120f;
+    public float dampening = 8f;
+    public float inertiaFactor = 0.8f; // How much it reacts to the player's movement
+    
+    // NEW: Absorption Trajectory Settings
+    [Header("Absorption Trajectory")]
+    public float absorbDuration = 0.4f; // How long it takes to fly into orbit like a vacuum
+    
     private Vector3 axis;
     private float angle;
     private float heightOffset;
+
+    // Variables to track target movement and calculate wobble
+    private Vector3 lastTargetPos;
+    private Vector3 wobbleOffset;
+    private Vector3 wobbleVelocity;
+    
+    // NEW: State variables for the initial "suck-in" flight path
+    private Vector3 initialWorldPosition;
+    private float absorbTimer = 0f;
+    private bool isAbsorbing = true;
 
     void Start()
     {
@@ -505,27 +570,71 @@ public class OrbitBehaviour : MonoBehaviour
         axis = Random.onUnitSphere;
         angle = Random.Range(0f, 360f);
 
-        // Calculate the physical center of the target so they orbit the body, not the feet
         if (target != null)
         {
             Collider col = target.GetComponent<Collider>();
             if (col != null) heightOffset = col.bounds.extents.y;
+            
+            lastTargetPos = target.position;
         }
+        
+        // Record the exact position where the item was when the player touched it
+        initialWorldPosition = transform.position;
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (target == null) return;
 
         angle += speed * Time.deltaTime;
         
-        // Calculate orbital position
-        Vector3 offset = Quaternion.AngleAxis(angle, axis) * Vector3.forward * radius;
+        // Calculate the ideal pure-orbit offset
+        Vector3 idealOrbitOffset = Quaternion.AngleAxis(angle, axis) * Vector3.forward * radius;
         
-        // Follow the target and apply the orbit
-        transform.position = target.position + (Vector3.up * heightOffset) + offset;
+        // WOBBLE PHYSICS CALCULATION
+        Vector3 currentTargetPos = target.position;
+        Vector3 targetMovement = currentTargetPos - lastTargetPos;
+        
+        // 1. Inertia: when the bunny moves, push the wobble offset in the opposite direction
+        wobbleOffset -= targetMovement * inertiaFactor;
+        
+        // 2. Spring force: pull the wobble offset back to zero (creates the bounce when stopping)
+        Vector3 springForce = -springStiffness * wobbleOffset - dampening * wobbleVelocity;
+        wobbleVelocity += springForce * Time.deltaTime;
+        wobbleOffset += wobbleVelocity * Time.deltaTime;
+
+        // NEW: Apply the extraHeightOffset here to manually raise or lower the entire orbit ring
+        Vector3 targetOrbitPos = currentTargetPos + (Vector3.up * (heightOffset + extraHeightOffset)) + idealOrbitOffset + wobbleOffset;
+
+        // Trajectory Logic (Vacuum suck-in effect)
+        if (isAbsorbing)
+        {
+            absorbTimer += Time.deltaTime;
+            
+            // Normalize time from 0 to 1
+            float t = Mathf.Clamp01(absorbTimer / absorbDuration);
+
+            // Use an Ease-In Cubic curve (starts slow, snaps into orbit quickly to simulate a vacuum suck)
+            float ease = t * t * t;
+
+            // Smoothly move from its original grounded spot into the moving orbit path
+            transform.position = Vector3.LerpUnclamped(initialWorldPosition, targetOrbitPos, ease);
+
+            if (t >= 1f)
+            {
+                isAbsorbing = false; // Finished flying, lock into permanent orbit
+            }
+        }
+        else
+        {
+            // Follow the target perfectly (prevents drop desync) + apply orbit + apply wobble
+            transform.position = targetOrbitPos;
+        }
 
         // Make the item itself spin slightly while orbiting
         transform.Rotate(axis, speed * 1.5f * Time.deltaTime);
+        
+        // Update last position for the next frame
+        lastTargetPos = currentTargetPos;
     }
 }
