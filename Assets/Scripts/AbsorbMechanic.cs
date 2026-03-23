@@ -221,6 +221,15 @@ public class AbsorbMechanic : MonoBehaviour
         {
             paper.OnAbsorbed();
             if (bunnyAbsorbSfx != null) bunnyAbsorbSfx.Post(gameObject);
+
+            // Paper fragments should disappear once collected, not orbit/glow on the bunny.
+            DisablePickupGlow(item);
+            HideItemRenderers(item);
+            item.SetActive(false);
+            Destroy(item);
+
+            TriggerSmoothGrowth(growthFactor);
+            return;
         }
 
         // ===================================================================
@@ -429,6 +438,34 @@ public class AbsorbMechanic : MonoBehaviour
         if (playerCollider != null && itemCollider != null)
         {
             Physics.IgnoreCollision(playerCollider, itemCollider, false);
+        }
+    }
+
+    /// <summary>
+    /// Disables pickup highlight/glow components once an item is collected.
+    /// </summary>
+    private void DisablePickupGlow(GameObject item)
+    {
+        if (item == null) return;
+
+        Outline[] outlines = item.GetComponentsInChildren<Outline>(true);
+        foreach (Outline outline in outlines)
+        {
+            if (outline != null) outline.enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Hides all renderers for an item and its children.
+    /// </summary>
+    private void HideItemRenderers(GameObject item)
+    {
+        if (item == null) return;
+
+        Renderer[] renderers = item.GetComponentsInChildren<Renderer>(true);
+        foreach (Renderer r in renderers)
+        {
+            if (r != null) r.enabled = false;
         }
     }
 

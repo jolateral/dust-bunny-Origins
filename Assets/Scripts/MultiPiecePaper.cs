@@ -35,6 +35,10 @@ public class MultiPiecePaperData : ScriptableObject
     // Runtime data - tracks which pieces have been collected
     [System.NonSerialized]
     private HashSet<int> collectedPieces = new HashSet<int>();
+
+    // Runtime data - stores each collected piece's sprite by index.
+    [System.NonSerialized]
+    private Dictionary<int, Sprite> collectedPieceSprites = new Dictionary<int, Sprite>();
     
     /// <summary>
     /// Mark a piece as collected
@@ -47,6 +51,20 @@ public class MultiPiecePaperData : ScriptableObject
         
         collectedPieces.Add(pieceIndex);
         Debug.Log($"Collected piece {pieceIndex + 1}/{totalPieces} of {paperID}");
+    }
+
+    /// <summary>
+    /// Mark a piece as collected and store its sprite for UI reconstruction.
+    /// </summary>
+    public void CollectPiece(int pieceIndex, Sprite pieceSprite)
+    {
+        CollectPiece(pieceIndex);
+
+        if (collectedPieceSprites == null)
+            collectedPieceSprites = new Dictionary<int, Sprite>();
+
+        if (pieceSprite != null)
+            collectedPieceSprites[pieceIndex] = pieceSprite;
     }
     
     /// <summary>
@@ -89,6 +107,27 @@ public class MultiPiecePaperData : ScriptableObject
         
         return new List<int>(collectedPieces);
     }
+
+    /// <summary>
+    /// Returns an array of collected sprites indexed by piece number.
+    /// Missing/uncollected entries are null.
+    /// </summary>
+    public Sprite[] GetCollectedPieceSprites()
+    {
+        Sprite[] sprites = new Sprite[totalPieces];
+
+        if (collectedPieceSprites == null)
+            collectedPieceSprites = new Dictionary<int, Sprite>();
+
+        foreach (var kvp in collectedPieceSprites)
+        {
+            int idx = kvp.Key;
+            if (idx >= 0 && idx < sprites.Length)
+                sprites[idx] = kvp.Value;
+        }
+
+        return sprites;
+    }
     
     /// <summary>
     /// Reset all collected pieces (useful for testing or New Game)
@@ -99,6 +138,11 @@ public class MultiPiecePaperData : ScriptableObject
             collectedPieces = new HashSet<int>();
         
         collectedPieces.Clear();
+
+        if (collectedPieceSprites == null)
+            collectedPieceSprites = new Dictionary<int, Sprite>();
+        collectedPieceSprites.Clear();
+
         Debug.Log($"Reset progress for {paperID}");
     }
     
@@ -110,5 +154,8 @@ public class MultiPiecePaperData : ScriptableObject
     {
         if (collectedPieces == null)
             collectedPieces = new HashSet<int>();
+
+        if (collectedPieceSprites == null)
+            collectedPieceSprites = new Dictionary<int, Sprite>();
     }
 }
