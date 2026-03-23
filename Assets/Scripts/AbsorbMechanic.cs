@@ -45,6 +45,10 @@ public class AbsorbMechanic : MonoBehaviour
     [Tooltip("How fast the tiny items orbit around the bunny.")]
     public float orbitSpeed = 45f;
 
+    // NEW: Orbital Height Offset
+    [Tooltip("Adjust the vertical center of the orbit. Positive moves it up (e.g., to the head).")]
+    public float orbitHeightOffset = 0f;
+
     [Header("Absorb Constraint")]
     [Tooltip("Message shown when the player is too small to absorb something.")]
     public string tooBigMessage = "You're not quite big enough yet...";
@@ -292,6 +296,7 @@ public class AbsorbMechanic : MonoBehaviour
         orbit.target = this.transform;
         orbit.radius = surfaceStickRadius;
         orbit.speed = orbitSpeed;
+        orbit.extraHeightOffset = orbitHeightOffset; // NEW: Pass the manual height offset to the orbit script
 
         // Track generic items so they can be spilled later on hit
         bool canDropLater = (paper == null && memory == null && key == null);
@@ -532,6 +537,9 @@ public class OrbitBehaviour : MonoBehaviour
     public float radius = 1f;
     public float speed = 45f;
     
+    // NEW: Manual offset for orbit height (set via AbsorbMechanic)
+    public float extraHeightOffset = 0f; 
+    
     // NEW: Physics Wobble Settings for organic floating feedback
     [Header("Physics Wobble")]
     public float springStiffness = 120f;
@@ -570,7 +578,7 @@ public class OrbitBehaviour : MonoBehaviour
             lastTargetPos = target.position;
         }
         
-        // NEW: Record the exact position where the item was when the player touched it
+        // Record the exact position where the item was when the player touched it
         initialWorldPosition = transform.position;
     }
 
@@ -595,10 +603,10 @@ public class OrbitBehaviour : MonoBehaviour
         wobbleVelocity += springForce * Time.deltaTime;
         wobbleOffset += wobbleVelocity * Time.deltaTime;
 
-        // NEW: The exact orbit position the item SHOULD be at right now
-        Vector3 targetOrbitPos = currentTargetPos + (Vector3.up * heightOffset) + idealOrbitOffset + wobbleOffset;
+        // NEW: Apply the extraHeightOffset here to manually raise or lower the entire orbit ring
+        Vector3 targetOrbitPos = currentTargetPos + (Vector3.up * (heightOffset + extraHeightOffset)) + idealOrbitOffset + wobbleOffset;
 
-        // NEW: Trajectory Logic (Vacuum suck-in effect)
+        // Trajectory Logic (Vacuum suck-in effect)
         if (isAbsorbing)
         {
             absorbTimer += Time.deltaTime;
