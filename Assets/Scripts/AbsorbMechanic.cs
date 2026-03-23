@@ -538,14 +538,23 @@ public class OrbitBehaviour : MonoBehaviour
     public float dampening = 8f;
     public float inertiaFactor = 0.8f; // How much it reacts to the player's movement
     
+    // NEW: Absorption Trajectory Settings
+    [Header("Absorption Trajectory")]
+    public float absorbDuration = 0.4f; // How long it takes to fly into orbit like a vacuum
+    
     private Vector3 axis;
     private float angle;
     private float heightOffset;
 
-    // NEW: Variables to track target movement and calculate wobble
+    // Variables to track target movement and calculate wobble
     private Vector3 lastTargetPos;
     private Vector3 wobbleOffset;
     private Vector3 wobbleVelocity;
+    
+    // NEW: State variables for the initial "suck-in" flight path
+    private Vector3 initialWorldPosition;
+    private float absorbTimer = 0f;
+    private bool isAbsorbing = true;
 
     void Start()
     {
@@ -553,20 +562,18 @@ public class OrbitBehaviour : MonoBehaviour
         axis = Random.onUnitSphere;
         angle = Random.Range(0f, 360f);
 
-        // Calculate the physical center of the target so they orbit the body, not the feet
         if (target != null)
         {
             Collider col = target.GetComponent<Collider>();
             if (col != null) heightOffset = col.bounds.extents.y;
             
-            // NEW: Initialize the last target position
             lastTargetPos = target.position;
         }
+        
+        // NEW: Record the exact position where the item was when the player touched it
+        initialWorldPosition = transform.position;
     }
 
-    // NEW: Changed from Update to LateUpdate. 
-    // This guarantees the bunny finishes its physics/jump movement FIRST, 
-    // fixing the bug where orbiting items fall faster or jitter during jumps.
     void LateUpdate()
     {
         if (target == null) return;
@@ -576,7 +583,7 @@ public class OrbitBehaviour : MonoBehaviour
         // Calculate the ideal pure-orbit offset
         Vector3 idealOrbitOffset = Quaternion.AngleAxis(angle, axis) * Vector3.forward * radius;
         
-        // NEW: WOBBLE PHYSICS CALCULATION
+        // WOBBLE PHYSICS CALCULATION
         Vector3 currentTargetPos = target.position;
         Vector3 targetMovement = currentTargetPos - lastTargetPos;
         
@@ -588,8 +595,33 @@ public class OrbitBehaviour : MonoBehaviour
         wobbleVelocity += springForce * Time.deltaTime;
         wobbleOffset += wobbleVelocity * Time.deltaTime;
 
-        // Follow the target perfectly (prevents drop desync) + apply orbit + apply wobble
-        transform.position = currentTargetPos + (Vector3.up * heightOffset) + idealOrbitOffset + wobbleOffset;
+        // NEW: The exact orbit position the item SHOULD be at right now
+        Vector3 targetOrbitPos = currentTargetPos + (Vector3.up * heightOffset) + idealOrbitOffset + wobbleOffset;
+
+        // NEW: Trajectory Logic (Vacuum suck-in effect)
+        if (isAbsorbing)
+        {
+            absorbTimer += Time.deltaTime;
+            
+            // Normalize time from 0 to 1
+            float t = Mathf.Clamp01(absorbTimer / absorbDuration);
+
+            // Use an Ease-In Cubic curve (starts slow, snaps into orbit quickly to simulate a vacuum suck)
+            float ease = t * t * t;
+
+            // Smoothly move from its original grounded spot into the moving orbit path
+            transform.position = Vector3.LerpUnclamped(initialWorldPosition, targetOrbitPos, ease);
+
+            if (t >= 1f)
+            {
+                isAbsorbing = false; // Finished flying, lock into permanent orbit
+            }
+        }
+        else
+        {
+            // Follow the target perfectly (prevents drop desync) + apply orbit + apply wobble
+            transform.position = targetOrbitPos;
+        }
 
         // Make the item itself spin slightly while orbiting
         transform.Rotate(axis, speed * 1.5f * Time.deltaTime);
