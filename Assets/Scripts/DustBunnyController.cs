@@ -512,8 +512,11 @@ public class DustBunnyController : MonoBehaviour
         rb.AddForce(Vector3.up * (jumpForce * ScaleFactor * rb.mass), ForceMode.Impulse);
 
         isGrounded = false;
+
         if (_animator)
         {
+            _animator.SetTrigger("jump");
+
             _animator.SetBool("isGrounded", false);
             _animator.SetBool("isRunning", false);
         }
