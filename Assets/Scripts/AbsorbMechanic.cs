@@ -532,9 +532,20 @@ public class OrbitBehaviour : MonoBehaviour
     public float radius = 1f;
     public float speed = 45f;
     
+    // NEW: Physics Wobble Settings for organic floating feedback
+    [Header("Physics Wobble")]
+    public float springStiffness = 120f;
+    public float dampening = 8f;
+    public float inertiaFactor = 0.8f; // How much it reacts to the player's movement
+    
     private Vector3 axis;
     private float angle;
     private float heightOffset;
+
+    // NEW: Variables to track target movement and calculate wobble
+    private Vector3 lastTargetPos;
+    private Vector3 wobbleOffset;
+    private Vector3 wobbleVelocity;
 
     void Start()
     {
@@ -547,22 +558,43 @@ public class OrbitBehaviour : MonoBehaviour
         {
             Collider col = target.GetComponent<Collider>();
             if (col != null) heightOffset = col.bounds.extents.y;
+            
+            // NEW: Initialize the last target position
+            lastTargetPos = target.position;
         }
     }
 
-    void Update()
+    // NEW: Changed from Update to LateUpdate. 
+    // This guarantees the bunny finishes its physics/jump movement FIRST, 
+    // fixing the bug where orbiting items fall faster or jitter during jumps.
+    void LateUpdate()
     {
         if (target == null) return;
 
         angle += speed * Time.deltaTime;
         
-        // Calculate orbital position
-        Vector3 offset = Quaternion.AngleAxis(angle, axis) * Vector3.forward * radius;
+        // Calculate the ideal pure-orbit offset
+        Vector3 idealOrbitOffset = Quaternion.AngleAxis(angle, axis) * Vector3.forward * radius;
         
-        // Follow the target and apply the orbit
-        transform.position = target.position + (Vector3.up * heightOffset) + offset;
+        // NEW: WOBBLE PHYSICS CALCULATION
+        Vector3 currentTargetPos = target.position;
+        Vector3 targetMovement = currentTargetPos - lastTargetPos;
+        
+        // 1. Inertia: when the bunny moves, push the wobble offset in the opposite direction
+        wobbleOffset -= targetMovement * inertiaFactor;
+        
+        // 2. Spring force: pull the wobble offset back to zero (creates the bounce when stopping)
+        Vector3 springForce = -springStiffness * wobbleOffset - dampening * wobbleVelocity;
+        wobbleVelocity += springForce * Time.deltaTime;
+        wobbleOffset += wobbleVelocity * Time.deltaTime;
+
+        // Follow the target perfectly (prevents drop desync) + apply orbit + apply wobble
+        transform.position = currentTargetPos + (Vector3.up * heightOffset) + idealOrbitOffset + wobbleOffset;
 
         // Make the item itself spin slightly while orbiting
         transform.Rotate(axis, speed * 1.5f * Time.deltaTime);
+        
+        // Update last position for the next frame
+        lastTargetPos = currentTargetPos;
     }
 }
