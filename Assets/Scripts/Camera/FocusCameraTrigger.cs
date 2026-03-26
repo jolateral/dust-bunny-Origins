@@ -27,7 +27,7 @@ public class CameraFocusTrigger : MonoBehaviour
     [Tooltip("Should this only trigger once?")]
     public bool triggerOnlyOnce = true;
 
-    private bool hasTriggered = false;
+    public bool hasTriggered = false;
     private Camera mainCam;
 
     void Start()
@@ -42,6 +42,17 @@ public class CameraFocusTrigger : MonoBehaviour
         {
             if (triggerOnlyOnce) hasTriggered = true;
             
+            StartCoroutine(CinematicFocusRoutine(other.gameObject));
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        // Check if it's the player and if it hasn't been triggered yet
+        if (!hasTriggered && other.CompareTag("Player"))
+        {
+            if (triggerOnlyOnce) hasTriggered = true;
+
             StartCoroutine(CinematicFocusRoutine(other.gameObject));
         }
     }

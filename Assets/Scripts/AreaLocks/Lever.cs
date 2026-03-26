@@ -14,6 +14,12 @@ public class Lever : MonoBehaviour
     [SerializeField] private float hookDropAmount = 0.8f;
     [SerializeField] private float hookMoveDuration = 0.5f;
 
+    [Header("Camera")]
+    [SerializeField] private CameraFocusTrigger cameraFocusScript;
+    [SerializeField] private float delayBeforeCamera = 1f;
+    [SerializeField] private float delayBeforeMovingHook = 1.5f;
+
+
     private bool hasActivated = false;
     private Vector3 hookStartPosition;
 
@@ -25,7 +31,7 @@ public class Lever : MonoBehaviour
     private void Start()
     {
         if (hook != null)
-            hookStartPosition = hook.localPosition; 
+            hookStartPosition = hook.localPosition;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -33,9 +39,9 @@ public class Lever : MonoBehaviour
         TryActivate(collision.collider);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionStay(Collision collision)
     {
-        TryActivate(other);
+        TryActivate(collision.collider);
     }
 
     private void TryActivate(Collider other)
@@ -60,17 +66,36 @@ public class Lever : MonoBehaviour
         isHooked = true;
         hasActivated = true;
 
+        StartCoroutine(LeverSequence());
+    }
+
+    private IEnumerator LeverSequence()
+    {
+        // Play lever animation
         if (animator != null)
         {
             animator.SetBool("isHooked", true);
         }
 
+        // Wait before camera pan
+        yield return new WaitForSeconds(delayBeforeCamera);
+
+        // Enable camera focus
+        if (cameraFocusScript != null)
+        {
+            cameraFocusScript.enabled = true;
+            cameraFocusScript.hasTriggered = false;
+        }
+
+        yield return new WaitForSeconds(delayBeforeMovingHook);
+
+        // Move hook smoothly
         if (hook != null)
         {
             Vector3 targetPos = hookStartPosition;
             targetPos.y -= hookDropAmount;
 
-            StartCoroutine(MoveHookSmoothly(targetPos));
+            yield return StartCoroutine(MoveHookSmoothly(targetPos));
         }
     }
 
@@ -95,6 +120,6 @@ public class Lever : MonoBehaviour
             yield return null;
         }
 
-        hook.localPosition = targetPosition; 
+        hook.localPosition = targetPosition;
     }
 }
