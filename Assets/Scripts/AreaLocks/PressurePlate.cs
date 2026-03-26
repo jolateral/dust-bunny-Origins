@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PressurePlate : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PressurePlate : MonoBehaviour
     [Header("Timing")]
     [SerializeField] private float delayBeforeCameraFocus = 0.5f;
     [SerializeField] private float delayBeforeMovingWall = 1.75f;
+
+    [SerializeField] private Sprite displayTooLightPopup;
 
 
     [SerializeField] private CameraFocusTrigger cameraFocusScript;
@@ -58,7 +61,7 @@ public class PressurePlate : MonoBehaviour
         }
         else
         {
-            Debug.Log("Lever is not hooked yet!");
+            MemoryUIManager.Instance.ShowImage(displayTooLightPopup);
         }
     }
 

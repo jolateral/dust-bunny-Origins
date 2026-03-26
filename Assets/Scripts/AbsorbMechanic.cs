@@ -52,6 +52,7 @@ public class AbsorbMechanic : MonoBehaviour
     [Header("Absorb Constraint")]
     [Tooltip("Message shown when the player is too small to absorb something.")]
     public string tooBigMessage = "You're not quite big enough yet...";
+    public Sprite tooBigMessageImage;
 
     [Tooltip("Color of the too-small hint message.")]
     public Color tooBigColor = Color.red;
@@ -331,7 +332,7 @@ public class AbsorbMechanic : MonoBehaviour
         nextTooBigMessageTime = Time.time + tooBigMessageCooldown;
 
         if (MemoryUIManager.Instance != null)
-            MemoryUIManager.Instance.ShowMemory(tooBigMessage, tooBigColor);
+            MemoryUIManager.Instance.ShowImage(tooBigMessageImage);
     }
 
     // -----------------------------------------------------------------------
