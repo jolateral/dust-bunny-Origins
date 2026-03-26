@@ -46,7 +46,7 @@ public class ObjectiveUI : MonoBehaviour
     public InputActionReference toggleObjectiveAction;
 
     [Header("Objective Text")]
-    public GameObject objectiveText;
+    public GameObject objectiveImage;
 
     // -------------------------------------------------------------------------
     // Private State
@@ -139,8 +139,8 @@ public class ObjectiveUI : MonoBehaviour
             panel.gameObject.SetActive(false);
 
         // Re-show the objective text since no fragments have been collected yet.
-        if (objectiveText != null)
-            objectiveText.SetActive(true);
+        if (objectiveImage != null)
+            objectiveImage.SetActive(true);
 
         // Clear the fragment progress display so it doesn't show stale data.
         if (fragmentProgressUI != null)
@@ -247,8 +247,8 @@ public class ObjectiveUI : MonoBehaviour
         {
             hasCollectedAny = true;
 
-            if (objectiveText != null)
-                objectiveText.SetActive(false);
+            if (objectiveImage != null)
+                objectiveImage.SetActive(false);
         }
 
         int collected = paperData.GetCollectedCount();
@@ -273,8 +273,8 @@ public class ObjectiveUI : MonoBehaviour
         {
             hasCollectedAny = true;
 
-            if (objectiveText != null)
-                objectiveText.SetActive(false);
+            if (objectiveImage != null)
+                objectiveImage.SetActive(false);
         }
 
         if (fragmentProgressUI != null)
