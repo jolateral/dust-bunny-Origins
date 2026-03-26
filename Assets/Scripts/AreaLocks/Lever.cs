@@ -19,9 +19,13 @@ public class Lever : MonoBehaviour
     [SerializeField] private float delayBeforeCamera = 1f;
     [SerializeField] private float delayBeforeMovingHook = 1.5f;
 
-
     private bool hasActivated = false;
     private Vector3 hookStartPosition;
+
+    // 🔹 Player references
+    private DustBunnyController currentPlayer;
+    private Rigidbody playerRb;
+    private Animator playerAnimator;
 
     private void Reset()
     {
@@ -56,6 +60,11 @@ public class Lever : MonoBehaviour
         if (player == null) return;
         if (!player.isRolling) return;
 
+        // store references
+        currentPlayer = player;
+        playerRb = player.GetComponent<Rigidbody>();
+        playerAnimator = player.GetComponentInChildren<Animator>();
+
         HookLever();
     }
 
@@ -71,6 +80,24 @@ public class Lever : MonoBehaviour
 
     private IEnumerator LeverSequence()
     {
+        // Freeze player completely
+        if (currentPlayer != null)
+        {
+            currentPlayer.enabled = false;
+        }
+
+        if (playerRb != null)
+        {
+            playerRb.linearVelocity = Vector3.zero;
+            playerRb.angularVelocity = Vector3.zero;
+        }
+
+        if (playerAnimator != null)
+        {
+            playerAnimator.enabled = false;
+            playerAnimator.enabled = true;
+        }
+
         // Play lever animation
         if (animator != null)
         {
@@ -87,9 +114,10 @@ public class Lever : MonoBehaviour
             cameraFocusScript.hasTriggered = false;
         }
 
+        // Wait before moving hook
         yield return new WaitForSeconds(delayBeforeMovingHook);
 
-        // Move hook smoothly
+        // Move hook
         if (hook != null)
         {
             Vector3 targetPos = hookStartPosition;
@@ -113,7 +141,6 @@ public class Lever : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = elapsed / hookMoveDuration;
-
             t = Mathf.SmoothStep(0f, 1f, t);
 
             hook.localPosition = Vector3.Lerp(startPos, targetPosition, t);

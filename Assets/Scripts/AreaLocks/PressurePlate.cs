@@ -17,11 +17,10 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private float pressDuration = 1f;
 
     [Header("Timing")]
-    [SerializeField] private float delayBeforeCameraFocus = 0.5f;
+    [SerializeField] private float delayBeforeCameraFocus = 0.2f;
     [SerializeField] private float delayBeforeMovingWall = 1.75f;
 
     [SerializeField] private Sprite displayTooLightPopup;
-
 
     [SerializeField] private CameraFocusTrigger cameraFocusScript;
 
@@ -30,6 +29,11 @@ public class PressurePlate : MonoBehaviour
     private Vector3 wallStartPos;
 
     private bool isActivated = false;
+
+    // 🔹 Player references
+    private DustBunnyController currentPlayer;
+    private Rigidbody playerRb;
+    private Animator playerAnimator;
 
     private void Start()
     {
@@ -56,7 +60,12 @@ public class PressurePlate : MonoBehaviour
 
         if (lever != null && lever.IsHooked())
         {
-            isActivated = true; 
+            // 🔹 Store player references
+            currentPlayer = player;
+            playerRb = player.GetComponent<Rigidbody>();
+            playerAnimator = player.GetComponentInChildren<Animator>();
+
+            isActivated = true;
             StartCoroutine(PlateSequence());
         }
         else
@@ -67,13 +76,29 @@ public class PressurePlate : MonoBehaviour
 
     private IEnumerator PlateSequence()
     {
-        // Press the button DOWN
+        // Freeze player
+        if (currentPlayer != null)
+            currentPlayer.enabled = false;
+
+        if (playerRb != null)
+        {
+            playerRb.linearVelocity = Vector3.zero;
+            playerRb.angularVelocity = Vector3.zero;
+        }
+
+        if (playerAnimator != null)
+        {
+            playerAnimator.enabled = false;
+            playerAnimator.enabled = true;
+        }
+
+        // Press button DOWN
         Vector3 pressedPos = startPosition;
         pressedPos.y -= pressAmount;
 
         yield return StartCoroutine(MoveSmooth(transform, pressedPos, pressDuration));
 
-        // Wait before raising hook/wall
+        // Wait before camera focus
         yield return new WaitForSeconds(delayBeforeCameraFocus);
 
         // Enable camera focus
@@ -82,10 +107,11 @@ public class PressurePlate : MonoBehaviour
             cameraFocusScript.enabled = true;
             cameraFocusScript.hasTriggered = false;
         }
-        // Wait for camera to reach focus
+
+        // Wait before moving wall
         yield return new WaitForSeconds(delayBeforeMovingWall);
 
-        // Raise wall and hook
+        // Raise hook
         if (hook != null)
         {
             Vector3 target = hookStartPos;
@@ -100,6 +126,9 @@ public class PressurePlate : MonoBehaviour
             target.y += raiseAmount + 0.9f;
             StartCoroutine(MoveSmooth(wall, target, moveDuration));
         }
+
+        // Unfreeze player AFTER everything starts moving
+        yield return new WaitForSeconds(0.2f);
     }
 
     private IEnumerator MoveSmooth(Transform obj, Vector3 target, float duration)
