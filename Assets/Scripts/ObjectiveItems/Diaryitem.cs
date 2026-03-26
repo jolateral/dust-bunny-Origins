@@ -39,6 +39,13 @@ public class DiaryItem : MonoBehaviour
 
     public GameObject diaryLock;
 
+    [Header("World Model Swap (Closed -> Open)")]
+    [Tooltip("The closed diary model to hide after the entry is read (usually this GameObject or its mesh root).")]
+    public GameObject diaryClosedObject;
+
+    [Tooltip("The open diary model to show after the entry is read (e.g. 'DiaryOpen').")]
+    public GameObject diaryOpenObject;
+
     [Tooltip("Optional text shown inside the diary (leave empty for image-only).")]
     [TextArea(5, 15)]
     public string diaryText = "";
@@ -90,6 +97,12 @@ public class DiaryItem : MonoBehaviour
         {
             Debug.LogWarning($"[DiaryItem] No DiaryUIManager found in scene! Make sure one exists.");
         }
+
+        if (diaryOpenObject != null)
+            diaryOpenObject.SetActive(false);
+
+        if (diaryClosedObject != null)
+            diaryClosedObject.SetActive(true);
     }
 
     /// <summary>
@@ -168,12 +181,32 @@ public class DiaryItem : MonoBehaviour
         // Show the diary UI (full-screen image, just like the paper system)
         if (DiaryUIManager.Instance != null)
         {
+            DiaryUIManager.Instance.DiaryClosed -= OnDiaryClosed;
+            DiaryUIManager.Instance.DiaryClosed += OnDiaryClosed;
             DiaryUIManager.Instance.ShowDiary(diaryText, diarySprite);
         }
         else
         {
             Debug.LogError("[DiaryItem] DiaryUIManager.Instance is null! Can't show diary.");
+            SwapToOpenModel();
         }
+    }
+
+    private void OnDiaryClosed()
+    {
+        if (DiaryUIManager.Instance != null)
+            DiaryUIManager.Instance.DiaryClosed -= OnDiaryClosed;
+
+        SwapToOpenModel();
+    }
+
+    private void SwapToOpenModel()
+    {
+        if (diaryClosedObject != null)
+            diaryClosedObject.SetActive(false);
+
+        if (diaryOpenObject != null)
+            diaryOpenObject.SetActive(true);
     }
 
     /// <summary>

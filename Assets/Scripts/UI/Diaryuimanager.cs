@@ -14,6 +14,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System;
 
 public class DiaryUIManager : MonoBehaviour
 {
@@ -66,6 +67,11 @@ public class DiaryUIManager : MonoBehaviour
     // Tracks whether the diary has been shown this session.
     // Reset by ResetState() so it can be shown again on level reload.
     public bool diaryShown = false;
+
+    /// <summary>
+    /// Fired after the diary has fully closed and player control is restored.
+    /// </summary>
+    public event Action DiaryClosed;
 
     // -------------------------------------------------------------------------
     // Private State
@@ -244,6 +250,7 @@ public class DiaryUIManager : MonoBehaviour
         }
 
         isDiaryShowing = false;
+        DiaryClosed?.Invoke();
     }
 
     // -------------------------------------------------------------------------
