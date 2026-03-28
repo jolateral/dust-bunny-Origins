@@ -60,6 +60,7 @@ public class PaperUIManager : MonoBehaviour
     private bool isPaperShowing = false;
     private bool waitingForInput = false;
     private bool isMultiPieceMode = false;
+    private bool hasMusicTriggered = false;
 
     private MultiPiecePaperData currentPaperData;
     public MultiPiecePaperData CurrentPaperData => currentPaperData;
@@ -121,6 +122,7 @@ public class PaperUIManager : MonoBehaviour
         isPaperShowing = false;
         waitingForInput = false;
         isMultiPieceMode = false;
+        hasMusicTriggered = false;
         currentPaperData = null;
 
         // Hide all canvas groups immediately.
@@ -380,7 +382,15 @@ public class PaperUIManager : MonoBehaviour
         if (instructionImage != null)
             instructionImage.gameObject.SetActive(false);
 
+        // Sound and Music State handling
         AkUnitySoundEngine.SetState("player_state", "None");
+
+        if (hasMusicTriggered == false)
+        {
+            AkUnitySoundEngine.SetState("mus_zone1", "zone1_3");
+            hasMusicTriggered = true;
+            Debug.Log("Music State set to: mus_zone1, zone1_3");
+        }
 
         if (playerController != null)
         {
