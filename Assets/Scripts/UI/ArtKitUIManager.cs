@@ -183,6 +183,9 @@ public class ArtKitUIManager : MonoBehaviour
     private IEnumerator HideArtKit()
     {
         AkUnitySoundEngine.SetState("player_state", "None");
+        AkUnitySoundEngine.SetState("mus_zone2", "mus_zone2_2");
+
+        Debug.Log("Music State set to: mus_zone2, mus_zone2_2");
 
         waitingForInput = false;
 

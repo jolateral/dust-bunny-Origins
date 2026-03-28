@@ -93,21 +93,10 @@ namespace AK
                 static const AkUniqueID MUS_ZONE2_1 = 1041856411U;
                 static const AkUniqueID MUS_ZONE2_2 = 1041856408U;
                 static const AkUniqueID MUS_ZONE2_3 = 1041856409U;
+                static const AkUniqueID MUS_ZONE2_4 = 1041856414U;
                 static const AkUniqueID NONE = 748895195U;
             } // namespace STATE
         } // namespace MUS_ZONE2
-
-        namespace MUS_ZONE2_1
-        {
-            static const AkUniqueID GROUP = 1041856411U;
-
-            namespace STATE
-            {
-                static const AkUniqueID MUS_ZONE2_1_1 = 3920133835U;
-                static const AkUniqueID MUS_ZONE2_1_2 = 3920133832U;
-                static const AkUniqueID NONE = 748895195U;
-            } // namespace STATE
-        } // namespace MUS_ZONE2_1
 
         namespace PLAYER_STATE
         {
