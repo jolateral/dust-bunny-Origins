@@ -70,6 +70,45 @@ namespace AK
             } // namespace STATE
         } // namespace MUS_STATE
 
+        namespace MUS_ZONE1
+        {
+            static const AkUniqueID GROUP = 941180968U;
+
+            namespace STATE
+            {
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID ZONE1_1 = 3767178688U;
+                static const AkUniqueID ZONE1_2 = 3767178691U;
+                static const AkUniqueID ZONE1_3 = 3767178690U;
+                static const AkUniqueID ZONE1_4 = 3767178693U;
+            } // namespace STATE
+        } // namespace MUS_ZONE1
+
+        namespace MUS_ZONE2
+        {
+            static const AkUniqueID GROUP = 941180971U;
+
+            namespace STATE
+            {
+                static const AkUniqueID MUS_ZONE2_1 = 1041856411U;
+                static const AkUniqueID MUS_ZONE2_2 = 1041856408U;
+                static const AkUniqueID MUS_ZONE2_3 = 1041856409U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace MUS_ZONE2
+
+        namespace MUS_ZONE2_1
+        {
+            static const AkUniqueID GROUP = 1041856411U;
+
+            namespace STATE
+            {
+                static const AkUniqueID MUS_ZONE2_1_1 = 3920133835U;
+                static const AkUniqueID MUS_ZONE2_1_2 = 3920133832U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace MUS_ZONE2_1
+
         namespace PLAYER_STATE
         {
             static const AkUniqueID GROUP = 4071417932U;
