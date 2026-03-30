@@ -25802,6 +25802,7 @@ MonoBehaviour:
   _meshObjects: []
   _meshProxy: {fileID: 0}
   _useMeshProxy: 1
+  _finishedLoading: 0
   _logo: {fileID: 2800000, guid: 96b2057b71a117b42b43efafb7f67d5f, type: 3}
   _advancedMode: 0
   _runSim: 1
@@ -25834,7 +25835,19 @@ MonoBehaviour:
     _distLimit: 0.1
     _debug: 0
     _pointScale: 0.01
+    _unityDepthTexture: {fileID: 0}
     _unityDepthTextureCopy: {fileID: 0}
+    _clothSim: {fileID: 0}
+    _depthPoint: {x: 0, y: 0, z: 0, w: 0}
+    _vertexPoint: {x: 0, y: 0, z: 0}
+    _depthScanCS: {fileID: 0}
+    _posBuffer: {fileID: 0}
+    _runReadback: 0
+    _mainCam: {fileID: 0}
+    m_DepthCopyMat: {fileID: 0}
+    _newVertexId: 0
+  _pointConstraintsVec: []
+  _transformConstraints: []
   _dampingMethod: 1
   _dampingVel: 0.999
   _clampVel: 10
@@ -25867,6 +25880,82 @@ MonoBehaviour:
     _debugObject: {fileID: 0}
     _useDirectDispatch: 0
     _unifiedSphereSize: 0
+    _clothSim: {fileID: 0}
+    _clothSolver: {fileID: 0}
+    _scanCS: {fileID: 0}
+    _sphereFinderCS: {fileID: 0}
+    _inputPropId: 2322
+    _resultPropId: 373
+    _scanInBucketInclusiveKernel: 0
+    _scanBucketResultKernel: 0
+    _scanAddBucketResultKernel: 0
+    _autoSpheresKernel: 0
+    _meshObjects: []
+    _vertexCounts: 
+    _meshPos: []
+    _b:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    _updateAllParticlesKernel: 0
+    _updateAllParticleTrisKernel: 0
+    _updateSkinnerParticlesKernel: 0
+    _usedVoxelList: 
+    _counterPerVoxel2: 
+    _usedVoxelListBufferDispatch: 0
+    _useTrisMesh: 0
+    _lastCounterPerVoxel: 
+    _lastCounterPerVoxel2: 
+    _useSelfCollision: 0
+    _lastParticleSum: 0
+    _useAutoSpheresOnly: 0
+    _counterPerVoxelThread: 512
+    _numGroups_sphereData: 0
+    _useSecondClothIfNeeded: 0
+    _numClothParticles2: 0
+    _selfAndAutoSpheresCount: 0
+    _grid_ID: 2323
+    _scaled_ID: 2324
+    _lastParticleSum_ID: 2325
+    _selfAndAutoSpheresCount_ID: 2326
+    _useTrisMesh_ID: 2327
+    _useSelfCollision_ID: 2328
+    _useSelfCollisionTriangles_ID: 2329
+    _cubeMinVec_ID: 2330
+    _sphereDataLength_ID: 2331
+    _numClothParticles_ID: 2332
+    _numClothParticles2_ID: 2333
+    _collisionSize_ID: 2334
+    _selfCollisionScale_ID: 2335
+    _secondClothScale_ID: 2336
+    _usedVoxelListBuffer_ID: 2337
+    _usedVoxelListInverseBuffer_ID: 2338
+    _usedVoxelListInverseBufferR_ID: 2339
+    _usedVoxelListInverseBuffer2_ID: 2340
+    _counterPerVoxelBuffer_ID: 2341
+    _counterPerVoxelBuffer2_ID: 2342
+    _lastCounterPerVoxelBuffer_ID: 2343
+    _lastCounterPerVoxelBuffer2_ID: 2344
+    _voxelDataBuffer_ID: 2345
+    _voxelDataBuffer2_ID: 2346
+    _vertsLength_ID: 2347
+    _localToWorldMatrix_ID: 2348
+    _trisData_ID: 2349
+    _positionbuffer_ID: 2350
+    _sphereDataBufferRW_ID: 2351
+    _meshTrisLength_ID: 2352
+    _skinnerVertexTexWidth_ID: 2353
+    _normalScale_ID: 1828
+    _positionBufferTex_ID: 2354
+    _normalBufferTex_ID: 2355
+    _skinned_tex_width_ID: 2356
+    _meshMatrix_ID: 2357
+    _skinned_data_1_ID: 2358
+    _skinned_data_2_ID: 2359
+    _meshVertsOut_ID: 2360
+    _numAutoSpheres_ID: 2361
+    _autoSphereSize_ID: 2362
+    _autoBonesBuffer_ID: 2363
+    _autoSphereBuffer_ID: 2364
   _gridOffset:
     x: -124.33887
     y: 74.956055
@@ -25913,6 +26002,7 @@ MonoBehaviour:
   _fixDoubles: 1
   _vertexIdsToUvId: 2
   _weldVertices: 0
+  _weldDone: 0
   _weldThreshold: 1e-10
   _useReadbackVertices: 0
   _readbackVertexEveryX: 10
@@ -25932,6 +26022,189 @@ MonoBehaviour:
   _slowCPUWriteBack: 0
   _debugMode: 0
   _applyTransformAtExport: 0
+  _useTransferData: 0
+  _rootBone: {fileID: 0}
+  _voxelCubePos: {x: 0, y: 0, z: 0}
+  _clothSolver: {fileID: 0}
+  _enableMouseInteractionLastState: 0
+  _useCollidableObjectsListLastState: 0
+  _workGroupSize: 256
+  _vertexColliders: []
+  _runReadbackVertices: 0
+  _readbackVertexParent: {fileID: 0}
+  _skinTypeCloth: 0
+  _lastPointConstraintType: 0
+  _tempPointConstraint: -1
+  _deltaPointConstraint: {x: 0, y: 0, z: 0}
+  _lastMousePos: {x: 0, y: 0, z: 0}
+  _tempPointVertexId: 0
+  _lastCollidableObjectsCount: 0
+  _dummyTex: {fileID: 0}
+  _runReadback: 0
+  _nextFrameTime: 0
+  _positions: []
+  _colors: []
+  _velocities: []
+  _frictions: []
+  _invMass: 0
+  _numParticles: 0
+  _numDistanceConstraints: 0
+  _numBendingConstraints: 0
+  _numCollidableSpheres: 0
+  _numCollidableSDFs: 0
+  _numPointConstraints: 0
+  _pointConstraints: 
+  _connectionInfo: []
+  _connectedVerts: 
+  _gridCenterBuffer: {fileID: 0}
+  _applyExternalForcesKernel: 0
+  _dampVelocitiesKernel: 0
+  _applyExplicitEulerKernel: 0
+  _projectConstraintDeltasKernel: 0
+  _averageConstraintDeltasKernel: 0
+  _satisfyPointConstraintsKernel: 0
+  _satisfySphereCollisionsKernel: 0
+  _satisfyVertexCollisionsKernel: 0
+  _satisfySDFCollisionsKernel: 0
+  _updatePositionsKernel: 0
+  _updatePositions2Kernel: 0
+  _updatePositions2BlendsKernel: 0
+  _updatePositionsNoSkinningKernel: 0
+  _updateWorldTransformKernel: 0
+  _updateInverseWorldTransformKernel: 0
+  _csNormalsKernel: 0
+  _bendingConstraintDeltasKernel: 0
+  _skinningHDKernel: 0
+  _calcCubeCenterKernel: 0
+  _calcCubeCenter2Kernel: 0
+  _selfContactCollisionsKernel: 0
+  _collidersContactCollisionsKernel: 0
+  _otherSpheresContactCollisions2Kernel: 0
+  _countContactStartKernel: 0
+  _pointPointPredictiveContactKernel: 0
+  _pointPointPredictiveContactCollidersKernel: 0
+  _countContactSetupKernel: 0
+  _transferDuplicateVertexDataKernel: 0
+  _calcCubeCenterFastKernel: 0
+  _surfacePushKernel: 0
+  _surfacePushCollidersKernel: 0
+  _surfacePushDQSKernel: 0
+  _surfacePushCollidersDQSKernel: 0
+  _surfacePushSkinningKernel: 0
+  _surfacePushSkinningBlendsKernel: 0
+  _surfacePushCollidersSkinningKernel: 0
+  _surfacePushCollidersSkinningBlendsKernel: 0
+  _blendGarmentOriginKernel: 0
+  _computeCenterOfMassKernel: 0
+  _finishCenterOfMassKernel: 0
+  _sumAllMassAndMatrixKernel: 0
+  _finishMatrixCalcKernel: 0
+  _applyBackIntoVelocitiesKernel: 0
+  _clearCenterOfMassKernel: 0
+  _numGroups_Vertices: 0
+  _numGroups_DistanceConstraints: 0
+  _numGroups_BendingConstraints: 0
+  _numGroups_PointConstraints: 0
+  _numGroups_VerticesHD: 0
+  _mesh: {fileID: 0}
+  _mr: {fileID: 0}
+  _spheres: []
+  _sdfObjs: []
+  _dupIngoreList: 
+  _saveVoxelPosState: 0
+  _saveLodState: 0
+  _saveClippingState: 0
+  _foundInFrustum: 0
+  _blendDist: 0
+  _maxDebugData: 0
+  _maxDebugData2: 0
+  _maxDebugData3: 0
+  _supportsAsyncGPUReadback: 0
+  _dataBufferPos: []
+  _updateSync: 0
+  _cubeMinPos_ID: 2365
+  _worldToLocalMatrix_ID: 2366
+  _localToWorldMatrix_ID: 2348
+  _staticFriction_ID: 2367
+  _dynamicFriction_ID: 2368
+  _gravity_ID: 2369
+  _invMass_ID: 2370
+  _windVec_ID: 2371
+  _stretchStiffness_ID: 2372
+  _compressionStiffness_ID: 2373
+  _bendingStiffness_ID: 2374
+  __worldPositionImpact_ID: 2375
+  __worldRotationImpact_ID: 2376
+  __collidableObjectsBias_ID: 2377
+  __minBlend_ID: 2378
+  __blendSkinning_ID: 2379
+  _dt_ID: 2380
+  _deltaScale_ID: 2381
+  _clampDelta_ID: 2382
+  _clampVel_ID: 2383
+  _dampingVel_ID: 2384
+  _trisData_ID: 2349
+  _collisionRadius_ID: 2385
+  _deltaTime_ID: 2386
+  _usedVoxelListBuffer_ID: 2337
+  _counterPerVoxelBuffer2_ID: 2342
+  _lastCounterPerVoxelBuffer2_ID: 2344
+  _voxelDataBuffer_ID: 2345
+  _numPointConstraints_ID: 2387
+  _hasTempPointConstraint_ID: 2388
+  _deltaPointConstraint_ID: 2389
+  _tempPointConstraint_ID: 2390
+  _duplicateVerticesCount_ID: 2391
+  _delta_ID: 2392
+  _mpb_normalsBuffer_ID: 1844
+  _mpb_positionsBuffer_ID: 1825
+  _blendGarment_ID: 2393
+  _pushVertsByNormals_ID: 2394
+  _normalsBuffer_ID: 2395
+  _baseVertices_ID: 2396
+  _projectedPositions_ID: 2397
+  _maxVerts_ID: 2398
+  _positions_ID: 2399
+  _connectionInfoBuffer_ID: 2400
+  _connectedVertsBuffer_ID: 2401
+  _skinningForSurfacePush_ID: 2402
+  _skinned_tex_width_ID: 2356
+  _skinned_data_1_ID: 2358
+  _meshVertsOut_ID: 2360
+  _surfacePush_ID: 2403
+  _surfaceOffset_ID: 2404
+  _normalScale_ID: 1828
+  _dispatchDim_x_ID: 2405
+  _numParticles_ID: 2406
+  _gridCenterBuffer_ID: 2407
+  _gridCenterBufferCopy_ID: 2408
+  _deltaPosAsIntX_ID: 2409
+  _collidableSpheres_ID: 2410
+  _collidableSDFs_ID: 2411
+  _numCollidableSDFs_ID: 2412
+  _numCollidableSpheres_ID: 2413
+  _frictions_ID: 2414
+  _velocities_ID: 2415
+  _worldToLocalMatrixHD_ID: 2416
+  _deltaPosAsInt_ID: 2417
+  _deltaCount_ID: 2418
+  _pointPointContactBuffer_ID: 2419
+  _pointPointContactBuffer2_ID: 2420
+  _pointPointContactBuffer3_ID: 2421
+  _countContactBuffer_ID: 2422
+  _countContactBuffer2_ID: 2423
+  _countContactBuffer3_ID: 2424
+  _centerMassBuffer_ID: 2425
+  _dampingStiffness_ID: 2426
+  _posCloth_ID: 2427
+  _posVel_ID: 2428
+  _rotVel_ID: 2429
+  _abs: {fileID: 0}
+  _byteDataPreCache: []
+  _bufferPreCache: []
+  _bStepPreCache: 0
+  _overwritePreCache: 0
+  _shader: {fileID: 0}
 --- !u!64 &705339061
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26976,6 +27249,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ead942c9059643c1ae97662cfc5b8aa, type: 3}
+--- !u!1001 &737780314
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1253921141734082861, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_Name
+      value: CardboardBox_1_Label
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -108.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 51.267673
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000000026692543
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00000002669254
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705128858634114377, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
 --- !u!1001 &738193501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29899,6 +30229,7 @@ MonoBehaviour:
   _meshObjects: []
   _meshProxy: {fileID: 0}
   _useMeshProxy: 1
+  _finishedLoading: 0
   _logo: {fileID: 2800000, guid: 96b2057b71a117b42b43efafb7f67d5f, type: 3}
   _advancedMode: 0
   _runSim: 1
@@ -29931,7 +30262,19 @@ MonoBehaviour:
     _distLimit: 0.1
     _debug: 0
     _pointScale: 0.01
+    _unityDepthTexture: {fileID: 0}
     _unityDepthTextureCopy: {fileID: 0}
+    _clothSim: {fileID: 0}
+    _depthPoint: {x: 0, y: 0, z: 0, w: 0}
+    _vertexPoint: {x: 0, y: 0, z: 0}
+    _depthScanCS: {fileID: 0}
+    _posBuffer: {fileID: 0}
+    _runReadback: 0
+    _mainCam: {fileID: 0}
+    m_DepthCopyMat: {fileID: 0}
+    _newVertexId: 0
+  _pointConstraintsVec: []
+  _transformConstraints: []
   _dampingMethod: 1
   _dampingVel: 0.999
   _clampVel: 10
@@ -29964,6 +30307,82 @@ MonoBehaviour:
     _debugObject: {fileID: 0}
     _useDirectDispatch: 0
     _unifiedSphereSize: 0
+    _clothSim: {fileID: 0}
+    _clothSolver: {fileID: 0}
+    _scanCS: {fileID: 0}
+    _sphereFinderCS: {fileID: 0}
+    _inputPropId: 2322
+    _resultPropId: 373
+    _scanInBucketInclusiveKernel: 0
+    _scanBucketResultKernel: 0
+    _scanAddBucketResultKernel: 0
+    _autoSpheresKernel: 0
+    _meshObjects: []
+    _vertexCounts: 
+    _meshPos: []
+    _b:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    _updateAllParticlesKernel: 0
+    _updateAllParticleTrisKernel: 0
+    _updateSkinnerParticlesKernel: 0
+    _usedVoxelList: 
+    _counterPerVoxel2: 
+    _usedVoxelListBufferDispatch: 0
+    _useTrisMesh: 0
+    _lastCounterPerVoxel: 
+    _lastCounterPerVoxel2: 
+    _useSelfCollision: 0
+    _lastParticleSum: 0
+    _useAutoSpheresOnly: 0
+    _counterPerVoxelThread: 512
+    _numGroups_sphereData: 0
+    _useSecondClothIfNeeded: 0
+    _numClothParticles2: 0
+    _selfAndAutoSpheresCount: 0
+    _grid_ID: 2323
+    _scaled_ID: 2324
+    _lastParticleSum_ID: 2325
+    _selfAndAutoSpheresCount_ID: 2326
+    _useTrisMesh_ID: 2327
+    _useSelfCollision_ID: 2328
+    _useSelfCollisionTriangles_ID: 2329
+    _cubeMinVec_ID: 2330
+    _sphereDataLength_ID: 2331
+    _numClothParticles_ID: 2332
+    _numClothParticles2_ID: 2333
+    _collisionSize_ID: 2334
+    _selfCollisionScale_ID: 2335
+    _secondClothScale_ID: 2336
+    _usedVoxelListBuffer_ID: 2337
+    _usedVoxelListInverseBuffer_ID: 2338
+    _usedVoxelListInverseBufferR_ID: 2339
+    _usedVoxelListInverseBuffer2_ID: 2340
+    _counterPerVoxelBuffer_ID: 2341
+    _counterPerVoxelBuffer2_ID: 2342
+    _lastCounterPerVoxelBuffer_ID: 2343
+    _lastCounterPerVoxelBuffer2_ID: 2344
+    _voxelDataBuffer_ID: 2345
+    _voxelDataBuffer2_ID: 2346
+    _vertsLength_ID: 2347
+    _localToWorldMatrix_ID: 2348
+    _trisData_ID: 2349
+    _positionbuffer_ID: 2350
+    _sphereDataBufferRW_ID: 2351
+    _meshTrisLength_ID: 2352
+    _skinnerVertexTexWidth_ID: 2353
+    _normalScale_ID: 1828
+    _positionBufferTex_ID: 2354
+    _normalBufferTex_ID: 2355
+    _skinned_tex_width_ID: 2356
+    _meshMatrix_ID: 2357
+    _skinned_data_1_ID: 2358
+    _skinned_data_2_ID: 2359
+    _meshVertsOut_ID: 2360
+    _numAutoSpheres_ID: 2361
+    _autoSphereSize_ID: 2362
+    _autoBonesBuffer_ID: 2363
+    _autoSphereBuffer_ID: 2364
   _gridOffset:
     x: -184.30371
     y: 74.956055
@@ -30010,6 +30429,7 @@ MonoBehaviour:
   _fixDoubles: 1
   _vertexIdsToUvId: 2
   _weldVertices: 0
+  _weldDone: 0
   _weldThreshold: 1e-10
   _useReadbackVertices: 0
   _readbackVertexEveryX: 10
@@ -30029,6 +30449,189 @@ MonoBehaviour:
   _slowCPUWriteBack: 0
   _debugMode: 0
   _applyTransformAtExport: 0
+  _useTransferData: 0
+  _rootBone: {fileID: 0}
+  _voxelCubePos: {x: 0, y: 0, z: 0}
+  _clothSolver: {fileID: 0}
+  _enableMouseInteractionLastState: 0
+  _useCollidableObjectsListLastState: 0
+  _workGroupSize: 256
+  _vertexColliders: []
+  _runReadbackVertices: 0
+  _readbackVertexParent: {fileID: 0}
+  _skinTypeCloth: 0
+  _lastPointConstraintType: 0
+  _tempPointConstraint: -1
+  _deltaPointConstraint: {x: 0, y: 0, z: 0}
+  _lastMousePos: {x: 0, y: 0, z: 0}
+  _tempPointVertexId: 0
+  _lastCollidableObjectsCount: 0
+  _dummyTex: {fileID: 0}
+  _runReadback: 0
+  _nextFrameTime: 0
+  _positions: []
+  _colors: []
+  _velocities: []
+  _frictions: []
+  _invMass: 0
+  _numParticles: 0
+  _numDistanceConstraints: 0
+  _numBendingConstraints: 0
+  _numCollidableSpheres: 0
+  _numCollidableSDFs: 0
+  _numPointConstraints: 0
+  _pointConstraints: 
+  _connectionInfo: []
+  _connectedVerts: 
+  _gridCenterBuffer: {fileID: 0}
+  _applyExternalForcesKernel: 0
+  _dampVelocitiesKernel: 0
+  _applyExplicitEulerKernel: 0
+  _projectConstraintDeltasKernel: 0
+  _averageConstraintDeltasKernel: 0
+  _satisfyPointConstraintsKernel: 0
+  _satisfySphereCollisionsKernel: 0
+  _satisfyVertexCollisionsKernel: 0
+  _satisfySDFCollisionsKernel: 0
+  _updatePositionsKernel: 0
+  _updatePositions2Kernel: 0
+  _updatePositions2BlendsKernel: 0
+  _updatePositionsNoSkinningKernel: 0
+  _updateWorldTransformKernel: 0
+  _updateInverseWorldTransformKernel: 0
+  _csNormalsKernel: 0
+  _bendingConstraintDeltasKernel: 0
+  _skinningHDKernel: 0
+  _calcCubeCenterKernel: 0
+  _calcCubeCenter2Kernel: 0
+  _selfContactCollisionsKernel: 0
+  _collidersContactCollisionsKernel: 0
+  _otherSpheresContactCollisions2Kernel: 0
+  _countContactStartKernel: 0
+  _pointPointPredictiveContactKernel: 0
+  _pointPointPredictiveContactCollidersKernel: 0
+  _countContactSetupKernel: 0
+  _transferDuplicateVertexDataKernel: 0
+  _calcCubeCenterFastKernel: 0
+  _surfacePushKernel: 0
+  _surfacePushCollidersKernel: 0
+  _surfacePushDQSKernel: 0
+  _surfacePushCollidersDQSKernel: 0
+  _surfacePushSkinningKernel: 0
+  _surfacePushSkinningBlendsKernel: 0
+  _surfacePushCollidersSkinningKernel: 0
+  _surfacePushCollidersSkinningBlendsKernel: 0
+  _blendGarmentOriginKernel: 0
+  _computeCenterOfMassKernel: 0
+  _finishCenterOfMassKernel: 0
+  _sumAllMassAndMatrixKernel: 0
+  _finishMatrixCalcKernel: 0
+  _applyBackIntoVelocitiesKernel: 0
+  _clearCenterOfMassKernel: 0
+  _numGroups_Vertices: 0
+  _numGroups_DistanceConstraints: 0
+  _numGroups_BendingConstraints: 0
+  _numGroups_PointConstraints: 0
+  _numGroups_VerticesHD: 0
+  _mesh: {fileID: 0}
+  _mr: {fileID: 0}
+  _spheres: []
+  _sdfObjs: []
+  _dupIngoreList: 
+  _saveVoxelPosState: 0
+  _saveLodState: 0
+  _saveClippingState: 0
+  _foundInFrustum: 0
+  _blendDist: 0
+  _maxDebugData: 0
+  _maxDebugData2: 0
+  _maxDebugData3: 0
+  _supportsAsyncGPUReadback: 0
+  _dataBufferPos: []
+  _updateSync: 0
+  _cubeMinPos_ID: 2365
+  _worldToLocalMatrix_ID: 2366
+  _localToWorldMatrix_ID: 2348
+  _staticFriction_ID: 2367
+  _dynamicFriction_ID: 2368
+  _gravity_ID: 2369
+  _invMass_ID: 2370
+  _windVec_ID: 2371
+  _stretchStiffness_ID: 2372
+  _compressionStiffness_ID: 2373
+  _bendingStiffness_ID: 2374
+  __worldPositionImpact_ID: 2375
+  __worldRotationImpact_ID: 2376
+  __collidableObjectsBias_ID: 2377
+  __minBlend_ID: 2378
+  __blendSkinning_ID: 2379
+  _dt_ID: 2380
+  _deltaScale_ID: 2381
+  _clampDelta_ID: 2382
+  _clampVel_ID: 2383
+  _dampingVel_ID: 2384
+  _trisData_ID: 2349
+  _collisionRadius_ID: 2385
+  _deltaTime_ID: 2386
+  _usedVoxelListBuffer_ID: 2337
+  _counterPerVoxelBuffer2_ID: 2342
+  _lastCounterPerVoxelBuffer2_ID: 2344
+  _voxelDataBuffer_ID: 2345
+  _numPointConstraints_ID: 2387
+  _hasTempPointConstraint_ID: 2388
+  _deltaPointConstraint_ID: 2389
+  _tempPointConstraint_ID: 2390
+  _duplicateVerticesCount_ID: 2391
+  _delta_ID: 2392
+  _mpb_normalsBuffer_ID: 1844
+  _mpb_positionsBuffer_ID: 1825
+  _blendGarment_ID: 2393
+  _pushVertsByNormals_ID: 2394
+  _normalsBuffer_ID: 2395
+  _baseVertices_ID: 2396
+  _projectedPositions_ID: 2397
+  _maxVerts_ID: 2398
+  _positions_ID: 2399
+  _connectionInfoBuffer_ID: 2400
+  _connectedVertsBuffer_ID: 2401
+  _skinningForSurfacePush_ID: 2402
+  _skinned_tex_width_ID: 2356
+  _skinned_data_1_ID: 2358
+  _meshVertsOut_ID: 2360
+  _surfacePush_ID: 2403
+  _surfaceOffset_ID: 2404
+  _normalScale_ID: 1828
+  _dispatchDim_x_ID: 2405
+  _numParticles_ID: 2406
+  _gridCenterBuffer_ID: 2407
+  _gridCenterBufferCopy_ID: 2408
+  _deltaPosAsIntX_ID: 2409
+  _collidableSpheres_ID: 2410
+  _collidableSDFs_ID: 2411
+  _numCollidableSDFs_ID: 2412
+  _numCollidableSpheres_ID: 2413
+  _frictions_ID: 2414
+  _velocities_ID: 2415
+  _worldToLocalMatrixHD_ID: 2416
+  _deltaPosAsInt_ID: 2417
+  _deltaCount_ID: 2418
+  _pointPointContactBuffer_ID: 2419
+  _pointPointContactBuffer2_ID: 2420
+  _pointPointContactBuffer3_ID: 2421
+  _countContactBuffer_ID: 2422
+  _countContactBuffer2_ID: 2423
+  _countContactBuffer3_ID: 2424
+  _centerMassBuffer_ID: 2425
+  _dampingStiffness_ID: 2426
+  _posCloth_ID: 2427
+  _posVel_ID: 2428
+  _rotVel_ID: 2429
+  _abs: {fileID: 0}
+  _byteDataPreCache: []
+  _bufferPreCache: []
+  _bStepPreCache: 0
+  _overwritePreCache: 0
+  _shader: {fileID: 0}
 --- !u!1001 &884644558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67293,7 +67896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eda42672f58dcd24ea560931d8f8d813, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 277.23
+      value: 259.89
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eda42672f58dcd24ea560931d8f8d813, type: 3}
       propertyPath: m_LocalPosition.y
@@ -67301,7 +67904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eda42672f58dcd24ea560931d8f8d813, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.839
+      value: -10.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eda42672f58dcd24ea560931d8f8d813, type: 3}
       propertyPath: m_LocalRotation.w
@@ -67769,32 +68372,36 @@ PrefabInstance:
       value: Plant1
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 77.48585
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 225.09999
+      value: 225.53825
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.5
+      value: 10.2
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 282.88318
+      value: 284.53534
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8312363
+      value: 0.87869364
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00000003137843
+      value: -0.000000033169933
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.5559193
+      value: 0.47738612
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000020985391
+      value: 0.000000018020973
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -67802,7 +68409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -67.548
+      value: 57.03
       objectReference: {fileID: 0}
     - target: {fileID: 9070919238598019271, guid: 4bb16670e6b241242901bc95c7e54727, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -74128,3 +74735,4 @@ SceneRoots:
   - {fileID: 1368237181}
   - {fileID: 48828267}
   - {fileID: 575346726}
+  - {fileID: 737780314}
