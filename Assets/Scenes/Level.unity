@@ -39586,7 +39586,7 @@ MonoBehaviour:
   transitionInTime: 1.5
   holdTime: 1.5
   transitionOutTime: 1
-  triggerOnlyOnce: 0
+  triggerOnlyOnce: 1
   hasTriggered: 0
 --- !u!65 &1339332061
 BoxCollider:
@@ -52846,7 +52846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8829212879488931246, guid: 1924d6215e36a3142bb7787c22611977, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 77.6
+      value: 80.28
       objectReference: {fileID: 0}
     - target: {fileID: 8829212879488931246, guid: 1924d6215e36a3142bb7787c22611977, type: 3}
       propertyPath: m_LocalPosition.z
@@ -62489,7 +62489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f0f2148b9e2303a4592e5161fa1e6532, type: 3}
       propertyPath: m_LocalScale.y
-      value: 65
+      value: 76.31379
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f0f2148b9e2303a4592e5161fa1e6532, type: 3}
       propertyPath: m_LocalScale.z
@@ -62497,11 +62497,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f0f2148b9e2303a4592e5161fa1e6532, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.3304
+      value: 2.3081
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f0f2148b9e2303a4592e5161fa1e6532, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 59.5
+      value: 59.52
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f0f2148b9e2303a4592e5161fa1e6532, type: 3}
       propertyPath: m_LocalPosition.z
@@ -67555,7 +67555,7 @@ GameObject:
   - component: {fileID: 4309606778734106060}
   - component: {fileID: 1812190274229427156}
   - component: {fileID: 9134457672758965754}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67978,8 +67978,8 @@ Transform:
   m_GameObject: {fileID: 3771336504854675738}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -115.56453, y: -5.72694, z: 28.61}
-  m_LocalScale: {x: 27.98152, y: 25.048357, z: 25.048359}
+  m_LocalPosition: {x: -115.56453, y: -5.68, z: 28.61}
+  m_LocalScale: {x: 27.98152, y: 35.363533, z: 25.048359}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1618533559}
@@ -69102,6 +69102,7 @@ GameObject:
   - component: {fileID: 8560912675486579385}
   - component: {fileID: 8173226874309649849}
   - component: {fileID: 8560912675486579386}
+  - component: {fileID: 8560912675486579387}
   m_Layer: 7
   m_Name: Chest
   m_TagString: Untagged
@@ -72473,10 +72474,32 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1.0000001, y: 1.1463685, z: 0.6548352}
-  m_Center: {x: 0, y: 0.57318425, z: 0}
+  m_Size: {x: 1.0000001, y: 1.0304313, z: 0.6548352}
+  m_Center: {x: 0, y: 0.51521564, z: 0}
+--- !u!64 &8560912675486579387
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3771336504854675738}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2131277950519408810, guid: d0167d9bc1f693248b42f26c713e2bdf, type: 3}
 --- !u!1 &8609676104938737470
 GameObject:
   m_ObjectHideFlags: 0
@@ -72858,7 +72881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4214717061640914858, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
       propertyPath: strictGroundCheckDistance
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4214717061640914858, guid: a2a7bf3326d5efb45a9e361eba1b4e7e, type: 3}
       propertyPath: bunnyJumpSfx.WwiseObjectReference
