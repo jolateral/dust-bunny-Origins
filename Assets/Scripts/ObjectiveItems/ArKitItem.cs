@@ -50,9 +50,13 @@ public class ArtKitItem : MonoBehaviour
              "Leave empty if you don't want a floating badge visual.")]
     public GameObject FloatingRulerPrefab;
 
-    [Header("Audio")]
-    [Tooltip("Optional Wwise event played when the Art Kit is opened.")]
-    public AK.Wwise.Event openSfx;
+[Header("Audio")]
+[Tooltip("Optional Wwise event played when the Art Kit is opened.")]
+public AK.Wwise.Event openSfx;
+
+[Header("Ruler Acquired Popup")]
+[Tooltip("Sprite shown as a tutorial-style image popup after the Art Kit UI closes.")]
+public Sprite rulerAcquiredSprite;
 
     // -----------------------------------------------------------------------
     // Static State  (read by BridgeUnlockTrigger and FloatingRulerItem)
@@ -151,6 +155,12 @@ public class ArtKitItem : MonoBehaviour
         // Set the unlock flag — BridgeUnlockTrigger now knows the player can pass
         HasViewedArtKit = true;
         Debug.Log("[ArtKitItem] Art kit viewed. Bridge unlock flag = true.");
+
+        // Show the "ruler acquired" image as a MemoryUIManager popup, if assigned
+        if (rulerAcquiredSprite != null && MemoryUIManager.Instance != null)
+        {
+            MemoryUIManager.Instance.ShowImage(rulerAcquiredSprite);
+        }
 
         // Spawn the floating badge above the player (mirrors the key after absorption)
         SpawnFloatingBadge();
