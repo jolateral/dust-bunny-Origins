@@ -1605,15 +1605,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58625803}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.05603838, y: -0.72567254, z: 0.68158764, w: -0.07548103}
-  m_LocalPosition: {x: -199.63004, y: 1.15, z: 65.917404}
+  m_LocalRotation: {x: -0.6257493, y: -0.27988094, z: 0.27593562, w: -0.6737685}
+  m_LocalPosition: {x: -187.5834, y: 1.1500001, z: 46.394623}
   m_LocalScale: {x: 0.58459, y: 0.58459, z: 0.58459}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 229974030}
   - {fileID: 503629431}
   m_Father: {fileID: 1618689470}
-  m_LocalEulerAnglesHint: {x: 86.095, y: 1950.862, z: -18.46}
+  m_LocalEulerAnglesHint: {x: 86.095, y: 1827.854, z: -18.46}
 --- !u!65 &58625810
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4717,8 +4717,8 @@ Transform:
   m_GameObject: {fileID: 144443042}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -78.92, y: -5.94, z: 16.58}
-  m_LocalScale: {x: 11.959305, y: 18.133665, z: 0.086026}
+  m_LocalPosition: {x: -80.97, y: 0.18, z: 6.87}
+  m_LocalScale: {x: 15.681043, y: 30.68133, z: 0.086026}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1099307581}
@@ -32287,6 +32287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 973007545}
+  - component: {fileID: 973007546}
   m_Layer: 0
   m_Name: PressurePlate
   m_TagString: Untagged
@@ -32311,6 +32312,24 @@ Transform:
   - {fileID: 1672390191}
   m_Father: {fileID: 532496385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &973007546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973007544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!4 &975748752 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1545864922453447421, guid: 4ead942c9059643c1ae97662cfc5b8aa, type: 3}
@@ -40829,6 +40848,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f526d53c58bf2894a95de8ac112aa17b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1339332061}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f526d53c58bf2894a95de8ac112aa17b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1339332062}
   m_SourcePrefab: {fileID: 100100000, guid: f526d53c58bf2894a95de8ac112aa17b, type: 3}
 --- !u!4 &1339332054 stripped
 Transform:
@@ -40964,6 +40986,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5928693, y: 0.30831835, z: 0.9093492}
   m_Center: {x: 0.01669454, y: 0.1561112, z: -0.0032428347}
+--- !u!114 &1339332062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339332055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1350381028
 PrefabInstance:
   m_ObjectHideFlags: 0
