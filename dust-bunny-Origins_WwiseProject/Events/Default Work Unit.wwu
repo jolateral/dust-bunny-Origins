@@ -366,6 +366,17 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_sfx_bookshelf_fan_lp" ID="{78BF5288-8C9E-437B-95AB-24684F3DF866}">
+									<ChildrenList>
+										<Action Name="" ID="{5E52F73B-57A6-40CE-BA78-B233A2FD66A7}" ShortID="788559221">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_bookshelf_fan_lp" ID="{CCBA2F88-A0F1-4C00-B4F6-EB8FFB1AFAD0}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="SFX_UI" ID="{28527661-F238-4DF1-9179-E90F1603C1CD}" ShortID="771613492">
@@ -448,6 +459,13 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_stapler_release_nl" ID="{9545400D-3E93-4179-A6DF-C1260BD6645A}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{D870A37A-0E93-41A1-960B-9EA272FB0669}" ShortID="159389949">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_stapler_bounce" ID="{5991B44A-BE46-4E07-8A11-64BEF306D88D}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -673,17 +691,6 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="sfx_endseq" ID="{F8F65FA4-6D01-44D3-A7E6-DAB9E5B50646}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-										</Reference>
-									</ReferenceList>
-								</Action>
-							</ChildrenList>
-						</Event>
-						<Event Name="Play_sfx_Human" ID="{A9AD46D0-BEDD-484A-BEF6-43EE137EDFE2}">
-							<ChildrenList>
-								<Action Name="" ID="{EC265F3E-2CE2-4B3A-9A83-23AB316F776A}" ShortID="727965910">
-									<ReferenceList>
-										<Reference Name="Target">
-											<ObjectRef Name="SFX_Human" ID="{13F0F7D6-6B06-44E6-AB26-B6FAFC886500}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
