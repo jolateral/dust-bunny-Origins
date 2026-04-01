@@ -10,12 +10,20 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{C16F9080-D5AD-73F0-4570-3C95D72599AB}",
+    "Hash": "{82F9661B-F995-FAF8-03CF-C895A244671E}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
     "Plugins": {
      "Custom": [
+      {
+       "Id": "52296476",
+       "Name": "Meter (Custom)",
+       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\UI\\[Effect Slot [0]: (Meter)]\\Meter (Custom)",
+       "GUID": "{344CE7BF-DD0C-4C26-BBB9-994D95216F36}",
+       "LibName": "Wwise Meter",
+       "LibId": "8454147"
+      },
       {
        "Id": "104838541",
        "Name": "Dual_Filters_Radio_Comm (Custom)",
@@ -23,6 +31,14 @@
        "GUID": "{17DB577C-8C33-4432-9BF2-7B96A1574716}",
        "LibName": "Wwise Parametric EQ",
        "LibId": "6881283"
+      },
+      {
+       "Id": "855443374",
+       "Name": "Meter (Custom)",
+       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Music\\[Effect Slot [0]: (Meter)]\\Meter (Custom)",
+       "GUID": "{254265E6-5ABE-4EA2-890E-71CD53D21EDE}",
+       "LibName": "Wwise Meter",
+       "LibId": "8454147"
       }
      ],
      "ShareSets": [
@@ -56,10 +72,42 @@
     },
     "Busses": [
      {
+      "Id": "85412153",
+      "Name": "Ambience",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Ambience",
+      "GUID": "{280555F4-A617-43A5-833C-979DE59E34E4}"
+     },
+     {
+      "Id": "1551306167",
+      "Name": "UI",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\UI",
+      "GUID": "{E9BD2B6A-49DB-4B46-AA00-C62412AB50DB}",
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "52296476"
+        }
+       ]
+      }
+     },
+     {
       "Id": "2246998526",
       "Name": "Main Audio Bus",
       "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus",
       "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     },
+     {
+      "Id": "3991942870",
+      "Name": "Music",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Music",
+      "GUID": "{BE286057-0C51-43E8-B323-A72521227C91}",
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "855443374"
+        }
+       ]
+      }
      }
     ],
     "AuxBusses": [
@@ -108,10 +156,28 @@
       "GUID": "{7E77D9FB-20E8-4729-A178-F4B0CB873461}"
      },
      {
+      "Id": "1006694123",
+      "Name": "music_volume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\music_volume",
+      "GUID": "{7B3F23CE-CE57-4175-A84D-029B058171E5}"
+     },
+     {
+      "Id": "1719345792",
+      "Name": "ui_volume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\ui_volume",
+      "GUID": "{35E35687-F8ED-4B16-96A6-2119E81EE28B}"
+     },
+     {
       "Id": "3519441192",
       "Name": "velocity",
       "ObjectPath": "\\Game Parameters\\Default Work Unit\\velocity",
       "GUID": "{00E52E05-195E-4593-9251-C1504F30131D}"
+     },
+     {
+      "Id": "3990933355",
+      "Name": "bunny_velocity",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\bunny_velocity",
+      "GUID": "{C45DC861-7A84-45B1-A0DE-C00447C5BE12}"
      }
     ],
     "StateGroups": [
@@ -274,6 +340,6 @@
     ]
    }
   ],
-  "FileHash": "{42C10D50-AF38-9D84-608C-E71A9F352193}"
+  "FileHash": "{7F583AFB-E507-5B06-23EB-B3571C74C437}"
  }
 }

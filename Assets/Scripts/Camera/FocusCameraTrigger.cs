@@ -27,6 +27,8 @@ public class CameraFocusTrigger : MonoBehaviour
     [Tooltip("Should this only trigger once?")]
     public bool triggerOnlyOnce = true;
 
+    public AK.Wwise.Event stingerSfx;
+
     public bool hasTriggered = false;
     private Camera mainCam;
 
@@ -41,7 +43,12 @@ public class CameraFocusTrigger : MonoBehaviour
         if (!hasTriggered && other.CompareTag("Player"))
         {
             if (triggerOnlyOnce) hasTriggered = true;
-            
+
+            if (stingerSfx != null)
+            {
+                stingerSfx.Post(gameObject);
+            }
+
             StartCoroutine(CinematicFocusRoutine(other.gameObject));
         }
     }

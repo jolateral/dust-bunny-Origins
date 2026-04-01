@@ -12,7 +12,7 @@
 				<GameParameter Name="bunny_size" ID="{6749505B-A3CA-4BC2-B69F-EE8891A95801}">
 					<PropertyList>
 						<Property Name="InitialValue" Type="Real64" Value="0"/>
-						<Property Name="Max" Type="Real64" Value="1000"/>
+						<Property Name="Max" Type="Real64" Value="5000"/>
 					</PropertyList>
 				</GameParameter>
 				<GameParameter Name="object_mass" ID="{843CEA6A-F3A1-4997-B4A0-48745C2CC6B1}">
@@ -24,6 +24,25 @@
 					<PropertyList>
 						<Property Name="InitialValue" Type="Real64" Value="0"/>
 						<Property Name="Max" Type="Real64" Value="200"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="music_volume" ID="{7B3F23CE-CE57-4175-A84D-029B058171E5}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="Max" Type="Real64" Value="0"/>
+						<Property Name="Min" Type="Real64" Value="-48"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="ui_volume" ID="{35E35687-F8ED-4B16-96A6-2119E81EE28B}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="Max" Type="Real64" Value="0"/>
+						<Property Name="Min" Type="Real64" Value="-48"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="bunny_velocity" ID="{C45DC861-7A84-45B1-A0DE-C00447C5BE12}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
 					</PropertyList>
 				</GameParameter>
 			</ChildrenList>

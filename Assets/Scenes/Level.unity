@@ -3587,11 +3587,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8644576159005171825, guid: 0cd794a12ca2b484aaec5f3a06aea308, type: 3}
   m_PrefabInstance: {fileID: 5688344999271667418}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &109217549 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9019359134335546980, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
-  m_PrefabInstance: {fileID: 3184673593791335819}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &110474226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62858,6 +62853,7 @@ GameObject:
   - component: {fileID: 1941420675}
   - component: {fileID: 1941420674}
   - component: {fileID: 1941420676}
+  - component: {fileID: 1941420677}
   m_Layer: 0
   m_Name: Zone1toZone2
   m_TagString: Untagged
@@ -62945,6 +62941,24 @@ MonoBehaviour:
   groupIdInternal: 0
   valueGuidInternal: 
   groupGuidInternal: 
+--- !u!114 &1941420677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941420672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93aef96058d8b6549826eb9a0cdc25bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicStateTrigger
+  state:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 29b8c985e79105440a7a519ac4227365, type: 2}
 --- !u!1 &1947877599
 GameObject:
   m_ObjectHideFlags: 0
@@ -69996,6 +70010,10 @@ PrefabInstance:
       propertyPath: ventRideStop.WwiseObjectReference
       value: 
       objectReference: {fileID: 11400000, guid: efd99ed72b048c54b9a642ee3b6dafe3, type: 2}
+    - target: {fileID: 601665969879588061, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
+      propertyPath: ventRideStart.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 6b52d3554d66b174cb9f7fd07c663274, type: 2}
     - target: {fileID: 5479365990988889237, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
       propertyPath: TrailModule.lifetime.scalar
       value: 0.03
@@ -70056,12 +70074,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9019359134335546980, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6240603875237622663}
-    - targetCorrespondingSourceObject: {fileID: 9019359134335546980, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6240603875237622662}
     - targetCorrespondingSourceObject: {fileID: 7428964063247595710, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
       insertIndex: -1
       addedObject: {fileID: 999237651}
@@ -72138,59 +72150,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8530068331570326750, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
   m_PrefabInstance: {fileID: 3184673593791335819}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6240603875237622662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109217549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f1abff4722745488e32dbc98b00e33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkEvent
-  triggerList: f7f422d6
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 6b52d3554d66b174cb9f7fd07c663274, type: 2}
-  useCallbacks: 0
-  stopSoundOnDestroy: 1
-  Callbacks: []
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
---- !u!114 &6240603875237622663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109217549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e021e4d64cccd3478083e0e42485605, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
-  m_listeners:
-    initialListenerList: []
-    useDefaultListeners: 1
-  isEnvironmentAware: 1
-  isStaticObject: 0
-  usePositionOffsetData: 0
-  m_positionOffsetData:
-    KeepMe: 0
-    positionOffset: {x: 0, y: 0, z: 0}
-  scalingFactor: 1
-  m_posOffsetData: {fileID: 0}
-  listenerMask: 1
 --- !u!1001 &6272470258093917328
 PrefabInstance:
   m_ObjectHideFlags: 0

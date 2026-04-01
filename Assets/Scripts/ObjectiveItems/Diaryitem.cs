@@ -61,6 +61,7 @@ public class DiaryItem : MonoBehaviour
     [Header("Audio")]
     [Tooltip("Sound played when the diary is successfully unlocked.")]
     public AK.Wwise.Event unlockSfx;
+    public AK.Wwise.Event unlockMusic;
 
     [Tooltip("Sound played when the player bumps the locked diary.")]
     public AK.Wwise.Event lockedBumpSfx;
@@ -150,7 +151,10 @@ public class DiaryItem : MonoBehaviour
 
         // Play unlock sound
         if (unlockSfx != null)
+        {
             unlockSfx.Post(gameObject);
+            unlockMusic.Post(gameObject);
+        }
 
         // --- Hide the floating key ---
         // The key is parented to the player after absorption, but

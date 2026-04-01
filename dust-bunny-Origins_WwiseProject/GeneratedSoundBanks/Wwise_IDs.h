@@ -149,14 +149,20 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID BUNNY_SIZE = 404510017U;
+        static const AkUniqueID BUNNY_VELOCITY = 3990933355U;
+        static const AkUniqueID MUSIC_VOLUME = 1006694123U;
         static const AkUniqueID OBJECT_MASS = 292743055U;
         static const AkUniqueID ROOMBA_TO_BUNNY = 629805900U;
+        static const AkUniqueID UI_VOLUME = 1719345792U;
         static const AkUniqueID VELOCITY = 3519441192U;
     } // namespace GAME_PARAMETERS
 
     namespace BUSSES
     {
+        static const AkUniqueID AMBIENCE = 85412153U;
         static const AkUniqueID MAIN_AUDIO_BUS = 2246998526U;
+        static const AkUniqueID MUSIC = 3991942870U;
+        static const AkUniqueID UI = 1551306167U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES

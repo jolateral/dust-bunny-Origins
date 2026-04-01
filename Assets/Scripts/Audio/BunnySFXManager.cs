@@ -44,7 +44,7 @@ public class BunnySFXManager : MonoBehaviour
         Vector3 relativeVelocity = collision.relativeVelocity;
         if (relativeVelocity.magnitude > 1f)
         {
-            AkUnitySoundEngine.SetRTPCValue("velocity", relativeVelocity.magnitude, gameObject);
+            AkUnitySoundEngine.SetRTPCValue("bunny_velocity", relativeVelocity.magnitude, gameObject);
             bunnyImpactSfx.Post(gameObject);
         }
     }

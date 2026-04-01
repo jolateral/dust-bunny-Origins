@@ -1,4 +1,5 @@
 using UnityEngine;
+using static ak;
 
 public class VentUpstream : MonoBehaviour
 {
@@ -7,7 +8,11 @@ public class VentUpstream : MonoBehaviour
     public float maxUpwardSpeed = 35f;
 
     [Header("SFX")]
+    public AK.Wwise.Event ventRideStart;
     public AK.Wwise.Event ventRideStop;
+
+    private bool isPlaying;
+    private uint playingID;
 
     private void OnTriggerStay(Collider other)
     {
@@ -17,8 +22,13 @@ public class VentUpstream : MonoBehaviour
         Rigidbody rb = player.GetComponent<Rigidbody>();
         if (rb == null)
         {
-            ventRideStop.Post(gameObject);
             return;
+        }
+
+        if (!isPlaying)
+        {
+            playingID = ventRideStart.Post(gameObject);
+            isPlaying = true;
         }
 
         Vector3 velocity = rb.linearVelocity;
@@ -27,6 +37,17 @@ public class VentUpstream : MonoBehaviour
         {
             velocity.y = upwardSpeed;
             rb.linearVelocity = velocity;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        DustBunnyController player = other.GetComponent<DustBunnyController>();
+        if (player == null) return;
+
+        if (isPlaying)
+        {
+            AkUnitySoundEngine.StopPlayingID(playingID);
+            isPlaying = false;
         }
     }
 }
