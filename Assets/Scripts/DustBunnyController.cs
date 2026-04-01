@@ -27,6 +27,7 @@ public class DustBunnyController : MonoBehaviour
     public float dashDuration = 0.5f;
     public float dashCooldown = 1.0f;
     public float rollDrag = 0.5f;
+    public float dashAfterJumpDelay = 0.15f;
 
     [Header("--- Glide Settings ---")]
     public float glideHorizontalSpeed = 1f;
@@ -370,7 +371,11 @@ public class DustBunnyController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (!context.performed || isHit) return; // Prevent dashing during knockback
+        if (!context.performed || isHit) return;
+
+        if (Time.time < lastJumpTime + dashAfterJumpDelay)
+            return;
+
         if (!isRolling && Time.time >= lastDashTime + dashCooldown)
             StartCoroutine(PerformDash());
     }

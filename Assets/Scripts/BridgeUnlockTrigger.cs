@@ -296,8 +296,8 @@ public class BridgeUnlockTrigger : MonoBehaviour
 
         Debug.Log($"[BridgeUnlockTrigger] Player entered without art kit. Hint: '{lockedHintText}'");
 
-        if (MemoryUIManager.Instance != null && !string.IsNullOrEmpty(lockedHintText))
-            MemoryUIManager.Instance.ShowMemory(lockedHintText, Color.white);
+        if (MemoryUIManager.Instance != null)
+            MemoryUIManager.Instance.ShowImage(lockedHintSprite);
     }
 
     // -----------------------------------------------------------------------

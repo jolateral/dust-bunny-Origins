@@ -12,6 +12,9 @@ public class RoombaChase : MonoBehaviour
     [SerializeField] private Transform patrolPointB;
     [SerializeField] private float patrolStopDistance = 0.2f;
 
+    [Header("First Chase Delay")]
+    [SerializeField] private float firstChaseDelay = 1f;
+
     private DustBunnyController playerController;
     private Rigidbody rb;
     private Transform currentPatrolTarget;
@@ -20,6 +23,10 @@ public class RoombaChase : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float rotationSpeed = 8f;
     [SerializeField] private float stopDistance = 1.2f;
+
+    private bool hasStartedFirstChase = false;
+    private bool firstOutOfBoundsTriggered = false;
+    private float firstChaseStartTime = -1f;
 
     private void Start()
     {
@@ -41,7 +48,7 @@ public class RoombaChase : MonoBehaviour
 
         if (playerController.isOutOfBounds)
         {
-            ChasePlayer();
+            HandleChaseState();
         }
         else
         {
@@ -49,9 +56,35 @@ public class RoombaChase : MonoBehaviour
         }
     }
 
+    private void HandleChaseState()
+    {
+        // First ever time the player goes out of bounds: start delay timer
+        if (!hasStartedFirstChase)
+        {
+            if (!firstOutOfBoundsTriggered)
+            {
+                firstOutOfBoundsTriggered = true;
+                firstChaseStartTime = Time.time + firstChaseDelay;
+            }
+
+            // Still waiting before first chase begins, keep patrolling
+            if (Time.time < firstChaseStartTime)
+            {
+                Patrol();
+                return;
+            }
+
+            // First delay finished; all future chases happen instantly
+            hasStartedFirstChase = true;
+        }
+
+        ChasePlayer();
+    }
+
     private void ChasePlayer()
     {
         moveSpeed = 100f;
+
         Vector3 toPlayer = player.position - transform.position;
         toPlayer.y = 0f;
 
@@ -70,6 +103,7 @@ public class RoombaChase : MonoBehaviour
     private void Patrol()
     {
         moveSpeed = 30f;
+
         if (patrolPointA == null || patrolPointB == null)
         {
             StopMoving();

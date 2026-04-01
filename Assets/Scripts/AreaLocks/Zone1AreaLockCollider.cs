@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Zone1AreaLockCollider : MonoBehaviour
 {
-    [SerializeField] private string message = "You need to collect all the memory fragments to pass through here.";
+    [SerializeField] private Sprite message;
     [SerializeField] private Color restrictionColour = Color.red;
 
     private void OnCollisionEnter(Collision collision)
@@ -20,7 +20,7 @@ public class Zone1AreaLockCollider : MonoBehaviour
             }
             else
             {
-                MemoryUIManager.Instance.ShowMemory(message, restrictionColour);
+                MemoryUIManager.Instance.ShowImage(message);
             }
         }
     }

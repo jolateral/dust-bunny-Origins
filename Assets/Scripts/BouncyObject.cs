@@ -12,6 +12,8 @@ public class BouncyObject : MonoBehaviour
     public AK.Wwise.Event staplerWindup;
     public AK.Wwise.Event staplerRelease;
 
+    [SerializeField] private Sprite hintImage;
+
     private Animator animator;
 
     void Awake()
@@ -25,7 +27,7 @@ public class BouncyObject : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player") && bookshelfStapler && DiaryUIManager.Instance != null && !DiaryUIManager.Instance.diaryShown)
         {
-            MemoryUIManager.Instance.ShowMemory("This stapler isn't working...Maybe I need to view the diary first.", Color.white);
+            MemoryUIManager.Instance.ShowImage(hintImage);
         }
     }
 
@@ -38,7 +40,7 @@ public class BouncyObject : MonoBehaviour
             if (DiaryUIManager.Instance == null || !DiaryUIManager.Instance.diaryShown)
             {
                 if (MemoryUIManager.Instance != null)
-                    MemoryUIManager.Instance.ShowMemory("This stapler isn't working...Maybe I need to view the diary first.", Color.white);
+                    MemoryUIManager.Instance.ShowImage(hintImage);
                 return false;
             }
         }

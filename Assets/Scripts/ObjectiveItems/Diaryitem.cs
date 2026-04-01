@@ -53,6 +53,7 @@ public class DiaryItem : MonoBehaviour
     [Header("Locked Behaviour")]
     [Tooltip("Message shown when the player doesn't have the key yet. Uses MemoryUIManager if available.")]
     public string lockedHintText = "It's locked... I need to find the key.";
+    [SerializeField] private Sprite hintImage;
 
     [Tooltip("How many seconds to wait before the hint can show again (prevents spam).")]
     public float hintCooldown = 3f;
@@ -228,7 +229,7 @@ public class DiaryItem : MonoBehaviour
         // (same system used for other text popups in your game)
         if (MemoryUIManager.Instance != null)
         {
-            MemoryUIManager.Instance.ShowMemory(lockedHintText, Color.white);
+            MemoryUIManager.Instance.ShowImage(hintImage);
         }
     }
 

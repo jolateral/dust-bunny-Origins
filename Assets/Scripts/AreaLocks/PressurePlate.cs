@@ -60,7 +60,7 @@ public class PressurePlate : MonoBehaviour
 
         if (lever != null && lever.IsHooked())
         {
-            // 🔹 Store player references
+            // Store player references
             currentPlayer = player;
             playerRb = player.GetComponent<Rigidbody>();
             playerAnimator = player.GetComponentInChildren<Animator>();
