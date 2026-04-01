@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6112180648959243457
+--- !u!1 &4889744364784177726
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5679212168504999640}
-  - component: {fileID: 7052395998369929549}
-  - component: {fileID: 5784993533568642584}
-  - component: {fileID: 7830621923759139407}
-  - component: {fileID: 8010416310333248277}
-  m_Layer: 0
-  m_Name: Whale Plush2
+  - component: {fileID: 5672260061484697248}
+  - component: {fileID: 850089193745928443}
+  - component: {fileID: 6163759053244011876}
+  - component: {fileID: 6516387755892459421}
+  m_Layer: 7
+  m_Name: Books1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5679212168504999640
+--- !u!4 &5672260061484697248
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6112180648959243457}
+  m_GameObject: {fileID: 4889744364784177726}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7273328, y: 1.2776002, z: -1.1253341}
-  m_LocalScale: {x: 56.37465, y: 25.015028, z: 11.027335}
+  m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -155.4, y: -5.6969404, z: 58.962112}
+  m_LocalScale: {x: 76.293, y: 70, z: 75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7052395998369929549
+--- !u!33 &850089193745928443
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6112180648959243457}
-  m_Mesh: {fileID: -4181224817937029246, guid: 36e428394eb4d1f4cbab76e22114bc41, type: 3}
---- !u!23 &5784993533568642584
+  m_GameObject: {fileID: 4889744364784177726}
+  m_Mesh: {fileID: 4929282560712386351, guid: 07e28ad28e8b4174c9469d38b0463ccb, type: 3}
+--- !u!23 &6163759053244011876
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6112180648959243457}
+  m_GameObject: {fileID: 4889744364784177726}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6578858362087993751, guid: 36e428394eb4d1f4cbab76e22114bc41, type: 3}
+  - {fileID: 2100000, guid: 21fa25b09d8d3d14d9308020872bc380, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,13 +91,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7830621923759139407
-MeshCollider:
+--- !u!65 &6516387755892459421
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6112180648959243457}
+  m_GameObject: {fileID: 4889744364784177726}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,34 +109,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4181224817937029246, guid: 36e428394eb4d1f4cbab76e22114bc41, type: 3}
---- !u!54 &8010416310333248277
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6112180648959243457}
-  serializedVersion: 5
-  m_Mass: 10000
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  serializedVersion: 3
+  m_Size: {x: 0.36323425, y: 0.246501, z: 0.18013863}
+  m_Center: {x: -0.1816176, y: 0.123250484, z: -0.09006933}
