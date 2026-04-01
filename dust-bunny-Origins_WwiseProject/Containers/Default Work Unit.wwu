@@ -11633,6 +11633,13 @@
 												<MediaID ID="657416441"/>
 											</MediaIDList>
 										</AudioFileSource>
+										<AudioFileSource Name="sfx_bridge_falling_nl" ID="{22EDD01A-F1D1-411F-A3D8-EA186CD2E992}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_bridge_falling_nl.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="649701090"/>
+											</MediaIDList>
+										</AudioFileSource>
 									</ChildrenList>
 									<StateInfo>
 										<StateGroupList>
@@ -11669,7 +11676,7 @@
 										</CustomStateList>
 									</StateInfo>
 									<ActiveSourceList>
-										<ActiveSource Name="sfx_bridge_creak_nl" ID="{654A27DF-66D9-4023-8EB7-1C60E140B2D5}" Platform="Linked"/>
+										<ActiveSource Name="sfx_bridge_falling_nl" ID="{22EDD01A-F1D1-411F-A3D8-EA186CD2E992}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="sfx_bridge_land_nl" ID="{1E254FB9-EC40-4235-8AA0-A501C4E2E05A}" ShortID="672961825">
@@ -11695,6 +11702,11 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="sfx_bridge_land_nl" ID="{EC4782A1-5F9E-4FDD-AAF9-BDEBD8D0C495}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.0183628139414223"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.0415159271719112"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>sfx_bridge_land_nl.wav</AudioFile>
 											<MediaIDList>
@@ -11804,7 +11816,11 @@
 												<ActiveSource Name="sfx_vent_low_lp" ID="{A6CAFB30-E8A3-4149-BC70-B6E25C58E45D}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="sfx_vent_ride_lp" ID="{5CE24F44-AC78-4DD7-AF20-79436D11F864}" ShortID="131375727">
+										<RandomSequenceContainer Name="sfx_vent_ride" ID="{0834C2C5-FBF4-4964-88F2-88BBA9B43712}" ShortID="502146218">
+											<PropertyList>
+												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+												<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -11814,44 +11830,88 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="sfx_vent_ride_lp" ID="{881EF832-DD12-40D9-91F8-FC6F8C3B7E62}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_vent_ride_lp.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="750305925"/>
-													</MediaIDList>
-												</AudioFileSource>
+												<Sound Name="sfx_vent_ride_lp" ID="{5CE24F44-AC78-4DD7-AF20-79436D11F864}" ShortID="131375727">
+													<PropertyList>
+														<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_vent_ride_lp" ID="{881EF832-DD12-40D9-91F8-FC6F8C3B7E62}">
+															<PropertyList>
+																<Property Name="FadeInDuration" Type="Real64" Value="0.00348959839803177"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>sfx_vent_ride_lp.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="750305925"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_vent_ride_lp" ID="{881EF832-DD12-40D9-91F8-FC6F8C3B7E62}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_vent_ridestart_nl" ID="{A709CAFD-2EE6-4D4A-8CE3-B8BE7A95CFA9}" ShortID="1045506600">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_vent_ridestart_nl" ID="{528C7A56-EF99-470B-9403-AEF0E893CFF8}">
+															<PropertyList>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="3.28491398343477"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>sfx_vent_ridestart_nl.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="665440016"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_vent_ridestart_nl" ID="{528C7A56-EF99-470B-9403-AEF0E893CFF8}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_vent_ride_lp" ID="{881EF832-DD12-40D9-91F8-FC6F8C3B7E62}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_vent_ridestart_nl" ID="{A709CAFD-2EE6-4D4A-8CE3-B8BE7A95CFA9}" ShortID="1045506600">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_vent_ridestart_nl" ID="{528C7A56-EF99-470B-9403-AEF0E893CFF8}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_vent_ridestart_nl.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="665440016"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_vent_ridestart_nl" ID="{528C7A56-EF99-470B-9403-AEF0E893CFF8}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
+											<ObjectLists>
+												<ObjectList Name="Playlist">
+													<PluginInnerObject Name="" ID="{447A925E-021D-46D7-89BD-56BB9FCBCBAA}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+														<ReferenceList>
+															<Reference Name="PlaylistObject">
+																<ObjectRef Name="sfx_vent_ridestart_nl" ID="{A709CAFD-2EE6-4D4A-8CE3-B8BE7A95CFA9}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+															</Reference>
+														</ReferenceList>
+													</PluginInnerObject>
+													<PluginInnerObject Name="" ID="{5102005E-4E20-4149-B7B6-A3AEC1743160}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+														<ReferenceList>
+															<Reference Name="PlaylistObject">
+																<ObjectRef Name="sfx_vent_ride_lp" ID="{5CE24F44-AC78-4DD7-AF20-79436D11F864}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+															</Reference>
+														</ReferenceList>
+													</PluginInnerObject>
+												</ObjectList>
+											</ObjectLists>
+										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
-								<Sound Name="sfx_lever_nl" ID="{50EC3A20-9254-48B5-9CED-91298E928903}" ShortID="335744391">
+								<Sound Name="sfx_zone1_lever_nl" ID="{50EC3A20-9254-48B5-9CED-91298E928903}" ShortID="335744391">
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 										</Reference>
@@ -11861,6 +11921,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="sfx_lever_nl" ID="{EEF01104-68DB-45C1-90D8-B76F1F5F9978}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.0187433827110432"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.120453797716557"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.283631482495051"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.515994293045329"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>sfx_lever_nl.wav</AudioFile>
 											<MediaIDList>
@@ -11872,8 +11939,11 @@
 										<ActiveSource Name="sfx_lever_nl" ID="{EEF01104-68DB-45C1-90D8-B76F1F5F9978}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="sfx_lever_unlock_nl" ID="{0551DB35-B34E-4A04-A649-630D063F699E}" ShortID="614912388">
+								<Sound Name="sfx_zone1_lever_unlock_nl" ID="{0551DB35-B34E-4A04-A649-630D063F699E}" ShortID="614912388">
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 										</Reference>
@@ -11889,7 +11959,7 @@
 												<MediaID ID="140659652"/>
 											</MediaIDList>
 										</AudioFileSource>
-										<AudioFileSource Name="sfx_lever_unlock_nl" ID="{BC1E9D3E-D781-4C49-867D-AEF36BE50D40}">
+										<AudioFileSource Name="sfx_lever_unlock_nl_01" ID="{BC1E9D3E-D781-4C49-867D-AEF36BE50D40}">
 											<Language>SFX</Language>
 											<AudioFile>sfx_lever_unlock_nl.wav</AudioFile>
 											<MediaIDList>
@@ -11898,12 +11968,12 @@
 										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="sfx_lever_unlock_nl" ID="{BC1E9D3E-D781-4C49-867D-AEF36BE50D40}" Platform="Linked"/>
+										<ActiveSource Name="sfx_lever_unlock_nl_01" ID="{BC1E9D3E-D781-4C49-867D-AEF36BE50D40}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 								<Folder Name="sfx_car_impact" ID="{4E9D8D24-7C24-439F-A180-E9919A4E2017}" ShortID="222969239">
 									<ChildrenList>
-										<Sound Name="sfx_car_crash_impact_nl-001" ID="{1708E3A7-4EB9-4B01-8FDE-F5FA7C838B1F}" ShortID="768758084">
+										<RandomSequenceContainer Name="sfx_car_crash_nl" ID="{AA431A34-FDA7-47E9-8A94-82A1B2F4BD72}" ShortID="871854261">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -11913,19 +11983,75 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="sfx_car_crash_impact_nl-001" ID="{7F9157F7-D26C-4313-A330-1148397CCAAB}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_car_crash_impact_nl-001.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="666528547"/>
-													</MediaIDList>
-												</AudioFileSource>
+												<Sound Name="sfx_car_crash_impact_nl-001" ID="{1708E3A7-4EB9-4B01-8FDE-F5FA7C838B1F}" ShortID="768758084">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_car_crash_impact_nl-001" ID="{7F9157F7-D26C-4313-A330-1148397CCAAB}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_car_crash_impact_nl-001.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="666528547"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_car_crash_impact_nl-001" ID="{7F9157F7-D26C-4313-A330-1148397CCAAB}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_car_crash_impact_nl-002" ID="{DFF7641C-23AF-4222-98FA-C139B93305AE}" ShortID="404839350">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_car_crash_impact_nl-002" ID="{C52C3B1F-7227-4337-BD5E-F7E48DD3DDE0}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_car_crash_impact_nl-002.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="273487584"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_car_crash_impact_nl-002" ID="{C52C3B1F-7227-4337-BD5E-F7E48DD3DDE0}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_car_crash_impact_nl-003" ID="{975C0B12-023D-44CF-9A0B-0A153672B204}" ShortID="327901406">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_car_crash_impact_nl-003" ID="{05EA7615-276A-4C63-A73F-A2C593C7F477}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_car_crash_impact_nl-003.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="466190646"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_car_crash_impact_nl-003" ID="{05EA7615-276A-4C63-A73F-A2C593C7F477}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_car_crash_impact_nl-001" ID="{7F9157F7-D26C-4313-A330-1148397CCAAB}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_car_crash_impact_nl-002" ID="{DFF7641C-23AF-4222-98FA-C139B93305AE}" ShortID="404839350">
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="sfx_car_honk_nl" ID="{51B3AD4A-4DEC-4479-9E0D-FC63235B1B77}" ShortID="512327600">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -11935,19 +12061,75 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="sfx_car_crash_impact_nl-002" ID="{C52C3B1F-7227-4337-BD5E-F7E48DD3DDE0}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_car_crash_impact_nl-002.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="273487584"/>
-													</MediaIDList>
-												</AudioFileSource>
+												<Sound Name="sfx_car_honk_nl-001" ID="{E178FBD5-9E31-41A4-957A-938A5EE555A1}" ShortID="939521495">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_car_honk_nl-001" ID="{EA0A8E2F-CC74-49B7-8F47-07F30C33328B}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_car_honk_nl-001.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="578016436"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_car_honk_nl-001" ID="{EA0A8E2F-CC74-49B7-8F47-07F30C33328B}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_car_honk_nl-002" ID="{20AC194D-5390-4B72-85C1-DD9ED2682194}" ShortID="837841652">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_car_honk_nl-002" ID="{867B269E-F5F9-4E19-AB50-66C03A76067B}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_car_honk_nl-002.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="936002445"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_car_honk_nl-002" ID="{867B269E-F5F9-4E19-AB50-66C03A76067B}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_car_honk_nl-003" ID="{AFF487DB-5D2B-436B-85A7-EB0001870A43}" ShortID="90307625">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_car_honk_nl-003" ID="{EFACCF66-F523-41C9-BCDB-9E95BE1A709D}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_car_honk_nl-003.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="141892685"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_car_honk_nl-003" ID="{EFACCF66-F523-41C9-BCDB-9E95BE1A709D}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_car_crash_impact_nl-002" ID="{C52C3B1F-7227-4337-BD5E-F7E48DD3DDE0}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_car_crash_impact_nl-003" ID="{975C0B12-023D-44CF-9A0B-0A153672B204}" ShortID="327901406">
+										</RandomSequenceContainer>
+										<RandomSequenceContainer Name="sfx_car_impact_nl" ID="{B605DEA2-BA00-4C5B-A453-2683A8E45637}" ShortID="775986590">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -11957,128 +12139,52 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="sfx_car_crash_impact_nl-003" ID="{05EA7615-276A-4C63-A73F-A2C593C7F477}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_car_crash_impact_nl-003.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="466190646"/>
-													</MediaIDList>
-												</AudioFileSource>
+												<Sound Name="sfx_car_impact_nl-001" ID="{667180A4-2B8D-45A4-BE49-4DAA1ACB4B12}" ShortID="450350773">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_car_impact_nl-001" ID="{53C97EF0-E2D3-4E73-9F25-426B67921CF9}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_car_impact_nl-001.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="1065752985"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_car_impact_nl-001" ID="{53C97EF0-E2D3-4E73-9F25-426B67921CF9}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="sfx_car_impact_nl-002" ID="{C5F602FE-F507-4F18-BAB1-69FD2327CA01}" ShortID="723623890">
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="sfx_car_impact_nl-002" ID="{D0CFA1FA-2CB0-4EBC-BA8C-FE3372984AB5}">
+															<Language>SFX</Language>
+															<AudioFile>sfx_car_impact_nl-002.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="729951903"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="sfx_car_impact_nl-002" ID="{D0CFA1FA-2CB0-4EBC-BA8C-FE3372984AB5}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
 											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_car_crash_impact_nl-003" ID="{05EA7615-276A-4C63-A73F-A2C593C7F477}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_car_honk_nl-001" ID="{E178FBD5-9E31-41A4-957A-938A5EE555A1}" ShortID="939521495">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_car_honk_nl-001" ID="{EA0A8E2F-CC74-49B7-8F47-07F30C33328B}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_car_honk_nl-001.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="578016436"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_car_honk_nl-001" ID="{EA0A8E2F-CC74-49B7-8F47-07F30C33328B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_car_honk_nl-002" ID="{20AC194D-5390-4B72-85C1-DD9ED2682194}" ShortID="837841652">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_car_honk_nl-002" ID="{867B269E-F5F9-4E19-AB50-66C03A76067B}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_car_honk_nl-002.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="936002445"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_car_honk_nl-002" ID="{867B269E-F5F9-4E19-AB50-66C03A76067B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_car_honk_nl-003" ID="{AFF487DB-5D2B-436B-85A7-EB0001870A43}" ShortID="90307625">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_car_honk_nl-003" ID="{EFACCF66-F523-41C9-BCDB-9E95BE1A709D}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_car_honk_nl-003.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="141892685"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_car_honk_nl-003" ID="{EFACCF66-F523-41C9-BCDB-9E95BE1A709D}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_car_impact_nl-001" ID="{667180A4-2B8D-45A4-BE49-4DAA1ACB4B12}" ShortID="450350773">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_car_impact_nl-001" ID="{53C97EF0-E2D3-4E73-9F25-426B67921CF9}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_car_impact_nl-001.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="1065752985"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_car_impact_nl-001" ID="{53C97EF0-E2D3-4E73-9F25-426B67921CF9}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_car_impact_nl-002" ID="{C5F602FE-F507-4F18-BAB1-69FD2327CA01}" ShortID="723623890">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_car_impact_nl-002" ID="{D0CFA1FA-2CB0-4EBC-BA8C-FE3372984AB5}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_car_impact_nl-002.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="729951903"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_car_impact_nl-002" ID="{D0CFA1FA-2CB0-4EBC-BA8C-FE3372984AB5}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
+										</RandomSequenceContainer>
 									</ChildrenList>
 								</Folder>
 								<Sound Name="sfx_latch_winch_nl" ID="{36C77B53-682A-4710-AA4F-370CEEACF597}" ShortID="95996141">
@@ -12103,8 +12209,11 @@
 										<ActiveSource Name="sfx_latch_winch_nl" ID="{CA030080-9F4E-48E8-8130-DD2BF249D498}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="sfx_pressureplate_click_nl" ID="{58CBF953-BDF4-4B7F-AF3D-F9274625A013}" ShortID="291707697">
+								<Sound Name="sfx_zone1_pressureplate_click_nl" ID="{58CBF953-BDF4-4B7F-AF3D-F9274625A013}" ShortID="291707697">
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 										</Reference>
@@ -12125,7 +12234,7 @@
 										<ActiveSource Name="sfx_pressureplate_click_nl" ID="{9157800F-8FEF-41ED-85BE-799BE6A15224}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="sfx_pressureplate_slide_nl" ID="{C95314C2-B30B-4637-B0E0-20A61EFEBC5A}" ShortID="701517732">
+								<Sound Name="sfx_zone1_pressureplate_slide_nl" ID="{C95314C2-B30B-4637-B0E0-20A61EFEBC5A}" ShortID="701517732">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -12149,6 +12258,9 @@
 								</Sound>
 								<Sound Name="sfx_zone1_latch_click_nl" ID="{AD3CB3AE-B9DA-43DE-ABEA-B4AE2A4B7EF9}" ShortID="535230199">
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 										</Reference>
@@ -12171,6 +12283,9 @@
 								</Sound>
 								<Sound Name="sfx_zone1_latch_lower_nl" ID="{525D1FC0-F6F0-4DDD-965B-35BB3F90C630}" ShortID="960316403">
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 										</Reference>
@@ -12537,6 +12652,28 @@
 										</Sound>
 									</ChildrenList>
 								</Folder>
+								<Sound Name="sfx_zone1_door_open_nl" ID="{D95D4F44-B4A3-4EC8-8ECB-17212E3D6119}" ShortID="423178418">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_zone1_door_open_nl" ID="{B72EC9CA-406C-4C64-B9AD-A6DF10884699}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_zone1_door_open_nl.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="833626681"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_zone1_door_open_nl" ID="{B72EC9CA-406C-4C64-B9AD-A6DF10884699}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="SFX_Memory" ID="{608C843A-8ADA-4D20-8C62-78B7F56B6623}" ShortID="318452658">
@@ -12730,6 +12867,9 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="sfx_art_kit_open_nl" ID="{FF3474EF-0147-4A2D-B990-AD1D17129FC1}" ShortID="557047028">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -13018,7 +13158,7 @@
 										<ActiveSource Name="sfx_harp_stinger-008" ID="{A0C9769F-AAD5-4C38-A4AD-BA6C6BBC9F2D}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="sfx_chimes-001" ID="{A7B1C5CE-280E-40B8-B237-1BA9CAA40AA4}" ShortID="906614007">
+								<RandomSequenceContainer Name="sfx_ui_chime_nl" ID="{1F99C70C-DDD1-4B0E-94A3-82495399C919}" ShortID="276346715">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -13028,19 +13168,119 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="sfx_chimes-001" ID="{D8D8216C-C964-4C3D-BF1A-E2E4A183B060}">
-											<Language>SFX</Language>
-											<AudioFile>sfx_chimes-001.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="16981510"/>
-											</MediaIDList>
-										</AudioFileSource>
+										<Sound Name="sfx_chimes_nl-001" ID="{A6138381-C4DE-4D1A-8502-301E510C271E}" ShortID="929204115">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_chimes_nl-001" ID="{F814648C-8A35-46F2-A6FC-E9EED43F2D8B}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_chimes_nl-001.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="39049704"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_chimes_nl-001" ID="{F814648C-8A35-46F2-A6FC-E9EED43F2D8B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_chimes_nl-002" ID="{668401B1-596C-45B2-81C7-0E945DBBF3C8}" ShortID="61169680">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_chimes_nl-002" ID="{825725BB-F1C1-4F4C-A551-05A8C80C8026}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_chimes_nl-002.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1008709125"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_chimes_nl-002" ID="{825725BB-F1C1-4F4C-A551-05A8C80C8026}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_chimes_nl-003" ID="{6A1F937C-76B1-460C-AFE7-5D5FB4994B78}" ShortID="90713658">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_chimes_nl-003" ID="{157538B0-89D8-4A73-A220-16957D66047B}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_chimes_nl-003.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="675806067"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_chimes_nl-003" ID="{157538B0-89D8-4A73-A220-16957D66047B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_chimes_nl-004" ID="{00360067-51C3-42FB-8488-B855A06C5239}" ShortID="642206762">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_chimes_nl-004" ID="{5F0BCF6E-95B9-499C-8D1C-93BD877BF179}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_chimes_nl-004.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="610955562"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_chimes_nl-004" ID="{5F0BCF6E-95B9-499C-8D1C-93BD877BF179}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_chimes_nl-005" ID="{7D7F861D-DD40-4CAF-9B05-C40DBB146529}" ShortID="661460905">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_chimes_nl-005" ID="{8E6275DD-81CF-4DB8-80F8-A0F0E74AA8DB}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_chimes_nl-005.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="96563665"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_chimes_nl-005" ID="{8E6275DD-81CF-4DB8-80F8-A0F0E74AA8DB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="sfx_chimes-001" ID="{D8D8216C-C964-4C3D-BF1A-E2E4A183B060}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="sfx_chimes-002" ID="{BFC4A3EB-A8CB-4466-B76F-C92C466BBECB}" ShortID="289923116">
+								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="sfx_ui_bell_nl" ID="{0F04AF61-1BEC-4D8D-9370-21AF64170011}" ShortID="908898107">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
@@ -13050,150 +13290,74 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="sfx_chimes-002" ID="{DC5026F6-B51B-47BE-ACDE-E37F7BC494F2}">
-											<Language>SFX</Language>
-											<AudioFile>sfx_chimes-002.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="1061312901"/>
-											</MediaIDList>
-										</AudioFileSource>
+										<Sound Name="sfx_sleighbell_nl-001" ID="{3F79B0A9-81D2-4846-BD80-CD3881EDA77F}" ShortID="220240012">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_sleighbell_nl-001" ID="{A69FEF6E-6A8F-4A12-90CD-11F2DF7A6857}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_sleighbell_nl-001.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="175645025"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_sleighbell_nl-001" ID="{A69FEF6E-6A8F-4A12-90CD-11F2DF7A6857}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_sleighbell_nl-002" ID="{B9A568BD-94A4-43AE-AC7F-2FD394A8C3E1}" ShortID="128365683">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_sleighbell_nl-002" ID="{5100C839-A3D0-4F32-A7D9-2B73FAD0726E}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_sleighbell_nl-002.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="999444577"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_sleighbell_nl-002" ID="{5100C839-A3D0-4F32-A7D9-2B73FAD0726E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_sleighbell_nl-003" ID="{C08D37C9-1BE6-40AF-8547-5DC4B651A7DA}" ShortID="809442840">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_sleighbell_nl-003" ID="{06F2E2AD-0EDE-48CD-8C64-F7B97C8B3EE4}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_sleighbell_nl-003.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="832259668"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_sleighbell_nl-003" ID="{06F2E2AD-0EDE-48CD-8C64-F7B97C8B3EE4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="sfx_chimes-002" ID="{DC5026F6-B51B-47BE-ACDE-E37F7BC494F2}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="sfx_chimes-003" ID="{537CEF51-F435-4B77-96BB-987C67C013B5}" ShortID="104905481">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="sfx_chimes-003" ID="{05C94BFD-B7B2-48FE-9B66-EF738942D2F1}">
-											<Language>SFX</Language>
-											<AudioFile>sfx_chimes-003.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="450192036"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="sfx_chimes-003" ID="{05C94BFD-B7B2-48FE-9B66-EF738942D2F1}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="sfx_chimes-004" ID="{E471E81D-B842-43AE-B5E2-6A52DFBAD8AD}" ShortID="717431334">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="sfx_chimes-004" ID="{6989395F-CAFC-49A3-8D44-539275053812}">
-											<Language>SFX</Language>
-											<AudioFile>sfx_chimes-004.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="825613118"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="sfx_chimes-004" ID="{6989395F-CAFC-49A3-8D44-539275053812}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="sfx_chimes-005" ID="{C9EC4A86-721A-49D3-AB57-919BFA051321}" ShortID="888152467">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="sfx_chimes-005" ID="{284F2F25-5874-4F6B-BD7F-036EB4081968}">
-											<Language>SFX</Language>
-											<AudioFile>sfx_chimes-005.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="311765250"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="sfx_chimes-005" ID="{284F2F25-5874-4F6B-BD7F-036EB4081968}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="sfx_sleighbell_nl-001" ID="{3F79B0A9-81D2-4846-BD80-CD3881EDA77F}" ShortID="220240012">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="sfx_sleighbell_nl-001" ID="{A69FEF6E-6A8F-4A12-90CD-11F2DF7A6857}">
-											<Language>SFX</Language>
-											<AudioFile>sfx_sleighbell_nl-001.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="175645025"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="sfx_sleighbell_nl-001" ID="{A69FEF6E-6A8F-4A12-90CD-11F2DF7A6857}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="sfx_sleighbell_nl-002" ID="{B9A568BD-94A4-43AE-AC7F-2FD394A8C3E1}" ShortID="128365683">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="sfx_sleighbell_nl-002" ID="{5100C839-A3D0-4F32-A7D9-2B73FAD0726E}">
-											<Language>SFX</Language>
-											<AudioFile>sfx_sleighbell_nl-002.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="999444577"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="sfx_sleighbell_nl-002" ID="{5100C839-A3D0-4F32-A7D9-2B73FAD0726E}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="sfx_sleighbell_nl-003" ID="{C08D37C9-1BE6-40AF-8547-5DC4B651A7DA}" ShortID="809442840">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="sfx_sleighbell_nl-003" ID="{06F2E2AD-0EDE-48CD-8C64-F7B97C8B3EE4}">
-											<Language>SFX</Language>
-											<AudioFile>sfx_sleighbell_nl-003.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="832259668"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="sfx_sleighbell_nl-003" ID="{06F2E2AD-0EDE-48CD-8C64-F7B97C8B3EE4}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="SFX_End" ID="{217EAB2B-283E-459A-A2EC-85C9B69D9DA2}" ShortID="63317648">
@@ -14412,6 +14576,9 @@
 										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 										</Reference>
@@ -14434,6 +14601,9 @@
 								</Sound>
 								<Sound Name="sfx_roomba_impact_nl" ID="{D9B24184-E48D-41F7-A90E-F4BA18406543}" ShortID="1020799180">
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 										</Reference>
@@ -14455,7 +14625,13 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="sfx_roomba_lp" ID="{D66103CA-626C-4DCE-9CA4-8AE033846F2A}" ShortID="873043049">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
 									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 										</Reference>

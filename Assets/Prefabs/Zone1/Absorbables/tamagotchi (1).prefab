@@ -75,6 +75,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40b683a15b525f24aa00d873f61faec5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7935951733109261303}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40b683a15b525f24aa00d873f61faec5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6995759321157369933}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40b683a15b525f24aa00d873f61faec5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6177233838396965606}
   m_SourcePrefab: {fileID: 100100000, guid: 40b683a15b525f24aa00d873f61faec5, type: 3}
 --- !u!1 &2266110682954836863 stripped
 GameObject:
@@ -102,3 +108,47 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.00856882, y: 0.015906405, z: 0.021015937}
   m_Center: {x: 0.000029088467, y: -5.5845195e-16, z: 0.019648783}
+--- !u!54 &-6995759321157369933
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266110682954836863}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &6177233838396965606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266110682954836863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 722cac8d9d4cd26419589b6745b62c7a, type: 2}
+  debug: 0

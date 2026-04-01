@@ -24,6 +24,11 @@ public class PressurePlate : MonoBehaviour
 
     [SerializeField] private CameraFocusTrigger cameraFocusScript;
 
+    [Header("SFX")]
+    public AK.Wwise.Event buttonPress;
+    public AK.Wwise.Event buttonClick;
+    public AK.Wwise.Event doorOpen;
+
     private Vector3 startPosition;
     private Vector3 hookStartPos;
     private Vector3 wallStartPos;
@@ -66,6 +71,7 @@ public class PressurePlate : MonoBehaviour
             playerAnimator = player.GetComponentInChildren<Animator>();
 
             isActivated = true;
+
             StartCoroutine(PlateSequence());
         }
         else
@@ -96,7 +102,11 @@ public class PressurePlate : MonoBehaviour
         Vector3 pressedPos = startPosition;
         pressedPos.y -= pressAmount;
 
+        buttonPress.Post(gameObject);
+
         yield return StartCoroutine(MoveSmooth(transform, pressedPos, pressDuration));
+
+        buttonClick.Post(gameObject);
 
         // Wait before camera focus
         yield return new WaitForSeconds(delayBeforeCameraFocus);
@@ -114,6 +124,7 @@ public class PressurePlate : MonoBehaviour
         // Raise hook
         if (hook != null)
         {
+            doorOpen.Post(gameObject);
             Vector3 target = hookStartPos;
             target.y += raiseAmount;
             StartCoroutine(MoveSmooth(hook, target, moveDuration));

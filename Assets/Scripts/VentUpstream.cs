@@ -6,13 +6,20 @@ public class VentUpstream : MonoBehaviour
     public float upwardSpeed = 30f;
     public float maxUpwardSpeed = 35f;
 
+    [Header("SFX")]
+    public AK.Wwise.Event ventRideStop;
+
     private void OnTriggerStay(Collider other)
     {
         DustBunnyController player = other.GetComponent<DustBunnyController>();
         if (player == null) return;
 
         Rigidbody rb = player.GetComponent<Rigidbody>();
-        if (rb == null) return;
+        if (rb == null)
+        {
+            ventRideStop.Post(gameObject);
+            return;
+        }
 
         Vector3 velocity = rb.linearVelocity;
 

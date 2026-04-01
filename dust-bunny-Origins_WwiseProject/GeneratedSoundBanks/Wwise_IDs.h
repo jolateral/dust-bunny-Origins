@@ -23,6 +23,8 @@ namespace AK
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
         static const AkUniqueID PLAY_MUS_GAME = 3188041860U;
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
+        static const AkUniqueID PLAY_SFX_ART_KIT_OPEN_NL = 2718719620U;
+        static const AkUniqueID PLAY_SFX_BOOKSHELF_FAN_LP = 2878616736U;
         static const AkUniqueID PLAY_SFX_BRIDGE_CREAK_NL = 3975145325U;
         static const AkUniqueID PLAY_SFX_BUNNY_ABSORB_NL = 3617904731U;
         static const AkUniqueID PLAY_SFX_BUNNY_GLIDING_LP = 3621260004U;
@@ -34,11 +36,14 @@ namespace AK
         static const AkUniqueID PLAY_SFX_CAR_IMPACT_NL = 2032188842U;
         static const AkUniqueID PLAY_SFX_CAR_MOVE_NL = 4207159517U;
         static const AkUniqueID PLAY_SFX_COIN_ABSORB_NL = 4259653120U;
+        static const AkUniqueID PLAY_SFX_DIARY_NOKEY_NL = 2032929161U;
+        static const AkUniqueID PLAY_SFX_DIARY_UNLOCK_NL = 2109170807U;
         static const AkUniqueID PLAY_SFX_DOMINO_IMPACT = 3743694823U;
         static const AkUniqueID PLAY_SFX_ENDSEQ = 1833036738U;
         static const AkUniqueID PLAY_SFX_ERASER_ABSORB_NL = 1495456639U;
+        static const AkUniqueID PLAY_SFX_GAME_START = 3576864173U;
         static const AkUniqueID PLAY_SFX_HAIRPIN_ABSORB_NL = 2555693410U;
-        static const AkUniqueID PLAY_SFX_HUMAN = 3957740849U;
+        static const AkUniqueID PLAY_SFX_KEY_PICKUP_NL = 3082622675U;
         static const AkUniqueID PLAY_SFX_LEGO_ABSORB_NL = 3199315176U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_001 = 1142362393U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_002 = 1142362394U;
@@ -47,12 +52,23 @@ namespace AK
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_005 = 1142362397U;
         static const AkUniqueID PLAY_SFX_STAPLER_RELEASE_NL = 2050082196U;
         static const AkUniqueID PLAY_SFX_STAPLER_WINDUP_NL = 166426674U;
+        static const AkUniqueID PLAY_SFX_TROPHY_NL = 743151801U;
+        static const AkUniqueID PLAY_SFX_UI_CHIME_NL = 459017098U;
         static const AkUniqueID PLAY_SFX_UI_SELECT_NL = 4289076888U;
         static const AkUniqueID PLAY_SFX_VENT_LP = 1128772546U;
+        static const AkUniqueID PLAY_SFX_VENT_RIDESTART_NL = 2966358761U;
         static const AkUniqueID PLAY_SFX_WOODBLOCK_IMPACT_WOOD = 841695155U;
+        static const AkUniqueID PLAY_SFX_ZONE1_DOOR_OPEN_NL = 4065002664U;
+        static const AkUniqueID PLAY_SFX_ZONE1_LATCH_CLICK_NL = 480118936U;
+        static const AkUniqueID PLAY_SFX_ZONE1_LATCH_LOWER_NL = 248668601U;
+        static const AkUniqueID PLAY_SFX_ZONE1_LEVER_NL = 976538073U;
+        static const AkUniqueID PLAY_SFX_ZONE1_LEVER_UNLOCK_NL = 663331512U;
+        static const AkUniqueID PLAY_SFX_ZONE1_PRESSUREPLATE_CLICK_NL = 2299298003U;
+        static const AkUniqueID PLAY_SFX_ZONE1_PRESSUREPLATE_SLIDE_NL = 4088029866U;
         static const AkUniqueID STOP_MUS_GAME = 700666702U;
         static const AkUniqueID STOP_MUS_STARTMENU = 200855961U;
         static const AkUniqueID STOP_SFX_BUNNY_GLIDING_LP = 3668857278U;
+        static const AkUniqueID STOP_SFX_VENT_RIDE = 593031558U;
     } // namespace EVENTS
 
     namespace STATES

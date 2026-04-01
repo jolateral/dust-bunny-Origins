@@ -6514,7 +6514,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 1e0292f285c0e574ca929460d1e2a89f, type: 2}
   reverbLevel: 1
-  transmissionLoss: 0.5
+  transmissionLoss: 0.2
   distanceBehavior: 0
   roomToneEvent:
     idInternal: 0
@@ -24969,7 +24969,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1931428703624756177, guid: 1924d6215e36a3142bb7787c22611977, type: 3}
       propertyPath: bounceForce
-      value: 125
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8200064232114196244, guid: 1924d6215e36a3142bb7787c22611977, type: 3}
       propertyPath: m_Name
@@ -31741,6 +31741,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1545864922453447421, guid: 4ead942c9059643c1ae97662cfc5b8aa, type: 3}
   m_PrefabInstance: {fileID: 2062935050}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &999237645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7428964063247595710, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
+  m_PrefabInstance: {fileID: 3184673593791335819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &999237650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999237645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f1abff4722745488e32dbc98b00e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkEvent
+  triggerList: f7e1664c
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 395c5a65e02e591499242498c13fc2ee, type: 2}
+  useCallbacks: 0
+  stopSoundOnDestroy: 1
+  Callbacks: []
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  eventIdInternal: 0
+  valueGuidInternal: 
+  m_callbackDataInternal: {fileID: 0}
+--- !u!114 &999237651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999237645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e021e4d64cccd3478083e0e42485605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1001 &1009277375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39421,6 +39479,22 @@ MonoBehaviour:
   cameraFocusScript: {fileID: 1339332060}
   delayBeforeCamera: 1
   delayBeforeMovingHook: 1.25
+  leverSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 406c25e1254361a41bb94d95eb446380, type: 2}
+  leverUnlockSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 80343e77deb11fb43bd24f496e1f8e13, type: 2}
+  latchLowerSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: f2337116c41b1c74eb2879785450fd0c, type: 2}
+  latchClickSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1a8a87810fea02f479ec4410b094d72f, type: 2}
 --- !u!95 &1339332057
 Animator:
   serializedVersion: 7
@@ -55684,6 +55758,18 @@ MonoBehaviour:
   delayBeforeMovingWall: 1.75
   displayTooLightPopup: {fileID: 21300000, guid: 3faa31b138709dd4cb7948635175635e, type: 3}
   cameraFocusScript: {fileID: 1672390198}
+  buttonPress:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9b764106f2618294c91035655ef3642c, type: 2}
+  buttonClick:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e9f218c1391612e4497e283e7a5e70ed, type: 2}
+  doorOpen:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: cd7c426a9f26f0f49970c33879e9f53e, type: 2}
 --- !u!114 &1672390198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69889,6 +69975,10 @@ PrefabInstance:
       propertyPath: maxUpwardSpeed
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 601665969879588061, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
+      propertyPath: ventRideStop.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: efd99ed72b048c54b9a642ee3b6dafe3, type: 2}
     - target: {fileID: 5479365990988889237, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
       propertyPath: TrailModule.lifetime.scalar
       value: 0.03
@@ -69951,13 +70041,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9019359134335546980, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6240603875237622668}
+      addedObject: {fileID: 6240603875237622663}
     - targetCorrespondingSourceObject: {fileID: 9019359134335546980, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6240603875237622667}
-    - targetCorrespondingSourceObject: {fileID: 9019359134335546980, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
+      addedObject: {fileID: 6240603875237622662}
+    - targetCorrespondingSourceObject: {fileID: 7428964063247595710, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6240603875237622669}
+      addedObject: {fileID: 999237651}
+    - targetCorrespondingSourceObject: {fileID: 7428964063247595710, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 999237650}
   m_SourcePrefab: {fileID: 100100000, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
 --- !u!1001 &3208092529736479251
 PrefabInstance:
@@ -72028,7 +72121,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8530068331570326750, guid: af3bb21c8b4b91e4fb28d5ba0a081468, type: 3}
   m_PrefabInstance: {fileID: 3184673593791335819}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6240603875237622667
+--- !u!114 &6240603875237622662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72040,7 +72133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f1abff4722745488e32dbc98b00e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkEvent
-  triggerList: ae8d9d44
+  triggerList: f7f422d6
   useOtherObject: 0
   actionOnEventType: 0
   curveInterpolation: 4
@@ -72048,7 +72141,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 395c5a65e02e591499242498c13fc2ee, type: 2}
+    WwiseObjectReference: {fileID: 11400000, guid: 6b52d3554d66b174cb9f7fd07c663274, type: 2}
   useCallbacks: 0
   stopSoundOnDestroy: 1
   Callbacks: []
@@ -72057,7 +72150,7 @@ MonoBehaviour:
   eventIdInternal: 0
   valueGuidInternal: 
   m_callbackDataInternal: {fileID: 0}
---- !u!114 &6240603875237622668
+--- !u!114 &6240603875237622663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72072,28 +72165,15 @@ MonoBehaviour:
   m_listeners:
     initialListenerList: []
     useDefaultListeners: 1
-  isEnvironmentAware: 0
+  isEnvironmentAware: 1
   isStaticObject: 0
   usePositionOffsetData: 0
   m_positionOffsetData:
-    KeepMe: 1
+    KeepMe: 0
     positionOffset: {x: 0, y: 0, z: 0}
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
---- !u!114 &6240603875237622669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109217549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f8da6ca5275f744cbe5658ab19a7d15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkRoomAwareObject
-  m_Collider: {fileID: 0}
 --- !u!1001 &6272470258093917328
 PrefabInstance:
   m_ObjectHideFlags: 0

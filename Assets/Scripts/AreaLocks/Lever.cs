@@ -19,6 +19,12 @@ public class Lever : MonoBehaviour
     [SerializeField] private float delayBeforeCamera = 1f;
     [SerializeField] private float delayBeforeMovingHook = 1.5f;
 
+    [Header("SFX")]
+    public AK.Wwise.Event leverSfx;
+    public AK.Wwise.Event leverUnlockSfx;
+    public AK.Wwise.Event latchLowerSfx;
+    public AK.Wwise.Event latchClickSfx;
+
     private bool hasActivated = false;
     private Vector3 hookStartPosition;
 
@@ -102,6 +108,8 @@ public class Lever : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("isHooked", true);
+
+            leverUnlockSfx.Post(gameObject);
         }
 
         // Wait before camera pan
@@ -134,6 +142,8 @@ public class Lever : MonoBehaviour
 
     private IEnumerator MoveHookSmoothly(Vector3 targetPosition)
     {
+        latchLowerSfx.Post(gameObject);
+
         Vector3 startPos = hook.localPosition;
         float elapsed = 0f;
 
@@ -148,5 +158,7 @@ public class Lever : MonoBehaviour
         }
 
         hook.localPosition = targetPosition;
+
+        latchClickSfx.Post(gameObject);
     }
 }
