@@ -38,6 +38,7 @@ namespace AK
         static const AkUniqueID PLAY_SFX_COIN_ABSORB_NL = 4259653120U;
         static const AkUniqueID PLAY_SFX_DIARY_NOKEY_NL = 2032929161U;
         static const AkUniqueID PLAY_SFX_DIARY_UNLOCK_NL = 2109170807U;
+        static const AkUniqueID PLAY_SFX_DIARY_WITH_KEY = 1647905338U;
         static const AkUniqueID PLAY_SFX_DOMINO_IMPACT = 3743694823U;
         static const AkUniqueID PLAY_SFX_ENDSEQ = 1833036738U;
         static const AkUniqueID PLAY_SFX_ERASER_ABSORB_NL = 1495456639U;
@@ -50,6 +51,8 @@ namespace AK
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_003 = 1142362395U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_004 = 1142362396U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_005 = 1142362397U;
+        static const AkUniqueID PLAY_SFX_ROOMBA_IMPACT_NL = 2813769886U;
+        static const AkUniqueID PLAY_SFX_ROOMBA_LP = 1824279243U;
         static const AkUniqueID PLAY_SFX_STAPLER_RELEASE_NL = 2050082196U;
         static const AkUniqueID PLAY_SFX_STAPLER_WINDUP_NL = 166426674U;
         static const AkUniqueID PLAY_SFX_TROPHY_NL = 743151801U;
@@ -147,6 +150,7 @@ namespace AK
     {
         static const AkUniqueID BUNNY_SIZE = 404510017U;
         static const AkUniqueID OBJECT_MASS = 292743055U;
+        static const AkUniqueID ROOMBA_TO_BUNNY = 629805900U;
         static const AkUniqueID VELOCITY = 3519441192U;
     } // namespace GAME_PARAMETERS
 

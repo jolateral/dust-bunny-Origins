@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -24,12 +25,18 @@ public class RoombaChase : MonoBehaviour
     [SerializeField] private float rotationSpeed = 8f;
     [SerializeField] private float stopDistance = 1.2f;
 
+    [Header("SFX")]
+    public AK.Wwise.Event roombaLoop;
+    public AK.Wwise.Event roombaImpact;
+
     private bool hasStartedFirstChase = false;
     private bool firstOutOfBoundsTriggered = false;
     private float firstChaseStartTime = -1f;
 
     private void Start()
     {
+        roombaLoop.Post(gameObject);
+
         rb = GetComponent<Rigidbody>();
 
         if (player != null)
@@ -90,6 +97,8 @@ public class RoombaChase : MonoBehaviour
 
         float distance = toPlayer.magnitude;
 
+        AkUnitySoundEngine.SetRTPCValue("roomba_to_bunny", distance);
+
         if (distance <= stopDistance)
         {
             StopMoving();
@@ -103,6 +112,8 @@ public class RoombaChase : MonoBehaviour
     private void Patrol()
     {
         moveSpeed = 30f;
+
+        AkUnitySoundEngine.SetRTPCValue("roomba_to_bunny", 200f);
 
         if (patrolPointA == null || patrolPointB == null)
         {
@@ -176,7 +187,10 @@ public class RoombaChase : MonoBehaviour
 
         Rigidbody playerRb = player.GetComponent<Rigidbody>();
         if (playerRb != null)
+        {
+            roombaImpact.Post(gameObject);
             playerRb.linearVelocity = Vector3.zero;
+        }
 
         player.position = respawnPoint.position;
         player.rotation = respawnPoint.rotation;

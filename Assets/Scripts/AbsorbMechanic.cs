@@ -316,7 +316,12 @@ public class AbsorbMechanic : MonoBehaviour
         // Play absorb sound
         if (bunnyAbsorbSfx != null) bunnyAbsorbSfx.Post(gameObject);
 
+        float bunnyMass = GetComponent<Rigidbody>().mass;
+
+        AkUnitySoundEngine.SetRTPCValue("bunny_size", bunnyMass);
+
         Debug.Log("Absorbed: " + item.name);
+        Debug.Log("Bunny Mass: " + bunnyMass);
 
         // Notify the objective UI that something was collected
         ObjectiveUI.Instance.SetObjective();

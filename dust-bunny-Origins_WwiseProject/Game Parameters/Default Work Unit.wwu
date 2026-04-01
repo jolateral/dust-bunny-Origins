@@ -12,12 +12,18 @@
 				<GameParameter Name="bunny_size" ID="{6749505B-A3CA-4BC2-B69F-EE8891A95801}">
 					<PropertyList>
 						<Property Name="InitialValue" Type="Real64" Value="0"/>
-						<Property Name="Max" Type="Real64" Value="10"/>
+						<Property Name="Max" Type="Real64" Value="1000"/>
 					</PropertyList>
 				</GameParameter>
 				<GameParameter Name="object_mass" ID="{843CEA6A-F3A1-4997-B4A0-48745C2CC6B1}">
 					<PropertyList>
 						<Property Name="InitialValue" Type="Real64" Value="0"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="roomba_to_bunny" ID="{7E77D9FB-20E8-4729-A178-F4B0CB873461}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+						<Property Name="Max" Type="Real64" Value="200"/>
 					</PropertyList>
 				</GameParameter>
 			</ChildrenList>

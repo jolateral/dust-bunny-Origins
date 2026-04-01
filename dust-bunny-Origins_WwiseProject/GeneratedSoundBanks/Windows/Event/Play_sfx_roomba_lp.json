@@ -1,0 +1,55 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "1824279243",
+    "Type": "Event",
+    "GUID": "{AEF2CB5E-ADE2-4AC3-B282-F97E8EE324BB}",
+    "Language": "SFX",
+    "Hash": "{A36259D3-DBCA-5E59-685C-BC0D6811CDA1}",
+    "ObjectPath": "Play_sfx_roomba_lp",
+    "ShortName": "Play_sfx_roomba_lp",
+    "Path": "Event/Play_sfx_roomba_lp.bnk",
+    "Media": [
+     {
+      "Id": "240888963",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_roomba_lp.wav",
+      "Path": "Media/240888963.wem",
+      "CachePath": "07/{07819950-3EBC-931A-CCB8-6B1952D7A859}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "1824279243",
+      "Name": "Play_sfx_roomba_lp",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\SFX_Interactable\\Play_sfx_roomba_lp",
+      "GUID": "{AEF2CB5E-ADE2-4AC3-B282-F97E8EE324BB}",
+      "MaxAttenuation": "150",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "240888963"
+       }
+      ]
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "629805900",
+      "Name": "roomba_to_bunny",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\roomba_to_bunny",
+      "GUID": "{7E77D9FB-20E8-4729-A178-F4B0CB873461}"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{95CDE2B6-1826-C1D4-0F96-E188E638D25F}"
+ }
+}

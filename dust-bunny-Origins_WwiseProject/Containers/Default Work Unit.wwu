@@ -8347,6 +8347,72 @@
 												</ObjectLists>
 											</MultiSwitchEntry>
 										</ObjectList>
+										<ObjectList Name="RTPC">
+											<RTPC Name="" ID="{71CD2F63-1A7A-4818-A851-08D264B15640}" ShortID="200917564">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Volume"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="roomba_to_bunny" ID="{7E77D9FB-20E8-4729-A178-F4B0CB873461}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{AA7BD9C5-BB8F-4EDB-B95F-7AE7050EC2BF}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>12</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Log3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>200</XPos>
+																		<YPos>0</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+											<RTPC Name="" ID="{0E5204E9-1BFC-4FD6-B70C-4CEF0ED8E704}" ShortID="628247363">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="PlaybackSpeed"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="roomba_to_bunny" ID="{7E77D9FB-20E8-4729-A178-F4B0CB873461}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{96EE5657-40F3-451D-AE55-84E319A66A87}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="1"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>1.5</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Log3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>200</XPos>
+																		<YPos>1</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</ObjectList>
 									</ObjectLists>
 								</MusicSwitchContainer>
 							</ChildrenList>
@@ -10719,7 +10785,13 @@
 																				<XPos>0</XPos>
 																				<YPos>-200</YPos>
 																				<Flags>5</Flags>
-																				<SegmentShape>Log3</SegmentShape>
+																				<SegmentShape>Exp2</SegmentShape>
+																			</Point>
+																			<Point>
+																				<XPos>6.0207</XPos>
+																				<YPos>-200</YPos>
+																				<Flags>0</Flags>
+																				<SegmentShape>Exp3</SegmentShape>
 																			</Point>
 																			<Point>
 																				<XPos>10</XPos>
@@ -10751,10 +10823,10 @@
 																				<XPos>0</XPos>
 																				<YPos>-11.12605</YPos>
 																				<Flags>5</Flags>
-																				<SegmentShape>Log3</SegmentShape>
+																				<SegmentShape>Exp1</SegmentShape>
 																			</Point>
 																			<Point>
-																				<XPos>10</XPos>
+																				<XPos>1000</XPos>
 																				<YPos>3</YPos>
 																				<Flags>37</Flags>
 																			</Point>
@@ -10770,7 +10842,7 @@
 														</PropertyList>
 														<ReferenceList>
 															<Reference Name="ControlInput">
-																<ObjectRef Name="velocity" ID="{00E52E05-195E-4593-9251-C1504F30131D}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
+																<ObjectRef Name="bunny_size" ID="{6749505B-A3CA-4BC2-B69F-EE8891A95801}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
 															</Reference>
 															<Reference Name="Curve">
 																<Custom>
@@ -10781,11 +10853,12 @@
 																		<PointList>
 																			<Point>
 																				<XPos>0</XPos>
-																				<YPos>50</YPos>
+																				<YPos>30</YPos>
 																				<Flags>5</Flags>
+																				<SegmentShape>Exp3</SegmentShape>
 																			</Point>
 																			<Point>
-																				<XPos>10</XPos>
+																				<XPos>1000</XPos>
 																				<YPos>0</YPos>
 																				<Flags>37</Flags>
 																			</Point>
@@ -10817,8 +10890,8 @@
 																	<Modifier Name="" ID="{F8CB5686-B8A1-4D80-9B0E-B9D1937AC48D}">
 																		<PropertyList>
 																			<Property Name="Enabled" Type="bool" Value="True"/>
-																			<Property Name="Max" Type="Real64" Value="200"/>
-																			<Property Name="Min" Type="Real64" Value="-300"/>
+																			<Property Name="Max" Type="Real64" Value="500"/>
+																			<Property Name="Min" Type="Real64" Value="-500"/>
 																		</PropertyList>
 																	</Modifier>
 																</ModifierInfo>
@@ -10827,7 +10900,7 @@
 														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
 														<Property Name="Volume" Type="Real64">
 															<ValueList>
-																<Value>-6</Value>
+																<Value>-3</Value>
 															</ValueList>
 															<ModifierList>
 																<ModifierInfo>
@@ -11123,9 +11196,9 @@
 																<AudioFileSource Name="sfx_bunnyland_nl" ID="{37618E3A-65DE-4D42-83EA-299A332E4C15}">
 																	<PropertyList>
 																		<Property Name="FadeInDuration" Type="Real64" Value="0.0520037195275246"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.232955429845945"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.177806807037764"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="0.446807460147909"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.267816315945917"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunnyland_nl.wav</AudioFile>
@@ -11818,10 +11891,14 @@
 										</Sound>
 										<RandomSequenceContainer Name="sfx_vent_ride" ID="{0834C2C5-FBF4-4964-88F2-88BBA9B43712}" ShortID="502146218">
 											<PropertyList>
+												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="0.2"/>
 												<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 												<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 											</PropertyList>
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
 												</Reference>
@@ -11940,6 +12017,13 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="sfx_zone1_lever_unlock_nl" ID="{0551DB35-B34E-4A04-A649-630D063F699E}" ShortID="614912388">
+									<PropertyList>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Attenuation">
 											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
@@ -12911,6 +12995,28 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="sfx_trophy" ID="{97C1CDFE-81E3-45A3-B872-0BC260ABC539}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_diary_with_key" ID="{BFF8BA96-318F-4B52-9CF3-ABA04B0A9607}" ShortID="705564160">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_diary_with_key" ID="{969F64F1-6B2E-41DE-9497-A1CBE315F6F0}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_diary_with_key.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="471362448"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_diary_with_key" ID="{969F64F1-6B2E-41DE-9497-A1CBE315F6F0}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -14626,6 +14732,8 @@
 								</Sound>
 								<Sound Name="sfx_roomba_lp" ID="{D66103CA-626C-4DCE-9CA4-8AE033846F2A}" ShortID="873043049">
 									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="AttenuationDistanceScaling" Type="Real32" Value="3"/>
 										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 									</PropertyList>
 									<ReferenceList>
@@ -14648,6 +14756,74 @@
 											</MediaIDList>
 										</AudioFileSource>
 									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="RTPC">
+											<RTPC Name="" ID="{4005D9E8-A828-4786-AF18-F26EA83EC4CF}" ShortID="1045116296">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Volume"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="roomba_to_bunny" ID="{7E77D9FB-20E8-4729-A178-F4B0CB873461}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{9A5AF5CA-AA09-4C9C-9E0F-A78AFDB89556}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="3"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>3</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Log1</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>200</XPos>
+																		<YPos>0</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+											<RTPC Name="" ID="{1F2B68D6-C5C2-4B48-A86E-03DBC6E32C46}" ShortID="684738008">
+												<PropertyList>
+													<Property Name="PropertyName" Type="string" Value="Pitch"/>
+												</PropertyList>
+												<ReferenceList>
+													<Reference Name="ControlInput">
+														<ObjectRef Name="roomba_to_bunny" ID="{7E77D9FB-20E8-4729-A178-F4B0CB873461}" WorkUnitID="{7233BDA5-0B5D-497C-BA1C-2E80C0F76727}"/>
+													</Reference>
+													<Reference Name="Curve">
+														<Custom>
+															<Curve Name="" ID="{4ECC832F-7448-4A03-A8AA-BCF4893478E2}">
+																<PropertyList>
+																	<Property Name="Flags" Type="int32" Value="65537"/>
+																</PropertyList>
+																<PointList>
+																	<Point>
+																		<XPos>0</XPos>
+																		<YPos>600</YPos>
+																		<Flags>5</Flags>
+																		<SegmentShape>Log3</SegmentShape>
+																	</Point>
+																	<Point>
+																		<XPos>200</XPos>
+																		<YPos>-200</YPos>
+																		<Flags>37</Flags>
+																	</Point>
+																</PointList>
+															</Curve>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</RTPC>
+										</ObjectList>
+									</ObjectLists>
 									<ActiveSourceList>
 										<ActiveSource Name="sfx_roomba_lp" ID="{8BA1FC88-0FC1-42BD-BB37-78D30B0D1BC4}" Platform="Linked"/>
 									</ActiveSourceList>

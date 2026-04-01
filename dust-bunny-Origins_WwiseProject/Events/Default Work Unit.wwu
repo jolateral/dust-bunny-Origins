@@ -695,6 +695,38 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Event Name="Play_sfx_roomba_impact_nl" ID="{774A9962-DB9A-4BF2-8617-04A306D4C601}">
+									<ChildrenList>
+										<Action Name="" ID="{B466951D-D9B2-49CD-A34C-CBB2BA20180F}" ShortID="507678413">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_roomba_impact_nl" ID="{D9B24184-E48D-41F7-A90E-F4BA18406543}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{125D4577-EE1B-461F-B899-D083B627C979}" ShortID="945426792">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="0.2"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_bunny_squeak_nl-005" ID="{75BC578B-B983-4F50-B4FD-7F0DCC595A23}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_roomba_lp" ID="{AEF2CB5E-ADE2-4AC3-B282-F97E8EE324BB}">
+									<ChildrenList>
+										<Action Name="" ID="{51BBF641-8A69-430C-9AF4-433BA4DFB9C1}" ShortID="5480006">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_roomba_lp" ID="{D66103CA-626C-4DCE-9CA4-8AE033846F2A}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="SFX_Memory" ID="{BB92FFEB-B625-49B8-A649-F23EC8D32D60}" ShortID="877945584">
@@ -873,6 +905,17 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_trophy_nl" ID="{07097656-CA40-48EB-A806-4C7BAC44B6D1}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_diary_with_key" ID="{1341FB25-6F24-4178-84A0-022B9F1DA556}">
+									<ChildrenList>
+										<Action Name="" ID="{23AC0557-F3D3-4239-84BC-46B90A4D9719}" ShortID="1015468132">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_diary_with_key" ID="{BFF8BA96-318F-4B52-9CF3-ABA04B0A9607}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
