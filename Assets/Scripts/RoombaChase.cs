@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -11,7 +10,7 @@ public class RoombaChase : MonoBehaviour
     [Header("Patrol")]
     [SerializeField] private Transform patrolPointA;
     [SerializeField] private Transform patrolPointB;
-    [SerializeField] private float patrolStopDistance = 0.2f;
+    [SerializeField] private float patrolStopDistance = 0.5f;
 
     [Header("First Chase Delay")]
     [SerializeField] private float firstChaseDelay = 1f;
@@ -21,7 +20,8 @@ public class RoombaChase : MonoBehaviour
     private Transform currentPatrolTarget;
 
     [Header("Chase Settings")]
-    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float patrolSpeed = 6f;
+    [SerializeField] private float chaseSpeed = 10f;
     [SerializeField] private float rotationSpeed = 8f;
     [SerializeField] private float stopDistance = 1.2f;
 
@@ -32,6 +32,8 @@ public class RoombaChase : MonoBehaviour
     private bool hasStartedFirstChase = false;
     private bool firstOutOfBoundsTriggered = false;
     private float firstChaseStartTime = -1f;
+
+    private bool justReachedPatrolPoint = false;
 
     private void Start()
     {
@@ -54,18 +56,15 @@ public class RoombaChase : MonoBehaviour
             return;
 
         if (playerController.isOutOfBounds)
-        {
             HandleChaseState();
-        }
         else
-        {
             Patrol();
-        }
     }
 
     private void HandleChaseState()
     {
-        // First ever time the player goes out of bounds: start delay timer
+        justReachedPatrolPoint = false;
+
         if (!hasStartedFirstChase)
         {
             if (!firstOutOfBoundsTriggered)
@@ -74,14 +73,12 @@ public class RoombaChase : MonoBehaviour
                 firstChaseStartTime = Time.time + firstChaseDelay;
             }
 
-            // Still waiting before first chase begins, keep patrolling
             if (Time.time < firstChaseStartTime)
             {
                 Patrol();
                 return;
             }
 
-            // First delay finished; all future chases happen instantly
             hasStartedFirstChase = true;
         }
 
@@ -90,13 +87,12 @@ public class RoombaChase : MonoBehaviour
 
     private void ChasePlayer()
     {
-        moveSpeed = 100f;
+        float moveSpeed = chaseSpeed;
 
         Vector3 toPlayer = player.position - transform.position;
         toPlayer.y = 0f;
 
         float distance = toPlayer.magnitude;
-
         AkUnitySoundEngine.SetRTPCValue("roomba_to_bunny", distance);
 
         if (distance <= stopDistance)
@@ -106,13 +102,11 @@ public class RoombaChase : MonoBehaviour
         }
 
         Vector3 moveDir = toPlayer.normalized;
-        MoveInDirection(moveDir);
+        MoveInDirection(moveDir, moveSpeed);
     }
 
     private void Patrol()
     {
-        moveSpeed = 30f;
-
         AkUnitySoundEngine.SetRTPCValue("roomba_to_bunny", 200f);
 
         if (patrolPointA == null || patrolPointB == null)
@@ -124,23 +118,42 @@ public class RoombaChase : MonoBehaviour
         if (currentPatrolTarget == null)
             currentPatrolTarget = patrolPointA;
 
-        Vector3 toTarget = currentPatrolTarget.position - transform.position;
-        toTarget.y = 0f;
+        Vector3 flatPos = transform.position;
+        flatPos.y = 0f;
 
+        Vector3 targetPos = currentPatrolTarget.position;
+        targetPos.y = 0f;
+
+        Vector3 toTarget = targetPos - flatPos;
         float distance = toTarget.magnitude;
 
         if (distance <= patrolStopDistance)
         {
-            currentPatrolTarget = currentPatrolTarget == patrolPointA ? patrolPointB : patrolPointA;
+            // Snap cleanly to the patrol point on XZ so it doesn't hover near the threshold
+            transform.position = new Vector3(
+                currentPatrolTarget.position.x,
+                transform.position.y,
+                currentPatrolTarget.position.z
+            );
+
             StopMoving();
+
+            if (!justReachedPatrolPoint)
+            {
+                justReachedPatrolPoint = true;
+                currentPatrolTarget = currentPatrolTarget == patrolPointA ? patrolPointB : patrolPointA;
+            }
+
             return;
         }
 
+        justReachedPatrolPoint = false;
+
         Vector3 moveDir = toTarget.normalized;
-        MoveInDirection(moveDir);
+        MoveInDirection(moveDir, patrolSpeed);
     }
 
-    private void MoveInDirection(Vector3 moveDir)
+    private void MoveInDirection(Vector3 moveDir, float moveSpeed)
     {
         if (moveDir.sqrMagnitude <= 0.0001f)
         {
@@ -177,7 +190,7 @@ public class RoombaChase : MonoBehaviour
         TryRespawnPlayer(other);
     }
 
-    void TryRespawnPlayer(Collider other)
+    private void TryRespawnPlayer(Collider other)
     {
         if (other == null || player == null || respawnPoint == null)
             return;
