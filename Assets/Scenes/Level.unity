@@ -9500,6 +9500,11 @@ MonoBehaviour:
   holdTime: 1
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  popupImage: {fileID: 0}
+  stingerSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   hasTriggered: 0
 --- !u!65 &313375910
 BoxCollider:
@@ -29627,6 +29632,7 @@ Transform:
   - {fileID: 939058526}
   - {fileID: 127383494}
   - {fileID: 1489342092}
+  - {fileID: 1672390201}
   - {fileID: 1076957464}
   - {fileID: 499579095}
   m_Father: {fileID: 0}
@@ -39581,6 +39587,11 @@ MonoBehaviour:
   holdTime: 1.5
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  popupImage: {fileID: 0}
+  stingerSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   hasTriggered: 0
 --- !u!65 &1339332061
 BoxCollider:
@@ -46236,6 +46247,11 @@ MonoBehaviour:
   holdTime: 2
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  popupImage: {fileID: 0}
+  stingerSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   hasTriggered: 0
 --- !u!65 &1538681484
 BoxCollider:
@@ -55761,6 +55777,7 @@ MonoBehaviour:
   delayBeforeCameraFocus: 0.2
   delayBeforeMovingWall: 1.75
   displayTooLightPopup: {fileID: 21300000, guid: 3faa31b138709dd4cb7948635175635e, type: 3}
+  approachCameraFocusScript: {fileID: 1672390203}
   cameraFocusScript: {fileID: 1672390198}
   buttonPress:
     idInternal: 0
@@ -55792,6 +55809,10 @@ MonoBehaviour:
   holdTime: 2
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  stingerSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   hasTriggered: 0
 --- !u!65 &1672390199
 BoxCollider:
@@ -55814,6 +55835,85 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.16766815, y: 0.1875946, z: 0.15890183}
   m_Center: {x: -0.008377877, y: 0.0068007736, z: -0.002986138}
+--- !u!1 &1672390200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1672390201}
+  - component: {fileID: 1672390202}
+  - component: {fileID: 1672390203}
+  m_Layer: 0
+  m_Name: camera pan system pressure plate approach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1672390201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672390200}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -29.60147, y: -15.673059, z: -3.2611084}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 885618233}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1672390202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672390200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 14, y: 5, z: 18}
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &1672390203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672390200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e422cbd120735e4b8461ab6b7a5cf9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFocusTrigger
+  cameraStandpoint: {fileID: 260179789}
+  focusTarget: {fileID: 489632655}
+  transitionInTime: 1.5
+  holdTime: 2
+  transitionOutTime: 1
+  triggerOnlyOnce: 1
+  useTriggerVolume: 0
+  popupImage: {fileID: 21300000, guid: 6b07e925ec9437141b1cecc2fcec803b, type: 3}
+  stingerSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  hasTriggered: 0
 --- !u!1001 &1679801262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66376,6 +66476,11 @@ MonoBehaviour:
   holdTime: 2
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  popupImage: {fileID: 0}
+  stingerSfx:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   hasTriggered: 0
 --- !u!65 &2112855500
 BoxCollider:

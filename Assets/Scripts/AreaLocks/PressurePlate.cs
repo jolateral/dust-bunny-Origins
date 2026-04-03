@@ -22,6 +22,9 @@ public class PressurePlate : MonoBehaviour
 
     [SerializeField] private Sprite displayTooLightPopup;
 
+    [Tooltip("Optional. First physical collision with the plate (while the wall is still closed) runs this door pan + popup, then the player can roll onto the plate again for the normal result. Disabled once the wall opens.")]
+    [SerializeField] private CameraFocusTrigger approachCameraFocusScript;
+
     [SerializeField] private CameraFocusTrigger cameraFocusScript;
 
     [Header("SFX")]
@@ -49,6 +52,20 @@ public class PressurePlate : MonoBehaviour
             wallStartPos = wall.localPosition;
 
         startPosition = transform.localPosition;
+
+        ApplyApproachCameraState();
+    }
+
+    private void ApplyApproachCameraState()
+    {
+        if (approachCameraFocusScript == null) return;
+        approachCameraFocusScript.enabled = !isActivated;
+    }
+
+    private void DisableApproachCamera()
+    {
+        if (approachCameraFocusScript == null) return;
+        approachCameraFocusScript.enabled = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -62,6 +79,12 @@ public class PressurePlate : MonoBehaviour
             player = other.GetComponentInParent<DustBunnyController>();
 
         if (player == null) return;
+
+        if (!isActivated && approachCameraFocusScript != null && approachCameraFocusScript.isActiveAndEnabled)
+        {
+            if (approachCameraFocusScript.TryTriggerFocus(player.gameObject))
+                return;
+        }
 
         if (lever != null && lever.IsHooked())
         {
@@ -82,6 +105,8 @@ public class PressurePlate : MonoBehaviour
 
     private IEnumerator PlateSequence()
     {
+        DisableApproachCamera();
+
         // Freeze player
         if (currentPlayer != null)
             currentPlayer.enabled = false;

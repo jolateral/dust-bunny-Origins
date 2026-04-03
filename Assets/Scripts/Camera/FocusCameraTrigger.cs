@@ -27,6 +27,12 @@ public class CameraFocusTrigger : MonoBehaviour
     [Tooltip("Should this only trigger once?")]
     public bool triggerOnlyOnce = true;
 
+    [Tooltip("If off, OnTriggerEnter/Stay do nothing — use TryTriggerFocus() from another script (e.g. pressure plate collision).")]
+    public bool useTriggerVolume = true;
+
+    [Tooltip("If set, shown through MemoryUIManager when this focus starts (e.g. PressurePlate.png with the door pan).")]
+    public Sprite popupImage;
+
     public AK.Wwise.Event stingerSfx;
 
     public bool hasTriggered = false;
@@ -39,34 +45,54 @@ public class CameraFocusTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Check if it's the player and if it hasn't been triggered yet
-        if (!hasTriggered && other.CompareTag("Player"))
-        {
-            if (triggerOnlyOnce) hasTriggered = true;
+        if (!useTriggerVolume) return;
+        if (hasTriggered && triggerOnlyOnce) return;
+        if (!other.CompareTag("Player")) return;
 
-            if (stingerSfx != null)
-            {
-                stingerSfx.Post(gameObject);
-            }
-
-            StartCoroutine(CinematicFocusRoutine(other.gameObject));
-        }
+        TryStartFocus(other.gameObject);
     }
 
     void OnTriggerStay(Collider other)
     {
-        // Check if it's the player and if it hasn't been triggered yet
-        if (!hasTriggered && other.CompareTag("Player"))
-        {
-            if (triggerOnlyOnce) hasTriggered = true;
+        if (!useTriggerVolume) return;
+        if (hasTriggered && triggerOnlyOnce) return;
+        if (!other.CompareTag("Player")) return;
 
-            StartCoroutine(CinematicFocusRoutine(other.gameObject));
-        }
+        TryStartFocus(other.gameObject);
+    }
+
+    /// <summary>
+    /// Starts the focus cinematic from code (e.g. first collision with the pressure plate). Returns false if skipped.
+    /// </summary>
+    public bool TryTriggerFocus(GameObject playerRoot)
+    {
+        if (!isActiveAndEnabled) return false;
+        if (playerRoot == null) return false;
+        if (hasTriggered && triggerOnlyOnce) return false;
+        if (playerRoot.GetComponentInParent<DustBunnyController>() == null) return false;
+
+        TryStartFocus(playerRoot);
+        return true;
+    }
+
+    private void TryStartFocus(GameObject playerRoot)
+    {
+        if (hasTriggered && triggerOnlyOnce) return;
+
+        if (triggerOnlyOnce) hasTriggered = true;
+
+        if (stingerSfx != null)
+            stingerSfx.Post(gameObject);
+
+        StartCoroutine(CinematicFocusRoutine(playerRoot));
     }
 
     IEnumerator CinematicFocusRoutine(GameObject player)
     {
         if (mainCam == null) yield break;
+
+        if (popupImage != null && MemoryUIManager.Instance != null)
+            MemoryUIManager.Instance.ShowImage(popupImage);
 
         // Get all necessary components
         DustBunnyController bunnyController = player.GetComponent<DustBunnyController>();
