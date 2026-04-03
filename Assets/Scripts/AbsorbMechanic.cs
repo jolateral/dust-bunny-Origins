@@ -241,6 +241,9 @@ public class AbsorbMechanic : MonoBehaviour
             // Handle physics and parenting first
             Destroy(item.GetComponent<Rigidbody>());
             Destroy(item.GetComponent<Collider>());
+
+            DisablePickupGlow(item);
+
             item.transform.SetParent(this.transform);
 
             // NOW activate floating — parent is valid at this point
@@ -275,6 +278,8 @@ public class AbsorbMechanic : MonoBehaviour
         // Remove physics so the item doesn't fight the bunny's movement
         Destroy(item.GetComponent<Rigidbody>());
         Destroy(item.GetComponent<Collider>());
+
+        DisablePickupGlow(item);
 
         // Parent the item to the player so it travels with the bunny
         item.transform.SetParent(this.transform);
