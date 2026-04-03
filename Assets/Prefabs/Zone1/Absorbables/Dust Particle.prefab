@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 814107540997729523}
   - component: {fileID: 2975521579157971873}
   - component: {fileID: 1355241549442247388}
+  - component: {fileID: -6246681886908001279}
   - component: {fileID: -6246681886908001280}
   m_Layer: 0
   m_Name: Dust Particle
@@ -132,6 +133,18 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-6246681886908001279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6883403238992338957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8e9d2c1b4a5647382910fedcba9876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DustParticleAbsorbable
 --- !u!54 &-6246681886908001280
 Rigidbody:
   m_ObjectHideFlags: 0

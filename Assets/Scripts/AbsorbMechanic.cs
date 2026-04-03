@@ -176,23 +176,7 @@ public class AbsorbMechanic : MonoBehaviour
                 float actualGrowthFactor = growthFactor * fleeing.growthMultiplier;
                 Debug.Log($"Absorbed fleeing item! Bonus growth: {actualGrowthFactor} (x{fleeing.growthMultiplier})");
 
-                // [ORIGINAL CODE COMMENTED OUT TO ALLOW SMOOTH GROWTH]
-                // transform.localScale += Vector3.one * actualGrowthFactor;
-                
-                // NEW: Call the smooth growth function
-                TriggerSmoothGrowth(actualGrowthFactor);
-
-                bunnyAbsorbSfx.Post(gameObject);
-
-                if (fleeing != null) fleeing.enabled = false;
-
-                // Hide renderers before destroying (avoids visual pop)
-                Renderer[] renderers = item.GetComponentsInChildren<Renderer>();
-                foreach (Renderer r in renderers)
-                    if (r != null) r.enabled = false;
-
-                item.SetActive(false);
-                Destroy(item);
+                AbsorbDustWithoutVisual(item, actualGrowthFactor);
                 return;
             }
             else
@@ -276,7 +260,16 @@ public class AbsorbMechanic : MonoBehaviour
         }
 
         // ===================================================================
-        // 6. VISUAL ABSORPTION — Extreme shrink + Orbital Floating
+        // 6. DUST PARTICLE — growth only, no orbiting specks on the bunny
+        // ===================================================================
+        if (item.GetComponent<DustParticleAbsorbable>() != null)
+        {
+            AbsorbDustWithoutVisual(item, growthFactor);
+            return;
+        }
+
+        // ===================================================================
+        // 7. VISUAL ABSORPTION — Extreme shrink + Orbital Floating
         // ===================================================================
 
         // Remove physics so the item doesn't fight the bunny's movement
@@ -338,6 +331,42 @@ public class AbsorbMechanic : MonoBehaviour
 
         if (MemoryUIManager.Instance != null)
             MemoryUIManager.Instance.ShowImage(tooBigMessageImage);
+    }
+
+    /// <summary>
+    /// Absorb without parenting/orbit: used for dust pickups and fleeing dust.
+    /// </summary>
+    void AbsorbDustWithoutVisual(GameObject item, float growthAmount)
+    {
+        FleeingAbsorbable fleeing = item.GetComponent<FleeingAbsorbable>();
+        if (fleeing != null)
+            fleeing.enabled = false;
+
+        Collider itemCol = item.GetComponent<Collider>();
+        if (itemCol != null)
+            itemCol.enabled = false;
+
+        DisablePickupGlow(item);
+        HideItemRenderers(item);
+
+        ParticleSystem[] particleSystems = item.GetComponentsInChildren<ParticleSystem>(true);
+        foreach (ParticleSystem ps in particleSystems)
+        {
+            if (ps != null)
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+
+        TriggerSmoothGrowth(growthAmount);
+
+        if (bunnyAbsorbSfx != null)
+            bunnyAbsorbSfx.Post(gameObject);
+
+        float bunnyMass = GetComponent<Rigidbody>().mass;
+        AkUnitySoundEngine.SetRTPCValue("bunny_size", bunnyMass);
+
+        ObjectiveUI.Instance.SetObjective();
+
+        Destroy(item);
     }
 
     // -----------------------------------------------------------------------
