@@ -420,6 +420,7 @@ public class AbsorbMechanic : MonoBehaviour
 
             // Make sure it can be absorbed again.
             item.tag = "StickyObject";
+            EnablePickupGlow(item);
 
             // Restore physics: give it a collider and rigidbody if missing.
             Collider col = item.GetComponent<Collider>();
@@ -497,6 +498,20 @@ public class AbsorbMechanic : MonoBehaviour
         foreach (Outline outline in outlines)
         {
             if (outline != null) outline.enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Re-enables pickup highlight/glow components when an item is spilled.
+    /// </summary>
+    private void EnablePickupGlow(GameObject item)
+    {
+        if (item == null) return;
+
+        Outline[] outlines = item.GetComponentsInChildren<Outline>(true);
+        foreach (Outline outline in outlines)
+        {
+            if (outline != null) outline.enabled = true;
         }
     }
 
