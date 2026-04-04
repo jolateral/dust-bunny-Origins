@@ -3562,7 +3562,7 @@
 										<CustomState Name="" ID="{1A85B946-A4B3-4D3E-96FC-745D7345E845}" ShortID="976945944">
 											<PropertyList>
 												<Property Name="Lowpass" Type="int16" Value="30"/>
-												<Property Name="Volume" Type="Real64" Value="-12"/>
+												<Property Name="Volume" Type="Real64" Value="-18"/>
 											</PropertyList>
 										</CustomState>
 									</CustomState>
@@ -3579,7 +3579,7 @@
 										<CustomState Name="" ID="{4C63F65B-B438-41F4-9148-13112517EFAA}" ShortID="556609047">
 											<PropertyList>
 												<Property Name="Lowpass" Type="int16" Value="30"/>
-												<Property Name="Volume" Type="Real64" Value="-12"/>
+												<Property Name="Volume" Type="Real64" Value="-18"/>
 											</PropertyList>
 										</CustomState>
 									</CustomState>
@@ -7317,7 +7317,7 @@
 															<MusicCue Name="Exit Cue" ID="{CF9BF71C-3FA5-4418-B230-E7E709B77A72}">
 																<PropertyList>
 																	<Property Name="CueType" Type="int16" Value="1"/>
-																	<Property Name="TimeMs" Type="Real64" Value="30448.9744597357"/>
+																	<Property Name="TimeMs" Type="Real64" Value="30000"/>
 																</PropertyList>
 															</MusicCue>
 														</ObjectList>
@@ -8432,7 +8432,7 @@
 										<CustomState Name="" ID="{97D5A6D2-8409-4460-AF2B-CE9CA334E8B7}" ShortID="398049955">
 											<PropertyList>
 												<Property Name="Lowpass" Type="int16" Value="30"/>
-												<Property Name="Volume" Type="Real64" Value="-12"/>
+												<Property Name="Volume" Type="Real64" Value="-24"/>
 											</PropertyList>
 										</CustomState>
 									</CustomState>
@@ -8449,7 +8449,7 @@
 										<CustomState Name="" ID="{06BF48F2-8810-4CA8-976A-79723E0CA2BF}" ShortID="159944853">
 											<PropertyList>
 												<Property Name="Lowpass" Type="int16" Value="30"/>
-												<Property Name="Volume" Type="Real64" Value="-12"/>
+												<Property Name="Volume" Type="Real64" Value="-24"/>
 											</PropertyList>
 										</CustomState>
 									</CustomState>
@@ -12832,9 +12832,16 @@
 														<MediaID ID="426851958"/>
 													</MediaIDList>
 												</AudioFileSource>
+												<AudioFileSource Name="sfx_memory_001" ID="{8B3CFCDE-F4FC-4854-B941-7C93AF81A277}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_memory_001.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="423504906"/>
+													</MediaIDList>
+												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="sfx_memory_drawing_nl_001" ID="{021DB835-C0F9-4168-844B-61CE839938D1}" Platform="Linked"/>
+												<ActiveSource Name="sfx_memory_001" ID="{8B3CFCDE-F4FC-4854-B941-7C93AF81A277}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="sfx_memory_drawing_nl_002" ID="{24C5F8F9-5074-4943-98BB-D63FD19E5D5D}" ShortID="806346679">
@@ -12854,9 +12861,16 @@
 														<MediaID ID="457121634"/>
 													</MediaIDList>
 												</AudioFileSource>
+												<AudioFileSource Name="sfx_memory_002" ID="{66495CBB-CF6C-4C77-9E3F-ACEED851B809}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_memory_002.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="86228498"/>
+													</MediaIDList>
+												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="sfx_memory_drawing_nl_002" ID="{D233B486-F3BB-452C-A4C7-7103826C27F9}" Platform="Linked"/>
+												<ActiveSource Name="sfx_memory_002" ID="{66495CBB-CF6C-4C77-9E3F-ACEED851B809}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="sfx_memory_drawing_nl_003" ID="{694BE2F9-1B5D-43C4-93C3-077CE1F62F74}" ShortID="383117411">
@@ -12876,9 +12890,16 @@
 														<MediaID ID="645890679"/>
 													</MediaIDList>
 												</AudioFileSource>
+												<AudioFileSource Name="sfx_memory_003" ID="{B189253A-D615-4AA9-8FFA-A123E701FFC0}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_memory_003.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="462475172"/>
+													</MediaIDList>
+												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="sfx_memory_drawing_nl_003" ID="{8E166EE1-3A5E-4E39-8820-32E7A9CC1900}" Platform="Linked"/>
+												<ActiveSource Name="sfx_memory_003" ID="{B189253A-D615-4AA9-8FFA-A123E701FFC0}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="sfx_memory_drawing_nl_004" ID="{C23E6FBA-98CE-4D6F-AE6B-9D5DDEF7DC5B}" ShortID="245277130">
@@ -12898,9 +12919,16 @@
 														<MediaID ID="27625347"/>
 													</MediaIDList>
 												</AudioFileSource>
+												<AudioFileSource Name="sfx_memory_004" ID="{2C66F7F8-1F16-4F5E-8F9C-E03AE5CB8D83}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_memory_004.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="89949185"/>
+													</MediaIDList>
+												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="sfx_memory_drawing_nl_004" ID="{3BB976DF-3DB8-4B5A-861F-3034D6C33244}" Platform="Linked"/>
+												<ActiveSource Name="sfx_memory_004" ID="{2C66F7F8-1F16-4F5E-8F9C-E03AE5CB8D83}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="sfx_memory_drawing_nl_005" ID="{DB1834B7-67A6-4840-9651-5B6C55DF46FF}" ShortID="229162605">
@@ -12920,9 +12948,16 @@
 														<MediaID ID="705568186"/>
 													</MediaIDList>
 												</AudioFileSource>
+												<AudioFileSource Name="sfx_memory_005" ID="{F0C18011-62BB-4D3A-8AE8-E4E7683A3BA0}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_memory_005.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="896466248"/>
+													</MediaIDList>
+												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="sfx_memory_drawing_nl_005" ID="{1A1FE3A0-12A8-47B4-B47F-E9749BFE0552}" Platform="Linked"/>
+												<ActiveSource Name="sfx_memory_005" ID="{F0C18011-62BB-4D3A-8AE8-E4E7683A3BA0}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -13459,9 +13494,14 @@
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="sfx_ui_bell_nl" ID="{0F04AF61-1BEC-4D8D-9370-21AF64170011}" ShortID="908898107">
 									<PropertyList>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>30</Value>
+											</ValueList>
+										</Property>
 										<Property Name="Pitch" Type="int32">
 											<ValueList>
-												<Value>-300</Value>
+												<Value>-400</Value>
 											</ValueList>
 										</Property>
 										<Property Name="Volume" Type="Real64">

@@ -8,5 +8,7 @@ public class MusicManager : MonoBehaviour
         mus.Post(gameObject);
 
         AkUnitySoundEngine.SetState("mus_state", "zone1");
+
+        Debug.Log("Music start! State: zone1");
     }
 }
