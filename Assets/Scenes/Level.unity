@@ -6509,7 +6509,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 1e0292f285c0e574ca929460d1e2a89f, type: 2}
   reverbLevel: 1
-  transmissionLoss: 0.2
+  transmissionLoss: 0.3
   distanceBehavior: 0
   roomToneEvent:
     idInternal: 0
@@ -8784,6 +8784,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &297081896
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9500,7 +9504,6 @@ MonoBehaviour:
   holdTime: 1
   transitionOutTime: 1
   triggerOnlyOnce: 1
-  popupImage: {fileID: 0}
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
@@ -9666,6 +9669,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!1 &314956145
 GameObject:
   m_ObjectHideFlags: 0
@@ -9720,6 +9727,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &314956148
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10455,6 +10466,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &343199172
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19577,6 +19592,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!65 &491745433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29632,7 +29651,6 @@ Transform:
   - {fileID: 939058526}
   - {fileID: 127383494}
   - {fileID: 1489342092}
-  - {fileID: 1672390201}
   - {fileID: 1076957464}
   - {fileID: 499579095}
   m_Father: {fileID: 0}
@@ -32368,6 +32386,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &1023777854
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32748,7 +32770,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 1e0292f285c0e574ca929460d1e2a89f, type: 2}
   reverbLevel: 1
-  transmissionLoss: 0.6
+  transmissionLoss: 0.3
   distanceBehavior: 0
   roomToneEvent:
     idInternal: 0
@@ -33649,6 +33671,93 @@ Transform:
   - {fileID: 2104662111}
   m_Father: {fileID: 523356640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1083499702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1083499703}
+  - component: {fileID: 1083499706}
+  - component: {fileID: 1083499705}
+  - component: {fileID: 1083499704}
+  m_Layer: 0
+  m_Name: Zone2_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1083499703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083499702}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -33.2, y: 60.4, z: 65}
+  m_LocalScale: {x: 80, y: 80, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1554084100}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1083499704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083499702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93aef96058d8b6549826eb9a0cdc25bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicStateTrigger
+  state:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 29b8c985e79105440a7a519ac4227365, type: 2}
+--- !u!114 &1083499705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083499702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0cb6976a347914e9734cb27c46cb92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioZoneAssistant
+  drawGizmo: 0
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!65 &1083499706
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083499702}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1086456785
 GameObject:
   m_ObjectHideFlags: 0
@@ -35477,6 +35586,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!65 &1172293709
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39587,7 +39700,6 @@ MonoBehaviour:
   holdTime: 1.5
   transitionOutTime: 1
   triggerOnlyOnce: 1
-  popupImage: {fileID: 0}
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
@@ -40424,6 +40536,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.1
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &1377441631
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41247,6 +41363,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &1396130946
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44378,7 +44498,7 @@ GameObject:
   - component: {fileID: 1478579280}
   - component: {fileID: 1478579279}
   m_Layer: 0
-  m_Name: Zone2_1 (1)
+  m_Name: Zone2_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44393,7 +44513,7 @@ Transform:
   m_GameObject: {fileID: 1478579277}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.5, y: 70.8, z: 177.9}
+  m_LocalPosition: {x: -15.5, y: 70.8, z: 127.1}
   m_LocalScale: {x: 120, y: 80, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44967,6 +45087,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.1
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &1493400654
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46247,11 +46371,10 @@ MonoBehaviour:
   holdTime: 2
   transitionOutTime: 1
   triggerOnlyOnce: 1
-  popupImage: {fileID: 0}
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 8e7df1f1f1422a948be49d9cd7eaeb45, type: 2}
   hasTriggered: 0
 --- !u!65 &1538681484
 BoxCollider:
@@ -47057,8 +47180,8 @@ Transform:
   m_Children:
   - {fileID: 1507827923}
   - {fileID: 976696568}
-  - {fileID: 1934677392}
   - {fileID: 1478579278}
+  - {fileID: 1083499703}
   - {fileID: 304249099}
   m_Father: {fileID: 1387954840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54026,6 +54149,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.1
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &1629692956
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55777,7 +55904,6 @@ MonoBehaviour:
   delayBeforeCameraFocus: 0.2
   delayBeforeMovingWall: 1.75
   displayTooLightPopup: {fileID: 21300000, guid: 3faa31b138709dd4cb7948635175635e, type: 3}
-  approachCameraFocusScript: {fileID: 1672390203}
   cameraFocusScript: {fileID: 1672390198}
   buttonPress:
     idInternal: 0
@@ -55835,85 +55961,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.16766815, y: 0.1875946, z: 0.15890183}
   m_Center: {x: -0.008377877, y: 0.0068007736, z: -0.002986138}
---- !u!1 &1672390200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1672390201}
-  - component: {fileID: 1672390202}
-  - component: {fileID: 1672390203}
-  m_Layer: 0
-  m_Name: camera pan system pressure plate approach
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1672390201
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672390200}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.60147, y: -15.673059, z: -3.2611084}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 885618233}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1672390202
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672390200}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 14, y: 5, z: 18}
-  m_Center: {x: 0, y: 1.5, z: 0}
---- !u!114 &1672390203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672390200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e422cbd120735e4b8461ab6b7a5cf9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraFocusTrigger
-  cameraStandpoint: {fileID: 260179789}
-  focusTarget: {fileID: 489632655}
-  transitionInTime: 1.5
-  holdTime: 2
-  transitionOutTime: 1
-  triggerOnlyOnce: 1
-  useTriggerVolume: 0
-  popupImage: {fileID: 21300000, guid: 6b07e925ec9437141b1cecc2fcec803b, type: 3}
-  stingerSfx:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
-  hasTriggered: 0
 --- !u!1001 &1679801262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56230,6 +56277,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &1684305848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -62706,93 +62757,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3536725230719977581, guid: b6ceb60856b983c4eb32edbb42a49f36, type: 3}
---- !u!1 &1934677391
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1934677392}
-  - component: {fileID: 1934677395}
-  - component: {fileID: 1934677394}
-  - component: {fileID: 1934677393}
-  m_Layer: 0
-  m_Name: Zone2_1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1934677392
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934677391}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -49.7, y: 44.72, z: 64.3}
-  m_LocalScale: {x: 40, y: 30, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1554084100}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1934677393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934677391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93aef96058d8b6549826eb9a0cdc25bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MusicStateTrigger
-  state:
-    idInternal: 0
-    valueGuidInternal: 
-    groupIdInternal: 0
-    groupGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 29b8c985e79105440a7a519ac4227365, type: 2}
---- !u!114 &1934677394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934677391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0cb6976a347914e9734cb27c46cb92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioZoneAssistant
-  drawGizmo: 0
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!65 &1934677395
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934677391}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1936012017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65999,6 +65963,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 1
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
 --- !u!65 &2102862056
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66476,7 +66444,6 @@ MonoBehaviour:
   holdTime: 2
   transitionOutTime: 1
   triggerOnlyOnce: 1
-  popupImage: {fileID: 0}
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
@@ -68279,6 +68246,10 @@ PrefabInstance:
       propertyPath: rulerAcquiredSprite
       value: 
       objectReference: {fileID: 21300000, guid: 63f54057851fa48b7a4041fee8193050, type: 3}
+    - target: {fileID: 4657346392755547419, guid: eaa4f73fbf54b2545ab18143faa78bc4, type: 3}
+      propertyPath: openSfx.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f16def60a87358469c3ccdb7c4b7f90, type: 2}
     - target: {fileID: 4708199555670877522, guid: eaa4f73fbf54b2545ab18143faa78bc4, type: 3}
       propertyPath: m_Name
       value: ArtKit
@@ -74154,6 +74125,18 @@ PrefabInstance:
       propertyPath: diaryClosedObject
       value: 
       objectReference: {fileID: 800310306}
+    - target: {fileID: 8018825337000721008, guid: 3f72456134ecbed439c1a0274e7a1c06, type: 3}
+      propertyPath: unlockSfx.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: df72b77f4689ba74ca62a22b48cac581, type: 2}
+    - target: {fileID: 8018825337000721008, guid: 3f72456134ecbed439c1a0274e7a1c06, type: 3}
+      propertyPath: unlockMusic.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 433d477bc2d04f74f80801562900b256, type: 2}
+    - target: {fileID: 8018825337000721008, guid: 3f72456134ecbed439c1a0274e7a1c06, type: 3}
+      propertyPath: lockedBumpSfx.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 6b87a80b1119cbb488eb6f6d68569801, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74260,6 +74243,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 248833094}
     m_Modifications:
+    - target: {fileID: 5504224910379067436, guid: 714f449ad31ca964e9eba0ef46fe8073, type: 3}
+      propertyPath: pickupSfx.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a691151fe3883c46b7b21dd13e79550, type: 2}
     - target: {fileID: 5941997096929488504, guid: 714f449ad31ca964e9eba0ef46fe8073, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.4416766
@@ -74338,6 +74325,10 @@ MonoBehaviour:
   oneTimeOnly: 1
   showDelay: 0.5
   hideOnExit: 0
+  uiTutorialPopup:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!1001 &8786848661199569189
 PrefabInstance:
   m_ObjectHideFlags: 0

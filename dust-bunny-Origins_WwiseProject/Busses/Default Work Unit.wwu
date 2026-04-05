@@ -74,13 +74,13 @@
 															</Point>
 															<Point>
 																<XPos>-45</XPos>
-																<YPos>-0</YPos>
+																<YPos>0</YPos>
 																<Flags>0</Flags>
 																<SegmentShape>Log3</SegmentShape>
 															</Point>
 															<Point>
 																<XPos>0</XPos>
-																<YPos>-200</YPos>
+																<YPos>-12</YPos>
 																<Flags>37</Flags>
 															</Point>
 														</PointList>
@@ -106,7 +106,7 @@
 														<PointList>
 															<Point>
 																<XPos>-48</XPos>
-																<YPos>-0</YPos>
+																<YPos>0</YPos>
 																<Flags>5</Flags>
 															</Point>
 															<Point>
@@ -138,6 +138,7 @@
 												<Custom>
 													<Effect Name="Meter (Custom)" ID="{254265E6-5ABE-4EA2-890E-71CD53D21EDE}" ShortID="855443374" PluginName="Wwise Meter" CompanyID="0" PluginID="129" PluginType="3">
 														<PropertyList>
+															<Property Name="AttackTime" Type="Real32" Value="0.1"/>
 															<Property Name="MeterMode" Type="int32" Value="1"/>
 															<Property Name="ReleaseTime" Type="Real32" Value="3"/>
 														</PropertyList>
@@ -177,7 +178,7 @@
 																<XPos>-45</XPos>
 																<YPos>0</YPos>
 																<Flags>0</Flags>
-																<SegmentShape>Log1</SegmentShape>
+																<SegmentShape>Log3</SegmentShape>
 															</Point>
 															<Point>
 																<XPos>0</XPos>

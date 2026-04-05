@@ -24,6 +24,8 @@ public class TutorialTriggerCollision : MonoBehaviour
     public float showDelay = 0.5f;
     public bool hideOnExit = true;
 
+    public AK.Wwise.Event uiTutorialPopup;
+
     private bool hasBeenTriggered = false;
     private bool isShowing = false;
 
@@ -34,6 +36,9 @@ public class TutorialTriggerCollision : MonoBehaviour
 
         var player = other.GetComponentInParent<DustBunnyController>();
         if (player == null) return;
+
+        if (uiTutorialPopup != null)
+            uiTutorialPopup.Post(gameObject);
 
         TriggerTutorial();
     }

@@ -10,11 +10,29 @@
     "Type": "Event",
     "GUID": "{177723F1-67E6-48F6-BA16-0BD415C65DFF}",
     "Language": "SFX",
-    "Hash": "{5C9A1E99-BE7A-D0AE-BB0E-6F82B1BB1742}",
+    "Hash": "{6B52154B-6DE0-759E-10CA-8E5C878C10E6}",
     "ObjectPath": "Play_mus_game",
     "ShortName": "Play_mus_game",
     "Path": "Event/Play_mus_game.bnk",
     "Media": [
+     {
+      "Id": "25386983",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_130bpm_zone2_bar25-32_softpiano2_lp.wav",
+      "Path": "Media/25386983.wem",
+      "CachePath": "83/{832CCCD8-0871-8701-CEAE-52B4483CE404}.wem"
+     },
+     {
+      "Id": "50004982",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_130bpm_zone2_bar25-40_celesta2_lp.wav",
+      "Path": "Media/50004982.wem",
+      "CachePath": "06/{065A1AED-3D10-47C8-34D1-BB07ABA70EAD}.wem"
+     },
      {
       "Id": "72263303",
       "Language": "SFX",
@@ -25,6 +43,15 @@
       "CachePath": "D5/{D505E5D2-1E6C-9354-30F1-A5122024F783}.wem"
      },
      {
+      "Id": "140471119",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_130bpm_zone2_bar9-16_softpiano1_lp.wav",
+      "Path": "Media/140471119.wem",
+      "CachePath": "3E/{3EB33D53-2BDB-2994-7CA5-98E24119CC26}.wem"
+     },
+     {
       "Id": "142253773",
       "Language": "SFX",
       "Streaming": "false",
@@ -32,6 +59,15 @@
       "ShortName": "mus_4-4-100bpm_zone1_Celesta.wav",
       "Path": "Media/142253773.wem",
       "CachePath": "C5/{C577AD77-B6E7-79CF-D4FA-3E0BCD880CC8}.wem"
+     },
+     {
+      "Id": "203867738",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_130bpm_zone2_bar9-16_softpiano2_lp.wav",
+      "Path": "Media/203867738.wem",
+      "CachePath": "DC/{DC2A518D-4513-9740-81D4-94F49B2976F8}.wem"
      },
      {
       "Id": "248635623",
@@ -223,6 +259,15 @@
       "CachePath": "D4/{D4427368-6428-B58F-6666-80F95C762E5E}.wem"
      },
      {
+      "Id": "1013342653",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_130bpm_zone2_bar9-16_celesta1_lp.wav",
+      "Path": "Media/1013342653.wem",
+      "CachePath": "2B/{2BC35F5A-CA2B-9EA0-EF33-2FC71546DCAC}.wem"
+     },
+     {
       "Id": "1022143604",
       "Language": "SFX",
       "Streaming": "false",
@@ -366,12 +411,103 @@
          "Id": "831766783",
          "GUID": "{868A53EB-5726-4480-B033-2D9A57B417C1}"
         },
-        "MediaRefs": [
+        "Children": [
          {
-          "Id": "248635623"
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "941180971",
+           "Id": "1041856411",
+           "GUID": "{BA2E6BF4-7A2A-490D-8258-5A07962C1E42}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "248635623"
+           },
+           {
+            "Id": "1069753046"
+           }
+          ]
          },
          {
-          "Id": "1069753046"
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "941180971",
+           "Id": "1041856408",
+           "GUID": "{50E338F9-9191-4950-94F4-236EA6CCBA22}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "140471119"
+           },
+           {
+            "Id": "248635623"
+           },
+           {
+            "Id": "1013342653"
+           },
+           {
+            "Id": "1069753046"
+           }
+          ]
+         },
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "941180971",
+           "Id": "1041856409",
+           "GUID": "{6D2B2DC7-6CE9-4365-84ED-408CB1975C5B}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "25386983"
+           },
+           {
+            "Id": "50004982"
+           },
+           {
+            "Id": "140471119"
+           },
+           {
+            "Id": "203867738"
+           },
+           {
+            "Id": "248635623"
+           },
+           {
+            "Id": "1013342653"
+           },
+           {
+            "Id": "1069753046"
+           }
+          ]
+         },
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "941180971",
+           "Id": "1041856414",
+           "GUID": "{6089AAF8-0136-4401-AC2E-579701062EC1}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "50004982"
+           },
+           {
+            "Id": "140471119"
+           },
+           {
+            "Id": "203867738"
+           },
+           {
+            "Id": "248635623"
+           },
+           {
+            "Id": "1013342653"
+           },
+           {
+            "Id": "1069753046"
+           }
+          ]
          }
         ]
        },
@@ -570,6 +706,44 @@
       ]
      },
      {
+      "Id": "941180971",
+      "Name": "mus_zone2",
+      "ObjectPath": "\\States\\Default Work Unit\\mus_zone2",
+      "GUID": "{530248FE-4471-4089-B560-6BAA004103EB}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_zone2\\None",
+        "GUID": "{7ADFABAA-DCBE-459A-92A8-BCBC3F0BD169}"
+       },
+       {
+        "Id": "1041856408",
+        "Name": "mus_zone2_2",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_zone2\\mus_zone2_2",
+        "GUID": "{50E338F9-9191-4950-94F4-236EA6CCBA22}"
+       },
+       {
+        "Id": "1041856409",
+        "Name": "mus_zone2_3",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_zone2\\mus_zone2_3",
+        "GUID": "{6D2B2DC7-6CE9-4365-84ED-408CB1975C5B}"
+       },
+       {
+        "Id": "1041856411",
+        "Name": "mus_zone2_1",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_zone2\\mus_zone2_1",
+        "GUID": "{BA2E6BF4-7A2A-490D-8258-5A07962C1E42}"
+       },
+       {
+        "Id": "1041856414",
+        "Name": "mus_zone2_4",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_zone2\\mus_zone2_4",
+        "GUID": "{6089AAF8-0136-4401-AC2E-579701062EC1}"
+       }
+      ]
+     },
+     {
       "Id": "1940399660",
       "Name": "mus_state",
       "ObjectPath": "\\States\\Default Work Unit\\mus_state",
@@ -604,6 +778,6 @@
     ]
    }
   ],
-  "FileHash": "{BB9C7033-9AE7-0A81-B42B-2D0A9904063E}"
+  "FileHash": "{5A41A121-F0C3-DF19-E600-6E97D29E61FE}"
  }
 }
