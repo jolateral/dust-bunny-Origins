@@ -176,23 +176,7 @@ public class AbsorbMechanic : MonoBehaviour
                 float actualGrowthFactor = growthFactor * fleeing.growthMultiplier;
                 Debug.Log($"Absorbed fleeing item! Bonus growth: {actualGrowthFactor} (x{fleeing.growthMultiplier})");
 
-                // [ORIGINAL CODE COMMENTED OUT TO ALLOW SMOOTH GROWTH]
-                // transform.localScale += Vector3.one * actualGrowthFactor;
-                
-                // NEW: Call the smooth growth function
-                TriggerSmoothGrowth(actualGrowthFactor);
-
-                bunnyAbsorbSfx.Post(gameObject);
-
-                if (fleeing != null) fleeing.enabled = false;
-
-                // Hide renderers before destroying (avoids visual pop)
-                Renderer[] renderers = item.GetComponentsInChildren<Renderer>();
-                foreach (Renderer r in renderers)
-                    if (r != null) r.enabled = false;
-
-                item.SetActive(false);
-                Destroy(item);
+                AbsorbDustWithoutVisual(item, actualGrowthFactor);
                 return;
             }
             else
@@ -257,6 +241,9 @@ public class AbsorbMechanic : MonoBehaviour
             // Handle physics and parenting first
             Destroy(item.GetComponent<Rigidbody>());
             Destroy(item.GetComponent<Collider>());
+
+            DisablePickupGlow(item);
+
             item.transform.SetParent(this.transform);
 
             // NOW activate floating — parent is valid at this point
@@ -276,12 +263,23 @@ public class AbsorbMechanic : MonoBehaviour
         }
 
         // ===================================================================
-        // 6. VISUAL ABSORPTION — Extreme shrink + Orbital Floating
+        // 6. DUST PARTICLE — growth only, no orbiting specks on the bunny
+        // ===================================================================
+        if (item.GetComponent<DustParticleAbsorbable>() != null)
+        {
+            AbsorbDustWithoutVisual(item, growthFactor);
+            return;
+        }
+
+        // ===================================================================
+        // 7. VISUAL ABSORPTION — Extreme shrink + Orbital Floating
         // ===================================================================
 
         // Remove physics so the item doesn't fight the bunny's movement
         Destroy(item.GetComponent<Rigidbody>());
         Destroy(item.GetComponent<Collider>());
+
+        DisablePickupGlow(item);
 
         // Parent the item to the player so it travels with the bunny
         item.transform.SetParent(this.transform);
@@ -340,6 +338,42 @@ public class AbsorbMechanic : MonoBehaviour
             MemoryUIManager.Instance.ShowImage(tooBigMessageImage);
     }
 
+    /// <summary>
+    /// Absorb without parenting/orbit: used for dust pickups and fleeing dust.
+    /// </summary>
+    void AbsorbDustWithoutVisual(GameObject item, float growthAmount)
+    {
+        FleeingAbsorbable fleeing = item.GetComponent<FleeingAbsorbable>();
+        if (fleeing != null)
+            fleeing.enabled = false;
+
+        Collider itemCol = item.GetComponent<Collider>();
+        if (itemCol != null)
+            itemCol.enabled = false;
+
+        DisablePickupGlow(item);
+        HideItemRenderers(item);
+
+        ParticleSystem[] particleSystems = item.GetComponentsInChildren<ParticleSystem>(true);
+        foreach (ParticleSystem ps in particleSystems)
+        {
+            if (ps != null)
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+
+        TriggerSmoothGrowth(growthAmount);
+
+        if (bunnyAbsorbSfx != null)
+            bunnyAbsorbSfx.Post(gameObject);
+
+        float bunnyMass = GetComponent<Rigidbody>().mass;
+        AkUnitySoundEngine.SetRTPCValue("bunny_size", bunnyMass);
+
+        ObjectiveUI.Instance.SetObjective();
+
+        Destroy(item);
+    }
+
     // -----------------------------------------------------------------------
     // Spill Logic
     // -----------------------------------------------------------------------
@@ -386,6 +420,7 @@ public class AbsorbMechanic : MonoBehaviour
 
             // Make sure it can be absorbed again.
             item.tag = "StickyObject";
+            EnablePickupGlow(item);
 
             // Restore physics: give it a collider and rigidbody if missing.
             Collider col = item.GetComponent<Collider>();
@@ -463,6 +498,20 @@ public class AbsorbMechanic : MonoBehaviour
         foreach (Outline outline in outlines)
         {
             if (outline != null) outline.enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Re-enables pickup highlight/glow components when an item is spilled.
+    /// </summary>
+    private void EnablePickupGlow(GameObject item)
+    {
+        if (item == null) return;
+
+        Outline[] outlines = item.GetComponentsInChildren<Outline>(true);
+        foreach (Outline outline in outlines)
+        {
+            if (outline != null) outline.enabled = true;
         }
     }
 

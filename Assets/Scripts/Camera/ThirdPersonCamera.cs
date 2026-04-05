@@ -23,6 +23,12 @@ public class ThirdPersonCamera : MonoBehaviour
     
     public float recoverSpeed = 10f;
 
+    // NEW: Camera Growth/Scale Delay Settings
+    [Header("--- Camera Growth Delay ---")]
+    [Tooltip("How fast the camera adjusts its distance when the player grows. Lower means more delay, making growth feel much more impactful.")]
+    public float scaleSmoothSpeed = 2.0f;
+    private float smoothedScale = 1.0f;
+
     // NEW: Camera Shake Settings
     [Header("--- Camera Shake Settings ---")]
     private float currentShakeDuration = 0f;
@@ -42,6 +48,9 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             currentX = target.eulerAngles.y;
             currentY = 15f; // slight downward tilt so you see the bunny and what it's facing
+            
+            // NEW: Initialize the smoothed scale to match the player's starting scale
+            smoothedScale = target.localScale.x; 
         }
     }
 
@@ -65,7 +74,14 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         if (!target) return;
 
-        float currentScale = target.localScale.x;
+        // NEW: Smoothly interpolate the scale the camera uses. 
+        // This causes the camera to "lag" behind the player's actual growth, 
+        // making the bunny appear to physically swell up on screen before the camera zooms out.
+        smoothedScale = Mathf.Lerp(smoothedScale, target.localScale.x, Time.deltaTime * scaleSmoothSpeed);
+
+        // Replace target.localScale.x with our new smoothedScale
+        float currentScale = smoothedScale; 
+        
         float targetBaseDistance = baseDistance * currentScale;
         float actualHeight = height * currentScale;
 
