@@ -9504,6 +9504,8 @@ MonoBehaviour:
   holdTime: 1
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  useTriggerVolume: 1
+  popupImage: {fileID: 0}
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
@@ -29790,6 +29792,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1470709700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &893512162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 893512163}
+  - component: {fileID: 893512165}
+  - component: {fileID: 893512164}
+  m_Layer: 0
+  m_Name: DashReminder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &893512163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893512162}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -148.54, y: 3.55, z: 36.98}
+  m_LocalScale: {x: 8.1, y: 7.32, z: 4.41}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1130444254}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &893512164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893512162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac8b3449ec314e9583b161738081777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialReminderTrigger
+  displayMode: 1
+  tutorialText: 
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  tutorialImage: {fileID: 21300000, guid: 7321b8f7a4a1cda41941035cabd18045, type: 3}
+  reminderDelay: 10
+  oneTimeOnly: 1
+--- !u!65 &893512165
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893512162}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &895240065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34309,6 +34383,7 @@ Transform:
   - {fileID: 297081894}
   - {fileID: 2102862054}
   - {fileID: 343199170}
+  - {fileID: 893512163}
   m_Father: {fileID: 624317589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1133428839 stripped
@@ -39700,6 +39775,8 @@ MonoBehaviour:
   holdTime: 1.5
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  useTriggerVolume: 1
+  popupImage: {fileID: 0}
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
@@ -46371,6 +46448,8 @@ MonoBehaviour:
   holdTime: 2
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  useTriggerVolume: 1
+  popupImage: {fileID: 0}
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
@@ -55904,6 +55983,7 @@ MonoBehaviour:
   delayBeforeCameraFocus: 0.2
   delayBeforeMovingWall: 1.75
   displayTooLightPopup: {fileID: 21300000, guid: 3faa31b138709dd4cb7948635175635e, type: 3}
+  approachCameraFocusScript: {fileID: 0}
   cameraFocusScript: {fileID: 1672390198}
   buttonPress:
     idInternal: 0
@@ -55935,6 +56015,8 @@ MonoBehaviour:
   holdTime: 2
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  useTriggerVolume: 1
+  popupImage: {fileID: 0}
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
@@ -66444,6 +66526,8 @@ MonoBehaviour:
   holdTime: 2
   transitionOutTime: 1
   triggerOnlyOnce: 1
+  useTriggerVolume: 1
+  popupImage: {fileID: 0}
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
