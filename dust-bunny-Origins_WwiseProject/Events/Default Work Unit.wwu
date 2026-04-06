@@ -450,6 +450,16 @@
 												</Reference>
 											</ReferenceList>
 										</Action>
+										<Action Name="" ID="{0B41CE57-2463-4F78-A888-82FF96C00E85}" ShortID="594170520">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="0.5"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_bunny_squeak_nl" ID="{B2A4FB79-D9C6-4227-B3E4-5ABE6F560016}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
 									</ChildrenList>
 								</Event>
 							</ChildrenList>
@@ -722,6 +732,29 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_roomba_lp" ID="{D66103CA-626C-4DCE-9CA4-8AE033846F2A}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_ruler_bridge_nl" ID="{741D1761-1516-4D27-96DE-F039C419DDCE}">
+									<ChildrenList>
+										<Action Name="" ID="{3609A0A3-0492-45E6-8EFB-0C0BE558FED0}" ShortID="111896701">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_harp_stinger-008" ID="{1F47B7A9-0FF8-44D4-8831-B82A918730AC}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{43DAA23D-FC5C-4A30-9574-0341D0F9ED4A}" ShortID="968586626">
+											<PropertyList>
+												<Property Name="Delay" Type="Real64" Value="0.2"/>
+												<Property Name="FadeInCurve" Type="int16" Value="2"/>
+												<Property Name="FadeTime" Type="Real64" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_bridge_land_nl" ID="{1E254FB9-EC40-4235-8AA0-A501C4E2E05A}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

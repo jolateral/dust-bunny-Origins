@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{3B58D75D-44A2-208E-40A2-6AA5728A22D9}",
+    "Hash": "{7ED366AF-A61C-5AF8-9B84-659B529D65E0}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -290,6 +290,32 @@
       ]
      },
      {
+      "Id": "3398622049",
+      "Name": "mus_gliding",
+      "ObjectPath": "\\States\\Default Work Unit\\mus_gliding",
+      "GUID": "{CCB8FC0A-C015-41E9-B59B-685DCC7010B8}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_gliding\\None",
+        "GUID": "{386464E7-793F-4E69-A913-15868E33FFF9}"
+       },
+       {
+        "Id": "1714287606",
+        "Name": "gliding_intro",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_gliding\\gliding_intro",
+        "GUID": "{1D3FF5E1-3278-45A4-8F60-A6DB61AAE005}"
+       },
+       {
+        "Id": "3448342964",
+        "Name": "gliding_lp",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_gliding\\gliding_lp",
+        "GUID": "{C9CAE962-402D-4472-941A-EFAD8CD89C9A}"
+       }
+      ]
+     },
+     {
       "Id": "4071417932",
       "Name": "player_state",
       "ObjectPath": "\\States\\Default Work Unit\\player_state",
@@ -340,6 +366,6 @@
     ]
    }
   ],
-  "FileHash": "{DA1210D1-4BC1-CFD0-E1F2-A45E8FE7E81E}"
+  "FileHash": "{457957E4-519A-A665-B740-894BF9FF677F}"
  }
 }

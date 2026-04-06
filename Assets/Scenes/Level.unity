@@ -8956,7 +8956,7 @@ MonoBehaviour:
   bridgeUnlockSfx:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 4776e839ade94fb4eae32cd4298dc620, type: 2}
 --- !u!65 &302069187
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8989,6 +8989,7 @@ GameObject:
   - component: {fileID: 304249099}
   - component: {fileID: 304249101}
   - component: {fileID: 304249100}
+  - component: {fileID: 304249102}
   m_Layer: 0
   m_Name: GlideMusicTrigger
   m_TagString: Untagged
@@ -9056,6 +9057,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &304249102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304249098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7a482e861e9b241bf741345c77da50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
+  triggerList: f7f422d6
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 077ec4f0ab2b73c40871f62e7e498e9d, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 
 --- !u!1 &304499403 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: f0f2148b9e2303a4592e5161fa1e6532, type: 3}
@@ -66817,6 +66842,7 @@ GameObject:
   - component: {fileID: 2112855501}
   - component: {fileID: 2112855500}
   - component: {fileID: 2112855499}
+  - component: {fileID: 2112855504}
   m_Layer: 0
   m_Name: Camerafocustrigger
   m_TagString: Untagged
@@ -66847,7 +66873,7 @@ MonoBehaviour:
   stingerSfx:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: a1339edf80fa8ea4ea60484fdfe3f5f1, type: 2}
   hasTriggered: 0
 --- !u!65 &2112855500
 BoxCollider:
@@ -66942,6 +66968,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1756183370}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2112855504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112855498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7a482e861e9b241bf741345c77da50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
+  triggerList: f7f422d6
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a41ee8f1dc6d2fc4e9ff82de978f068c, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 
 --- !u!4 &2114084087 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2791975375652310906, guid: 339ef7fa120a66c43a2e5b2420ce7a52, type: 3}

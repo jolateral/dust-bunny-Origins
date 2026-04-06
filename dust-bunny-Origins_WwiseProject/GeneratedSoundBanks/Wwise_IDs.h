@@ -23,6 +23,7 @@ namespace AK
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
         static const AkUniqueID PLAY_MUS_GAME = 3188041860U;
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
+        static const AkUniqueID PLAY_RULER_BRIDGE_NL = 2095326951U;
         static const AkUniqueID PLAY_SFX_ART_KIT_OPEN_NL = 2718719620U;
         static const AkUniqueID PLAY_SFX_BOOKSHELF_FAN_LP = 2878616736U;
         static const AkUniqueID PLAY_SFX_BRIDGE_CREAK_NL = 3975145325U;
@@ -76,6 +77,18 @@ namespace AK
 
     namespace STATES
     {
+        namespace MUS_GLIDING
+        {
+            static const AkUniqueID GROUP = 3398622049U;
+
+            namespace STATE
+            {
+                static const AkUniqueID GLIDING_INTRO = 1714287606U;
+                static const AkUniqueID GLIDING_LP = 3448342964U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace MUS_GLIDING
+
         namespace MUS_STATE
         {
             static const AkUniqueID GROUP = 1940399660U;
