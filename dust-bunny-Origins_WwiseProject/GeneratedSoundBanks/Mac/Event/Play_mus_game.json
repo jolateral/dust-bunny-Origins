@@ -10,7 +10,7 @@
     "Type": "Event",
     "GUID": "{177723F1-67E6-48F6-BA16-0BD415C65DFF}",
     "Language": "SFX",
-    "Hash": "{86542D8F-D194-2217-A69F-6C707E3C50B8}",
+    "Hash": "{CB8C3C8B-0284-94E4-983A-A0178EB2E57D}",
     "ObjectPath": "Play_mus_game",
     "ShortName": "Play_mus_game",
     "Path": "Event/Play_mus_game.bnk",
@@ -32,6 +32,15 @@
       "ShortName": "mus_4-4_130bpm_zone2_bar25-40_celesta2_lp.wav",
       "Path": "Media/50004982.wem",
       "CachePath": "06/{065A1AED-3D10-47C8-34D1-BB07ABA70EAD}.wem"
+     },
+     {
+      "Id": "54961289",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_150bpm_gliding_lp.wav",
+      "Path": "Media/54961289.wem",
+      "CachePath": "8A/{8A21D982-FC9E-94AB-8CB5-794E98959414}.wem"
      },
      {
       "Id": "72263303",
@@ -151,6 +160,24 @@
       "CachePath": "9A/{9AAED584-FAF7-43B3-B165-AA953101E32F}.wem"
      },
      {
+      "Id": "637578049",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_150bpm_gliding_intro_snare_lp.wav",
+      "Path": "Media/637578049.wem",
+      "CachePath": "55/{55B0BCCF-071A-58C8-97AB-5EEA84567A96}.wem"
+     },
+     {
+      "Id": "713281698",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_150bpm_gliding_intro_piano.wav",
+      "Path": "Media/713281698.wem",
+      "CachePath": "E9/{E9CE3A0B-70B9-C094-934D-426102D88437}.wem"
+     },
+     {
       "Id": "765559773",
       "Language": "SFX",
       "Streaming": "false",
@@ -176,6 +203,15 @@
       "ShortName": "mus_4-4_100bpm_bar1-8_softpiano1_lp.wav",
       "Path": "Media/880274954.wem",
       "CachePath": "90/{9054DFC8-5F40-7F90-66A3-FF92BD0CAD08}.wem"
+     },
+     {
+      "Id": "941528143",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_150bpm_gliding_intro_whiteout_lp.wav",
+      "Path": "Media/941528143.wem",
+      "CachePath": "48/{4830B2B7-57E3-F2D8-1778-08AD02BB112F}.wem"
      },
      {
       "Id": "948343802",
@@ -212,6 +248,15 @@
       "ShortName": "mus_4-4_100bpm_bar9-16_softpiano1_lp.wav",
       "Path": "Media/1022143604.wem",
       "CachePath": "5B/{5BB84652-9DE4-2BDA-97D3-94DDBE9DBDD0}.wem"
+     },
+     {
+      "Id": "1067322146",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "mus_4-4_150bpm_gliding_intro_harp_lp.wav",
+      "Path": "Media/1067322146.wem",
+      "CachePath": "21/{21211AB9-814F-B28F-117B-E749B438DCB3}.wem"
      },
      {
       "Id": "1069753046",
@@ -443,6 +488,83 @@
            },
            {
             "Id": "1069753046"
+           }
+          ]
+         },
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "941180971",
+           "Id": "748895195",
+           "GUID": "{7ADFABAA-DCBE-459A-92A8-BCBC3F0BD169}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "248635623"
+           },
+           {
+            "Id": "1069753046"
+           }
+          ]
+         },
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "941180971",
+           "Id": "0",
+           "GUID": "{530248FE-4471-4089-B560-6BAA004103EB}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "248635623"
+           },
+           {
+            "Id": "1069753046"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "1940399660",
+         "Id": "2968795556",
+         "GUID": "{E2402114-3321-422E-977C-0D3BAC32F7EA}"
+        },
+        "Children": [
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "3398622049",
+           "Id": "1714287606",
+           "GUID": "{1D3FF5E1-3278-45A4-8F60-A6DB61AAE005}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "637578049"
+           },
+           {
+            "Id": "713281698"
+           },
+           {
+            "Id": "941528143"
+           },
+           {
+            "Id": "1067322146"
+           }
+          ]
+         },
+         {
+          "SwitchValue": {
+           "GroupType": "State",
+           "GroupId": "3398622049",
+           "Id": "3448342964",
+           "GUID": "{C9CAE962-402D-4472-941A-EFAD8CD89C9A}"
+          },
+          "MediaRefs": [
+           {
+            "Id": "54961289"
            }
           ]
          }
@@ -677,10 +799,36 @@
         "GUID": "{E2402114-3321-422E-977C-0D3BAC32F7EA}"
        }
       ]
+     },
+     {
+      "Id": "3398622049",
+      "Name": "mus_gliding",
+      "ObjectPath": "\\States\\Default Work Unit\\mus_gliding",
+      "GUID": "{CCB8FC0A-C015-41E9-B59B-685DCC7010B8}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_gliding\\None",
+        "GUID": "{386464E7-793F-4E69-A913-15868E33FFF9}"
+       },
+       {
+        "Id": "1714287606",
+        "Name": "gliding_intro",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_gliding\\gliding_intro",
+        "GUID": "{1D3FF5E1-3278-45A4-8F60-A6DB61AAE005}"
+       },
+       {
+        "Id": "3448342964",
+        "Name": "gliding_lp",
+        "ObjectPath": "\\States\\Default Work Unit\\mus_gliding\\gliding_lp",
+        "GUID": "{C9CAE962-402D-4472-941A-EFAD8CD89C9A}"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{4852853C-7799-F074-83F3-9F8B0698FAF2}"
+  "FileHash": "{C5328E00-1B90-6275-2182-32A5B6BBE27B}"
  }
 }

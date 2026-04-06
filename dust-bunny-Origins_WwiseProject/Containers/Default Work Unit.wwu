@@ -29,7 +29,7 @@
 										<Property Name="3DSpatialization" Type="int16" Value="2"/>
 										<Property Name="InitialDelay" Type="Real64">
 											<ValueList>
-												<Value>10</Value>
+												<Value>45</Value>
 											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
@@ -136,263 +136,6 @@
 											</ChildrenList>
 											<ActiveSourceList>
 												<ActiveSource Name="sfx_plates_nl-003" ID="{F1FDDCB6-4300-460B-B172-7455C9749A5C}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-									</ChildrenList>
-								</RandomSequenceContainer>
-								<RandomSequenceContainer Name="amb_cat" ID="{8A76D6E2-DDFC-48AA-BDD8-9F8823E8A328}" ShortID="42473220">
-									<PropertyList>
-										<Property Name="3DSpatialization" Type="int16" Value="2"/>
-										<Property Name="InitialDelay" Type="Real64">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{D8D36596-68AE-485E-9A05-5B971F81DA92}">
-														<PropertyList>
-															<Property Name="Max" Type="Real64" Value="5"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Lowpass" Type="int16">
-											<ValueList>
-												<Value>20</Value>
-											</ValueList>
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{50F5DD1C-8472-4B61-800F-3BB384C1AC20}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{3F6D8085-7C2F-4B40-AC49-613C58646F3F}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="300"/>
-															<Property Name="Min" Type="Real64" Value="-300"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
-										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
-										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="5">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{7D67D174-A01E-4492-96DB-1235DB0C5C69}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="20"/>
-															<Property Name="Min" Type="Real64" Value="-4"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{5185D4D7-DA3C-4473-994F-76FA3362782D}">
-														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
-															<Property Name="Max" Type="Real64" Value="3"/>
-															<Property Name="Min" Type="Real64" Value="-3"/>
-														</PropertyList>
-													</Modifier>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Attenuation">
-											<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
-										</Reference>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<Sound Name="sfx_cat_running_nl-002" ID="{FAC1911E-FB84-438E-B2E9-6DB202BAC4B7}" ShortID="352981674">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_cat_running_nl-002" ID="{EC0C2D06-6AFF-440E-8F29-89780685A842}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_cat_running_nl-002.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="796398043"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_cat_running_nl-002" ID="{EC0C2D06-6AFF-440E-8F29-89780685A842}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_cat_meow_nl-002" ID="{5FBEF568-5040-49B2-AA22-807FBDF90045}" ShortID="332525872">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_cat_meow_nl-002" ID="{B14BC46A-AF73-45EE-ACED-7071E864177E}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_cat_meow_nl-002.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="274285391"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_cat_meow_nl-002" ID="{B14BC46A-AF73-45EE-ACED-7071E864177E}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_cat_running_nl-001" ID="{BEC4327E-A6E5-44C7-B0AD-CAFDB58FAAC4}" ShortID="815659104">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_cat_running_nl-001" ID="{7A6D73B6-79C0-4FDB-A3BC-B1EFC97889F4}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_cat_running_nl-001.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="919932857"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_cat_running_nl-001" ID="{7A6D73B6-79C0-4FDB-A3BC-B1EFC97889F4}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_cat_scratch_nl" ID="{822A5C1F-A0E3-42EE-9040-186C68842C58}" ShortID="482388643">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_cat_scratch_nl" ID="{0678706F-B3CF-45B1-BAC1-E56C70A19A70}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_cat_scratch_nl.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="191007600"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_cat_scratch_nl" ID="{0678706F-B3CF-45B1-BAC1-E56C70A19A70}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_cat_meow_nl-001" ID="{B196A5A2-1D68-4BD7-8480-4966DFF49503}" ShortID="311027475">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_cat_meow_nl-001" ID="{1BB17C51-41F2-4224-A739-202E8B1D8263}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_cat_meow_nl-001.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="129742938"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_cat_meow_nl-001" ID="{1BB17C51-41F2-4224-A739-202E8B1D8263}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_cat_meow_nl-003" ID="{3BF8AE44-0931-4278-85D4-2BAC2E94FEF3}" ShortID="285055056">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_cat_meow_nl-003" ID="{0725E948-6567-4EF7-B453-EA90CC0E0B9F}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_cat_meow_nl-003.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="129041448"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_cat_meow_nl-003" ID="{0725E948-6567-4EF7-B453-EA90CC0E0B9F}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_cat_running_nl-004" ID="{1C8C3D19-8D23-4DC1-BB2B-6654DA7D62BA}" ShortID="937251601">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_cat_running_nl-004" ID="{179E2394-78D8-4C71-885D-18B7F9289E7B}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_cat_running_nl-004.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="114972520"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_cat_running_nl-004" ID="{179E2394-78D8-4C71-885D-18B7F9289E7B}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="sfx_cat_running_nl-003" ID="{AE123841-A463-4B0B-9EF7-AC06D43139E5}" ShortID="1033941767">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="sfx_cat_running_nl-003" ID="{60818D7E-F5A7-4E8D-A190-84C77145755C}">
-													<Language>SFX</Language>
-													<AudioFile>sfx_cat_running_nl-003.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="363615502"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="sfx_cat_running_nl-003" ID="{60818D7E-F5A7-4E8D-A190-84C77145755C}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -2933,6 +2676,264 @@
 										</RandomSequenceContainer>
 									</ChildrenList>
 								</RandomSequenceContainer>
+								<RandomSequenceContainer Name="amb_cat" ID="{8A76D6E2-DDFC-48AA-BDD8-9F8823E8A328}" ShortID="42473220">
+									<PropertyList>
+										<Property Name="3DSpatialization" Type="int16" Value="2"/>
+										<Property Name="InitialDelay" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{D8D36596-68AE-485E-9A05-5B971F81DA92}">
+														<PropertyList>
+															<Property Name="Max" Type="Real64" Value="5"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>20</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{50F5DD1C-8472-4B61-800F-3BB384C1AC20}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{3F6D8085-7C2F-4B40-AC49-613C58646F3F}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-300"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="3"/>
+										<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="5">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{7D67D174-A01E-4492-96DB-1235DB0C5C69}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="20"/>
+															<Property Name="Min" Type="Real64" Value="-4"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{5185D4D7-DA3C-4473-994F-76FA3362782D}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+															<Property Name="Min" Type="Real64" Value="-3"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Ambient_Attenuation" ID="{A10A303A-3B49-4434-9D96-1316738F332F}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="sfx_cat_running_nl-002" ID="{FAC1911E-FB84-438E-B2E9-6DB202BAC4B7}" ShortID="352981674">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_cat_running_nl-002" ID="{EC0C2D06-6AFF-440E-8F29-89780685A842}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_cat_running_nl-002.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="796398043"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_cat_running_nl-002" ID="{EC0C2D06-6AFF-440E-8F29-89780685A842}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_cat_meow_nl-002" ID="{5FBEF568-5040-49B2-AA22-807FBDF90045}" ShortID="332525872">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_cat_meow_nl-002" ID="{B14BC46A-AF73-45EE-ACED-7071E864177E}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_cat_meow_nl-002.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="274285391"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_cat_meow_nl-002" ID="{B14BC46A-AF73-45EE-ACED-7071E864177E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_cat_running_nl-001" ID="{BEC4327E-A6E5-44C7-B0AD-CAFDB58FAAC4}" ShortID="815659104">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_cat_running_nl-001" ID="{7A6D73B6-79C0-4FDB-A3BC-B1EFC97889F4}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_cat_running_nl-001.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="919932857"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_cat_running_nl-001" ID="{7A6D73B6-79C0-4FDB-A3BC-B1EFC97889F4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_cat_scratch_nl" ID="{822A5C1F-A0E3-42EE-9040-186C68842C58}" ShortID="482388643">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_cat_scratch_nl" ID="{0678706F-B3CF-45B1-BAC1-E56C70A19A70}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_cat_scratch_nl.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="191007600"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_cat_scratch_nl" ID="{0678706F-B3CF-45B1-BAC1-E56C70A19A70}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_cat_meow_nl-001" ID="{B196A5A2-1D68-4BD7-8480-4966DFF49503}" ShortID="311027475">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_cat_meow_nl-001" ID="{1BB17C51-41F2-4224-A739-202E8B1D8263}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_cat_meow_nl-001.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="129742938"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_cat_meow_nl-001" ID="{1BB17C51-41F2-4224-A739-202E8B1D8263}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_cat_meow_nl-003" ID="{3BF8AE44-0931-4278-85D4-2BAC2E94FEF3}" ShortID="285055056">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_cat_meow_nl-003" ID="{0725E948-6567-4EF7-B453-EA90CC0E0B9F}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_cat_meow_nl-003.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="129041448"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_cat_meow_nl-003" ID="{0725E948-6567-4EF7-B453-EA90CC0E0B9F}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_cat_running_nl-004" ID="{1C8C3D19-8D23-4DC1-BB2B-6654DA7D62BA}" ShortID="937251601">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_cat_running_nl-004" ID="{179E2394-78D8-4C71-885D-18B7F9289E7B}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_cat_running_nl-004.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="114972520"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_cat_running_nl-004" ID="{179E2394-78D8-4C71-885D-18B7F9289E7B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_cat_running_nl-003" ID="{AE123841-A463-4B0B-9EF7-AC06D43139E5}" ShortID="1033941767">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_cat_running_nl-003" ID="{60818D7E-F5A7-4E8D-A190-84C77145755C}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_cat_running_nl-003.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="363615502"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_cat_running_nl-003" ID="{60818D7E-F5A7-4E8D-A190-84C77145755C}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 							<StateInfo>
 								<StateGroupList>
@@ -3620,7 +3621,7 @@
 															<MusicFade Name="Source Fade-out" ID="{D00B3471-008F-48A2-9327-AA201E579BEB}">
 																<PropertyList>
 																	<Property Name="FadeCurve" Type="int16" Value="1"/>
-																	<Property Name="FadeTime" Type="Real64" Value="8"/>
+																	<Property Name="FadeTime" Type="Real64" Value="5"/>
 																	<Property Name="FadeType" Type="int16" Value="1"/>
 																</PropertyList>
 															</MusicFade>
@@ -5564,6 +5565,11 @@
 									<PropertyList>
 										<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
 										<Property Name="Tempo" Type="Real64" Value="130"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -7675,6 +7681,11 @@
 												</ObjectLists>
 											</MultiSwitchEntry>
 											<MultiSwitchEntry Name="" ID="{D90D488D-A864-48B9-B840-4093AB330C6D}">
+												<ReferenceList>
+													<Reference Name="AudioNode">
+														<ObjectRef Name="mus_zone2_1" ID="{050815E7-33DF-41C9-8C2D-3088DF7E8B7B}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													</Reference>
+												</ReferenceList>
 												<ObjectLists>
 													<ObjectList Name="EntryPath">
 														<PluginInnerObject Name="" ID="{86C6917A-8FDE-424C-AC03-0CE7C78FE2AB}" PluginName="EntryPathSlot" CompanyID="0" PluginID="88">
@@ -7688,6 +7699,11 @@
 												</ObjectLists>
 											</MultiSwitchEntry>
 											<MultiSwitchEntry Name="" ID="{0FBB99C1-C9DC-4D5A-BE43-C991F4CB553D}">
+												<ReferenceList>
+													<Reference Name="AudioNode">
+														<ObjectRef Name="mus_zone2_1" ID="{050815E7-33DF-41C9-8C2D-3088DF7E8B7B}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													</Reference>
+												</ReferenceList>
 												<ObjectLists>
 													<ObjectList Name="EntryPath">
 														<PluginInnerObject Name="" ID="{4BE85AB9-C814-47D6-9700-999C6A9950BD}" PluginName="EntryPathSlot" CompanyID="0" PluginID="88">
@@ -7866,6 +7882,13 @@
 													</ReferenceList>
 													<ChildrenList>
 														<MusicTrack Name="mus_4-4_150bpm_gliding_intro_harp_lp" ID="{56026002-1FFF-4131-8F96-A1825C07D038}" ShortID="28062119">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-6</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="OutputBus">
 																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
@@ -7970,6 +7993,13 @@
 															</ObjectLists>
 														</MusicTrack>
 														<MusicTrack Name="mus_4-4_150bpm_gliding_intro_whiteout_lp" ID="{068D105B-8F60-4D76-9ECC-3EB652846998}" ShortID="670515022">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-6</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="OutputBus">
 																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
@@ -8074,6 +8104,13 @@
 															</ObjectLists>
 														</MusicTrack>
 														<MusicTrack Name="mus_4-4_150bpm_gliding_intro_snare_lp" ID="{00270B9E-FA71-4DB8-B466-1747F76B162A}" ShortID="874356891">
+															<PropertyList>
+																<Property Name="Volume" Type="Real64">
+																	<ValueList>
+																		<Value>-6</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
 															<ReferenceList>
 																<Reference Name="OutputBus">
 																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
@@ -8969,7 +9006,11 @@
 										</ObjectLists>
 									</MultiSwitchEntry>
 									<MultiSwitchEntry Name="" ID="{2F0071E6-3307-4583-A981-7F9CEF4EDBDF}">
-										<ReferenceList/>
+										<ReferenceList>
+											<Reference Name="AudioNode">
+												<ObjectRef Name="mus_glide" ID="{F6EDBCCC-5ECE-4555-B2F2-BDFA2BAA337C}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+											</Reference>
+										</ReferenceList>
 										<ObjectLists>
 											<ObjectList Name="EntryPath">
 												<PluginInnerObject Name="" ID="{A6C81126-FF3E-47B7-8F65-E428542B448D}" PluginName="EntryPathSlot" CompanyID="0" PluginID="88">
@@ -9363,6 +9404,355 @@
 								</MusicSegment>
 							</ChildrenList>
 						</MusicPlaylistContainer>
+						<MusicPlaylistContainer Name="mus_endseq" ID="{90D9B28E-7585-4FEF-A4D0-42F6B17F78A9}" ShortID="36080380">
+							<PropertyList>
+								<Property Name="Tempo" Type="Real64" Value="150"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+								</Reference>
+								<Reference Name="PlaylistRoot">
+									<Custom>
+										<MusicPlaylistItem Name="" ID="{6C63FCB5-258F-4B8C-A190-A8AFBD5A9F3F}" ShortID="979314187">
+											<ChildrenList>
+												<MusicPlaylistItem Name="" ID="{D6CAFAD6-9E00-4ECA-B5E5-DB833FD4956C}" ShortID="729383821">
+													<PropertyList>
+														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Segment">
+															<ObjectRef Name="mus_4-4_150bpm_gliding_lp" ID="{36F14E57-2102-4616-91B1-82CA160E2CB6}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</MusicPlaylistItem>
+												<MusicPlaylistItem Name="" ID="{A8F235BE-44D1-442E-9541-CC04856A630A}" ShortID="546569431">
+													<PropertyList>
+														<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Segment">
+															<ObjectRef Name="mus_endmotif" ID="{BC58C53E-2109-487C-B8C0-271BAFDA5DAB}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</MusicPlaylistItem>
+											</ChildrenList>
+										</MusicPlaylistItem>
+									</Custom>
+								</Reference>
+								<Reference Name="TransitionRoot">
+									<Custom>
+										<MusicTransition Name="Root" ID="{1EC30992-E17B-4410-AB01-9E9B7DDFD452}">
+											<PropertyList>
+												<Property Name="IsFolder" Type="bool" Value="True"/>
+											</PropertyList>
+											<ChildrenList>
+												<MusicTransition Name="Transition" ID="{A2B7062E-E24A-438B-8B58-42A557EF2F92}">
+													<PropertyList>
+														<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo>
+														<SourceFadeOut>
+															<MusicFade Name="Source Fade-out" ID="{EB0E829E-82EB-49AF-B891-DA3781871D11}">
+																<PropertyList>
+																	<Property Name="FadeCurve" Type="int16" Value="5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="12"/>
+																	<Property Name="FadeType" Type="int16" Value="1"/>
+																</PropertyList>
+															</MusicFade>
+														</SourceFadeOut>
+														<DestinationFadeIn>
+															<MusicFade Name="Destination Fade-in" ID="{07CE7FF9-4110-4040-A8C6-D7DBC8DFDA4A}">
+																<PropertyList>
+																	<Property Name="FadeCurve" Type="int16" Value="7"/>
+																	<Property Name="FadeTime" Type="Real64" Value="8"/>
+																</PropertyList>
+															</MusicFade>
+														</DestinationFadeIn>
+													</TransitionInfo>
+												</MusicTransition>
+											</ChildrenList>
+											<TransitionInfo/>
+										</MusicTransition>
+									</Custom>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicSegment Name="mus_4-4_150bpm_gliding_lp" ID="{36F14E57-2102-4616-91B1-82CA160E2CB6}" ShortID="911873400">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="32768"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="mus_4-4_150bpm_gliding_lp" ID="{6ABE1C0E-A1EE-41C0-AC6D-89CF083EE376}" ShortID="67788823">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{E0DA2AAC-0F34-4292-95F3-16979B819161}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mus_4-4_150bpm_gliding_lp" ID="{BA5A81F7-1C8B-4D75-BE47-B42BC43709DB}">
+													<Language>SFX</Language>
+													<AudioFile>mus_4-4_150bpm_gliding_lp.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="54961289"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<MusicTrackSequence Name="" ID="{8E27AF3C-0DDF-4F8D-9A45-355D7677CFEC}">
+														<ObjectLists>
+															<ObjectList Name="Clips">
+																<MusicClip Name="mus_4-4_150bpm_gliding_lp" ID="{30139FBB-347C-4CC1-BE9F-9CD2E74317D1}">
+																	<PropertyList>
+																		<Property Name="EndTrimOffset" Type="Real64" Value="32000"/>
+																		<Property Name="FadeInMode" Type="int16" Value="0"/>
+																		<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																	</PropertyList>
+																	<AudioSourceRef Name="mus_4-4_150bpm_gliding_lp" ID="{BA5A81F7-1C8B-4D75-BE47-B42BC43709DB}"/>
+																	<PropertyCurveList>
+																		<PropertyCurve PropertyName="Highpass">
+																			<Curve Name="" ID="{95468F3E-15C1-485D-9DAF-3C92D1C35125}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="1"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>0</XPos>
+																						<YPos>0</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>32</XPos>
+																						<YPos>0</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</PropertyCurve>
+																		<PropertyCurve PropertyName="Lowpass">
+																			<Curve Name="" ID="{2DC81B05-404E-479A-ACCE-6F479837B20D}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="1"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>0</XPos>
+																						<YPos>0</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>32</XPos>
+																						<YPos>0</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</PropertyCurve>
+																		<PropertyCurve PropertyName="Volume">
+																			<Curve Name="" ID="{AF1FBE66-8B9D-4D0B-86F9-6E1892E39637}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="3"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>0</XPos>
+																						<YPos>0</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>32</XPos>
+																						<YPos>0</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</PropertyCurve>
+																	</PropertyCurveList>
+																</MusicClip>
+															</ObjectList>
+														</ObjectLists>
+													</MusicTrackSequence>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<MusicCue Name="Entry Cue" ID="{A56FDDD1-0B82-4FFC-8785-79514B62BEB1}"/>
+											<MusicCue Name="Exit Cue" ID="{901E900C-B599-46BE-A60B-63E746B8754A}">
+												<PropertyList>
+													<Property Name="CueType" Type="int16" Value="1"/>
+													<Property Name="TimeMs" Type="Real64" Value="32000"/>
+												</PropertyList>
+											</MusicCue>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
+								<MusicSegment Name="mus_endmotif" ID="{BC58C53E-2109-487C-B8C0-271BAFDA5DAB}" ShortID="455937460">
+									<PropertyList>
+										<Property Name="EndPosition" Type="Real64" Value="18777"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>30</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<MusicTrack Name="mus_4-4_100bpm_bar33-40_softpiano2_lp" ID="{E36B9F85-F7AC-40CB-A5D3-665F6F1A2E44}" ShortID="139519398">
+											<ReferenceList>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+												<Reference Name="TransitionRoot">
+													<Custom>
+														<MusicTransition Name="Root" ID="{794760EF-F549-4FFA-B94F-5910C3D92C2F}">
+															<PropertyList>
+																<Property Name="IsFolder" Type="bool" Value="True"/>
+															</PropertyList>
+															<TransitionInfo/>
+														</MusicTransition>
+													</Custom>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="mus_4-4_100bpm_bar33-40_softpiano2_lp" ID="{ADC0D4AF-8FAB-4298-90C1-281BDCF6CAC4}">
+													<Language>SFX</Language>
+													<AudioFile>mus_4-4_100bpm_bar33-40_softpiano2_lp.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="777506816"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists>
+												<ObjectList Name="Sequences">
+													<MusicTrackSequence Name="" ID="{54A2AF5A-FDE7-491A-8FF7-321834E57BA6}">
+														<ObjectLists>
+															<ObjectList Name="Clips">
+																<MusicClip Name="mus_4-4_100bpm_bar33-40_softpiano2_lp" ID="{81BB8480-47A5-4DC8-B4D5-41C88BCC9F40}">
+																	<PropertyList>
+																		<Property Name="BeginTrimOffset" Type="Real64" Value="-1600"/>
+																		<Property Name="EndTrimOffset" Type="Real64" Value="8000.00000000001"/>
+																		<Property Name="FadeInMode" Type="int16" Value="0"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="5385.12202358323"/>
+																		<Property Name="PlayAt" Type="Real64" Value="1600"/>
+																	</PropertyList>
+																	<AudioSourceRef Name="mus_4-4_100bpm_bar33-40_softpiano2_lp" ID="{ADC0D4AF-8FAB-4298-90C1-281BDCF6CAC4}"/>
+																	<PropertyCurveList>
+																		<PropertyCurve PropertyName="Highpass">
+																			<Curve Name="" ID="{B1FA7629-AC49-4CEA-BCEC-57B64CF346BC}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="1"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>-1.6</XPos>
+																						<YPos>0</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>8</XPos>
+																						<YPos>0</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</PropertyCurve>
+																		<PropertyCurve PropertyName="Lowpass">
+																			<Curve Name="" ID="{BA75278C-AC46-4F78-A5C9-C60B6FE441BF}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="1"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>-1.6</XPos>
+																						<YPos>0</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>8</XPos>
+																						<YPos>0</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</PropertyCurve>
+																		<PropertyCurve PropertyName="Volume">
+																			<Curve Name="" ID="{A33A5C89-7BAF-4F4E-B00D-804C7F509A50}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="3"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>-1.6</XPos>
+																						<YPos>0</YPos>
+																						<Flags>5</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>8</XPos>
+																						<YPos>0</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</PropertyCurve>
+																	</PropertyCurveList>
+																</MusicClip>
+															</ObjectList>
+														</ObjectLists>
+													</MusicTrackSequence>
+												</ObjectList>
+											</ObjectLists>
+										</MusicTrack>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Cues">
+											<MusicCue Name="Entry Cue" ID="{E29D4202-5E5B-48D5-90CB-456B81AD4634}"/>
+											<MusicCue Name="Exit Cue" ID="{D6C2A91F-6C12-412A-B90D-23CC2E904C95}">
+												<PropertyList>
+													<Property Name="CueType" Type="int16" Value="1"/>
+													<Property Name="TimeMs" Type="Real64" Value="9600"/>
+												</PropertyList>
+											</MusicCue>
+										</ObjectList>
+									</ObjectLists>
+								</MusicSegment>
+							</ChildrenList>
+						</MusicPlaylistContainer>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="SFX" ID="{EDE35C22-6A02-480B-B2FD-C9F921C71D20}" ShortID="269045098">
@@ -9393,8 +9783,8 @@
 																	<Modifier Name="" ID="{E3F6F5FA-E151-45D0-99D1-49E385E18EF0}">
 																		<PropertyList>
 																			<Property Name="Enabled" Type="bool" Value="True"/>
-																			<Property Name="Max" Type="Real64" Value="200"/>
-																			<Property Name="Min" Type="Real64" Value="-200"/>
+																			<Property Name="Max" Type="Real64" Value="100"/>
+																			<Property Name="Min" Type="Real64" Value="-100"/>
 																		</PropertyList>
 																	</Modifier>
 																</ModifierInfo>
@@ -10056,8 +10446,10 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-001" ID="{5D3D776D-2C87-48AC-B5FB-6995A56E64A5}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.350286062798986"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.12733"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.25213"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.3575"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-001.wav</AudioFile>
@@ -10082,8 +10474,10 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-002" ID="{1678C7FA-5F7C-44ED-8BFA-53EA05CA8A38}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.483088352280816"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.06849"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.20638"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.30286"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-002.wav</AudioFile>
@@ -10108,8 +10502,11 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-003" ID="{210BD49C-6E8E-4EEB-9150-AF8B0CBC3CEC}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.331832579634094"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.06749"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.23959"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.0396"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.41392"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-003.wav</AudioFile>
@@ -10134,8 +10531,11 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-004" ID="{39391601-0CE3-4296-B51E-91CDAE5FDE72}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.351686901618641"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.08472"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.2748"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.04421"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.31901"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-004.wav</AudioFile>
@@ -10160,8 +10560,11 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-005" ID="{98587259-82B7-4C26-BA57-CF247664181F}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.494982326722368"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.0523"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.21196"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.09385"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.38747"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-005.wav</AudioFile>
@@ -10186,10 +10589,11 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-007" ID="{A54534BD-2D3F-48C5-ACB9-F0C40D3E3119}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.302778314226191"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.106889323963906"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.05504"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.20712"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="0.668351931531697"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.06748"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.35696"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-007.wav</AudioFile>
@@ -10214,11 +10618,12 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-008" ID="{D902FCED-63F2-45AC-8AAC-FF2B77A9E866}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.158331139301795"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.563500623086393"/>
-																				<Property Name="FadeOutShape" Type="int16" Value="0"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.04167"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.25737"/>
+																				<Property Name="FadeOutShape" Type="int16" Value="7"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="0.825303989536944"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.03991"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.36073"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-008.wav</AudioFile>
@@ -10243,10 +10648,11 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-009" ID="{28943E89-65D1-49E6-83ED-6017E6483EF9}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.266526483557395"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.537363501883531"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.03353"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.16413"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="0.614129647137987"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.056"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.38913"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-009.wav</AudioFile>
@@ -10271,11 +10677,12 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-010" ID="{B7A5D602-16E8-46DC-A0DB-D8BC63B2A092}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.357767598472493"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.626618645784219"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.05315"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.23622"/>
 																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="0.626618645784219"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.03833"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.3906"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-010.wav</AudioFile>
@@ -10300,10 +10707,11 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-011" ID="{21B5E74A-2219-4DBA-BE1D-7ABB5B6DDB02}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.457263415414913"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.578518698385168"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.03075"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.21133"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="0.799480699015373"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.05499"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.39494"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-011.wav</AudioFile>
@@ -10328,11 +10736,11 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-012" ID="{EDCDA192-49B6-41F2-8214-D61E3F7008CD}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.21164937087298"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.308277002864925"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.06665"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.15028"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 																				<Property Name="TrimBegin" Type="Real64" Value="0.0767646291718983"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="0.738402582455027"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.4284"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-012.wav</AudioFile>
@@ -10357,12 +10765,12 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-013" ID="{6439CFAB-95C0-4781-AD98-C2FDDF3E830E}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.268333691009153"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.413241389620865"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.10765"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.18935"/>
 																				<Property Name="FadeOutShape" Type="int16" Value="6"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.0579987952735082"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="0.63315348836625"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.0699"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.41795"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-013.wav</AudioFile>
@@ -10387,11 +10795,11 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-014" ID="{98B07A74-5AC7-406E-A5D2-5A77A98AD393}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.185483907581696"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.41816868454182"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.04628"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.18159"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimBegin" Type="Real64" Value="0.0395220403073061"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="0.673149570994652"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.06464"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.37701"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-014.wav</AudioFile>
@@ -10416,10 +10824,11 @@
 																	<ChildrenList>
 																		<AudioFileSource Name="sfx_bunny_step-015" ID="{A63C24D9-B57D-48BB-83DC-685ED06F3137}">
 																			<PropertyList>
-																				<Property Name="FadeInDuration" Type="Real64" Value="0.360768731565713"/>
-																				<Property Name="FadeOutDuration" Type="Real64" Value="0.0800229171504445"/>
+																				<Property Name="FadeInDuration" Type="Real64" Value="0.02501"/>
+																				<Property Name="FadeOutDuration" Type="Real64" Value="0.18743"/>
 																				<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																				<Property Name="TrimEnd" Type="Real64" Value="0.598266597780014"/>
+																				<Property Name="TrimBegin" Type="Real64" Value="0.07925"/>
+																				<Property Name="TrimEnd" Type="Real64" Value="0.33864"/>
 																			</PropertyList>
 																			<Language>SFX</Language>
 																			<AudioFile>sfx_bunny_step-015.wav</AudioFile>
@@ -10476,8 +10885,6 @@
 																	<Modifier Name="" ID="{DC938407-2B31-414F-B122-71C884E96845}">
 																		<PropertyList>
 																			<Property Name="Enabled" Type="bool" Value="True"/>
-																			<Property Name="Max" Type="Real64" Value="200"/>
-																			<Property Name="Min" Type="Real64" Value="-200"/>
 																		</PropertyList>
 																	</Modifier>
 																</ModifierInfo>
@@ -10521,9 +10928,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-001" ID="{F15CD8D7-2A79-4E50-9EEF-B1DE7DFC0DAB}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.349889044791965"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.210164376739728"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.34989"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.21016"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.44895"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-001.wav</AudioFile>
@@ -10548,8 +10956,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-002" ID="{37CB6EA0-00AF-441F-9ED5-DD6731DBF49E}">
 																	<PropertyList>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.53944815960476"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.06337"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.3237"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.3237"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-002.wav</AudioFile>
@@ -10574,9 +10984,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-003" ID="{B51FFB4F-6E8C-4EFA-9B40-36B371A6075B}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.376126411102586"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.602378696708356"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.08086"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.34349"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.43643"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-003.wav</AudioFile>
@@ -10601,9 +11012,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-004" ID="{77341030-D8A0-4C9D-B74F-D1056220ABF2}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.214566953859087"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.376254847999346"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.21457"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.3032"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.3032"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-004.wav</AudioFile>
@@ -10628,9 +11040,11 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-005" ID="{E0B274CC-ADFD-453C-929D-D6EB8EC87E7B}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.325746443817171"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.687948265823268"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.03077"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.27366"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.06269"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.36495"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-005.wav</AudioFile>
@@ -10655,9 +11069,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-006" ID="{6C4F1482-DC06-4185-90A8-707951E2109F}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.265744317891234"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.444644087451999"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.05436"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.1915"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.24348"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-006.wav</AudioFile>
@@ -10682,9 +11097,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-007" ID="{5F9C66AF-D012-40D0-AEA2-DD75BC5C9054}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.370886771355645"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.393712743540398"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.0945"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.16211"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.2208"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-007.wav</AudioFile>
@@ -10709,9 +11125,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-008" ID="{C7069057-6E8C-4F6D-B473-044FE55F7B87}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.451661771384336"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.541345807329073"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.10422"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.20197"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.32317"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-008.wav</AudioFile>
@@ -10736,9 +11153,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-009" ID="{7B8DF4E8-3B13-42E3-B1F8-892ACCAEA0D2}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.240643845898298"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.569048513547849"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.19295"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.19175"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.35596"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-009.wav</AudioFile>
@@ -10763,9 +11181,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-010" ID="{9AD5FDEC-22E8-42D4-8240-76D05D400B62}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.173088550711117"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.569466796971984"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.11134"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.19581"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.29749"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-010.wav</AudioFile>
@@ -10776,33 +11195,6 @@
 															</ChildrenList>
 															<ActiveSourceList>
 																<ActiveSource Name="sfx_bunny_step_ground-010" ID="{9AD5FDEC-22E8-42D4-8240-76D05D400B62}" Platform="Linked"/>
-															</ActiveSourceList>
-														</Sound>
-														<Sound Name="sfx_bunny_step_ground-011" ID="{83F1567D-22CD-4056-A0E3-EA909312A256}" ShortID="463220733">
-															<ReferenceList>
-																<Reference Name="Conversion">
-																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
-																</Reference>
-																<Reference Name="OutputBus">
-																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
-																</Reference>
-															</ReferenceList>
-															<ChildrenList>
-																<AudioFileSource Name="sfx_bunny_step_ground-011" ID="{24D31BBF-6649-4AF2-B04C-B37CD604A9AE}">
-																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.44468312878648"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.583030764261208"/>
-																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																	</PropertyList>
-																	<Language>SFX</Language>
-																	<AudioFile>sfx_bunny_step_ground-011.wav</AudioFile>
-																	<MediaIDList>
-																		<MediaID ID="33744021"/>
-																	</MediaIDList>
-																</AudioFileSource>
-															</ChildrenList>
-															<ActiveSourceList>
-																<ActiveSource Name="sfx_bunny_step_ground-011" ID="{24D31BBF-6649-4AF2-B04C-B37CD604A9AE}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
 														<Sound Name="sfx_bunny_step_ground-012" ID="{015AC6FF-7C02-4C9F-836F-994BE19DADAD}" ShortID="659369899">
@@ -10817,9 +11209,10 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-012" ID="{5D1BF0D0-4528-4DB4-99B2-64FAE0BC9A46}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.173683564604844"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.436327003763389"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.09529"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.25579"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.25579"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-012.wav</AudioFile>
@@ -10844,9 +11237,11 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-013" ID="{10DC8EA6-4092-46A8-84CB-BD17C25D1F15}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.263747940617581"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.602718038074041"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.08179"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.20931"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.04933"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.35945"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-013.wav</AudioFile>
@@ -10871,9 +11266,11 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-014" ID="{97F78E7A-E722-4493-ABEB-56F5892E6CB9}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.194073585635525"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.425657192024134"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.05082"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.17227"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.0282"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.25687"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-014.wav</AudioFile>
@@ -10898,9 +11295,11 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-015" ID="{11F09237-1785-4EE7-9F19-BBB2BA917BBF}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.28302692457781"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.977243908755523"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.05844"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.25457"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.07485"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.40802"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-015.wav</AudioFile>
@@ -10925,9 +11324,11 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-016" ID="{A3438293-AB0D-4DF9-9DBF-EBD4CCDFA0C1}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.0364667303045057"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.306320534557848"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.03647"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.21699"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.03009"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.28876"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-016.wav</AudioFile>
@@ -10952,9 +11353,11 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-017" ID="{41968597-497D-467E-996A-54CF29F4CFAC}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.1875"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.583686440677966"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.04098"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.23769"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.02277"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.29214"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-017.wav</AudioFile>
@@ -10979,9 +11382,11 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-018" ID="{62AE0649-F7E4-4E16-B841-9FCD6EEBBB64}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.202059213514045"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.487319279651521"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.05258"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.22315"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.05252"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.27567"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-018.wav</AudioFile>
@@ -11006,9 +11411,11 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunny_step_ground-019" ID="{8EC10424-7361-45B3-B98D-CB4141D4BE34}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.261652542372881"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.679025423728813"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.05474"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.12385"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.05445"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.27829"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunny_step_ground-019.wav</AudioFile>
@@ -11019,6 +11426,455 @@
 															</ChildrenList>
 															<ActiveSourceList>
 																<ActiveSource Name="sfx_bunny_step_ground-019" ID="{8EC10424-7361-45B3-B98D-CB4141D4BE34}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="sfx_bunnystep2_nl" ID="{A9FC8543-EE70-467B-B37D-462F4D46A025}" ShortID="306383928">
+													<PropertyList>
+														<Property Name="Pitch" Type="int32">
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{857C2971-3608-4A76-96C7-F65837AB79EF}">
+																		<PropertyList>
+																			<Property Name="Enabled" Type="bool" Value="True"/>
+																			<Property Name="Max" Type="Real64" Value="200"/>
+																			<Property Name="Min" Type="Real64" Value="-200"/>
+																		</PropertyList>
+																	</Modifier>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+														<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+														<Property Name="Volume" Type="Real64">
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{3B0CAA10-D53B-4837-9E2B-96EA15F96EDA}">
+																		<PropertyList>
+																			<Property Name="Enabled" Type="bool" Value="True"/>
+																			<Property Name="Max" Type="Real64" Value="3"/>
+																		</PropertyList>
+																	</Modifier>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="sfx_bunny_step-001" ID="{99D191D2-B212-45DB-893D-5B297347DE6D}" ShortID="109796252">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-001" ID="{273AB38A-77C5-49BB-9567-27507ADB1C51}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.06432"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.16938"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.37721"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.7131"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-001.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="411971617"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-001" ID="{273AB38A-77C5-49BB-9567-27507ADB1C51}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-002" ID="{CD0C2231-F455-4CA4-B35B-038D2873B105}" ShortID="390274512">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-002" ID="{7E457AA2-0D26-4184-917D-836121510F1A}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.06849"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.20638"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.34299"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.67071"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-002.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="637265184"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-002" ID="{7E457AA2-0D26-4184-917D-836121510F1A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-003" ID="{56982EBD-14B2-4DF7-AF51-0F22220211CA}" ShortID="658215932">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-003" ID="{36564A3E-B1B3-4C6A-BB06-4DDFDB4E159F}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.06749"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.23959"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.41283"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.77032"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-003.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="848481571"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-003" ID="{36564A3E-B1B3-4C6A-BB06-4DDFDB4E159F}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-004" ID="{948DED7F-A183-49F5-A3F2-BFF96C9937EB}" ShortID="278928873">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-004" ID="{F82D5B23-9749-43D7-8BA0-4C46D89DF770}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.08472"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.14046"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.27565"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.58945"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-004.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="16643844"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-004" ID="{F82D5B23-9749-43D7-8BA0-4C46D89DF770}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-005" ID="{8C853C77-8B76-484F-87BB-F91B254E7C70}" ShortID="308331079">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-005" ID="{CFCE2EF8-D75F-4FF4-8FBA-098FC0FCBF1A}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.0523"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.21196"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.38643"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.9052"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-005.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="441758625"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-005" ID="{CFCE2EF8-D75F-4FF4-8FBA-098FC0FCBF1A}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-007" ID="{7482C3C1-B316-4000-BB9C-0367EE3D7B13}" ShortID="415415980">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-007" ID="{0811A1F3-4996-476B-AD8B-72ADD61DDAA3}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.05504"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.20712"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.33069"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.75226"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-007.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="88114498"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-007" ID="{0811A1F3-4996-476B-AD8B-72ADD61DDAA3}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-008" ID="{6677D859-75B0-47B6-90F7-7263BE383B36}" ShortID="19343559">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-008" ID="{7820FD56-13F3-44BE-8C1E-B16284D2DE1E}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.04167"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.25737"/>
+																		<Property Name="FadeOutShape" Type="int16" Value="7"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.34896"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.71479"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-008.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="266672200"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-008" ID="{7820FD56-13F3-44BE-8C1E-B16284D2DE1E}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-009" ID="{BA458617-FCDF-44E9-A3F1-C05EE49DBE48}" ShortID="855022141">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-009" ID="{F659AFA5-0B32-4039-8609-533F9A90F92C}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.03353"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.16413"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.36402"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.75613"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-009.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="993730182"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-009" ID="{F659AFA5-0B32-4039-8609-533F9A90F92C}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-010" ID="{61238A7E-08E8-4BBB-81E4-8A488373BED0}" ShortID="188449022">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-010" ID="{7A437244-C639-4E12-A272-095A8A0E7A30}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.05315"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.23622"/>
+																		<Property Name="FadeOutShape" Type="int16" Value="6"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.45487"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.81215"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-010.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="995289877"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-010" ID="{7A437244-C639-4E12-A272-095A8A0E7A30}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-011" ID="{B45F085E-B3C1-4919-9DCA-8391857A4625}" ShortID="39585413">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-011" ID="{81CF69BD-4C0B-401B-B915-E15B3DCC917D}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.03075"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.21133"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.48368"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.92698"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-011.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="830321503"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-011" ID="{81CF69BD-4C0B-401B-B915-E15B3DCC917D}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-012" ID="{3E59CE6B-A1CA-44C3-A6DA-46EDED9C620B}" ShortID="951132743">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-012" ID="{C4BE0145-AE1F-4E89-80CA-074FDD07FBCB}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.06665"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.15028"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.36978"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.7154"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-012.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="152411843"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-012" ID="{C4BE0145-AE1F-4E89-80CA-074FDD07FBCB}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-013" ID="{C1600FAF-4E9F-4547-B0A5-26412563CC25}" ShortID="118503065">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-013" ID="{1A393BBE-2D85-44B4-8CF0-105CFF905A2B}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.10765"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.18935"/>
+																		<Property Name="FadeOutShape" Type="int16" Value="6"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.36051"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.76409"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-013.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="843201456"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-013" ID="{1A393BBE-2D85-44B4-8CF0-105CFF905A2B}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-014" ID="{36C47F40-CC1C-45B6-87B5-CF5CBB747335}" ShortID="607867405">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-014" ID="{A9C82C41-8162-4AC1-9433-A043B9A02209}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.04628"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.18159"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.46751"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.82808"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-014.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="910470810"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-014" ID="{A9C82C41-8162-4AC1-9433-A043B9A02209}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="sfx_bunny_step-015" ID="{30EC5D77-CF5F-4DEA-97B5-A94A60E727FF}" ShortID="241567396">
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="sfx_bunny_step-015" ID="{05B73B5A-B5C2-4952-B56D-36FAA70A7AAE}">
+																	<PropertyList>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.02501"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.18743"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.33783"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.70669"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>sfx_bunny_step-015.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="237168818"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="sfx_bunny_step-015" ID="{05B73B5A-B5C2-4952-B56D-36FAA70A7AAE}" Platform="Linked"/>
 															</ActiveSourceList>
 														</Sound>
 													</ChildrenList>
@@ -11140,6 +11996,23 @@
 										<RandomSequenceContainer Name="sfx_bunnyimpact_nl" ID="{C13FA2A5-2A8C-4A89-BF0B-EEA0E20671D7}" ShortID="370708644">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>30</Value>
+													</ValueList>
+												</Property>
+												<Property Name="MaxReachedBehavior" Type="int16" Value="1"/>
+												<Property Name="MaxSoundPerInstance" Type="int16">
+													<ValueList>
+														<Value>1</Value>
+													</ValueList>
+												</Property>
+												<Property Name="UseMaxSoundPerInstance" Type="bool">
+													<ValueList>
+														<Value>True</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Attenuation">
@@ -11292,14 +12165,14 @@
 																				<SegmentShape>Exp3</SegmentShape>
 																			</Point>
 																			<Point>
-																				<XPos>30</XPos>
+																				<XPos>50</XPos>
 																				<YPos>-12</YPos>
 																				<Flags>0</Flags>
 																				<SegmentShape>Log3</SegmentShape>
 																			</Point>
 																			<Point>
 																				<XPos>100</XPos>
-																				<YPos>0</YPos>
+																				<YPos>-6</YPos>
 																				<Flags>37</Flags>
 																			</Point>
 																		</PointList>
@@ -11325,13 +12198,13 @@
 																		<PointList>
 																			<Point>
 																				<XPos>0</XPos>
-																				<YPos>-11.12605</YPos>
+																				<YPos>-12</YPos>
 																				<Flags>5</Flags>
 																				<SegmentShape>Exp1</SegmentShape>
 																			</Point>
 																			<Point>
 																				<XPos>5000</XPos>
-																				<YPos>3</YPos>
+																				<YPos>0</YPos>
 																				<Flags>37</Flags>
 																			</Point>
 																		</PointList>
@@ -11699,10 +12572,11 @@
 															<ChildrenList>
 																<AudioFileSource Name="sfx_bunnyland_nl" ID="{37618E3A-65DE-4D42-83EA-299A332E4C15}">
 																	<PropertyList>
-																		<Property Name="FadeInDuration" Type="Real64" Value="0.0520037195275246"/>
-																		<Property Name="FadeOutDuration" Type="Real64" Value="0.177806807037764"/>
+																		<Property Name="FadeInDuration" Type="Real64" Value="0.01137"/>
+																		<Property Name="FadeOutDuration" Type="Real64" Value="0.16786"/>
 																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-																		<Property Name="TrimEnd" Type="Real64" Value="0.267816315945917"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.00535"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.17321"/>
 																	</PropertyList>
 																	<Language>SFX</Language>
 																	<AudioFile>sfx_bunnyland_nl.wav</AudioFile>
@@ -12396,7 +13270,7 @@
 										<RandomSequenceContainer Name="sfx_vent_ride" ID="{0834C2C5-FBF4-4964-88F2-88BBA9B43712}" ShortID="502146218">
 											<PropertyList>
 												<Property Name="3DSpatialization" Type="int16" Value="2"/>
-												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="2"/>
+												<Property Name="AttenuationDistanceScaling" Type="Real32" Value="3"/>
 												<Property Name="Pitch" Type="int32">
 													<ValueList>
 														<Value>300</Value>
