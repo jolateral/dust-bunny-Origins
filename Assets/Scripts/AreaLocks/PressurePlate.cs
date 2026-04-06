@@ -20,12 +20,14 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] private float delayBeforeCameraFocus = 0.2f;
     [SerializeField] private float delayBeforeMovingWall = 1.75f;
 
-    [SerializeField] private Sprite displayTooLightPopup;
+    [SerializeField] private Sprite displayHookFirstPopup;
 
     [Tooltip("Optional. First physical collision with the plate (while the wall is still closed) runs this door pan + popup, then the player can roll onto the plate again for the normal result. Disabled once the wall opens.")]
     [SerializeField] private CameraFocusTrigger approachCameraFocusScript;
 
     [SerializeField] private CameraFocusTrigger cameraFocusScript;
+
+    [SerializeField] private GameObject wallPopup;
 
     [Header("SFX")]
     public AK.Wwise.Event buttonPress;
@@ -38,7 +40,7 @@ public class PressurePlate : MonoBehaviour
 
     private bool isActivated = false;
 
-    // 🔹 Player references
+    // Player references
     private DustBunnyController currentPlayer;
     private Rigidbody playerRb;
     private Animator playerAnimator;
@@ -95,11 +97,13 @@ public class PressurePlate : MonoBehaviour
 
             isActivated = true;
 
+            Destroy(wallPopup);
+
             StartCoroutine(PlateSequence());
         }
         else
         {
-            MemoryUIManager.Instance.ShowImage(displayTooLightPopup);
+            MemoryUIManager.Instance.ShowImage(displayHookFirstPopup);
         }
     }
 
