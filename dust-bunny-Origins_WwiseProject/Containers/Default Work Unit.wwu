@@ -10451,14 +10451,14 @@
 																	<CrossfadingInfo>
 																		<LeftEdgePos>0</LeftEdgePos>
 																		<LeftFadingMode>Automatic</LeftFadingMode>
-																		<RightEdgePos>3865.3496492467</RightEdgePos>
+																		<RightEdgePos>4999.9995</RightEdgePos>
 																		<RightFadingMode>Automatic</RightFadingMode>
 																	</CrossfadingInfo>
 																</BlendTrackAssoc>
 																<BlendTrackAssoc>
 																	<ItemRef Name="sfx_bunnystep_heavy_nl" ID="{13F0F7D6-6B06-44E6-AB26-B6FAFC886500}"/>
 																	<CrossfadingInfo>
-																		<LeftEdgePos>1130.22375122062</LeftEdgePos>
+																		<LeftEdgePos>1056.47743853625</LeftEdgePos>
 																		<LeftFadingMode>Automatic</LeftFadingMode>
 																		<RightEdgePos>5000</RightEdgePos>
 																		<RightFadingMode>Automatic</RightFadingMode>
@@ -11357,7 +11357,7 @@
 																		<PointList>
 																			<Point>
 																				<XPos>0</XPos>
-																				<YPos>30</YPos>
+																				<YPos>40</YPos>
 																				<Flags>5</Flags>
 																				<SegmentShape>Exp3</SegmentShape>
 																			</Point>
@@ -13271,6 +13271,33 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="sfx_zone1_door_open_nl" ID="{B72EC9CA-406C-4C64-B9AD-A6DF10884699}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_bridge_impact_nl_001" ID="{811A06C1-D608-47F0-8BEA-DA9B48388724}" ShortID="761649118">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_bunny_impact_nl_001" ID="{D1D6C621-28D3-4C23-B7F4-08F14907FC29}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.0286377292786174"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.0338054398251348"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>sfx_bunny_impact_nl_001.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="306431546"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_bunny_impact_nl_001" ID="{D1D6C621-28D3-4C23-B7F4-08F14907FC29}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>

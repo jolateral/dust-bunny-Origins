@@ -10,11 +10,20 @@
     "Type": "Event",
     "GUID": "{1739B67D-1F53-4924-9D60-0AB8C815D5A6}",
     "Language": "SFX",
-    "Hash": "{D75AA675-5726-9B11-E582-6F1B306D01FC}",
+    "Hash": "{801DA8A9-1D82-5FCE-E731-D9BE41A1FCC9}",
     "ObjectPath": "Play_sfx_bridge_creak_nl",
     "ShortName": "Play_sfx_bridge_creak_nl",
     "Path": "Event/Play_sfx_bridge_creak_nl.bnk",
     "Media": [
+     {
+      "Id": "306431546",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_bunny_impact_nl_001.wav",
+      "Path": "Media/306431546.wem",
+      "CachePath": "17/{17B74320-672C-8327-A881-359FFF6322FC}.wem"
+     },
      {
       "Id": "442927121",
       "Language": "SFX",
@@ -40,11 +49,13 @@
       "Name": "Play_sfx_bridge_creak_nl",
       "ObjectPath": "\\Events\\Default Work Unit\\SFX\\SFX_Interactable\\Play_sfx_bridge_creak_nl",
       "GUID": "{1739B67D-1F53-4924-9D60-0AB8C815D5A6}",
-      "MaxAttenuation": "50",
       "DurationType": "OneShot",
       "DurationMin": "2.5596666",
       "DurationMax": "2.5596666",
       "MediaRefs": [
+       {
+        "Id": "306431546"
+       },
        {
         "Id": "442927121"
        },
@@ -56,6 +67,6 @@
     ]
    }
   ],
-  "FileHash": "{A2402D4A-7B6B-0F4F-6F7A-D7BAF32EF45E}"
+  "FileHash": "{A94C48D2-B023-8ADD-CDB0-659D63AEBB10}"
  }
 }
