@@ -21,6 +21,7 @@ namespace AK
         static const AkUniqueID PLAY_AMB_FOOTSTEP_SLIPPER = 2859770665U;
         static const AkUniqueID PLAY_AMB_PLATES = 3831521374U;
         static const AkUniqueID PLAY_AMB_ROOM_LP = 3112684807U;
+        static const AkUniqueID PLAY_MUS_ENDSEQ = 3593716606U;
         static const AkUniqueID PLAY_MUS_GAME = 3188041860U;
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
         static const AkUniqueID PLAY_RULER_BRIDGE_NL = 2095326951U;

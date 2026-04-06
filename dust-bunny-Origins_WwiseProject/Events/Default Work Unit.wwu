@@ -755,7 +755,7 @@
 										</Action>
 										<Action Name="" ID="{43DAA23D-FC5C-4A30-9574-0341D0F9ED4A}" ShortID="968586626">
 											<PropertyList>
-												<Property Name="Delay" Type="Real64" Value="0.2"/>
+												<Property Name="Delay" Type="Real64" Value="0.5"/>
 												<Property Name="FadeInCurve" Type="int16" Value="2"/>
 												<Property Name="FadeTime" Type="Real64" Value="1"/>
 											</PropertyList>
@@ -1011,12 +1011,31 @@
 								</Event>
 							</ChildrenList>
 						</Folder>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="EndSeq" ID="{50BF0810-9C14-408D-BB71-933288D1531A}" ShortID="538405127">
+					<ChildrenList>
 						<Event Name="Play_sfx_endseq" ID="{2DEAEBE3-AE4A-491D-A440-8AA823017137}">
 							<ChildrenList>
 								<Action Name="" ID="{1F2C8548-DDB4-477C-84AE-457F06340D16}" ShortID="280935228">
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="sfx_endseq" ID="{F8F65FA4-6D01-44D3-A7E6-DAB9E5B50646}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_mus_endseq" ID="{546E32D9-68CF-4A1E-AB9E-3319EEFC645B}">
+							<ChildrenList>
+								<Action Name="" ID="{B0827154-012D-43F9-A1CB-31CD05EDBF44}" ShortID="675080479">
+									<PropertyList>
+										<Property Name="FadeInCurve" Type="int16" Value="6"/>
+										<Property Name="FadeTime" Type="Real64" Value="5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="mus_endseq" ID="{90D9B28E-7585-4FEF-A4D0-42F6B17F78A9}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

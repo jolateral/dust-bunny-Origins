@@ -231,9 +231,9 @@ public class DiaryUIManager : MonoBehaviour
     private IEnumerator HideDiary()
     {
         AkUnitySoundEngine.SetState("player_state", "None");
-        AkUnitySoundEngine.SetState("mus_zone2", "mus_zone2_4");
+        AkUnitySoundEngine.SetState("mus_state", "glide");
 
-        Debug.Log("Music State set to: mus_zone2, mus_zone2_4");
+        Debug.Log("Music State set to: mus_state, mus_zone2_4");
 
         waitingForInput = false;
 
