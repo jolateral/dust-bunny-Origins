@@ -137,9 +137,16 @@ public class CameraFocusTrigger : MonoBehaviour
         // Lower sound volume/kill movement sounds
         AkUnitySoundEngine.SetState("player_state", "memory");
 
-        // --- 2. DISABLE CAMERA CONTROLS ---
+        // --- 2. DISABLE CAMERA CONTROLS & COLLIDERS ---
         if (tpCamera != null) tpCamera.enabled = false;
         if (cinemachineBrain != null) cinemachineBrain.enabled = false;
+
+        // NEW: Turn off any colliders on the camera so it doesn't hit or trigger things while panning
+        Collider[] cameraColliders = mainCam.GetComponents<Collider>();
+        foreach (Collider col in cameraColliders)
+        {
+            col.enabled = false;
+        }
 
         // --- 3. SAVE ORIGINAL CAMERA STATE ---
         Vector3 originalPos = mainCam.transform.position;
@@ -183,6 +190,12 @@ public class CameraFocusTrigger : MonoBehaviour
         // --- 7. RESTORE EVERYTHING ---
         if (tpCamera != null) tpCamera.enabled = true;
         if (cinemachineBrain != null) cinemachineBrain.enabled = true;
+
+        // NEW: Re-enable the camera colliders after the pan is finished
+        foreach (Collider col in cameraColliders)
+        {
+            col.enabled = true;
+        }
         
         // UNFREEZE THE PLAYER
         if (bunnyRb != null) 
