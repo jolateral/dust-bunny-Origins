@@ -42410,7 +42410,7 @@ GameObject:
   - component: {fileID: 1412084496}
   - component: {fileID: 1412084495}
   m_Layer: 0
-  m_Name: OOP-Poster (1)
+  m_Name: BunBun-Poster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69517,7 +69517,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fan
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6268645315487496708, guid: e73f4e618050fd6428f1100cd4eced31, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -69527,6 +69528,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3138272727505498727, guid: e73f4e618050fd6428f1100cd4eced31, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1033511371921639114}
+    - targetCorrespondingSourceObject: {fileID: 3138272727505498727, guid: e73f4e618050fd6428f1100cd4eced31, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1033511371921639116}
   m_SourcePrefab: {fileID: 100100000, guid: e73f4e618050fd6428f1100cd4eced31, type: 3}
 --- !u!4 &1033511371921639112 stripped
 Transform:
@@ -69591,6 +69595,28 @@ MonoBehaviour:
   scalingFactor: 1
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!95 &1033511371921639116
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899182535}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a41a37f7cb1b9d64899bcd5ab12c1363, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1059426611034956538
 Transform:
   m_ObjectHideFlags: 0
