@@ -58,7 +58,6 @@ public class DustBunnyController : MonoBehaviour
 
     private Rigidbody rb;
     private Collider playerCollider;
-    public bool isOutOfBounds = false;
 
     private float turnSmoothVelocity;
     private float lastDashTime = -10f;
@@ -83,6 +82,9 @@ public class DustBunnyController : MonoBehaviour
 
     // Time until which jump input should be ignored (e.g., just after closing UI overlays).
     private float jumpSuppressedUntil;
+
+    private int outOfBoundsTriggerCount = 0;
+    public bool isOutOfBounds => outOfBoundsTriggerCount > 0;
 
     [Header("--- Car Hit Settings ---")]
     public float carKnockbackForce = 6f;
@@ -213,29 +215,23 @@ public class DustBunnyController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         HandleCarHit(collision.collider);
-
-        if (collision.collider.CompareTag("OutOfBounds"))
-            isOutOfBounds = true;
     }
 
-    void OnCollisionExit(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("OutOfBounds"))
-            isOutOfBounds = false;
+        HandleCarHit(other);    
+        if (!other.CompareTag("OutOfBounds"))
+            return;
+
+        outOfBoundsTriggerCount++;
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        HandleCarHit(other);
+        if (!other.CompareTag("OutOfBounds"))
+            return;
 
-        if (other.CompareTag("OutOfBounds"))
-            isOutOfBounds = true;
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("OutOfBounds"))
-            isOutOfBounds = false;
+        outOfBoundsTriggerCount = Mathf.Max(0, outOfBoundsTriggerCount - 1);
     }
 
     void HandleCarHit(Collider other)
@@ -782,6 +778,11 @@ public class DustBunnyController : MonoBehaviour
 
         if (_animator)
             _animator.SetBool("isGrounded", isGrounded);
+    }
+
+    public void ClearOutOfBoundsState()
+    {
+        outOfBoundsTriggerCount = 0;
     }
 
     void OnDrawGizmosSelected()

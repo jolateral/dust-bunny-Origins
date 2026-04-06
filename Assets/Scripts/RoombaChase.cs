@@ -211,6 +211,6 @@ public class RoombaChase : MonoBehaviour
         AkUnitySoundEngine.SetState("mus_state", "zone2");
 
         if (playerController != null)
-            playerController.isOutOfBounds = false;
+            playerController.ClearOutOfBoundsState();
     }
 }
