@@ -208,6 +208,8 @@ public class RoombaChase : MonoBehaviour
         player.position = respawnPoint.position;
         player.rotation = respawnPoint.rotation;
 
+        AkUnitySoundEngine.SetState("mus_state", "zone2");
+
         if (playerController != null)
             playerController.isOutOfBounds = false;
     }

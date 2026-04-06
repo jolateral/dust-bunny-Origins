@@ -3620,7 +3620,7 @@
 															<MusicFade Name="Source Fade-out" ID="{D00B3471-008F-48A2-9327-AA201E579BEB}">
 																<PropertyList>
 																	<Property Name="FadeCurve" Type="int16" Value="1"/>
-																	<Property Name="FadeTime" Type="Real64" Value="5"/>
+																	<Property Name="FadeTime" Type="Real64" Value="8"/>
 																	<Property Name="FadeType" Type="int16" Value="1"/>
 																</PropertyList>
 															</MusicFade>
@@ -3629,7 +3629,7 @@
 															<MusicFade Name="Destination Fade-in" ID="{19779505-0A7E-4301-A023-467F28FB5A37}">
 																<PropertyList>
 																	<Property Name="FadeCurve" Type="int16" Value="7"/>
-																	<Property Name="FadeTime" Type="Real64" Value="3"/>
+																	<Property Name="FadeTime" Type="Real64" Value="8"/>
 																</PropertyList>
 															</MusicFade>
 														</DestinationFadeIn>
@@ -13988,14 +13988,9 @@
 												<Value>30</Value>
 											</ValueList>
 										</Property>
-										<Property Name="Pitch" Type="int32">
-											<ValueList>
-												<Value>-400</Value>
-											</ValueList>
-										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-6</Value>
+												<Value>-3</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
