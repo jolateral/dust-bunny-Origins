@@ -42,7 +42,6 @@
 											<PropertyList>
 												<Property Name="ActionType" Type="int16" Value="2"/>
 												<Property Name="FadeOutCurve" Type="int16" Value="6"/>
-												<Property Name="FadeTime" Type="Real64" Value="5"/>
 											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Target">
@@ -372,6 +371,24 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_bookshelf_fan_lp" ID="{CCBA2F88-A0F1-4C00-B4F6-EB8FFB1AFAD0}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_tamagotchi_impact" ID="{207930C6-A865-4330-A864-BDC774D92A3B}">
+									<ChildrenList>
+										<Action Name="" ID="{A4F386DA-0002-4A22-8494-63C2B81A5F11}" ShortID="506064107">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_tamagotchi_impact" ID="{80495EF5-593B-4013-875A-C4B1FB9F0E85}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+										<Action Name="" ID="{5C4300B5-5FEB-49A4-B59A-A9ED2AF661DE}" ShortID="167920846">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_ui_select_nl" ID="{8BD81CAE-6A82-45C8-A621-2F7E2713EA07}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -1073,6 +1090,17 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_button_absorb_nl" ID="{2E57DFC4-D31D-4857-8EA4-83C252EE4BFA}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_tamagotchi_absorb_nl" ID="{0B2E63AD-CD68-4D4F-B3A9-98764CA1E4AD}">
+									<ChildrenList>
+										<Action Name="" ID="{C3A8DE12-3AB7-4502-A735-89A988EF48EE}" ShortID="712425876">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_tamagotchi_absorb_nl" ID="{F6C3E93F-BFBB-42F4-BFC4-E8D3A9C7B347}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

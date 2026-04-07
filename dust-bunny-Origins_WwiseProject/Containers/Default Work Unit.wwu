@@ -16586,6 +16586,242 @@
 										<ActiveSource Name="sfx_roomba_lp" ID="{8BA1FC88-0FC1-42BD-BB37-78D30B0D1BC4}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<RandomSequenceContainer Name="sfx_tamagotchi_impact" ID="{80495EF5-593B-4013-875A-C4B1FB9F0E85}" ShortID="797487343">
+									<PropertyList>
+										<Property Name="IgnoreParentMaxSoundInstance" Type="bool" Value="True"/>
+										<Property Name="MaxSoundPerInstance" Type="int16">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{B728F898-07E7-441E-A01B-4F2C40AB2620}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="200"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="UseMaxSoundPerInstance" Type="bool">
+											<ValueList>
+												<Value>True</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{71D0B844-7E31-47DD-A34E-895A4F5CDCFA}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Min" Type="Real64" Value="-3"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Attenuation">
+											<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+										</Reference>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="sfx_tamagotchi_impact_nl-001" ID="{35756B1A-D922-4B28-A282-87AD55E178A9}" ShortID="17655241">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_tamagotchi_impact_nl-001" ID="{0C126F19-4B76-4F2D-827D-46BD18C52470}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_tamagotchi_impact_nl-001.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="294353930"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_tamagotchi_impact_nl-001" ID="{0C126F19-4B76-4F2D-827D-46BD18C52470}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_tamagotchi_impact_nl-002" ID="{66A2DB7E-A3FD-4BFC-90A1-76305C7B0334}" ShortID="174242759">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_tamagotchi_impact_nl-002" ID="{80F669DD-2A33-46B2-907D-98976F3EC43E}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_tamagotchi_impact_nl-002.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="508101008"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_tamagotchi_impact_nl-002" ID="{80F669DD-2A33-46B2-907D-98976F3EC43E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_tamagotchi_impact_nl-003" ID="{BF6798AA-06EE-4A1C-9B00-FADFBA4DCB75}" ShortID="290888584">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_tamagotchi_impact_nl-003" ID="{11C93632-93B5-43CC-B632-5BEB5EB3A7D3}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_tamagotchi_impact_nl-003.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="241945062"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_tamagotchi_impact_nl-003" ID="{11C93632-93B5-43CC-B632-5BEB5EB3A7D3}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_tamagotchi_impact_nl-004" ID="{C835757E-C8CD-432A-B9F8-0D850B1B2CB7}" ShortID="587572509">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_tamagotchi_impact_nl-004" ID="{35D1E1F9-1873-4DBB-925E-000C40362CE2}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_tamagotchi_impact_nl-004.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="785559380"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_tamagotchi_impact_nl-004" ID="{35D1E1F9-1873-4DBB-925E-000C40362CE2}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_tamagotchi_impact_nl-005" ID="{385D3D85-A381-4B35-85F8-4806423B9754}" ShortID="229244778">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_tamagotchi_impact_nl-005" ID="{28A12D4E-43EA-4220-A68B-D52FE152DA23}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_tamagotchi_impact_nl-005.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="923455998"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_tamagotchi_impact_nl-005" ID="{28A12D4E-43EA-4220-A68B-D52FE152DA23}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_tamagotchi_impact_nl-006" ID="{26889F7A-BB04-4F00-A78B-4CD0E5A10D65}" ShortID="88788352">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_tamagotchi_impact_nl-006" ID="{54E0E8D0-C15E-4E4B-8C49-8B803E0A88E7}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_tamagotchi_impact_nl-006.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="544645474"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_tamagotchi_impact_nl-006" ID="{54E0E8D0-C15E-4E4B-8C49-8B803E0A88E7}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_tamagotchi_impact_nl-007" ID="{9FD76788-36F7-44A8-97A1-51EFEC3F9149}" ShortID="362559148">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_tamagotchi_impact_nl-007" ID="{96584592-3E79-4429-B62E-1A134D0901A7}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_tamagotchi_impact_nl-007.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1065602494"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_tamagotchi_impact_nl-007" ID="{96584592-3E79-4429-B62E-1A134D0901A7}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="sfx_tamagotchi_absorb_nl" ID="{F6C3E93F-BFBB-42F4-BFC4-E8D3A9C7B347}" ShortID="854619037">
+											<PropertyList>
+												<Property Name="3DSpatialization" Type="int16" Value="2"/>
+												<Property Name="UseGameAuxSends" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Attenuation">
+													<ObjectRef Name="Object_Attenuation" ID="{CB0575D9-EF40-4174-960B-434B38E8A7A9}" WorkUnitID="{DC66B5A5-1FDB-4196-82E7-FBA168F69B5E}"/>
+												</Reference>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D3825642-F025-4FBF-8A43-E3763B045392}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F0FD729E-B36E-4C30-83E0-FFC878DA3935}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sfx_tamagotchi_absorb_nl" ID="{9F9970C9-3CC0-4548-B30C-6F05ACDB5ABA}">
+													<Language>SFX</Language>
+													<AudioFile>sfx_tamagotchi_absorb_nl.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="951684554"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sfx_tamagotchi_absorb_nl" ID="{9F9970C9-3CC0-4548-B30C-6F05ACDB5ABA}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 						<PropertyContainer Name="SFX_Absorb" ID="{4A73ADDF-1F4F-4823-AD2A-A2D638D66A6A}" ShortID="481756803">

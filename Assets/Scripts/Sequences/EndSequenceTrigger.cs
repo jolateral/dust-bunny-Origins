@@ -21,6 +21,8 @@ public class EndSequenceTrigger : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            stopMusic.Post(gameObject);
+
             triggered = true;
             StartCoroutine(EndSequence());
         }
@@ -28,8 +30,6 @@ public class EndSequenceTrigger : MonoBehaviour
 
     IEnumerator EndSequence()
     {
-        stopMusic.Post(gameObject);
-
         // Wait before fading
         yield return new WaitForSeconds(delayBeforeFade);
 

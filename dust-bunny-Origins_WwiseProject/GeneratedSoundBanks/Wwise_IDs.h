@@ -62,6 +62,8 @@ namespace AK
         static const AkUniqueID PLAY_SFX_ROOMBA_LP = 1824279243U;
         static const AkUniqueID PLAY_SFX_STAPLER_RELEASE_NL = 2050082196U;
         static const AkUniqueID PLAY_SFX_STAPLER_WINDUP_NL = 166426674U;
+        static const AkUniqueID PLAY_SFX_TAMAGOTCHI_ABSORB_NL = 3885557168U;
+        static const AkUniqueID PLAY_SFX_TAMAGOTCHI_IMPACT = 2547893210U;
         static const AkUniqueID PLAY_SFX_TROPHY_NL = 743151801U;
         static const AkUniqueID PLAY_SFX_UI_CHIME_NL = 459017098U;
         static const AkUniqueID PLAY_SFX_UI_SELECT_NL = 4289076888U;
