@@ -158,7 +158,5 @@ public class Lever : MonoBehaviour
         }
 
         hook.localPosition = targetPosition;
-
-        latchClickSfx.Post(gameObject);
     }
 }
