@@ -28,10 +28,10 @@ public class EndSequenceTrigger : MonoBehaviour
 
     IEnumerator EndSequence()
     {
+        stopMusic.Post(gameObject);
+
         // Wait before fading
         yield return new WaitForSeconds(delayBeforeFade);
-
-        stopMusic.Post(gameObject);
 
         // Fade to ending scene
         FadeSequenceManager.Instance.FadeToScene(endingScene, fadeDuration);

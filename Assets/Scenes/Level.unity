@@ -6352,11 +6352,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
---- !u!1 &201401605 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7221043501422124538, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
-  m_PrefabInstance: {fileID: 6277406875652415411}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &201530725
 GameObject:
   m_ObjectHideFlags: 0
@@ -37402,23 +37397,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8033749258565371712, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
   m_PrefabInstance: {fileID: 6277406875652415411}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1219475724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201401605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
-  physicsImpact:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: b53b7d4964046424a8dbef7737770ffd, type: 2}
-  debug: 0
 --- !u!1001 &1226363690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39992,8 +39970,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndSeqTrigger
   endingScene: EndSeq
-  delayBeforeFade: 2
-  fadeDuration: 2
+  delayBeforeFade: 2.5
+  fadeDuration: 2.5
   stopMusic:
     idInternal: 0
     valueGuidInternal: 
@@ -71164,8 +71142,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5590349401243771295, guid: f9239be71f4c92649b3965d7bda4265e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2837598979076073509}
   m_SourcePrefab: {fileID: 100100000, guid: f9239be71f4c92649b3965d7bda4265e, type: 3}
+--- !u!1 &1843159428574124687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5590349401243771295, guid: f9239be71f4c92649b3965d7bda4265e, type: 3}
+  m_PrefabInstance: {fileID: 1843159428574124686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1843779046627902276
 GameObject:
   m_ObjectHideFlags: 0
@@ -71926,6 +71912,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8026000691227833490, guid: f9239be71f4c92649b3965d7bda4265e, type: 3}
   m_PrefabInstance: {fileID: 1843159428574124686}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2837598979076073509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843159428574124687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 0a2cb1a26b140b74b81ca87cbef07448, type: 2}
+  debug: 0
 --- !u!1001 &2879321292160470870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74430,6 +74433,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 248833094}
     m_Modifications:
+    - target: {fileID: 7040375019500247382, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
+      propertyPath: holePunch.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: b53b7d4964046424a8dbef7737770ffd, type: 2}
     - target: {fileID: 7221043501422124538, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
       propertyPath: m_Name
       value: Holepuncher
@@ -74481,10 +74488,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7221043501422124538, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1219475724}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
 --- !u!137 &6298780574482847926
 SkinnedMeshRenderer:

@@ -353,16 +353,12 @@ MonoBehaviour:
   endingText: {fileID: 1447973159}
   endingImage: {fileID: 341386879}
   lines:
-  - type: 0
-    text: Life moves on, but memories remain
-    image: {fileID: 0}
-    screenPosition: {x: 0, y: 0}
-  - type: 1
-    text: 
+  - text: "Life moves on,\n\t\tbut memories remain"
     image: {fileID: 21300000, guid: fa2f212006631ca4e89415a0860a800b, type: 3}
-    screenPosition: {x: 0, y: 0}
-  fadeTime: 3.5
-  displayTime: 4
+    textPosition: {x: -650, y: 0}
+    imagePosition: {x: 500, y: 0}
+  fadeTime: 5
+  displayTime: 8
   returnScene: StartMenu
   delayBeforeReturn: 5
   endSequence:
@@ -728,8 +724,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

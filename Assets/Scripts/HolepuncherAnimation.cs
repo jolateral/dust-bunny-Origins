@@ -5,6 +5,8 @@ public class HolepuncherAnimation : MonoBehaviour
     public string playerTag = "Player";
     private Animator animator;
 
+    public AK.Wwise.Event holePunch;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -14,6 +16,7 @@ public class HolepuncherAnimation : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(playerTag))
         {
+            holePunch.Post(gameObject);
             animator.SetTrigger("Swing");
         }
     }
@@ -22,6 +25,7 @@ public class HolepuncherAnimation : MonoBehaviour
     {
         if (other.CompareTag(playerTag))
         {
+            holePunch.Post(gameObject);
             animator.SetTrigger("Swing");
         }
     }
