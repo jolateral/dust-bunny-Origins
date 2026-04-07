@@ -107,17 +107,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiaryItem
   keyID: Diary_Key_01
   diarySprite: {fileID: 21300000, guid: f118c2e7c491b4408ac0d2d95d0903d7, type: 3}
+  diaryLock: {fileID: 0}
+  diaryClosedObject: {fileID: 0}
+  diaryOpenObject: {fileID: 0}
   diaryText: 
   lockedHintText: It's locked... I need to find the key.
+  hintImage: {fileID: 0}
   hintCooldown: 3
   unlockSfx:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: df72b77f4689ba74ca62a22b48cac581, type: 2}
+  unlockMusic:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 433d477bc2d04f74f80801562900b256, type: 2}
   lockedBumpSfx:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 6b87a80b1119cbb488eb6f6d68569801, type: 2}
 --- !u!65 &8552890047993757725
 BoxCollider:
   m_ObjectHideFlags: 0

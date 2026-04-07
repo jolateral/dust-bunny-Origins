@@ -4127,6 +4127,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 81485195}
     m_Modifications:
+    - target: {fileID: -2485056270799254641, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -2485056270799254641, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2485056270799254641, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
+      propertyPath: m_AngularDamping
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5271648413886638805, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
       propertyPath: m_ReceiveGI
       value: 2
@@ -6181,6 +6193,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc6afe5f553813a42ba1d012ae3ed736, type: 3}
+--- !u!1 &201401605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7221043501422124538, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
+  m_PrefabInstance: {fileID: 6277406875652415411}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &201530725
 GameObject:
   m_ObjectHideFlags: 0
@@ -6696,7 +6713,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 1e0292f285c0e574ca929460d1e2a89f, type: 2}
   reverbLevel: 1
-  transmissionLoss: 0.3
+  transmissionLoss: 0.6
   distanceBehavior: 0
   roomToneEvent:
     idInternal: 0
@@ -33655,6 +33672,33 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: d992539241f1ea34e9e2157695b9c2d9, type: 2}
   debug: 0
+--- !u!54 &1076563783
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076563776}
+  serializedVersion: 5
+  m_Mass: 20
+  m_LinearDamping: 0.9
+  m_AngularDamping: 0.9
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1076957463
 GameObject:
   m_ObjectHideFlags: 0
@@ -36775,6 +36819,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8033749258565371712, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
   m_PrefabInstance: {fileID: 6277406875652415411}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1219475724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201401605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: b53b7d4964046424a8dbef7737770ffd, type: 2}
+  debug: 0
 --- !u!1001 &1226363690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41445,7 +41506,7 @@ MonoBehaviour:
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 1e0292f285c0e574ca929460d1e2a89f, type: 2}
   reverbLevel: 1
-  transmissionLoss: 0.6
+  transmissionLoss: 0.5
   distanceBehavior: 0
   roomToneEvent:
     idInternal: 0
@@ -57343,6 +57404,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 92f6fda64c66c82419e50733ba6528ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1076563782}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 92f6fda64c66c82419e50733ba6528ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1076563783}
   m_SourcePrefab: {fileID: 100100000, guid: 92f6fda64c66c82419e50733ba6528ed, type: 3}
 --- !u!4 &1714712118 stripped
 Transform:
@@ -60356,6 +60420,30 @@ MonoBehaviour:
   groupIdInternal: 0
   valueGuidInternal: 
   groupGuidInternal: 
+--- !u!114 &1832411579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315581880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7a482e861e9b241bf741345c77da50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkState
+  triggerList: d1bbb3b5
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 57aef32e6ad8b084483497cd8121322d, type: 2}
+  valueIdInternal: 0
+  groupIdInternal: 0
+  valueGuidInternal: 
+  groupGuidInternal: 
 --- !u!1 &1834050643
 GameObject:
   m_ObjectHideFlags: 0
@@ -61867,8 +61955,20 @@ PrefabInstance:
       value: -1681.178
       objectReference: {fileID: 0}
     - target: {fileID: 5315253676945081778, guid: 79b7e704377abd34c8cd456517af2b8e, type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315253676945081778, guid: 79b7e704377abd34c8cd456517af2b8e, type: 3}
       propertyPath: m_UseGravity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315253676945081778, guid: 79b7e704377abd34c8cd456517af2b8e, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315253676945081778, guid: 79b7e704377abd34c8cd456517af2b8e, type: 3}
+      propertyPath: m_AngularDamping
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -66554,6 +66654,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 81485195}
     m_Modifications:
+    - target: {fileID: -2485056270799254641, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -2485056270799254641, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2485056270799254641, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
+      propertyPath: m_AngularDamping
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5271648413886638805, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
       propertyPath: m_ReceiveGI
       value: 2
@@ -70266,6 +70378,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6188859410806334354, guid: 3f8ba5e4aa0ec674bb86489a5242cde4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1832411571}
+    - targetCorrespondingSourceObject: {fileID: 6188859410806334354, guid: 3f8ba5e4aa0ec674bb86489a5242cde4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1832411579}
   m_SourcePrefab: {fileID: 100100000, guid: 3f8ba5e4aa0ec674bb86489a5242cde4, type: 3}
 --- !u!1001 &2017596141318341828
 PrefabInstance:
@@ -72126,6 +72241,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 81485195}
     m_Modifications:
+    - target: {fileID: -2485056270799254641, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -2485056270799254641, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2485056270799254641, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
+      propertyPath: m_AngularDamping
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5271648413886638805, guid: cbeddeab263024a55ae0315f64dafa38, type: 3}
       propertyPath: m_ReceiveGI
       value: 2
@@ -73452,7 +73579,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7221043501422124538, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1219475724}
   m_SourcePrefab: {fileID: 100100000, guid: 76a039205ebebb143b2d718f3995295e, type: 3}
 --- !u!137 &6298780574482847926
 SkinnedMeshRenderer:
@@ -74067,8 +74197,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5315253676945081778, guid: 8e240208f352e4761bfb43a0c045ed7e, type: 3}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315253676945081778, guid: 8e240208f352e4761bfb43a0c045ed7e, type: 3}
       propertyPath: m_UseGravity
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315253676945081778, guid: 8e240208f352e4761bfb43a0c045ed7e, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315253676945081778, guid: 8e240208f352e4761bfb43a0c045ed7e, type: 3}
+      propertyPath: m_AngularDamping
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -590,109 +590,12 @@
 										</Action>
 									</ChildrenList>
 								</Event>
-								<Event Name="Play_sfx_zone1_latch_click_nl" ID="{D3226511-B9DE-4E95-86F5-EED139A3F672}">
-									<ChildrenList>
-										<Action Name="" ID="{8B82BC21-06D9-42AB-9BA1-CE64E4865F46}" ShortID="179132873">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_zone1_latch_click_nl" ID="{AD3CB3AE-B9DA-43DE-ABEA-B4AE2A4B7EF9}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="Play_sfx_zone1_lever_nl" ID="{442A822A-32C4-475C-B01B-CD9F8D009014}">
-									<ChildrenList>
-										<Action Name="" ID="{2102A45B-27B5-429D-9161-1E8306EABB66}" ShortID="697392190">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_zone1_lever_nl" ID="{50EC3A20-9254-48B5-9CED-91298E928903}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="Play_sfx_zone1_pressureplate_click_nl" ID="{E5803598-2757-448F-B11B-E467EC9BD11A}">
-									<ChildrenList>
-										<Action Name="" ID="{E5C77E3C-AF77-4BCB-B200-E30F02F2E318}" ShortID="221853164">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_zone1_pressureplate_click_nl" ID="{58CBF953-BDF4-4B7F-AF3D-F9274625A013}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-										<Action Name="" ID="{0D519AA8-2CC5-4C5A-940E-3DD2A6307A3D}" ShortID="929022358">
-											<PropertyList>
-												<Property Name="Delay" Type="Real64" Value="0.5"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_harp_stinger-002" ID="{ABC9AC31-BB75-4FA3-A920-4C61F9DB913E}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="Play_sfx_zone1_latch_lower_nl" ID="{30587F7B-1A2D-4CCA-A434-44F2255CBA29}">
-									<ChildrenList>
-										<Action Name="" ID="{D4463FD9-251A-4F1D-96FF-8C669D9C26E1}" ShortID="314984316">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_zone1_latch_lower_nl" ID="{525D1FC0-F6F0-4DDD-965B-35BB3F90C630}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="Play_sfx_zone1_lever_unlock_nl" ID="{C2230A06-7E6D-44FB-AE7A-A69ADA906AEF}">
-									<ChildrenList>
-										<Action Name="" ID="{2D3F475D-5E4F-475F-BD12-E8F84188201D}" ShortID="347231474">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_zone1_lever_unlock_nl" ID="{0551DB35-B34E-4A04-A649-630D063F699E}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-										<Action Name="" ID="{BC765390-11FB-4F06-8F89-4E23C7C06A26}" ShortID="150880436">
-											<PropertyList>
-												<Property Name="Delay" Type="Real64" Value="0.5"/>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_harp_stinger-001" ID="{2BD23765-C87F-4555-9133-FBFE6DA57687}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="Play_sfx_zone1_pressureplate_slide_nl" ID="{854431CB-6E55-4139-8E01-060F1E14090C}">
-									<ChildrenList>
-										<Action Name="" ID="{7F3BCDC3-7642-4F27-985B-23BD9B0F7CB2}" ShortID="13722570">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_zone1_pressureplate_slide_nl" ID="{C95314C2-B30B-4637-B0E0-20A61EFEBC5A}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
 								<Event Name="Play_sfx_vent_ridestart_nl" ID="{F4092623-1C22-4A91-9EA2-05126F976EE9}">
 									<ChildrenList>
 										<Action Name="" ID="{B9A423A4-415F-4742-9193-43E27F52CCDF}" ShortID="309303204">
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_vent_ride" ID="{0834C2C5-FBF4-4964-88F2-88BBA9B43712}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
-												</Reference>
-											</ReferenceList>
-										</Action>
-									</ChildrenList>
-								</Event>
-								<Event Name="Play_sfx_zone1_door_open_nl" ID="{B921608D-A069-4EC0-84E4-25D299E0798C}">
-									<ChildrenList>
-										<Action Name="" ID="{34FDDEC5-517C-42DE-923B-6D23D222D08E}" ShortID="222178969">
-											<ReferenceList>
-												<Reference Name="Target">
-													<ObjectRef Name="sfx_zone1_door_open_nl" ID="{D95D4F44-B4A3-4EC8-8ECB-17212E3D6119}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -767,6 +670,107 @@
 										</Action>
 									</ChildrenList>
 								</Event>
+								<Folder Name="sfx_zone1_lock" ID="{C5DD00F6-7183-4EA3-830D-BE4B4F93B9CE}" ShortID="695217263">
+									<ChildrenList>
+										<Event Name="Play_sfx_zone1_door_open_nl" ID="{B921608D-A069-4EC0-84E4-25D299E0798C}">
+											<ChildrenList>
+												<Action Name="" ID="{34FDDEC5-517C-42DE-923B-6D23D222D08E}" ShortID="222178969">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="sfx_zone1_door_open_nl" ID="{D95D4F44-B4A3-4EC8-8ECB-17212E3D6119}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_sfx_zone1_pressureplate_click_nl" ID="{E5803598-2757-448F-B11B-E467EC9BD11A}">
+											<ChildrenList>
+												<Action Name="" ID="{E5C77E3C-AF77-4BCB-B200-E30F02F2E318}" ShortID="221853164">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="sfx_zone1_pressureplate_click_nl" ID="{58CBF953-BDF4-4B7F-AF3D-F9274625A013}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{0D519AA8-2CC5-4C5A-940E-3DD2A6307A3D}" ShortID="929022358">
+													<PropertyList>
+														<Property Name="Delay" Type="Real64" Value="0.5"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="sfx_harp_stinger-002" ID="{ABC9AC31-BB75-4FA3-A920-4C61F9DB913E}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_sfx_zone1_lever_nl" ID="{442A822A-32C4-475C-B01B-CD9F8D009014}">
+											<ChildrenList>
+												<Action Name="" ID="{2102A45B-27B5-429D-9161-1E8306EABB66}" ShortID="697392190">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="sfx_zone1_lever_nl" ID="{50EC3A20-9254-48B5-9CED-91298E928903}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_sfx_zone1_lever_unlock_nl" ID="{C2230A06-7E6D-44FB-AE7A-A69ADA906AEF}">
+											<ChildrenList>
+												<Action Name="" ID="{2D3F475D-5E4F-475F-BD12-E8F84188201D}" ShortID="347231474">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="sfx_zone1_lever_unlock_nl" ID="{0551DB35-B34E-4A04-A649-630D063F699E}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+												<Action Name="" ID="{BC765390-11FB-4F06-8F89-4E23C7C06A26}" ShortID="150880436">
+													<PropertyList>
+														<Property Name="Delay" Type="Real64" Value="0.5"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="sfx_harp_stinger-001" ID="{2BD23765-C87F-4555-9133-FBFE6DA57687}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_sfx_zone1_latch_click_nl" ID="{D3226511-B9DE-4E95-86F5-EED139A3F672}">
+											<ChildrenList>
+												<Action Name="" ID="{8B82BC21-06D9-42AB-9BA1-CE64E4865F46}" ShortID="179132873">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="sfx_zone1_latch_click_nl" ID="{AD3CB3AE-B9DA-43DE-ABEA-B4AE2A4B7EF9}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_sfx_zone1_latch_lower_nl" ID="{30587F7B-1A2D-4CCA-A434-44F2255CBA29}">
+											<ChildrenList>
+												<Action Name="" ID="{D4463FD9-251A-4F1D-96FF-8C669D9C26E1}" ShortID="314984316">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="sfx_zone1_latch_lower_nl" ID="{525D1FC0-F6F0-4DDD-965B-35BB3F90C630}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+										<Event Name="Play_sfx_zone1_pressureplate_slide_nl" ID="{854431CB-6E55-4139-8E01-060F1E14090C}">
+											<ChildrenList>
+												<Action Name="" ID="{7F3BCDC3-7642-4F27-985B-23BD9B0F7CB2}" ShortID="13722570">
+													<ReferenceList>
+														<Reference Name="Target">
+															<ObjectRef Name="sfx_zone1_pressureplate_slide_nl" ID="{C95314C2-B30B-4637-B0E0-20A61EFEBC5A}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+														</Reference>
+													</ReferenceList>
+												</Action>
+											</ChildrenList>
+										</Event>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="SFX_Memory" ID="{BB92FFEB-B625-49B8-A649-F23EC8D32D60}" ShortID="877945584">
@@ -965,12 +969,12 @@
 						</Folder>
 						<Folder Name="SFX_Absorbable" ID="{2DDD78FE-9259-4624-8539-13958ABF75C1}" ShortID="34307065">
 							<ChildrenList>
-								<Event Name="Play_sfx_eraser_absorb_nl" ID="{C98E3718-FEA1-4929-BE57-C06E2817DA6E}">
+								<Event Name="Play_sfx_battery_absorb_nl" ID="{C98E3718-FEA1-4929-BE57-C06E2817DA6E}">
 									<ChildrenList>
 										<Action Name="" ID="{561154F7-992D-4104-ADBE-440F2D24DECF}" ShortID="871448505">
 											<ReferenceList>
 												<Reference Name="Target">
-													<ObjectRef Name="sfx_eraser_absorb_nl" ID="{EBEC5737-6303-4F9F-BBA5-86274D05786D}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+													<ObjectRef Name="sfx_battery_absorb_nl" ID="{EBEC5737-6303-4F9F-BBA5-86274D05786D}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>
@@ -1004,6 +1008,50 @@
 											<ReferenceList>
 												<Reference Name="Target">
 													<ObjectRef Name="sfx_lego_absorb_nl" ID="{CED5396D-F171-44C5-BD14-BD7E35869046}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_eraser_absorb_nl" ID="{AB077888-65E7-4F2D-B116-2FC1061E6B7B}">
+									<ChildrenList>
+										<Action Name="" ID="{6B37EF7B-D6E3-413C-BDA3-14FFB90358C3}" ShortID="24719502">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_eraser_absorb_nl" ID="{8E6561CD-1914-4842-9AA3-2766F7052FA5}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_pencil_absorb_nl" ID="{E628DC9C-44F7-4A16-A092-9D4CF841AB5D}">
+									<ChildrenList>
+										<Action Name="" ID="{5F177871-8C15-4835-AC11-E7E59AB5FA55}" ShortID="945582112">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_pencil_absorb_nl" ID="{CA095157-6B29-4A2D-8A41-0098C95C31F4}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_postit_absorb_nl" ID="{FE473F61-2991-4159-8C0A-8BA056BDB236}">
+									<ChildrenList>
+										<Action Name="" ID="{530732CA-7930-4F0C-B2F2-C2C39C946B09}" ShortID="605156649">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_postit_absorb_nl" ID="{C717E5BB-1233-4D61-B9BB-61E08116DA73}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
+												</Reference>
+											</ReferenceList>
+										</Action>
+									</ChildrenList>
+								</Event>
+								<Event Name="Play_sfx_button_absorb_nl" ID="{27881521-7331-4290-B58D-6DC72128399E}">
+									<ChildrenList>
+										<Action Name="" ID="{41F706B2-F620-40CF-B547-05E161632980}" ShortID="243505030">
+											<ReferenceList>
+												<Reference Name="Target">
+													<ObjectRef Name="sfx_button_absorb_nl" ID="{2E57DFC4-D31D-4857-8EA4-83C252EE4BFA}" WorkUnitID="{A57C4857-7F96-4DD7-B94B-8D4079773A9C}"/>
 												</Reference>
 											</ReferenceList>
 										</Action>

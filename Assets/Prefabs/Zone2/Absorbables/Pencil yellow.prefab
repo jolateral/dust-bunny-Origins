@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1545452663281219620}
   - component: {fileID: 2991332382729609209}
   - component: {fileID: -7805879881637092481}
+  - component: {fileID: 131870896406127814}
+  - component: {fileID: 240353940867487196}
   m_Layer: 0
   m_Name: Pencil yellow
   m_TagString: StickyObject
@@ -131,3 +133,47 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &131870896406127814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411800534463897416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2b8948cc81814489696ab3232024e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsBasedAudio
+  physicsImpact:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 476659ffcf4abb0408d2e1a67334e90b, type: 2}
+  debug: 0
+--- !u!54 &240353940867487196
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3411800534463897416}
+  serializedVersion: 5
+  m_Mass: 200
+  m_LinearDamping: 0.7
+  m_AngularDamping: 0.7
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

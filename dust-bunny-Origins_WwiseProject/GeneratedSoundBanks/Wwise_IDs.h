@@ -26,6 +26,7 @@ namespace AK
         static const AkUniqueID PLAY_MUS_STARTMENU = 1973883363U;
         static const AkUniqueID PLAY_RULER_BRIDGE_NL = 2095326951U;
         static const AkUniqueID PLAY_SFX_ART_KIT_OPEN_NL = 2718719620U;
+        static const AkUniqueID PLAY_SFX_BATTERY_ABSORB_NL = 2979380752U;
         static const AkUniqueID PLAY_SFX_BOOKSHELF_FAN_LP = 2878616736U;
         static const AkUniqueID PLAY_SFX_BRIDGE_CREAK_NL = 3975145325U;
         static const AkUniqueID PLAY_SFX_BUNNY_ABSORB_NL = 3617904731U;
@@ -35,6 +36,7 @@ namespace AK
         static const AkUniqueID PLAY_SFX_BUNNY_JUMP_NL = 1938447626U;
         static const AkUniqueID PLAY_SFX_BUNNY_LAND_NL = 16499847U;
         static const AkUniqueID PLAY_SFX_BUNNY_ROLL_NL = 2747268133U;
+        static const AkUniqueID PLAY_SFX_BUTTON_ABSORB_NL = 553606987U;
         static const AkUniqueID PLAY_SFX_CAR_IMPACT_NL = 2032188842U;
         static const AkUniqueID PLAY_SFX_CAR_MOVE_NL = 4207159517U;
         static const AkUniqueID PLAY_SFX_COIN_ABSORB_NL = 4259653120U;
@@ -46,6 +48,7 @@ namespace AK
         static const AkUniqueID PLAY_SFX_ERASER_ABSORB_NL = 1495456639U;
         static const AkUniqueID PLAY_SFX_GAME_START = 3576864173U;
         static const AkUniqueID PLAY_SFX_HAIRPIN_ABSORB_NL = 2555693410U;
+        static const AkUniqueID PLAY_SFX_HOLEPUNCH_NL = 1264574613U;
         static const AkUniqueID PLAY_SFX_KEY_PICKUP_NL = 3082622675U;
         static const AkUniqueID PLAY_SFX_LEGO_ABSORB_NL = 3199315176U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_001 = 1142362393U;
@@ -53,6 +56,8 @@ namespace AK
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_003 = 1142362395U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_004 = 1142362396U;
         static const AkUniqueID PLAY_SFX_MEMORY_DRAWING_NL_005 = 1142362397U;
+        static const AkUniqueID PLAY_SFX_PENCIL_ABSORB_NL = 3763076604U;
+        static const AkUniqueID PLAY_SFX_POSTIT_ABSORB_NL = 2512854650U;
         static const AkUniqueID PLAY_SFX_ROOMBA_IMPACT_NL = 2813769886U;
         static const AkUniqueID PLAY_SFX_ROOMBA_LP = 1824279243U;
         static const AkUniqueID PLAY_SFX_STAPLER_RELEASE_NL = 2050082196U;
