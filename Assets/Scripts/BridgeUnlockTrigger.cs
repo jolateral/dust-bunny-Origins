@@ -84,6 +84,8 @@ public class BridgeUnlockTrigger : MonoBehaviour
     [Tooltip("Optional Wwise event played when the bridge successfully unlocks.")]
     public AK.Wwise.Event bridgeUnlockSfx;
 
+    [SerializeField] GameObject bridgeOutlineGuide;
+
     // -----------------------------------------------------------------------
     // Private State
     // -----------------------------------------------------------------------
@@ -187,6 +189,9 @@ public class BridgeUnlockTrigger : MonoBehaviour
         // Step 4: Disable our trigger collider — the bridge is unlocked for good
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
+
+        // Remove outline
+        Destroy(bridgeOutlineGuide);
 
         Debug.Log("[BridgeUnlockTrigger] Bridge fully unlocked and trigger disabled.");
     }
