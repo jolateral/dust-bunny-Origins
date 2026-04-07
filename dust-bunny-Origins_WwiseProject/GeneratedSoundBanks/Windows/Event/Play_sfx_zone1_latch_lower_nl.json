@@ -10,7 +10,7 @@
     "Type": "Event",
     "GUID": "{30587F7B-1A2D-4CCA-A434-44F2255CBA29}",
     "Language": "SFX",
-    "Hash": "{38BF0BB9-02BC-82FD-A391-02CDC683F1A7}",
+    "Hash": "{1FD755ED-F98F-3DFA-4680-2D78CF3B06C7}",
     "ObjectPath": "Play_sfx_zone1_latch_lower_nl",
     "ShortName": "Play_sfx_zone1_latch_lower_nl",
     "Path": "Event/Play_sfx_zone1_latch_lower_nl.bnk",
@@ -22,7 +22,16 @@
       "Location": "Loose",
       "ShortName": "sfx_zone1_latch_lower_nl.wav",
       "Path": "Media/223240389.wem",
-      "CachePath": "9E/{9E1761D9-35F0-E722-456D-2245B6C22528}.wem"
+      "CachePath": "A8/{A814D0AC-10FF-7D8C-FE45-B38E7CF1A220}.wem"
+     },
+     {
+      "Id": "616861734",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "sfx_zone1_latch_click_nl.wav",
+      "Path": "Media/616861734.wem",
+      "CachePath": "58/{58ADBF79-8164-F051-148B-A0770B830957}.wem"
      }
     ],
     "Events": [
@@ -33,17 +42,20 @@
       "GUID": "{30587F7B-1A2D-4CCA-A434-44F2255CBA29}",
       "MaxAttenuation": "50",
       "DurationType": "OneShot",
-      "DurationMin": "1.9989792",
-      "DurationMax": "1.9989792",
+      "DurationMin": "2.0609791",
+      "DurationMax": "2.0609791",
       "MediaRefs": [
        {
         "Id": "223240389"
+       },
+       {
+        "Id": "616861734"
        }
       ]
      }
     ]
    }
   ],
-  "FileHash": "{14E72947-EB7F-B8FA-1FBB-99545DB551B9}"
+  "FileHash": "{1579CA2B-96AD-19EB-9944-FD0A9C5E075B}"
  }
 }
