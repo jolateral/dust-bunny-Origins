@@ -15073,7 +15073,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-3</Value>
+												<Value>-1.5</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -15087,6 +15087,11 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="sfx_endseq" ID="{31FFFC4F-5080-49D0-AB27-0D5AEE946750}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="10.70068"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="20.26389"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>sfx_endseq.wav</AudioFile>
 											<MediaIDList>
